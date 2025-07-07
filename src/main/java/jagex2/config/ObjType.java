@@ -546,7 +546,7 @@ public class ObjType {
       if (arg1 == 0) {
          Pix24 var4 = (Pix24)u.a((long)arg3);
          if (var4 != null && var4.O != arg2 && var4.O != -1) {
-            var4.a();
+            var4.unlink();
             var4 = null;
          }
 

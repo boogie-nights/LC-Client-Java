@@ -21,9 +21,9 @@ public class DoublyLinkList {
    }
 
    @ObfuscatedName("CZYJUOKA.a(LDPPNUUMQ;)V")
-   public void a(DoublyLinkable arg0) {
+   public void push(DoublyLinkable arg0) {
       if (arg0.f != null) {
-         arg0.b();
+         arg0.unlink2();
       }
 
       arg0.f = this.b.f;
@@ -38,7 +38,7 @@ public class DoublyLinkList {
       if (this.b == var1) {
          return null;
       } else {
-         var1.b();
+         var1.unlink2();
          return var1;
       }
    }

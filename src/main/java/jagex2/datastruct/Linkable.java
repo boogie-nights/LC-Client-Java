@@ -13,7 +13,7 @@ public class Linkable {
    public static boolean d;
 
    @ObfuscatedName("ZUOIJLRD.a()V")
-   public void a() {
+   public void unlink() {
       if (this.c != null) {
          this.c.b = this.b;
          this.b.c = this.c;

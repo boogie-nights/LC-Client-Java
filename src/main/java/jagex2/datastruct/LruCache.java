@@ -34,7 +34,7 @@ public class LruCache {
    public DoublyLinkable a(long arg0) {
       DoublyLinkable var3 = (DoublyLinkable)this.g.a(arg0);
       if (var3 != null) {
-         this.h.a(var3);
+         this.h.push(var3);
          ++this.c;
       } else {
          ++this.b;
@@ -51,19 +51,19 @@ public class LruCache {
 
       if (this.f == 0) {
          DoublyLinkable var5 = this.h.a();
-         var5.a();
-         var5.b();
+         var5.unlink();
+         var5.unlink2();
          if (this.d == var5) {
             DoublyLinkable var6 = this.h.a();
-            var6.a();
-            var6.b();
+            var6.unlink();
+            var6.unlink2();
          }
       } else {
          --this.f;
       }
 
       this.g.a(6, arg0, arg1);
-      this.h.a(arg0);
+      this.h.push(arg0);
       if (Linkable.d) {
       }
 
@@ -78,8 +78,8 @@ public class LruCache {
             return;
          }
 
-         var1.a();
-         var1.b();
+         var1.unlink();
+         var1.unlink2();
       }
    }
 }

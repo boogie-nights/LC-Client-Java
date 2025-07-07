@@ -18,9 +18,9 @@ public class LinkList {
    }
 
    @ObfuscatedName("BOHLFXVX.a(LZUOIJLRD;)V")
-   public void a(Linkable arg0) {
+   public void push(Linkable arg0) {
       if (arg0.c != null) {
-         arg0.a();
+         arg0.unlink();
       }
 
       arg0.c = this.c.c;
@@ -36,7 +36,7 @@ public class LinkList {
       }
 
       if (arg1.c != null) {
-         arg1.a();
+         arg1.unlink();
       }
 
       arg1.c = this.c;
@@ -51,13 +51,13 @@ public class LinkList {
       if (this.c == var1) {
          return null;
       } else {
-         var1.a();
+         var1.unlink();
          return var1;
       }
    }
 
    @ObfuscatedName("BOHLFXVX.b()LZUOIJLRD;")
-   public Linkable b() {
+   public Linkable head() {
       Linkable var1 = this.c.b;
       if (this.c == var1) {
          this.d = null;
@@ -86,7 +86,7 @@ public class LinkList {
    }
 
    @ObfuscatedName("BOHLFXVX.a(I)LZUOIJLRD;")
-   public Linkable a(int arg0) {
+   public Linkable next(int arg0) {
       Linkable var2 = this.d;
       if (this.c == var2) {
          this.d = null;
@@ -124,7 +124,7 @@ public class LinkList {
                return;
             }
 
-            var1.a();
+            var1.unlink();
          }
       }
    }

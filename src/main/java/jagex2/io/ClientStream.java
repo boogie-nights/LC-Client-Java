@@ -125,7 +125,7 @@ public class ClientStream implements Runnable {
 
                if (!this.k) {
                   this.k = true;
-                  this.g.a(this, 3);
+                  this.g.startThread(this, 3);
                }
 
                this.notify();

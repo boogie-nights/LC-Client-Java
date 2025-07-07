@@ -291,7 +291,7 @@ public class Model extends ModelSource {
       } else {
          Metadata var1 = gb[arg0];
          if (var1 == null) {
-            hb.a(arg0);
+            hb.requestModel(arg0);
             return null;
          } else {
             return new Model(arg0, -478);
@@ -306,7 +306,7 @@ public class Model extends ModelSource {
       } else {
          Metadata var1 = gb[arg0];
          if (var1 == null) {
-            hb.a(arg0);
+            hb.requestModel(arg0);
             return false;
          } else {
             return true;

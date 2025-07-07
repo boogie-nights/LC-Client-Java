@@ -1357,7 +1357,7 @@ public class World3D {
 
    @ObfuscatedName("KJCMXHNO.a(LRIEEXHOP;Z)V")
    public void a(Square arg0, boolean arg1) {
-      bb.a(arg0);
+      bb.push(arg0);
 
       while(true) {
          Square var3;
@@ -1584,28 +1584,28 @@ public class World3D {
                                     if (var4 < D && (var35 & 4) != 0) {
                                        Square var36 = var8[var4 + 1][var5];
                                        if (var36 != null && var36.v) {
-                                          bb.a(var36);
+                                          bb.push(var36);
                                        }
                                     }
 
                                     if (var5 < E && (var35 & 2) != 0) {
                                        Square var37 = var8[var4][var5 + 1];
                                        if (var37 != null && var37.v) {
-                                          bb.a(var37);
+                                          bb.push(var37);
                                        }
                                     }
 
                                     if (var4 > D && (var35 & 1) != 0) {
                                        Square var38 = var8[var4 - 1][var5];
                                        if (var38 != null && var38.v) {
-                                          bb.a(var38);
+                                          bb.push(var38);
                                        }
                                     }
 
                                     if (var5 > E && (var35 & 8) != 0) {
                                        Square var39 = var8[var4][var5 - 1];
                                        if (var39 != null && var39.v) {
-                                          bb.a(var39);
+                                          bb.push(var39);
                                        }
                                     }
                                  }
@@ -1732,9 +1732,9 @@ public class World3D {
                                        for(int var65 = var63.i; var65 <= var63.j; ++var65) {
                                           Square var66 = var8[var64][var65];
                                           if (var66.x != 0) {
-                                             bb.a(var66);
+                                             bb.push(var66);
                                           } else if ((var4 != var64 || var5 != var65) && var66.v) {
-                                             bb.a(var66);
+                                             bb.push(var66);
                                           }
                                        }
                                     }
@@ -1849,35 +1849,35 @@ public class World3D {
          if (var6 < this.n - 1) {
             Square var84 = this.r[var6 + 1][var4][var5];
             if (var84 != null && var84.v) {
-               bb.a(var84);
+               bb.push(var84);
             }
          }
 
          if (var4 < D) {
             Square var85 = var8[var4 + 1][var5];
             if (var85 != null && var85.v) {
-               bb.a(var85);
+               bb.push(var85);
             }
          }
 
          if (var5 < E) {
             Square var86 = var8[var4][var5 + 1];
             if (var86 != null && var86.v) {
-               bb.a(var86);
+               bb.push(var86);
             }
          }
 
          if (var4 > D) {
             Square var87 = var8[var4 - 1][var5];
             if (var87 != null && var87.v) {
-               bb.a(var87);
+               bb.push(var87);
             }
          }
 
          if (var5 > E) {
             Square var88 = var8[var4][var5 - 1];
             if (var88 != null && var88.v) {
-               bb.a(var88);
+               bb.push(var88);
             }
          }
       }

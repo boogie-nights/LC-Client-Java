@@ -102,7 +102,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
       if (arg0 < 0) {
          this.n = this.d(-756).getGraphics();
          this.o = new PixMap(this.m, (byte)-12, this.d(-756), this.l);
-         this.a(this, 1);
+         this.startThread(this, 1);
       }
    }
 
@@ -113,7 +113,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
          this.m = arg1;
          this.n = this.d(-756).getGraphics();
          this.o = new PixMap(this.m, (byte)-12, this.d(-756), this.l);
-         this.a(this, 1);
+         this.startThread(this, 1);
       }
    }
 
@@ -599,7 +599,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
    }
 
    @ObfuscatedName("JWWAIQPI.a(Ljava/lang/Runnable;I)V")
-   public void a(Runnable arg0, int arg1) {
+   public void startThread(Runnable arg0, int arg1) {
       Thread var3 = new Thread(arg0);
       var3.start();
       var3.setPriority(arg1);

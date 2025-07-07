@@ -277,7 +277,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.yg")
    public boolean yg = false;
    @ObfuscatedName("client.zg")
-   public boolean zg = false;
+   public boolean ingame = false;
    @ObfuscatedName("client.Cg")
    public int Cg = -110;
    @ObfuscatedName("client.Eg")
@@ -331,7 +331,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.Xh")
    public int Xh = -1;
    @ObfuscatedName("client.mi")
-   public FileStream[] mi = new FileStream[5];
+   public FileStream[] fileStreams = new FileStream[5];
    @ObfuscatedName("client.pi")
    public int pi = -1;
    @ObfuscatedName("client.si")
@@ -1253,12 +1253,12 @@ public class Client extends GameShell {
    @ObfuscatedName("client.d(B)V")
    public final void d(byte arg0) {
       if (arg0 == 3) {
-         for(LocChange var2 = (LocChange)this.Ti.b(); var2 != null; var2 = (LocChange)this.Ti.a(1)) {
+         for(LocChange var2 = (LocChange)this.Ti.head(); var2 != null; var2 = (LocChange)this.Ti.next(1)) {
             if (var2.k == -1) {
                var2.p = 0;
                this.a((byte)-61, var2);
             } else {
-               var2.a();
+               var2.unlink();
             }
          }
 
@@ -1406,7 +1406,7 @@ public class Client extends GameShell {
       this.Uh = null;
       this.Af = null;
       if (this.xj != null) {
-         this.xj.c();
+         this.xj.stop();
       }
 
       this.xj = null;
@@ -1691,7 +1691,7 @@ public class Client extends GameShell {
          int var4 = -99999999;
          ClientObj var5 = null;
 
-         for(ClientObj var6 = (ClientObj)var3.b(); var6 != null; var6 = (ClientObj)var3.a(1)) {
+         for(ClientObj var6 = (ClientObj)var3.head(); var6 != null; var6 = (ClientObj)var3.next(1)) {
             ObjType var7 = ObjType.a(var6.m);
             int var8 = var7.t;
             if (var7.T) {
@@ -1708,7 +1708,7 @@ public class Client extends GameShell {
          ClientObj var9 = null;
          ClientObj var10 = null;
 
-         for(ClientObj var11 = (ClientObj)var3.b(); var11 != null; var11 = (ClientObj)var3.a(1)) {
+         for(ClientObj var11 = (ClientObj)var3.head(); var11 != null; var11 = (ClientObj)var3.next(1)) {
             if (var5.m != var11.m && var9 == null) {
                var9 = var11;
             }
@@ -1749,7 +1749,7 @@ public class Client extends GameShell {
       for(int var2 = 0; var2 < 5 && this.h((int)21389); ++var2) {
       }
 
-      if (this.zg) {
+      if (this.ingame) {
          Object var3 = this.Gi.c;
          synchronized(this.Gi.c) {
             if (!fd) {
@@ -2416,7 +2416,7 @@ public class Client extends GameShell {
                            }
 
                            if (this.Sf.equals("::prefetchmusic")) {
-                              for(int var14 = 0; var14 < this.xj.c(2, -31140); ++var14) {
+                              for(int var14 = 0; var14 < this.xj.getFileCount(2); ++var14) {
                                  this.xj.a(-44, 2, (byte)1, var14);
                               }
                            }
@@ -2786,7 +2786,7 @@ public class Client extends GameShell {
                if (this.hk != var24 && this.Yi && !vc && this.qg == 0) {
                   this.cj = var24;
                   this.dj = true;
-                  this.xj.b(2, this.cj);
+                  this.xj.request(2, this.cj);
                }
 
                this.hk = var24;
@@ -2800,7 +2800,7 @@ public class Client extends GameShell {
                if (this.Yi && !vc) {
                   this.cj = var25;
                   this.dj = false;
-                  this.xj.b(2, this.cj);
+                  this.xj.request(2, this.cj);
                   this.qg = var26;
                }
 
@@ -3291,7 +3291,7 @@ public class Client extends GameShell {
                   }
                }
 
-               for(LocChange var89 = (LocChange)this.Ti.b(); var89 != null; var89 = (LocChange)this.Ti.a(1)) {
+               for(LocChange var89 = (LocChange)this.Ti.head(); var89 != null; var89 = (LocChange)this.Ti.next(1)) {
                   if (var89.n >= this.Gd && var89.n < this.Gd + 8 && var89.o >= this.Hd && var89.o < this.Hd + 8 && this.Ff == var89.l) {
                      var89.k = 0;
                   }
@@ -3589,14 +3589,14 @@ public class Client extends GameShell {
                                  this.fb[var122] = -1;
                                  ++var122;
                               } else {
-                                 int var125 = this.eb[var122] = this.xj.a(0, var123, (int)var124, 0);
+                                 int var125 = this.eb[var122] = this.xj.getMapFile(0, var123, (int)var124, 0);
                                  if (var125 != -1) {
-                                    this.xj.b(3, var125);
+                                    this.xj.request(3, var125);
                                  }
 
-                                 int var126 = this.fb[var122] = this.xj.a(0, var123, (int)var124, 1);
+                                 int var126 = this.fb[var122] = this.xj.getMapFile(0, var123, (int)var124, 1);
                                  if (var126 != -1) {
-                                    this.xj.b(3, var126);
+                                    this.xj.request(3, var126);
                                  }
 
                                  ++var122;
@@ -3638,14 +3638,14 @@ public class Client extends GameShell {
                            int var138 = this.db[var137] = var128[var137];
                            int var139 = var138 >> 8 & 255;
                            int var140 = var138 & 255;
-                           int var141 = this.eb[var137] = this.xj.a(0, var139, (int)var140, 0);
+                           int var141 = this.eb[var137] = this.xj.getMapFile(0, var139, (int)var140, 0);
                            if (var141 != -1) {
-                              this.xj.b(3, var141);
+                              this.xj.request(3, var141);
                            }
 
-                           int var142 = this.fb[var137] = this.xj.a(0, var139, (int)var140, 1);
+                           int var142 = this.fb[var137] = this.xj.getMapFile(0, var139, (int)var140, 1);
                            if (var142 != -1) {
-                              this.xj.b(3, var142);
+                              this.xj.request(3, var142);
                            }
 
                            ++var137;
@@ -3743,11 +3743,11 @@ public class Client extends GameShell {
                   }
                }
 
-               for(LocChange var162 = (LocChange)this.Ti.b(); var162 != null; var162 = (LocChange)this.Ti.a(1)) {
+               for(LocChange var162 = (LocChange)this.Ti.head(); var162 != null; var162 = (LocChange)this.Ti.next(1)) {
                   var162.n -= var143;
                   var162.o -= var144;
                   if (var162.n < 0 || var162.o < 0 || var162.n >= 104 || var162.o >= 104) {
-                     var162.a();
+                     var162.unlink();
                   }
                }
 
@@ -4324,7 +4324,7 @@ public class Client extends GameShell {
       }
 
       if (this.lf == 2) {
-         for(LocChange var2 = (LocChange)this.Ti.b(); var2 != null; var2 = (LocChange)this.Ti.a(1)) {
+         for(LocChange var2 = (LocChange)this.Ti.head(); var2 != null; var2 = (LocChange)this.Ti.next(1)) {
             if (var2.k > 0) {
                --var2.k;
             }
@@ -4332,7 +4332,7 @@ public class Client extends GameShell {
             if (var2.k == 0) {
                if (var2.h < 0 || World.a(var2.j, this.Fg, var2.h)) {
                   this.a(var2.i, var2.n, var2.h, var2.o, var2.l, var2.j, (byte)1, var2.m);
-                  var2.a();
+                  var2.unlink();
                }
             } else {
                if (var2.p > 0) {
@@ -4343,9 +4343,9 @@ public class Client extends GameShell {
                   this.a(var2.f, var2.n, var2.e, var2.o, var2.l, var2.g, (byte)1, var2.m);
                   var2.p = -1;
                   if (var2.h == var2.e && var2.h == -1) {
-                     var2.a();
+                     var2.unlink();
                   } else if (var2.h == var2.e && var2.i == var2.f && var2.j == var2.g) {
-                     var2.a();
+                     var2.unlink();
                   }
                }
             }
@@ -4539,7 +4539,7 @@ public class Client extends GameShell {
       int var4 = arg2.gBit(1);
       if (var4 != 0) {
          int var5 = arg2.gBit(2);
-         this.zg &= arg1;
+         this.ingame &= arg1;
          if (var5 == 0) {
             this.rd[this.qd++] = this.md;
          } else if (var5 == 1) {
@@ -5016,7 +5016,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.a(LMFMVIYHT;ZI)V")
    public final void a(Packet arg0, boolean arg1, int arg2) {
-      this.zg &= arg1;
+      this.ingame &= arg1;
       this.Aj = 0;
       this.qd = 0;
       this.b(arg2, (byte)-58, arg0);
@@ -5074,7 +5074,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.h(Z)V")
    public final void h(boolean arg0) {
-      ClientProj var2 = (ClientProj)this.oj.b();
+      ClientProj var2 = (ClientProj)this.oj.head();
       if (arg0) {
          this.ik = 153;
       }
@@ -5107,10 +5107,10 @@ public class Client extends GameShell {
                this.ah.a(-1, var2, (int)var2.o, (int)var2.q, false, 0, this.Ff, 60, (int)var2.p, var2.v);
             }
          } else {
-            var2.a();
+            var2.unlink();
          }
 
-         var2 = (ClientProj)this.oj.a(1);
+         var2 = (ClientProj)this.oj.next(1);
       }
 
       ++eh;
@@ -5208,7 +5208,7 @@ public class Client extends GameShell {
       if (!this.Bi) {
          this.Uj = true;
          this.Bi = true;
-         this.a((Runnable)this, 2);
+         this.startThread((Runnable)this, 2);
       }
    }
 
@@ -5471,10 +5471,10 @@ public class Client extends GameShell {
 
          this.ig = 0;
          ClientStream var2 = this.pe;
-         this.zg = false;
+         this.ingame = false;
          this.X = 0;
          this.a(this.Gf, this.Hf, true);
-         if (!this.zg) {
+         if (!this.ingame) {
             this.n(true);
          }
 
@@ -5634,8 +5634,8 @@ public class Client extends GameShell {
       int var8 = 5;
 
       try {
-         if (this.mi[0] != null) {
-            var7 = this.mi[0].a(this.Tb, arg4);
+         if (this.fileStreams[0] != null) {
+            var7 = this.fileStreams[0].a(this.Tb, arg4);
          }
       } catch (Exception var30) {
       }
@@ -5701,11 +5701,11 @@ public class Client extends GameShell {
                var15.close();
 
                try {
-                  if (this.mi[0] != null) {
-                     this.mi[0].a(var7.length, true, var7, arg4);
+                  if (this.fileStreams[0] != null) {
+                     this.fileStreams[0].a(var7.length, true, var7, arg4);
                   }
                } catch (Exception var29) {
-                  this.mi[0] = null;
+                  this.fileStreams[0] = null;
                }
 
                if (var7 != null) {
@@ -6151,7 +6151,7 @@ public class Client extends GameShell {
          } else {
             if (sign.Signlink.cache_dat != null) {
                for(int var3 = 0; var3 < 5; ++var3) {
-                  this.mi[var3] = new FileStream(var3 + 1, 600000, sign.Signlink.cache_dat, sign.Signlink.cache_idx[var3], 4);
+                  this.fileStreams[var3] = new FileStream(var3 + 1, 600000, sign.Signlink.cache_dat, sign.Signlink.cache_idx[var3], 4);
                }
             }
 
@@ -6182,13 +6182,13 @@ public class Client extends GameShell {
                Jagfile var11 = this.a(14076, this.K[5], "versionlist", 60, 5, "update list");
                this.a(60, true, (String)"Connecting to update server");
                this.xj = new OnDemand();
-               this.xj.a(var11, this);
+               this.xj.unpack(var11, this);
                AnimFrame.a(this.xj.d(553));
-               Model.a(this.xj.c(0, -31140), this.xj);
+               Model.a(this.xj.getFileCount(0), this.xj);
                if (!vc) {
                   this.cj = 0;
                   this.dj = true;
-                  this.xj.b(2, this.cj);
+                  this.xj.request(2, this.cj);
 
                   while(this.xj.b() > 0) {
                      this.j(false);
@@ -6206,10 +6206,10 @@ public class Client extends GameShell {
                }
 
                this.a(65, true, (String)"Requesting animations");
-               int var12 = this.xj.c(1, -31140);
+               int var12 = this.xj.getFileCount(1);
 
                for(int var13 = 0; var13 < var12; ++var13) {
-                  this.xj.b(1, var13);
+                  this.xj.request(1, var13);
                }
 
                while(this.xj.b() > 0) {
@@ -6232,12 +6232,12 @@ public class Client extends GameShell {
                }
 
                this.a(70, true, (String)"Requesting models");
-               int var15 = this.xj.c(0, -31140);
+               int var15 = this.xj.getFileCount(0);
 
                for(int var16 = 0; var16 < var15; ++var16) {
                   int var17 = this.xj.a(var16, -493);
                   if ((var17 & 1) != 0) {
-                     this.xj.b(0, var16);
+                     this.xj.request(0, var16);
                   }
                }
 
@@ -6257,20 +6257,20 @@ public class Client extends GameShell {
                   }
                }
 
-               if (this.mi[0] != null) {
+               if (this.fileStreams[0] != null) {
                   this.a(75, true, (String)"Requesting maps");
-                  this.xj.b(3, this.xj.a(0, 47, (int)48, 0));
-                  this.xj.b(3, this.xj.a(0, 47, (int)48, 1));
-                  this.xj.b(3, this.xj.a(0, 48, (int)48, 0));
-                  this.xj.b(3, this.xj.a(0, 48, (int)48, 1));
-                  this.xj.b(3, this.xj.a(0, 49, (int)48, 0));
-                  this.xj.b(3, this.xj.a(0, 49, (int)48, 1));
-                  this.xj.b(3, this.xj.a(0, 47, (int)47, 0));
-                  this.xj.b(3, this.xj.a(0, 47, (int)47, 1));
-                  this.xj.b(3, this.xj.a(0, 48, (int)47, 0));
-                  this.xj.b(3, this.xj.a(0, 48, (int)47, 1));
-                  this.xj.b(3, this.xj.a(0, 48, (int)148, 0));
-                  this.xj.b(3, this.xj.a(0, 48, (int)148, 1));
+                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)48, 0));
+                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)48, 1));
+                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)48, 0));
+                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)48, 1));
+                  this.xj.request(3, this.xj.getMapFile(0, 49, (int)48, 0));
+                  this.xj.request(3, this.xj.getMapFile(0, 49, (int)48, 1));
+                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)47, 0));
+                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)47, 1));
+                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)47, 0));
+                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)47, 1));
+                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)148, 0));
+                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)148, 1));
                   int var20 = this.xj.b();
 
                   while(this.xj.b() > 0) {
@@ -6288,7 +6288,7 @@ public class Client extends GameShell {
                   }
                }
 
-               int var22 = this.xj.c(0, -31140);
+               int var22 = this.xj.getFileCount(0);
 
                for(int var23 = 0; var23 < var22; ++var23) {
                   int var24 = this.xj.a(var23, -493);
@@ -6320,16 +6320,16 @@ public class Client extends GameShell {
 
                this.xj.a(uc, (byte)109);
                if (!vc) {
-                  int var26 = this.xj.c(2, -31140);
+                  int var26 = this.xj.getFileCount(2);
 
                   for(int var27 = 1; var27 < var26; ++var27) {
-                     if (this.xj.a(var27, gd)) {
+                     if (this.xj.shouldPrefectMidi(var27)) {
                         this.xj.a(-44, 2, (byte)1, var27);
                      }
                   }
                }
 
-               int var28 = this.xj.c(0, -31140);
+               int var28 = this.xj.getFileCount(0);
 
                for(int var29 = 0; var29 < var28; ++var29) {
                   int var30 = this.xj.a(var29, -493);
@@ -6544,7 +6544,7 @@ public class Client extends GameShell {
                World3D.a(334, 22845, var65, 800, 500, 512);
                WordFilter.a(var8);
                this.Gi = new MouseTracking(this, (byte)-116);
-               this.a((Runnable)this.Gi, 10);
+               this.startThread((Runnable)this.Gi, 10);
                ClientLocAnim.v = this;
                LocType.m = this;
                NpcType.i = this;
@@ -7694,18 +7694,18 @@ public class Client extends GameShell {
          this.dk = null;
       }
 
-      for(MapSpotAnim var2 = (MapSpotAnim)this.Uh.b(); var2 != null; var2 = (MapSpotAnim)this.Uh.a(1)) {
+      for(MapSpotAnim var2 = (MapSpotAnim)this.Uh.head(); var2 != null; var2 = (MapSpotAnim)this.Uh.next(1)) {
          if (this.Ff == var2.m && !var2.r) {
             if (fk >= var2.v) {
                var2.a((byte)1, this.Uc);
                if (var2.r) {
-                  var2.a();
+                  var2.unlink();
                } else {
                   this.ah.a(-1, var2, var2.n, var2.p, false, 0, var2.m, 60, var2.o, 0);
                }
             }
          } else {
-            var2.a();
+            var2.unlink();
          }
       }
 
@@ -7718,14 +7718,14 @@ public class Client extends GameShell {
       }
 
       while(true) {
-         OnDemandRequest var2 = this.xj.a();
+         OnDemandRequest var2 = this.xj.cycle();
          if (var2 == null) {
             return;
          }
 
-         if (var2.h == 0) {
-            Model.a(var2.k, var2.i, (byte)7);
-            if ((this.xj.a(var2.i, -493) & 98) != 0) {
+         if (var2.archive == 0) {
+            Model.a(var2.data, var2.file, (byte)7);
+            if ((this.xj.a(var2.file, -493) & 98) != 0) {
                this.rh = true;
                if (this.Fd != -1 || this.Bh != -1) {
                   this.yi = true;
@@ -7733,27 +7733,27 @@ public class Client extends GameShell {
             }
          }
 
-         if (var2.h == 1 && var2.k != null) {
-            AnimFrame.a(var2.k, true);
+         if (var2.archive == 1 && var2.data != null) {
+            AnimFrame.a(var2.data, true);
          }
 
-         if (var2.h == 2 && this.cj == var2.i && var2.k != null) {
-            this.a(this.dj, var2.k, 659);
+         if (var2.archive == 2 && this.cj == var2.file && var2.data != null) {
+            this.a(this.dj, var2.data, 659);
          }
 
-         if (var2.h == 3 && this.lf == 1) {
+         if (var2.archive == 3 && this.lf == 1) {
             for(int var3 = 0; var3 < this.L.length; ++var3) {
-               if (this.eb[var3] == var2.i) {
-                  this.L[var3] = var2.k;
-                  if (var2.k == null) {
+               if (this.eb[var3] == var2.file) {
+                  this.L[var3] = var2.data;
+                  if (var2.data == null) {
                      this.eb[var3] = -1;
                   }
                   break;
                }
 
-               if (this.fb[var3] == var2.i) {
-                  this.qi[var3] = var2.k;
-                  if (var2.k == null) {
+               if (this.fb[var3] == var2.file) {
+                  this.qi[var3] = var2.data;
+                  if (var2.data == null) {
                      this.fb[var3] = -1;
                   }
                   break;
@@ -7761,8 +7761,8 @@ public class Client extends GameShell {
             }
          }
 
-         if (var2.h == 93 && this.xj.b(var2.i, false)) {
-            World.a(this.xj, new Packet(var2.k), (byte)-3);
+         if (var2.archive == 93 && this.xj.b(var2.file, false)) {
+            World.a(this.xj, new Packet(var2.data), (byte)-3);
          }
       }
    }
@@ -7860,7 +7860,7 @@ public class Client extends GameShell {
             this.Gi.f = 0;
             super.s = true;
             this.hj = true;
-            this.zg = true;
+            this.ingame = true;
             this.hd.pos = 0;
             this.yh.pos = 0;
             this.rb = -1;
@@ -8000,7 +8000,7 @@ public class Client extends GameShell {
             this.ad = "The server is being updated.";
             this.bd = "Please wait 1 minute and try again.";
          } else if (var8 == 15) {
-            this.zg = true;
+            this.ingame = true;
             this.hd.pos = 0;
             this.yh.pos = 0;
             this.rb = -1;
@@ -8917,7 +8917,7 @@ public class Client extends GameShell {
       if (!this.he && !this.pj && !this.Lf) {
          ++fk;
          if (arg0 == -111) {
-            if (!this.zg) {
+            if (!this.ingame) {
                this.K(-724);
             } else {
                this.e((byte)4);
@@ -9243,7 +9243,7 @@ public class Client extends GameShell {
       }
 
       if (vc && sign.Signlink.cache_dat != null) {
-         int var49 = this.xj.c(0, -31140);
+         int var49 = this.xj.getFileCount(0);
 
          for(int var50 = 0; var50 < var49; ++var50) {
             int var51 = this.xj.a(var50, -493);
@@ -9271,12 +9271,12 @@ public class Client extends GameShell {
       for(int var57 = var52; var57 <= var53; ++var57) {
          for(int var58 = var54; var58 <= var55; ++var58) {
             if (var52 == var57 || var53 == var57 || var54 == var58 || var55 == var58) {
-               int var59 = this.xj.a(0, var57, (int)var58, 0);
+               int var59 = this.xj.getMapFile(0, var57, (int)var58, 0);
                if (var59 != -1) {
                   this.xj.a(var59, 3, this.Fc);
                }
 
-               int var60 = this.xj.a(0, var57, (int)var58, 1);
+               int var60 = this.xj.getMapFile(0, var57, (int)var58, 1);
                if (var60 != -1) {
                   this.xj.a(var60, 3, this.Fc);
                }
@@ -9952,7 +9952,7 @@ public class Client extends GameShell {
                if (this.Yi) {
                   this.cj = this.hk;
                   this.dj = true;
-                  this.xj.b(2, this.cj);
+                  this.xj.request(2, this.cj);
                } else {
                   this.g(false);
                }
@@ -10738,15 +10738,15 @@ public class Client extends GameShell {
    }
 
    @ObfuscatedName("client.a(Ljava/lang/Runnable;I)V")
-   public final void a(Runnable arg0, int arg1) {
+   public final void startThread(Runnable arg0, int arg1) {
       if (arg1 > 10) {
          arg1 = 10;
       }
 
-      if (sign.Signlink.mainapp != null) {
-         sign.Signlink.startthread(arg0, arg1);
+      if (jagex2.client.sign.Signlink.mainapp != null) {
+		  jagex2.client.sign.Signlink.startthread(arg0, arg1);
       } else {
-         super.a(arg0, arg1);
+         super.startThread(arg0, arg1);
       }
    }
 
@@ -12070,12 +12070,12 @@ public class Client extends GameShell {
       }
 
       this.pe = null;
-      this.zg = false;
+      this.ingame = false;
       this.ji = 0;
       this.Gf = "";
       this.Hf = "";
       this.k((int)383);
-      this.zg &= arg0;
+      this.ingame &= arg0;
       this.ah.a((byte)7);
 
       for(int var2 = 0; var2 < 4; ++var2) {
@@ -12174,7 +12174,7 @@ public class Client extends GameShell {
             this.Vd = -382;
          }
 
-         if (!this.zg) {
+         if (!this.ingame) {
             this.a((byte)-50, false);
          } else {
             this.p(7);
@@ -12427,7 +12427,7 @@ public class Client extends GameShell {
 
       if (this.ji == 0) {
          int var6 = var4 / 2 + 80;
-         this.Ye.a(true, this.Ve, 7711145, var6, var3 / 2, this.xj.o);
+         this.Ye.a(true, this.Ve, 7711145, var6, var3 / 2, this.xj.message);
          int var7 = var4 / 2 - 20;
          this.af.a(true, this.Ve, 16776960, var7, var3 / 2, "Welcome to RuneScape");
          int var18 = var7 + 30;
@@ -12630,7 +12630,7 @@ public class Client extends GameShell {
                this.dk[this.Ff][var31][var32] = new LinkList();
             }
 
-            this.dk[this.Ff][var31][var32].a(var36);
+            this.dk[this.Ff][var31][var32].push(var36);
             this.b(var31, var32);
          }
 
@@ -12701,7 +12701,7 @@ public class Client extends GameShell {
                this.dk[this.Ff][var56][var57] = new LinkList();
             }
 
-            this.dk[this.Ff][var56][var57].a(var59);
+            this.dk[this.Ff][var56][var57].push(var59);
             this.b(var56, var57);
          }
 
@@ -12715,7 +12715,7 @@ public class Client extends GameShell {
          if (var61 >= 0 && var62 >= 0 && var61 < 104 && var62 < 104) {
             LinkList var66 = this.dk[this.Ff][var61][var62];
             if (var66 != null) {
-               for(ClientObj var67 = (ClientObj)var66.b(); var67 != null; var67 = (ClientObj)var66.a(1)) {
+               for(ClientObj var67 = (ClientObj)var66.head(); var67 != null; var67 = (ClientObj)var66.next(1)) {
                   if ((var63 & 32767) == var67.m && var67.o == var64) {
                      var67.o = var65;
                      break;
@@ -12747,7 +12747,7 @@ public class Client extends GameShell {
             int var84 = var72 * 128 + 64;
             ClientProj var85 = new ClientProj(this.Ff, var76, var80, var82, var74, fk + var78, var79, var73, (byte)-41, this.a(var82, var81, (byte)9, this.Ff) - var75, var81, fk + var77);
             var85.a(var83, var84, this.a(var84, var83, (byte)9, this.Ff) - var76, fk + var77, 0);
-            this.oj.a(var85);
+            this.oj.push(var85);
          }
 
       } else {
@@ -12778,7 +12778,7 @@ public class Client extends GameShell {
                int var99 = var94 * 128 + 64;
                int var100 = var95 * 128 + 64;
                MapSpotAnim var101 = new MapSpotAnim(var99, this.Ff, this.a(var100, var99, (byte)9, this.Ff) - var97, var98, var96, fk, var100, 10709);
-               this.Uh.a(var101);
+               this.Uh.push(var101);
             }
 
          } else if (arg2 == 152) {
@@ -12816,14 +12816,14 @@ public class Client extends GameShell {
             if (var112 >= 0 && var113 >= 0 && var112 < 104 && var113 < 104) {
                LinkList var114 = this.dk[this.Ff][var112][var113];
                if (var114 != null) {
-                  for(ClientObj var115 = (ClientObj)var114.b(); var115 != null; var115 = (ClientObj)var114.a(1)) {
+                  for(ClientObj var115 = (ClientObj)var114.head(); var115 != null; var115 = (ClientObj)var114.next(1)) {
                      if ((var110 & 32767) == var115.m) {
-                        var115.a();
+                        var115.unlink();
                         break;
                      }
                   }
 
-                  if (var114.b() == null) {
+                  if (var114.head() == null) {
                      this.dk[this.Ff][var112][var113] = null;
                   }
 
@@ -12924,7 +12924,7 @@ public class Client extends GameShell {
       System.out.println("============");
       System.out.println("flame-cycle:" + this.Pf);
       if (this.xj != null) {
-         System.out.println("Od-cycle:" + this.xj.p);
+         System.out.println("Od-cycle:" + this.xj.cycle);
       }
 
       System.out.println("loop-cycle:" + fk);
@@ -13553,7 +13553,7 @@ public class Client extends GameShell {
       if (this.lf == 1) {
          int var2 = this.I(5);
          if (var2 != 0 && System.currentTimeMillis() - this.ni > 360000L) {
-            sign.Signlink.reporterror(this.Gf + " glcfb " + this.zc + "," + var2 + "," + vc + "," + this.mi[0] + "," + this.xj.b() + "," + this.Ff + "," + this.Kb + "," + this.Lb);
+            sign.Signlink.reporterror(this.Gf + " glcfb " + this.zc + "," + var2 + "," + vc + "," + this.fileStreams[0] + "," + this.xj.b() + "," + this.Ff + "," + this.Kb + "," + this.Lb);
             this.ni = System.currentTimeMillis();
          }
       }
@@ -13612,7 +13612,7 @@ public class Client extends GameShell {
    public final void a(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
       LocChange var11 = null;
 
-      for(LocChange var12 = (LocChange)this.Ti.b(); var12 != null; var12 = (LocChange)this.Ti.a(1)) {
+      for(LocChange var12 = (LocChange)this.Ti.head(); var12 != null; var12 = (LocChange)this.Ti.next(1)) {
          if (var12.l == arg1 && var12.n == arg2 && var12.o == arg9 && var12.m == arg8) {
             var11 = var12;
             break;
@@ -13626,7 +13626,7 @@ public class Client extends GameShell {
          var11.n = arg2;
          var11.o = arg9;
          this.a((byte)-61, var11);
-         this.Ti.a(var11);
+         this.Ti.push(var11);
       }
 
       var11.e = arg6;
@@ -13634,7 +13634,7 @@ public class Client extends GameShell {
       var11.f = arg3;
       var11.p = arg7;
       var11.k = arg4;
-      this.zg &= arg0;
+      this.ingame &= arg0;
    }
 
    @ObfuscatedName("client.m(B)V")
@@ -13768,7 +13768,7 @@ public class Client extends GameShell {
          if (super.B == 1 && super.C >= var6 - 75 && super.C <= var6 + 75 && super.D >= var17 - 20 && super.D <= var17 + 20) {
             this.X = 0;
             this.a(this.Gf, this.Hf, false);
-            if (this.zg) {
+            if (this.ingame) {
                return;
             }
          }
@@ -14141,7 +14141,7 @@ public class Client extends GameShell {
          if (this.qg == 0 && this.Yi && !vc) {
             this.cj = this.hk;
             this.dj = true;
-            this.xj.b(2, this.cj);
+            this.xj.request(2, this.cj);
             return;
          }
       }

@@ -11,7 +11,7 @@ public class DoublyLinkable extends Linkable {
    public DoublyLinkable f;
 
    @ObfuscatedName("DPPNUUMQ.b()V")
-   public void b() {
+   public void unlink2() {
       if (this.f != null) {
          this.f.e = this.e;
          this.e.f = this.f;
