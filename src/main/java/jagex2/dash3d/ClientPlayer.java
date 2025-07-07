@@ -438,7 +438,7 @@ public class ClientPlayer extends ClientEntity {
          super.jb = -1;
       }
 
-      this.yb = JString.a(JString.a(arg0.g8(), 0), (byte)7);
+      this.yb = JString.toSentenceCase(JString.fromBase37(arg0.g8()));
       this.Ab = arg0.g1();
       this.Gb = arg0.g2();
       this.Fb = true;

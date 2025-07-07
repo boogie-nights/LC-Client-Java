@@ -175,7 +175,7 @@ public class Component {
 
    @ObfuscatedName("EWIXBTLV.a(ILjava/lang/String;I)LEPQDEJTO;")
    public static Pix24 a(int arg0, String arg1, int arg2) {
-      long var3 = (JString.a(183, arg1) << 8) + (long)arg0;
+      long var3 = (JString.hashCode(arg1) << 8) + (long)arg0;
       if (arg2 <= 0) {
          nb = -317;
       }
