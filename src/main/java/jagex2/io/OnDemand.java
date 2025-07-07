@@ -10,7 +10,7 @@ import java.util.zip.GZIPInputStream;
 
 import deob.ObfuscatedName;
 import jagex2.client.Client;
-import jagex2.client.sign.Signlink;
+import jagex2.client.sign.SignLink;
 import jagex2.datastruct.DoublyLinkList;
 import jagex2.datastruct.LinkList;
 
@@ -138,7 +138,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 	@ObfuscatedName("ZPGPWCCV.a(LATJMVOZR;Lclient;)V")
 	public final void unpack(Jagfile versionlist, Client c) {
-		String[] version = new String[]{"model_version", "anim_version", "midi_version", "map_version"};
+		String[] version = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
 
 		for (int i = 0; i < 4; i++) {
 			byte[] data = versionlist.read(version[i], null);
@@ -153,7 +153,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			}
 		}
 
-		String[] crc = new String[]{"model_crc", "anim_crc", "midi_crc", "map_crc"};
+		String[] crc = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
 
 		for (int i = 0; i < 4; i++) {
 			byte[] data = versionlist.read(crc[i], null);
@@ -516,7 +516,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			}
 
 		} catch (Exception ex) {
-			Signlink.reporterror("od_ex " + ex.getMessage());
+			SignLink.reporterror("od_ex " + ex.getMessage());
 		}
 	}
 
@@ -694,7 +694,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					this.waitCycles = 0;
 
 					if (size == 0) {
-						Signlink.reporterror("Rej: " + archive + "," + file);
+						SignLink.reporterror("Rej: " + archive + "," + file);
 
 						this.current.data = null;
 

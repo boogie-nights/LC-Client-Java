@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.zip.CRC32;
 
 import deob.*;
+import jagex2.client.sign.SignLink;
 import jagex2.config.VarbitType;
 import jagex2.dash3d.*;
 import jagex2.datastruct.JString;
@@ -10743,8 +10744,8 @@ public class Client extends GameShell {
          arg1 = 10;
       }
 
-      if (jagex2.client.sign.Signlink.mainapp != null) {
-		  jagex2.client.sign.Signlink.startthread(arg0, arg1);
+      if (SignLink.mainapp != null) {
+		  SignLink.startthread(arg0, arg1);
       } else {
          super.startThread(arg0, arg1);
       }

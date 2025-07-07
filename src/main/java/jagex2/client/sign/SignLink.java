@@ -12,7 +12,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 
-public class Signlink implements Runnable {
+public class SignLink implements Runnable {
    public static int storeid = 32;
    public static RandomAccessFile cache_dat = null;
    public static RandomAccessFile[] cache_idx = new RandomAccessFile[5];
