@@ -2,46 +2,46 @@ package jagex2.client;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("fc")
 public class MouseTracking implements Runnable {
+   @ObfuscatedName("BORSVOPG.a")
+   public boolean a = true;
+   @ObfuscatedName("BORSVOPG.b")
+   public int[] b = new int[500];
+   @ObfuscatedName("BORSVOPG.c")
+   public Object c = new Object();
+   @ObfuscatedName("BORSVOPG.e")
+   public int e = 8;
+   @ObfuscatedName("BORSVOPG.g")
+   public int[] g = new int[500];
+   @ObfuscatedName("BORSVOPG.d")
+   public Client d;
+   @ObfuscatedName("BORSVOPG.f")
+   public int f;
 
-	@ObfuscatedName("fc.a")
-	public Client app;
+   public MouseTracking(Client arg0, byte arg1) {
+      if (arg1 != -116) {
+         this.e = 294;
+      }
 
-	@ObfuscatedName("fc.b")
-	public boolean active = true;
+      this.d = arg0;
+   }
 
-	@ObfuscatedName("fc.c")
-	public Object lock = new Object();
+   public void run() {
+      while(this.a) {
+         Object var1 = this.c;
+         synchronized(this.c) {
+            if (this.f < 500) {
+               this.g[this.f] = this.d.v;
+               this.b[this.f] = this.d.w;
+               ++this.f;
+            }
+         }
 
-	@ObfuscatedName("fc.d")
-	public int length;
+         try {
+            Thread.sleep(50L);
+         } catch (Exception var2) {
+         }
+      }
 
-	@ObfuscatedName("fc.e")
-	public int[] x = new int[500];
-
-	@ObfuscatedName("fc.f")
-	public int[] y = new int[500];
-
-	public MouseTracking(Client app) {
-		this.app = app;
-	}
-
-	public void run() {
-		while (this.active) {
-			Object sync = this.lock;
-			synchronized (sync) {
-				if (this.length < 500) {
-					this.x[this.length] = this.app.mouseX;
-					this.y[this.length] = this.app.mouseY;
-					this.length++;
-				}
-			}
-
-			try {
-				Thread.sleep(50L);
-			} catch (Exception ignore) {
-			}
-		}
-	}
+   }
 }

@@ -1,6 +1,5 @@
 package deob;
 
 public @interface ObfuscatedName {
-
-	String value();
+   String value();
 }

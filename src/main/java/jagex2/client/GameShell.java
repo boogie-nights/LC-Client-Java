@@ -1,7 +1,8 @@
 package jagex2.client;
 
-import deob.ObfuscatedName;
-import jagex2.graphics.Pix32;
+import deob.*;
+import jagex2.datastruct.Linkable;
+import jagex2.graphics.Pix24;
 import jagex2.graphics.PixMap;
 
 import java.applet.Applet;
@@ -19,632 +20,630 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-@ObfuscatedName("a")
 public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
-
-	@ObfuscatedName("a.g")
-	public int state;
-
-	@ObfuscatedName("a.h")
-	public int deltime = 20;
-
-	@ObfuscatedName("a.i")
-	public int mindel = 1;
-
-	@ObfuscatedName("a.j")
-	public long[] otim = new long[10];
-
-	@ObfuscatedName("a.k")
-	public int fps;
-
-	@ObfuscatedName("a.l")
-	public boolean debug = false;
-
-	@ObfuscatedName("a.m")
-	public int screenWidth;
-
-	@ObfuscatedName("a.n")
-	public int screenHeight;
-
-	@ObfuscatedName("a.o")
-	public Graphics graphics;
-
-	@ObfuscatedName("a.p")
-	public PixMap drawArea;
-
-	@ObfuscatedName("a.q")
-	public Pix32[] temp = new Pix32[6];
-
-	@ObfuscatedName("a.r")
-	public ViewBox frame;
-
-	@ObfuscatedName("a.s")
-	public boolean refresh = true;
-
-	@ObfuscatedName("a.t")
-	public boolean hasFocus = true;
-
-	@ObfuscatedName("a.u")
-	public int idleCycles;
-
-	@ObfuscatedName("a.v")
-	public int mouseButton;
-
-	@ObfuscatedName("a.w")
-	public int mouseX;
-
-	@ObfuscatedName("a.x")
-	public int mouseY;
-
-	@ObfuscatedName("a.y")
-	public int lastMouseClickButton;
-
-	@ObfuscatedName("a.z")
-	public int lastMouseClickX;
-
-	@ObfuscatedName("a.G")
-	public int[] actionKey = new int[128];
-
-	@ObfuscatedName("a.H")
-	public int[] keyQueue = new int[128];
-
-	@ObfuscatedName("a.A")
-	public int lastMouseClickY;
-
-	@ObfuscatedName("a.C")
-	public int mouseClickButton;
-
-	@ObfuscatedName("a.D")
-	public int mouseClickX;
-
-	@ObfuscatedName("a.E")
-	public int mouseClickY;
-
-	@ObfuscatedName("a.I")
-	public int keyQueueReadPos;
-
-	@ObfuscatedName("a.J")
-	public int keyQueueWritePos;
-
-	@ObfuscatedName("a.B")
-	public long lastMouseClickTime;
-
-	@ObfuscatedName("a.F")
-	public long mouseClickTime;
-
-	@ObfuscatedName("a.a(III)V")
-	public final void initApplication(int height, int width) {
-		this.screenWidth = width;
-		this.screenHeight = height;
-		this.frame = new ViewBox(this.screenWidth, this.screenHeight, this);
-		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.screenWidth, this.screenHeight, this.getBaseComponent());
-		this.startThread(this, 1);
-	}
-
-	@ObfuscatedName("a.a(BII)V")
-	public final void initApplet(int height, int width) {
-		this.screenWidth = width;
-		this.screenHeight = height;
-		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.screenWidth, this.screenHeight, this.getBaseComponent());
-		this.startThread(this, 1);
-	}
-
-	public void run() {
-		this.getBaseComponent().addMouseListener(this);
-		this.getBaseComponent().addMouseMotionListener(this);
-		this.getBaseComponent().addKeyListener(this);
-		this.getBaseComponent().addFocusListener(this);
-
-		if (this.frame != null) {
-			this.frame.addWindowListener(this);
-		}
-
-		this.drawProgress(0, "Loading...");
-		this.load();
-
-		int opos = 0;
-		int ratio = 256;
-		int delta = 1;
-		int count = 0;
-		int intex = 0;
-
-		for (int i = 0; i < 10; i++) {
-			this.otim[i] = System.currentTimeMillis();
-		}
-
-		while (this.state >= 0) {
-			if (this.state > 0) {
-				this.state--;
-
-				if (this.state == 0) {
-					this.shutdown();
-					return;
-				}
-			}
-
-			int lastRatio = ratio;
-			int lastDelta = delta;
-
-			ratio = 300;
-			delta = 1;
-
-			long ntime = System.currentTimeMillis();
-
-			if (this.otim[opos] == 0L) {
-				ratio = lastRatio;
-				delta = lastDelta;
-			} else if (ntime > this.otim[opos]) {
-				ratio = (int) ((this.deltime * 2560L) / (ntime - this.otim[opos]));
-			}
-
-			if (ratio < 25) {
-				ratio = 25;
-			} else if (ratio > 256) {
-				ratio = 256;
-				delta = (int) ((long) this.deltime - (ntime - this.otim[opos]) / 10L);
-			}
-
-			if (delta > this.deltime) {
-				delta = this.deltime;
-			}
-
-			this.otim[opos] = ntime;
-			opos = (opos + 1) % 10;
-
-			if (delta > 1) {
-				for (int i = 0; i < 10; i++) {
-					if (this.otim[i] != 0L) {
-						this.otim[i] += delta;
-					}
-				}
-			}
-
-			if (delta < this.mindel) {
-				delta = this.mindel;
-			}
-
-			try {
-				Thread.sleep(delta);
-			} catch (InterruptedException ignore) {
-				intex++;
-			}
-
-			while (count < 256) {
-				this.mouseClickButton = this.lastMouseClickButton;
-				this.mouseClickX = this.lastMouseClickX;
-				this.mouseClickY = this.lastMouseClickY;
-				this.mouseClickTime = this.lastMouseClickTime;
-				this.lastMouseClickButton = 0;
-				this.update();
-				this.keyQueueReadPos = this.keyQueueWritePos;
-				count += ratio;
-			}
-			count &= 0xFF;
-
-			if (this.deltime > 0) {
-				this.fps = ratio * 1000 / (this.deltime * 256);
-			}
-
-			this.draw();
-
-			if (this.debug) {
-				System.out.println("ntime:" + ntime);
-				for (int i = 0; i < 10; i++) {
-					int o = (opos - i - 1 + 20) % 10;
-					System.out.println("otim" + o + ":" + this.otim[o]);
-				}
-				System.out.println("fps:" + this.fps + " ratio:" + ratio + " count:" + count);
-				System.out.println("del:" + delta + " deltime:" + this.deltime + " mindel:" + this.mindel);
-				System.out.println("intex:" + intex + " opos:" + opos);
-				this.debug = false;
-				intex = 0;
-			}
-		}
-
-		if (this.state == -1) {
-			this.shutdown();
-		}
-	}
-
-	@ObfuscatedName("a.a(I)V")
-	public final void shutdown() {
-		this.state = -2;
-		this.unload();
-
-		try {
-			Thread.sleep(1000L);
-		} catch (Exception ignore) {
-		}
-
-		try {
-			System.exit(0);
-		} catch (Throwable ignore) {
-		}
-	}
-
-	@ObfuscatedName("a.a(II)V")
-	public final void setFramerate(int fps) {
-		this.deltime = 1000 / fps;
-	}
-
-	public final void start() {
-		if (this.state >= 0) {
-			this.state = 0;
-		}
-	}
-
-	public final void stop() {
-		if (this.state >= 0) {
-			this.state = 4000 / this.deltime;
-		}
-	}
-
-	public final void destroy() {
-		this.state = -1;
-
-		try {
-			Thread.sleep(5000L);
-		} catch (Exception ignore) {
-		}
-
-		if (this.state == -1) {
-			this.shutdown();
-		}
-	}
-
-	public final void update(Graphics g) {
-		if (this.graphics == null) {
-			this.graphics = g;
-		}
-
-		this.refresh = true;
-		this.refresh();
-	}
-
-	public final void paint(Graphics g) {
-		if (this.graphics == null) {
-			this.graphics = g;
-		}
-
-		this.refresh = true;
-		this.refresh();
-	}
-
-	public final void mousePressed(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-
-		if (this.frame != null) {
-			x -= this.frame.insets.left;
-			y -= this.frame.insets.top;
-		}
-
-		this.idleCycles = 0;
-		this.lastMouseClickX = x;
-		this.lastMouseClickY = y;
-		this.lastMouseClickTime = System.currentTimeMillis();
-
-		try {
-			if (e.getButton() == MouseEvent.BUTTON3) {
-				this.lastMouseClickButton = 2;
-				this.mouseButton = 2;
-			} else {
-				this.lastMouseClickButton = 1;
-				this.mouseButton = 1;
-			}
-
-			if (InputTracking.enabled) {
-				InputTracking.mousePressed(x, y, e.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
-			}
-		} catch (NoSuchMethodError ex) {
-			if (e.isMetaDown()) {
-				this.lastMouseClickButton = 2;
-				this.mouseButton = 2;
-			} else {
-				this.lastMouseClickButton = 1;
-				this.mouseButton = 1;
-			}
-
-			if (InputTracking.enabled) {
-				InputTracking.mousePressed(x, y, e.isMetaDown() ? 1 : 0);
-			}
-		}
-	}
-
-	public final void mouseReleased(MouseEvent e) {
-		this.idleCycles = 0;
-		this.mouseButton = 0;
-
-		try {
-			if (InputTracking.enabled) {
-				InputTracking.mouseReleased(e.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
-			}
-		} catch (NoSuchMethodError ex) {
-			if (InputTracking.enabled) {
-				InputTracking.mouseReleased(e.isMetaDown() ? 1 : 0);
-			}
-		}
-	}
-
-	public final void mouseClicked(MouseEvent e) {
-	}
-
-	public final void mouseEntered(MouseEvent e) {
-		if (InputTracking.enabled) {
-			InputTracking.mouseEntered();
-		}
-	}
-
-	public final void mouseExited(MouseEvent e) {
-		this.idleCycles = 0;
-		this.mouseX = -1;
-		this.mouseY = -1;
-
-		if (InputTracking.enabled) {
-			InputTracking.mouseExited();
-		}
-	}
-
-	public final void mouseDragged(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-
-		if (this.frame != null) {
-			x -= this.frame.insets.left;
-			y -= this.frame.insets.top;
-		}
-
-		this.idleCycles = 0;
-		this.mouseX = x;
-		this.mouseY = y;
-
-		if (InputTracking.enabled) {
-			InputTracking.mouseMoved(x, y);
-		}
-	}
-
-	public final void mouseMoved(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-
-		if (this.frame != null) {
-			x -= this.frame.insets.left;
-			y -= this.frame.insets.top;
-		}
-
-		this.idleCycles = 0;
-		this.mouseX = x;
-		this.mouseY = y;
-
-		if (InputTracking.enabled) {
-			InputTracking.mouseMoved(x, y);
-		}
-	}
-
-	public final void keyPressed(KeyEvent e) {
-		this.idleCycles = 0;
-
-		int code = e.getKeyCode();
-		int ch = e.getKeyChar();
-
-		if (ch < 30) {
-			ch = 0;
-		}
-
-		if (code == 37) {
-			ch = 1;
-		} else if (code == 39) {
-			ch = 2;
-		} else if (code == 38) {
-			ch = 3;
-		} else if (code == 40) {
-			ch = 4;
-		} else if (code == 17) {
-			ch = 5;
-		} else if (code == 8) {
-			ch = '\b';
-		} else if (code == 127) {
-			ch = '\b';
-		} else if (code == 9) {
-			ch = '\t';
-		} else if (code == 10) {
-			ch = '\n';
-		} else if (code >= 112 && code <= 123) {
-			ch = code + 1008 - 112;
-		} else if (code == 36) {
-			ch = 1000;
-		} else if (code == 35) {
-			ch = 1001;
-		} else if (code == 33) {
-			ch = 1002;
-		} else if (code == 34) {
-			ch = 1003;
-		}
-
-		if (ch > 0 && ch < 128) {
-			this.actionKey[ch] = 1;
-		}
-
-		if (ch > 4) {
-			this.keyQueue[this.keyQueueWritePos] = ch;
-			this.keyQueueWritePos = this.keyQueueWritePos + 1 & 0x7F;
-		}
-
-		if (InputTracking.enabled) {
-			InputTracking.keyPressed(ch);
-		}
-	}
-
-	public final void keyReleased(KeyEvent e) {
-		this.idleCycles = 0;
-
-		int code = e.getKeyCode();
-		char ch = e.getKeyChar();
-
-		if (ch < 30) {
-			ch = 0;
-		}
-
-		if (code == 37) {
-			ch = 1;
-		} else if (code == 39) {
-			ch = 2;
-		} else if (code == 38) {
-			ch = 3;
-		} else if (code == 40) {
-			ch = 4;
-		} else if (code == 17) {
-			ch = 5;
-		} else if (code == 8) {
-			ch = '\b';
-		} else if (code == 127) {
-			ch = '\b';
-		} else if (code == 9) {
-			ch = '\t';
-		} else if (code == 10) {
-			ch = '\n';
-		}
-
-		if (ch > 0 && ch < 128) {
-			this.actionKey[ch] = 0;
-		}
-
-		if (InputTracking.enabled) {
-			InputTracking.keyReleased(ch);
-		}
-	}
-
-	public final void keyTyped(KeyEvent e) {
-	}
-
-	@ObfuscatedName("a.b(I)I")
-	public final int pollKey() {
-		int key = -1;
-		if (this.keyQueueWritePos != this.keyQueueReadPos) {
-			key = this.keyQueue[this.keyQueueReadPos];
-			this.keyQueueReadPos = this.keyQueueReadPos + 1 & 0x7F;
-		}
-		return key;
-	}
-
-	public final void focusGained(FocusEvent e) {
-		this.hasFocus = true;
-		this.refresh = true;
-		this.refresh();
-
-		if (InputTracking.enabled) {
-			InputTracking.focusGained();
-		}
-	}
-
-	public final void focusLost(FocusEvent e) {
-		this.hasFocus = false;
-
-		if (InputTracking.enabled) {
-			InputTracking.focusLost();
-		}
-	}
-
-	public final void windowActivated(WindowEvent e) {
-	}
-
-	public final void windowClosed(WindowEvent e) {
-	}
-
-	public final void windowClosing(WindowEvent e) {
-		this.destroy();
-	}
-
-	public final void windowDeactivated(WindowEvent e) {
-	}
-
-	public final void windowDeiconified(WindowEvent e) {
-	}
-
-	public final void windowIconified(WindowEvent e) {
-	}
-
-	public final void windowOpened(WindowEvent e) {
-	}
-
-	@ObfuscatedName("a.a()V")
-	public void load() {
-	}
-
-	@ObfuscatedName("a.c(I)V")
-	public void update() {
-	}
-
-	@ObfuscatedName("a.d(I)V")
-	public void unload() {
-	}
-
-	@ObfuscatedName("a.a(Z)V")
-	public void draw() {
-	}
-
-	@ObfuscatedName("a.e(I)V")
-	public void refresh() {
-	}
-
-	@ObfuscatedName("a.f(I)Ljava/awt/Component;")
-	public java.awt.Component getBaseComponent() {
-		if (this.frame != null) {
-			return this.frame;
-		}
-
-		return this;
-	}
-
-	@ObfuscatedName("a.a(Ljava/lang/Runnable;I)V")
-	public void startThread(Runnable thread, int priority) {
-		Thread t = new Thread(thread);
-		t.start();
-		t.setPriority(priority);
-	}
-
-	@ObfuscatedName("a.a(IILjava/lang/String;)V")
-	public void drawProgress(int percent, String message) {
-		while (this.graphics == null) {
-			this.graphics = this.getBaseComponent().getGraphics();
-
-			try {
-				this.getBaseComponent().repaint();
-			} catch (Exception ignore) {
-			}
-
-			try {
-				Thread.sleep(1000L);
-			} catch (Exception ignore) {
-			}
-		}
-
-		Font bold = new Font("Helvetica", Font.BOLD, 13);
-		FontMetrics boldMetrics = this.getBaseComponent().getFontMetrics(bold);
-
-		Font plain = new Font("Helvetica", Font.PLAIN, 13);
-		FontMetrics plainMetrics = this.getBaseComponent().getFontMetrics(plain);
-
-		if (this.refresh) {
-			this.graphics.setColor(Color.black);
-			this.graphics.fillRect(0, 0, this.screenWidth, this.screenHeight);
-			this.refresh = false;
-		}
-
-		Color background = new Color(140, 17, 17);
-
-		int y = this.screenHeight / 2 - 18;
-		this.graphics.setColor(background);
-		this.graphics.drawRect(this.screenWidth / 2 - 152, y, 304, 34);
-		this.graphics.fillRect(this.screenWidth / 2 - 150, y + 2, percent * 3, 30);
-
-		this.graphics.setColor(Color.black);
-		this.graphics.fillRect(percent * 3 + (this.screenWidth / 2 - 150), y + 2, 300 - percent * 3, 30);
-		this.graphics.setFont(bold);
-
-		this.graphics.setColor(Color.white);
-		this.graphics.drawString(message, (this.screenWidth - boldMetrics.stringWidth(message)) / 2, y + 22);
-	}
+   @ObfuscatedName("JWWAIQPI.a")
+   public int a = 8;
+   @ObfuscatedName("JWWAIQPI.b")
+   public boolean b = false;
+   @ObfuscatedName("JWWAIQPI.c")
+   public boolean c = false;
+   @ObfuscatedName("JWWAIQPI.d")
+   public int d = 3;
+   @ObfuscatedName("JWWAIQPI.g")
+   public int g = 20;
+   @ObfuscatedName("JWWAIQPI.h")
+   public int h = 1;
+   @ObfuscatedName("JWWAIQPI.i")
+   public long[] i = new long[10];
+   @ObfuscatedName("JWWAIQPI.k")
+   public boolean k = false;
+   @ObfuscatedName("JWWAIQPI.p")
+   public Pix24[] p = new Pix24[6];
+   @ObfuscatedName("JWWAIQPI.r")
+   public boolean r = true;
+   @ObfuscatedName("JWWAIQPI.s")
+   public boolean s = true;
+   @ObfuscatedName("JWWAIQPI.F")
+   public int[] F = new int[128];
+   @ObfuscatedName("JWWAIQPI.G")
+   public int[] G = new int[128];
+   @ObfuscatedName("JWWAIQPI.B")
+   public int B;
+   @ObfuscatedName("JWWAIQPI.C")
+   public int C;
+   @ObfuscatedName("JWWAIQPI.D")
+   public int D;
+   @ObfuscatedName("JWWAIQPI.H")
+   public int H;
+   @ObfuscatedName("JWWAIQPI.I")
+   public int I;
+   @ObfuscatedName("JWWAIQPI.J")
+   public static int J;
+   @ObfuscatedName("JWWAIQPI.e")
+   public int e;
+   @ObfuscatedName("JWWAIQPI.f")
+   public int f;
+   @ObfuscatedName("JWWAIQPI.j")
+   public int j;
+   @ObfuscatedName("JWWAIQPI.l")
+   public int l;
+   @ObfuscatedName("JWWAIQPI.m")
+   public int m;
+   @ObfuscatedName("JWWAIQPI.t")
+   public int t;
+   @ObfuscatedName("JWWAIQPI.u")
+   public int u;
+   @ObfuscatedName("JWWAIQPI.v")
+   public int v;
+   @ObfuscatedName("JWWAIQPI.w")
+   public int w;
+   @ObfuscatedName("JWWAIQPI.x")
+   public int x;
+   @ObfuscatedName("JWWAIQPI.y")
+   public int y;
+   @ObfuscatedName("JWWAIQPI.z")
+   public int z;
+   @ObfuscatedName("JWWAIQPI.A")
+   public long A;
+   @ObfuscatedName("JWWAIQPI.E")
+   public long E;
+   @ObfuscatedName("JWWAIQPI.q")
+   public ViewBox q;
+   @ObfuscatedName("JWWAIQPI.o")
+   public PixMap o;
+   @ObfuscatedName("JWWAIQPI.n")
+   public Graphics n;
+
+   @ObfuscatedName("JWWAIQPI.a(III)V")
+   public final void a(int arg0, int arg1, int arg2) {
+      this.l = arg2;
+      this.m = arg1;
+      this.q = new ViewBox(this.d, this.m, this, this.l);
+      if (arg0 < 0) {
+         this.n = this.d(-756).getGraphics();
+         this.o = new PixMap(this.m, (byte)-12, this.d(-756), this.l);
+         this.a(this, 1);
+      }
+   }
+
+   @ObfuscatedName("JWWAIQPI.b(III)V")
+   public final void b(int arg0, int arg1, int arg2) {
+      this.l = arg0;
+      if (arg2 == 2) {
+         this.m = arg1;
+         this.n = this.d(-756).getGraphics();
+         this.o = new PixMap(this.m, (byte)-12, this.d(-756), this.l);
+         this.a(this, 1);
+      }
+   }
+
+   public void run() {
+      this.d(-756).addMouseListener(this);
+      this.d(-756).addMouseMotionListener(this);
+      this.d(-756).addKeyListener(this);
+      this.d(-756).addFocusListener(this);
+      if (this.q != null) {
+         this.q.addWindowListener(this);
+      }
+
+      this.a(0, true, "Loading...");
+      this.a();
+      int var1 = 0;
+      int var2 = 256;
+      int var3 = 1;
+      int var4 = 0;
+      int var5 = 0;
+
+      for(int var6 = 0; var6 < 10; ++var6) {
+         this.i[var6] = System.currentTimeMillis();
+      }
+
+      long var7 = System.currentTimeMillis();
+
+      while(true) {
+         long var11;
+         do {
+            if (this.f < 0) {
+               if (this.f == -1) {
+                  this.a(this.b);
+               }
+
+               return;
+            }
+
+            if (this.f > 0) {
+               --this.f;
+               if (this.f == 0) {
+                  this.a(this.b);
+                  return;
+               }
+            }
+
+            int var9 = var2;
+            int var10 = var3;
+            var2 = 300;
+            var3 = 1;
+            var11 = System.currentTimeMillis();
+            if (this.i[var1] == 0L) {
+               var2 = var9;
+               var3 = var10;
+            } else if (var11 > this.i[var1]) {
+               var2 = (int)((long)(this.g * 2560) / (var11 - this.i[var1]));
+            }
+
+            if (var2 < 25) {
+               var2 = 25;
+            }
+
+            if (var2 > 256) {
+               var2 = 256;
+               var3 = (int)((long)this.g - (var11 - this.i[var1]) / 10L);
+            }
+
+            if (var3 > this.g) {
+               var3 = this.g;
+            }
+
+            this.i[var1] = var11;
+            var1 = (var1 + 1) % 10;
+            if (var3 > 1) {
+               for(int var13 = 0; var13 < 10; ++var13) {
+                  if (this.i[var13] != 0L) {
+                     this.i[var13] += (long)var3;
+                  }
+               }
+            }
+
+            if (var3 < this.h) {
+               var3 = this.h;
+            }
+
+            try {
+               Thread.sleep((long)var3);
+            } catch (InterruptedException var16) {
+               ++var5;
+            }
+
+            while(var4 < 256) {
+               this.B = this.x;
+               this.C = this.y;
+               this.D = this.z;
+               this.E = this.A;
+               this.x = 0;
+               this.a((byte)-111);
+               this.H = this.I;
+               var4 += var2;
+            }
+
+            var4 &= 255;
+            if (this.g > 0) {
+               this.j = var2 * 1000 / (this.g * 256);
+            }
+
+            this.c(818);
+         } while(!this.k);
+
+         System.out.println("ntime:" + var11);
+
+         for(int var14 = 0; var14 < 10; ++var14) {
+            int var15 = (var1 - var14 - 1 + 20) % 10;
+            System.out.println("otim" + var15 + ":" + this.i[var15]);
+         }
+
+         System.out.println("fps:" + this.j + " ratio:" + var2 + " count:" + var4);
+         System.out.println("del:" + var3 + " deltime:" + this.g + " mindel:" + this.h);
+         System.out.println("intex:" + var5 + " opos:" + var1);
+         this.k = false;
+         var5 = 0;
+      }
+   }
+
+   @ObfuscatedName("JWWAIQPI.a(Z)V")
+   public final void a(boolean arg0) {
+      this.f = -2;
+      this.b((int)277);
+      if (!arg0) {
+         if (this.q != null) {
+            try {
+               Thread.sleep(1000L);
+            } catch (Exception var3) {
+            }
+
+            try {
+               System.exit(0);
+            } catch (Throwable var2) {
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("JWWAIQPI.a(BI)V")
+   public final void a(byte arg0, int arg1) {
+      if (arg0 != 103) {
+         this.a = 388;
+      }
+
+      this.g = 1000 / arg1;
+   }
+
+   public final void start() {
+      if (this.f >= 0) {
+         this.f = 0;
+      }
+
+   }
+
+   public final void stop() {
+      if (this.f >= 0) {
+         this.f = 4000 / this.g;
+      }
+
+   }
+
+   public final void destroy() {
+      this.f = -1;
+
+      try {
+         Thread.sleep(10000L);
+      } catch (Exception var1) {
+      }
+
+      if (this.f == -1) {
+         this.a(this.b);
+      }
+
+   }
+
+   public final void update(Graphics arg0) {
+      if (this.n == null) {
+         this.n = arg0;
+      }
+
+      this.r = true;
+      this.b((byte)-99);
+   }
+
+   public final void paint(Graphics arg0) {
+      if (this.n == null) {
+         this.n = arg0;
+      }
+
+      this.r = true;
+      this.b((byte)-99);
+   }
+
+   public final void mousePressed(MouseEvent arg0) {
+      int var2 = arg0.getX();
+      int var3 = arg0.getY();
+      if (this.q != null) {
+         var2 -= 4;
+         var3 -= 22;
+      }
+
+      this.t = 0;
+      this.y = var2;
+      this.z = var3;
+      this.A = System.currentTimeMillis();
+      if (arg0.isMetaDown()) {
+         this.x = 2;
+         this.u = 2;
+      } else {
+         this.x = 1;
+         this.u = 1;
+      }
+   }
+
+   public final void mouseReleased(MouseEvent arg0) {
+      this.t = 0;
+      this.u = 0;
+   }
+
+   public final void mouseClicked(MouseEvent arg0) {
+   }
+
+   public final void mouseEntered(MouseEvent arg0) {
+   }
+
+   public final void mouseExited(MouseEvent arg0) {
+      this.t = 0;
+      this.v = -1;
+      this.w = -1;
+   }
+
+   public final void mouseDragged(MouseEvent arg0) {
+      int var2 = arg0.getX();
+      int var3 = arg0.getY();
+      if (this.q != null) {
+         var2 -= 4;
+         var3 -= 22;
+      }
+
+      this.t = 0;
+      this.v = var2;
+      this.w = var3;
+   }
+
+   public final void mouseMoved(MouseEvent arg0) {
+      int var2 = arg0.getX();
+      int var3 = arg0.getY();
+      if (this.q != null) {
+         var2 -= 4;
+         var3 -= 22;
+      }
+
+      this.t = 0;
+      this.v = var2;
+      this.w = var3;
+   }
+
+   public final void keyPressed(KeyEvent arg0) {
+      this.t = 0;
+      int var2 = arg0.getKeyCode();
+      int var3 = arg0.getKeyChar();
+      if (var3 < 30) {
+         var3 = 0;
+      }
+
+      if (var2 == 37) {
+         var3 = 1;
+      }
+
+      if (var2 == 39) {
+         var3 = 2;
+      }
+
+      if (var2 == 38) {
+         var3 = 3;
+      }
+
+      if (var2 == 40) {
+         var3 = 4;
+      }
+
+      if (var2 == 17) {
+         var3 = 5;
+      }
+
+      if (var2 == 8) {
+         var3 = 8;
+      }
+
+      if (var2 == 127) {
+         var3 = 8;
+      }
+
+      if (var2 == 9) {
+         var3 = 9;
+      }
+
+      if (var2 == 10) {
+         var3 = 10;
+      }
+
+      if (var2 >= 112 && var2 <= 123) {
+         var3 = var2 + 1008 - 112;
+      }
+
+      if (var2 == 36) {
+         var3 = 1000;
+      }
+
+      if (var2 == 35) {
+         var3 = 1001;
+      }
+
+      if (var2 == 33) {
+         var3 = 1002;
+      }
+
+      if (var2 == 34) {
+         var3 = 1003;
+      }
+
+      if (var3 > 0 && var3 < 128) {
+         this.F[var3] = 1;
+      }
+
+      if (var3 > 4) {
+         this.G[this.I] = var3;
+         this.I = this.I + 1 & 127;
+      }
+
+      if (Linkable.d) {
+      }
+
+   }
+
+   public final void keyReleased(KeyEvent arg0) {
+      this.t = 0;
+      int var2 = arg0.getKeyCode();
+      char var3 = arg0.getKeyChar();
+      if (var3 < 30) {
+         var3 = 0;
+      }
+
+      if (var2 == 37) {
+         var3 = 1;
+      }
+
+      if (var2 == 39) {
+         var3 = 2;
+      }
+
+      if (var2 == 38) {
+         var3 = 3;
+      }
+
+      if (var2 == 40) {
+         var3 = 4;
+      }
+
+      if (var2 == 17) {
+         var3 = 5;
+      }
+
+      if (var2 == 8) {
+         var3 = '\b';
+      }
+
+      if (var2 == 127) {
+         var3 = '\b';
+      }
+
+      if (var2 == 9) {
+         var3 = '\t';
+      }
+
+      if (var2 == 10) {
+         var3 = '\n';
+      }
+
+      if (var3 > 0 && var3 < 128) {
+         this.F[var3] = 0;
+      }
+
+   }
+
+   public final void keyTyped(KeyEvent arg0) {
+   }
+
+   @ObfuscatedName("JWWAIQPI.a(I)I")
+   public final int a(int arg0) {
+      while(arg0 >= 0) {
+         this.e = -9;
+      }
+
+      int var2 = -1;
+      if (this.I != this.H) {
+         var2 = this.G[this.H];
+         this.H = this.H + 1 & 127;
+      }
+
+      return var2;
+   }
+
+   public final void focusGained(FocusEvent arg0) {
+      this.s = true;
+      this.r = true;
+      this.b((byte)-99);
+   }
+
+   public final void focusLost(FocusEvent arg0) {
+      this.s = false;
+
+      for(int var2 = 0; var2 < 128; ++var2) {
+         this.F[var2] = 0;
+      }
+
+   }
+
+   public final void windowActivated(WindowEvent arg0) {
+   }
+
+   public final void windowClosed(WindowEvent arg0) {
+   }
+
+   public final void windowClosing(WindowEvent arg0) {
+      this.destroy();
+   }
+
+   public final void windowDeactivated(WindowEvent arg0) {
+   }
+
+   public final void windowDeiconified(WindowEvent arg0) {
+   }
+
+   public final void windowIconified(WindowEvent arg0) {
+   }
+
+   public final void windowOpened(WindowEvent arg0) {
+   }
+
+   @ObfuscatedName("JWWAIQPI.a()V")
+   public void a() {
+   }
+
+   @ObfuscatedName("JWWAIQPI.a(B)V")
+   public void a(byte arg0) {
+      if (arg0 != -111) {
+         this.e = -400;
+      }
+   }
+
+   @ObfuscatedName("JWWAIQPI.b(I)V")
+   public void b(int arg0) {
+      int var2 = 41 / arg0;
+   }
+
+   @ObfuscatedName("JWWAIQPI.c(I)V")
+   public void c(int arg0) {
+      if (arg0 > 0) {
+         ;
+      }
+   }
+
+   @ObfuscatedName("JWWAIQPI.b(B)V")
+   public void b(byte arg0) {
+      if (arg0 == -99) {
+         ;
+      }
+   }
+
+   @ObfuscatedName("JWWAIQPI.d(I)Ljava/awt/Component;")
+   public java.awt.Component d(int arg0) {
+      if (arg0 >= 0) {
+         this.d = 329;
+      }
+
+      return this.q != null ? this.q : this;
+   }
+
+   @ObfuscatedName("JWWAIQPI.a(Ljava/lang/Runnable;I)V")
+   public void a(Runnable arg0, int arg1) {
+      Thread var3 = new Thread(arg0);
+      var3.start();
+      var3.setPriority(arg1);
+   }
+
+   @ObfuscatedName("JWWAIQPI.a(IZLjava/lang/String;)V")
+   public void a(int arg0, boolean arg1, String arg2) {
+      while(this.n == null) {
+         this.n = this.d(-756).getGraphics();
+
+         try {
+            this.d(-756).repaint();
+         } catch (Exception var10) {
+         }
+
+         try {
+            Thread.sleep(1000L);
+         } catch (Exception var9) {
+         }
+      }
+
+      Font var4 = new Font("Helvetica", 1, 13);
+      FontMetrics var5 = this.d(-756).getFontMetrics(var4);
+      if (!arg1) {
+         this.a = -145;
+      }
+
+      Font var6 = new Font("Helvetica", 0, 13);
+      this.d(-756).getFontMetrics(var6);
+      if (this.r) {
+         this.n.setColor(Color.black);
+         this.n.fillRect(0, 0, this.l, this.m);
+         this.r = false;
+      }
+
+      Color var7 = new Color(140, 17, 17);
+      int var8 = this.m / 2 - 18;
+      this.n.setColor(var7);
+      this.n.drawRect(this.l / 2 - 152, var8, 304, 34);
+      this.n.fillRect(this.l / 2 - 150, var8 + 2, arg0 * 3, 30);
+      this.n.setColor(Color.black);
+      this.n.fillRect(arg0 * 3 + (this.l / 2 - 150), var8 + 2, 300 - arg0 * 3, 30);
+      this.n.setFont(var4);
+      this.n.setColor(Color.white);
+      this.n.drawString(arg2, (this.l - var5.stringWidth(arg2)) / 2, var8 + 22);
+   }
 }

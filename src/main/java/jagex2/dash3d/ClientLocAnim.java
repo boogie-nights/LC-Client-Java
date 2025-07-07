@@ -4,87 +4,135 @@ import deob.ObfuscatedName;
 import jagex2.client.Client;
 import jagex2.config.LocType;
 import jagex2.config.SeqType;
-import jagex2.graphics.Model;
+import jagex2.config.VarbitType;
 
-@ObfuscatedName("cb")
 public class ClientLocAnim extends ModelSource {
+   @ObfuscatedName("NRPYRAWK.m")
+   public boolean m = false;
+   @ObfuscatedName("NRPYRAWK.s")
+   public int s;
+   @ObfuscatedName("NRPYRAWK.t")
+   public int t;
+   @ObfuscatedName("NRPYRAWK.u")
+   public int u;
+   @ObfuscatedName("NRPYRAWK.n")
+   public int n;
+   @ObfuscatedName("NRPYRAWK.o")
+   public int o;
+   @ObfuscatedName("NRPYRAWK.p")
+   public int p;
+   @ObfuscatedName("NRPYRAWK.q")
+   public int q;
+   @ObfuscatedName("NRPYRAWK.w")
+   public SeqType w;
+   @ObfuscatedName("NRPYRAWK.C")
+   public int C;
+   @ObfuscatedName("NRPYRAWK.B")
+   public int B;
+   @ObfuscatedName("NRPYRAWK.x")
+   public int x;
+   @ObfuscatedName("NRPYRAWK.y")
+   public int y;
+   @ObfuscatedName("NRPYRAWK.z")
+   public int[] z;
+   @ObfuscatedName("NRPYRAWK.r")
+   public int r;
+   @ObfuscatedName("NRPYRAWK.A")
+   public int A;
+   @ObfuscatedName("NRPYRAWK.v")
+   public static Client v;
 
-	@ObfuscatedName("cb.n")
-	public int field489;
+   @ObfuscatedName("NRPYRAWK.a(I)LYMYTDPVW;")
+   public final LocType a(int arg0) {
+      int var2 = -1;
+      if (arg0 != 0) {
+         this.A = 109;
+      }
 
-	@ObfuscatedName("cb.o")
-	public int field490;
+      if (this.x != -1) {
+         VarbitType var3 = VarbitType.c[this.x];
+         int var4 = var3.e;
+         int var5 = var3.f;
+         int var6 = var3.g;
+         int var7 = Client.Yh[var6 - var5];
+         var2 = v.Ee[var4] >> var5 & var7;
+      } else if (this.y != -1) {
+         var2 = v.Ee[this.y];
+      }
 
-	@ObfuscatedName("cb.p")
-	public int field491;
+      return var2 >= 0 && var2 < this.z.length && this.z[var2] != -1 ? LocType.a(this.z[var2]) : null;
+   }
 
-	@ObfuscatedName("cb.q")
-	public int field492;
+   public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, boolean arg7, int arg8, int arg9) {
+      this.s = arg6;
+      this.t = arg4;
+      this.u = arg9;
+      this.n = arg8;
+      this.o = arg3;
+      this.p = arg1;
+      this.q = arg2;
+      if (arg0 != -1) {
+         this.w = SeqType.d[arg0];
+         this.C = 0;
+         this.B = Client.fk - 1;
+         if (arg7 && this.w.i != -1) {
+            this.C = (int)(Math.random() * (double)this.w.e);
+            this.B -= (int)(Math.random() * (double)this.w.a(0, this.C));
+         }
+      }
 
-	@ObfuscatedName("cb.r")
-	public int field493;
+      LocType var11 = LocType.a(this.s);
+      this.x = var11.u;
+      this.y = var11.x;
+      this.z = var11.V;
+      if (arg5 != 3) {
+         this.r = -126;
+      }
+   }
 
-	@ObfuscatedName("cb.s")
-	public int field494;
+   @ObfuscatedName("NRPYRAWK.a(B)LLZYQDKJV;")
+   public final Model a(byte arg0) {
+      if (arg0 != 3) {
+         this.m = !this.m;
+      }
 
-	@ObfuscatedName("cb.t")
-	public int field495;
+      int var2 = -1;
+      if (this.w != null) {
+         int var3 = Client.fk - this.B;
+         if (var3 > 100 && this.w.i > 0) {
+            var3 = 100;
+         }
 
-	@ObfuscatedName("cb.u")
-	public SeqType seq;
+         label48: {
+            do {
+               do {
+                  if (var3 <= this.w.a(0, this.C)) {
+                     break label48;
+                  }
 
-	@ObfuscatedName("cb.v")
-	public int seqFrame;
+                  var3 -= this.w.a(0, this.C);
+                  ++this.C;
+               } while(this.C < this.w.e);
 
-	@ObfuscatedName("cb.w")
-	public int seqCycle;
+               this.C -= this.w.i;
+            } while(this.C >= 0 && this.C < this.w.e);
 
-	public ClientLocAnim(int arg0, int arg1, int arg2, int arg4, int arg5, boolean randomFrame, int arg7, int arg8, int seq) {
-		this.field489 = arg8;
-		this.field490 = arg4;
-		this.field491 = arg5;
-		this.field492 = arg2;
-		this.field493 = arg7;
-		this.field494 = arg1;
-		this.field495 = arg0;
+            this.w = null;
+         }
 
-		this.seq = SeqType.types[seq];
-		this.seqFrame = 0;
-		this.seqCycle = Client.loopCycle;
+         this.B = Client.fk - var3;
+         if (this.w != null) {
+            var2 = this.w.f[this.C];
+         }
+      }
 
-		if (randomFrame && this.seq.replayoff != -1) {
-			this.seqFrame = (int) (Math.random() * (double) this.seq.frameCount);
-			this.seqCycle -= (int) (Math.random() * (double) this.seq.getFrameDuration(this.seqFrame));
-		}
-	}
+      LocType var4;
+      if (this.z != null) {
+         var4 = this.a((int)0);
+      } else {
+         var4 = LocType.a(this.s);
+      }
 
-	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model getTempModel() {
-		if (this.seq != null) {
-			int var2 = Client.loopCycle - this.seqCycle;
-			if (var2 > 100 && this.seq.replayoff > 0) {
-				var2 = 100;
-			}
-			label42: {
-				do {
-					do {
-						if (var2 <= this.seq.getFrameDuration(this.seqFrame)) {
-							break label42;
-						}
-						var2 -= this.seq.getFrameDuration(this.seqFrame);
-						this.seqFrame++;
-					} while (this.seqFrame < this.seq.frameCount);
-					this.seqFrame -= this.seq.replayoff;
-				} while (this.seqFrame >= 0 && this.seqFrame < this.seq.frameCount);
-				this.seq = null;
-			}
-			this.seqCycle = Client.loopCycle - var2;
-		}
-		int var3 = -1;
-		if (this.seq != null) {
-			var3 = this.seq.frames[this.seqFrame];
-		}
-		LocType var4 = LocType.get(this.field489);
-		return var4.getModel(this.field490, this.field491, this.field492, this.field493, this.field494, this.field495, var3);
-	}
+      return var4 == null ? null : var4.a(this.t, this.u, this.n, this.o, this.p, this.q, var2);
+   }
 }

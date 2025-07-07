@@ -3,42 +3,29 @@ package jagex2.dash3d;
 import deob.ObfuscatedName;
 import jagex2.datastruct.Linkable;
 
-@ObfuscatedName("ob")
 public class LocChange extends Linkable {
-
-	@ObfuscatedName("ob.f")
-	public int level;
-
-	@ObfuscatedName("ob.g")
-	public int layer;
-
-	@ObfuscatedName("ob.h")
-	public int x;
-
-	@ObfuscatedName("ob.i")
-	public int z;
-
-	@ObfuscatedName("ob.j")
-	public int oldType;
-
-	@ObfuscatedName("ob.k")
-	public int oldAngle;
-
-	@ObfuscatedName("ob.l")
-	public int oldShape;
-
-	@ObfuscatedName("ob.m")
-	public int newType;
-
-	@ObfuscatedName("ob.n")
-	public int newAngle;
-
-	@ObfuscatedName("ob.o")
-	public int newShape;
-
-	@ObfuscatedName("ob.p")
-	public int startTime;
-
-	@ObfuscatedName("ob.q")
-	public int endTime = -1;
+   @ObfuscatedName("NLLHDXXJ.k")
+   public int k = -1;
+   @ObfuscatedName("NLLHDXXJ.e")
+   public int e;
+   @ObfuscatedName("NLLHDXXJ.f")
+   public int f;
+   @ObfuscatedName("NLLHDXXJ.g")
+   public int g;
+   @ObfuscatedName("NLLHDXXJ.h")
+   public int h;
+   @ObfuscatedName("NLLHDXXJ.i")
+   public int i;
+   @ObfuscatedName("NLLHDXXJ.j")
+   public int j;
+   @ObfuscatedName("NLLHDXXJ.l")
+   public int l;
+   @ObfuscatedName("NLLHDXXJ.m")
+   public int m;
+   @ObfuscatedName("NLLHDXXJ.n")
+   public int n;
+   @ObfuscatedName("NLLHDXXJ.o")
+   public int o;
+   @ObfuscatedName("NLLHDXXJ.p")
+   public int p;
 }

@@ -3,1203 +3,1577 @@ package jagex2.dash3d;
 import deob.*;
 import jagex2.config.FloType;
 import jagex2.config.LocType;
-import jagex2.graphics.Model;
 import jagex2.graphics.Pix3D;
 import jagex2.io.OnDemand;
 import jagex2.io.Packet;
 
-@ObfuscatedName("c")
 public class World {
+   @ObfuscatedName("CHEOPWNH.b")
+   public byte b = 0;
+   @ObfuscatedName("CHEOPWNH.c")
+   public boolean c = true;
+   @ObfuscatedName("CHEOPWNH.s")
+   public byte s = 0;
+   @ObfuscatedName("CHEOPWNH.t")
+   public boolean t = true;
+   @ObfuscatedName("CHEOPWNH.w")
+   public int w = 20411;
+   @ObfuscatedName("CHEOPWNH.C")
+   public int C = 69;
+   @ObfuscatedName("CHEOPWNH.n")
+   public int n;
+   @ObfuscatedName("CHEOPWNH.o")
+   public int o;
+   @ObfuscatedName("CHEOPWNH.l")
+   public int[][][] l;
+   @ObfuscatedName("CHEOPWNH.a")
+   public byte[][][] a;
+   @ObfuscatedName("CHEOPWNH.v")
+   public byte[][][] v;
+   @ObfuscatedName("CHEOPWNH.r")
+   public byte[][][] r;
+   @ObfuscatedName("CHEOPWNH.p")
+   public byte[][][] p;
+   @ObfuscatedName("CHEOPWNH.e")
+   public byte[][][] e;
+   @ObfuscatedName("CHEOPWNH.E")
+   public int[][][] E;
+   @ObfuscatedName("CHEOPWNH.A")
+   public byte[][][] A;
+   @ObfuscatedName("CHEOPWNH.B")
+   public int[][] B;
+   @ObfuscatedName("CHEOPWNH.g")
+   public int[] g;
+   @ObfuscatedName("CHEOPWNH.h")
+   public int[] h;
+   @ObfuscatedName("CHEOPWNH.i")
+   public int[] i;
+   @ObfuscatedName("CHEOPWNH.j")
+   public int[] j;
+   @ObfuscatedName("CHEOPWNH.k")
+   public int[] k;
+   @ObfuscatedName("CHEOPWNH.d")
+   public static int d = (int)(Math.random() * 17.0D) - 8;
+   @ObfuscatedName("CHEOPWNH.f")
+   public static final int[] f = new int[]{0, -1, 0, 1};
+   @ObfuscatedName("CHEOPWNH.m")
+   public static int m = 99;
+   @ObfuscatedName("CHEOPWNH.q")
+   public static byte q = -80;
+   @ObfuscatedName("CHEOPWNH.u")
+   public static final int[] u = new int[]{1, 2, 4, 8};
+   @ObfuscatedName("CHEOPWNH.x")
+   public static final int[] x = new int[]{1, 0, -1, 0};
+   @ObfuscatedName("CHEOPWNH.z")
+   public static int z = (int)(Math.random() * 33.0D) - 16;
+   @ObfuscatedName("CHEOPWNH.D")
+   public static final int[] D = new int[]{16, 32, 64, 128};
+   @ObfuscatedName("CHEOPWNH.F")
+   public static boolean F = true;
+   @ObfuscatedName("CHEOPWNH.y")
+   public static int y;
 
-	@ObfuscatedName("c.g")
-	public static boolean lowMemory = true;
+   @ObfuscatedName("CHEOPWNH.a(III)I")
+   public static final int a(int arg0, int arg1, int arg2) {
+      int var3 = arg0 / arg2;
+      int var4 = arg0 & arg2 - 1;
+      int var5 = arg1 / arg2;
+      int var6 = arg1 & arg2 - 1;
+      int var7 = c(var3, var5);
+      int var8 = c(var3 + 1, var5);
+      int var9 = c(var3, var5 + 1);
+      int var10 = c(var3 + 1, var5 + 1);
+      int var11 = b(var7, var8, var4, arg2);
+      int var12 = b(var9, var10, var4, arg2);
+      return b(var11, var12, var6, arg2);
+   }
 
-	@ObfuscatedName("c.h")
-	public static int levelBuilt;
+   @ObfuscatedName("CHEOPWNH.a(IIIB)I")
+   public int a(int arg0, int arg1, int arg2, byte arg3) {
+      if (this.s == arg3) {
+         boolean var5 = false;
+         if ((this.a[arg1][arg2][arg0] & 8) != 0) {
+            return 0;
+         } else {
+            return arg1 > 0 && (this.a[1][arg2][arg0] & 2) != 0 ? arg1 - 1 : arg1;
+         }
+      } else {
+         return 2;
+      }
+   }
 
-	@ObfuscatedName("c.i")
-	public static boolean fullbright;
+   @ObfuscatedName("CHEOPWNH.a(IIIILXRENONSA;IIIILKJCMXHNO;[[[I)V")
+   public static final void a(int arg0, int arg1, int arg2, int arg3, CollisionMap arg4, int arg5, int arg6, int arg7, int arg8, World3D arg9, int[][][] arg10) {
+      int var11 = arg10[arg1][arg6][arg3];
+      int var12 = arg10[arg1][arg6 + 1][arg3];
+      int var13 = arg10[arg1][arg6 + 1][arg3 + 1];
+      int var14 = arg10[arg1][arg6][arg3 + 1];
+      int var15 = var11 + var12 + var13 + var14 >> 2;
+      LocType var16 = LocType.a(arg0);
+      if (arg7 == 0) {
+         int var17 = (arg0 << 14) + (arg3 << 7) + arg6 + 1073741824;
+         if (!var16.b) {
+            var17 += Integer.MIN_VALUE;
+         }
 
-	@ObfuscatedName("c.j")
-	public int maxTileX;
+         byte var18 = (byte)((arg5 << 6) + arg2);
+         if (arg2 == 22) {
+            ModelSource var19;
+            if (var16.T == -1 && var16.V == null) {
+               var19 = var16.a(22, arg5, var11, var12, var13, var14, -1);
+            } else {
+               var19 = new ClientLocAnim(var16.T, var13, var14, var12, 22, (byte)3, arg0, true, var11, arg5);
+            }
 
-	@ObfuscatedName("c.k")
-	public int maxTileZ;
+            arg9.a(arg6, arg3, 669, var18, var17, var15, arg8, var19);
+            if (var16.ab && var16.b) {
+               arg4.a(8, (int)arg3, arg6);
+            }
 
-	@ObfuscatedName("c.l")
-	public int[][][] heightmap;
+         } else if (arg2 != 10 && arg2 != 11) {
+            if (arg2 >= 12) {
+               ModelSource var24;
+               if (var16.T == -1 && var16.V == null) {
+                  var24 = var16.a(arg2, arg5, var11, var12, var13, var14, -1);
+               } else {
+                  var24 = new ClientLocAnim(var16.T, var13, var14, var12, arg2, (byte)3, arg0, true, var11, arg5);
+               }
 
-	@ObfuscatedName("c.m")
-	public byte[][][] flags;
+               arg9.a(arg8, 1, arg3, var24, var18, 0, arg6, -896, 1, var15, var17);
+               if (var16.ab) {
+                  arg4.a(arg3, arg5, var16.r, var16.R, var16.Z, arg6, (byte)52);
+               }
 
-	@ObfuscatedName("c.n")
-	public byte[][][] underlayType;
+            } else if (arg2 == 0) {
+               ModelSource var25;
+               if (var16.T == -1 && var16.V == null) {
+                  var25 = var16.a(0, arg5, var11, var12, var13, var14, -1);
+               } else {
+                  var25 = new ClientLocAnim(var16.T, var13, var14, var12, 0, (byte)3, arg0, true, var11, arg5);
+               }
 
-	@ObfuscatedName("c.o")
-	public byte[][][] overlayType;
+               arg9.a(var15, 49878, 0, u[arg5], (ModelSource)null, arg6, var17, var18, arg3, var25, arg8);
+               if (var16.ab) {
+                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               }
 
-	@ObfuscatedName("c.p")
-	public byte[][][] overlayShape;
+            } else if (arg2 == 1) {
+               ModelSource var26;
+               if (var16.T == -1 && var16.V == null) {
+                  var26 = var16.a(1, arg5, var11, var12, var13, var14, -1);
+               } else {
+                  var26 = new ClientLocAnim(var16.T, var13, var14, var12, 1, (byte)3, arg0, true, var11, arg5);
+               }
 
-	@ObfuscatedName("c.q")
-	public byte[][][] overlayAngle;
+               arg9.a(var15, 49878, 0, D[arg5], (ModelSource)null, arg6, var17, var18, arg3, var26, arg8);
+               if (var16.ab) {
+                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               }
 
-	@ObfuscatedName("c.r")
-	public byte[][][] shadow;
+            } else if (arg2 == 2) {
+               int var27 = arg5 + 1 & 3;
+               ModelSource var28;
+               ModelSource var29;
+               if (var16.T == -1 && var16.V == null) {
+                  var28 = var16.a(2, arg5 + 4, var11, var12, var13, var14, -1);
+                  var29 = var16.a(2, var27, var11, var12, var13, var14, -1);
+               } else {
+                  var28 = new ClientLocAnim(var16.T, var13, var14, var12, 2, (byte)3, arg0, true, var11, arg5 + 4);
+                  var29 = new ClientLocAnim(var16.T, var13, var14, var12, 2, (byte)3, arg0, true, var11, var27);
+               }
 
-	@ObfuscatedName("c.s")
-	public int[][] lightness;
+               arg9.a(var15, 49878, u[var27], u[arg5], var29, arg6, var17, var18, arg3, var28, arg8);
+               if (var16.ab) {
+                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               }
 
-	@ObfuscatedName("c.t")
-	public int[] blendChroma;
+            } else if (arg2 == 3) {
+               ModelSource var30;
+               if (var16.T == -1 && var16.V == null) {
+                  var30 = var16.a(3, arg5, var11, var12, var13, var14, -1);
+               } else {
+                  var30 = new ClientLocAnim(var16.T, var13, var14, var12, 3, (byte)3, arg0, true, var11, arg5);
+               }
 
-	@ObfuscatedName("c.u")
-	public int[] blendSaturation;
+               arg9.a(var15, 49878, 0, D[arg5], (ModelSource)null, arg6, var17, var18, arg3, var30, arg8);
+               if (var16.ab) {
+                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               }
 
-	@ObfuscatedName("c.v")
-	public int[] blendLightness;
+            } else if (arg2 == 9) {
+               ModelSource var31;
+               if (var16.T == -1 && var16.V == null) {
+                  var31 = var16.a(arg2, arg5, var11, var12, var13, var14, -1);
+               } else {
+                  var31 = new ClientLocAnim(var16.T, var13, var14, var12, arg2, (byte)3, arg0, true, var11, arg5);
+               }
 
-	@ObfuscatedName("c.w")
-	public int[] blendLuminance;
+               arg9.a(arg8, 1, arg3, var31, var18, 0, arg6, -896, 1, var15, var17);
+               if (var16.ab) {
+                  arg4.a(arg3, arg5, var16.r, var16.R, var16.Z, arg6, (byte)52);
+               }
 
-	@ObfuscatedName("c.x")
-	public int[] blendMagnitude;
+            } else {
+               if (var16.l) {
+                  if (arg5 == 1) {
+                     int var32 = var14;
+                     var14 = var13;
+                     var13 = var12;
+                     var12 = var11;
+                     var11 = var32;
+                  } else if (arg5 == 2) {
+                     int var33 = var14;
+                     var14 = var12;
+                     var12 = var33;
+                     int var34 = var13;
+                     var13 = var11;
+                     var11 = var34;
+                  } else if (arg5 == 3) {
+                     int var35 = var14;
+                     var14 = var11;
+                     var11 = var12;
+                     var12 = var13;
+                     var13 = var35;
+                  }
+               }
 
-	@ObfuscatedName("c.y")
-	public int[][][] occlusion;
+               if (arg2 == 4) {
+                  ModelSource var36;
+                  if (var16.T == -1 && var16.V == null) {
+                     var36 = var16.a(4, 0, var11, var12, var13, var14, -1);
+                  } else {
+                     var36 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                  }
 
-	@ObfuscatedName("c.z")
-	public static final int[] ROTATION_WALL_TYPE = new int[] { 1, 2, 4, 8 };
+                  arg9.a(arg8, u[arg5], arg5 * 512, var17, var18, arg6, 0, arg3, 0, var15, var36, -930);
+               } else if (arg2 == 5) {
+                  int var37 = 16;
+                  int var38 = arg9.b(arg8, arg6, arg3);
+                  if (var38 > 0) {
+                     var37 = LocType.a(var38 >> 14 & 32767).S;
+                  }
 
-	@ObfuscatedName("c.A")
-	public static final int[] ROTATION_WALL_CORNER_TYPE = new int[] { 16, 32, 64, 128 };
+                  ModelSource var39;
+                  if (var16.T == -1 && var16.V == null) {
+                     var39 = var16.a(4, 0, var11, var12, var13, var14, -1);
+                  } else {
+                     var39 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                  }
 
-	@ObfuscatedName("c.B")
-	public static final int[] WALL_DECORATION_ROTATION_FORWARD_X = new int[] { 1, 0, -1, 0 };
+                  arg9.a(arg8, u[arg5], arg5 * 512, var17, var18, arg6, f[arg5] * var37, arg3, x[arg5] * var37, var15, var39, -930);
+               } else if (arg2 == 6) {
+                  ModelSource var40;
+                  if (var16.T == -1 && var16.V == null) {
+                     var40 = var16.a(4, 0, var11, var12, var13, var14, -1);
+                  } else {
+                     var40 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                  }
 
-	@ObfuscatedName("c.C")
-	public static final int[] WALL_DECORATION_ROTATION_FORWARD_Z = new int[] { 0, -1, 0, 1 };
+                  arg9.a(arg8, 256, arg5, var17, var18, arg6, 0, arg3, 0, var15, var40, -930);
+               } else if (arg2 == 7) {
+                  ModelSource var41;
+                  if (var16.T == -1 && var16.V == null) {
+                     var41 = var16.a(4, 0, var11, var12, var13, var14, -1);
+                  } else {
+                     var41 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                  }
 
-	@ObfuscatedName("c.D")
-	public static int randomHueOffset = (int) (Math.random() * 17.0D) - 8;
+                  arg9.a(arg8, 512, arg5, var17, var18, arg6, 0, arg3, 0, var15, var41, -930);
+               } else if (arg2 == 8) {
+                  ModelSource var42;
+                  if (var16.T == -1 && var16.V == null) {
+                     var42 = var16.a(4, 0, var11, var12, var13, var14, -1);
+                  } else {
+                     var42 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                  }
 
-	@ObfuscatedName("c.E")
-	public static int randomLightnessOffset = (int) (Math.random() * 33.0D) - 16;
+                  arg9.a(arg8, 768, arg5, var17, var18, arg6, 0, arg3, 0, var15, var42, -930);
+               }
+            }
+         } else {
+            ModelSource var20;
+            if (var16.T == -1 && var16.V == null) {
+               var20 = var16.a(10, arg5, var11, var12, var13, var14, -1);
+            } else {
+               var20 = new ClientLocAnim(var16.T, var13, var14, var12, 10, (byte)3, arg0, true, var11, arg5);
+            }
 
-	public World(int[][][] arg1, byte[][][] arg2, int arg3, int arg4) {
-		this.maxTileX = arg3;
-		this.maxTileZ = arg4;
-		this.heightmap = arg1;
-		this.flags = arg2;
-		this.underlayType = new byte[4][this.maxTileX][this.maxTileZ];
-		this.overlayType = new byte[4][this.maxTileX][this.maxTileZ];
-		this.overlayShape = new byte[4][this.maxTileX][this.maxTileZ];
-		this.overlayAngle = new byte[4][this.maxTileX][this.maxTileZ];
-		this.occlusion = new int[4][this.maxTileX + 1][this.maxTileZ + 1];
-		this.shadow = new byte[4][this.maxTileX + 1][this.maxTileZ + 1];
-		this.lightness = new int[this.maxTileX + 1][this.maxTileZ + 1];
-		this.blendChroma = new int[this.maxTileZ];
-		this.blendSaturation = new int[this.maxTileZ];
-		this.blendLightness = new int[this.maxTileZ];
-		this.blendLuminance = new int[this.maxTileZ];
-		this.blendMagnitude = new int[this.maxTileZ];
-	}
+            if (var20 != null) {
+               int var21 = 0;
+               if (arg2 == 11) {
+                  var21 += 256;
+               }
 
-	@ObfuscatedName("c.a(IIIZI)V")
-	public final void spreadHeight(int arg0, int arg1, int arg2, int arg4) {
-		for (int var6 = arg1; var6 <= arg1 + arg4; var6++) {
-			for (int var7 = arg0; var7 <= arg0 + arg2; var7++) {
-				if (var7 >= 0 && var7 < this.maxTileX && var6 >= 0 && var6 < this.maxTileZ) {
-					this.shadow[0][var7][var6] = 127;
-					if (arg0 == var7 && var7 > 0) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7 - 1][var6];
-					}
-					if (arg0 + arg2 == var7 && var7 < this.maxTileX - 1) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7 + 1][var6];
-					}
-					if (arg1 == var6 && var6 > 0) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7][var6 - 1];
-					}
-					if (arg1 + arg4 == var6 && var6 < this.maxTileZ - 1) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7][var6 + 1];
-					}
-				}
-			}
-		}
-	}
+               int var22;
+               int var23;
+               if (arg5 != 1 && arg5 != 3) {
+                  var22 = var16.R;
+                  var23 = var16.r;
+               } else {
+                  var22 = var16.r;
+                  var23 = var16.R;
+               }
 
-	@ObfuscatedName("c.a(I[BIIII)V")
-	public final void loadGround(byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
-		Packet var7 = new Packet(arg1);
-		for (int var8 = 0; var8 < 4; var8++) {
-			for (int var9 = 0; var9 < 64; var9++) {
-				for (int var10 = 0; var10 < 64; var10++) {
-					int var11 = arg2 + var9;
-					int var12 = arg3 + var10;
-					if (var11 >= 0 && var11 < 104 && var12 >= 0 && var12 < 104) {
-						this.flags[var8][var11][var12] = 0;
-						while (true) {
-							int var13 = var7.g1();
-							if (var13 == 0) {
-								if (var8 == 0) {
-									this.heightmap[0][var11][var12] = -perlinNoise(var11 + 932731 + arg4, var12 + 556238 + arg5) * 8;
-								} else {
-									this.heightmap[var8][var11][var12] = this.heightmap[var8 - 1][var11][var12] - 240;
-								}
-								break;
-							}
-							if (var13 == 1) {
-								int var14 = var7.g1();
-								if (var14 == 1) {
-									var14 = 0;
-								}
-								if (var8 == 0) {
-									this.heightmap[0][var11][var12] = -var14 * 8;
-								} else {
-									this.heightmap[var8][var11][var12] = this.heightmap[var8 - 1][var11][var12] - var14 * 8;
-								}
-								break;
-							}
-							if (var13 <= 49) {
-								this.overlayType[var8][var11][var12] = var7.g1b();
-								this.overlayShape[var8][var11][var12] = (byte) ((var13 - 2) / 4);
-								this.overlayAngle[var8][var11][var12] = (byte) (var13 - 2 & 0x3);
-							} else if (var13 <= 81) {
-								this.flags[var8][var11][var12] = (byte) (var13 - 49);
-							} else {
-								this.underlayType[var8][var11][var12] = (byte) (var13 - 81);
-							}
-						}
-					} else {
-						while (true) {
-							int var15 = var7.g1();
-							if (var15 == 0) {
-								break;
-							}
-							if (var15 == 1) {
-								var7.g1();
-								break;
-							}
-							if (var15 <= 49) {
-								var7.g1();
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+               arg9.a(arg8, var22, arg3, var20, var18, var21, arg6, -896, var23, var15, var17);
+            }
 
-	@ObfuscatedName("c.a(II[BZ)Z")
-	public static final boolean validateLocs(int arg0, int arg1, byte[] arg2) {
-		boolean var4 = true;
-		Packet var5 = new Packet(arg2);
-		int var6 = -1;
-		label54: while (true) {
-			int var7 = var5.gsmarts();
-			if (var7 == 0) {
-				return var4;
-			}
-			var6 += var7;
-			int var8 = 0;
-			boolean var9 = false;
-			while (true) {
-				while (!var9) {
-					int var11 = var5.gsmarts();
-					if (var11 == 0) {
-						continue label54;
-					}
-					var8 += var11 - 1;
-					int var12 = var8 & 0x3F;
-					int var13 = var8 >> 6 & 0x3F;
-					int var14 = var5.g1() >> 2;
-					int var15 = arg0 + var13;
-					int var16 = arg1 + var12;
-					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
-						LocType var17 = LocType.get(var6);
-						if (var14 != 22 || !lowMemory || var17.active || var17.forcedecor) {
-							var4 &= var17.validate();
-							var9 = true;
-						}
-					}
-				}
-				int var10 = var5.gsmarts();
-				if (var10 == 0) {
-					break;
-				}
-				var5.g1();
-			}
-		}
-	}
+            if (var16.ab) {
+               arg4.a(arg3, arg5, var16.r, var16.R, var16.Z, arg6, (byte)52);
+            }
 
-	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void prefetchLocs(Packet arg1, OnDemand arg2) {
-		int var3 = -1;
-		while (true) {
-			int var4 = arg1.gsmarts();
-			if (var4 == 0) {
-				return;
-			}
-			var3 += var4;
-			LocType var5 = LocType.get(var3);
-			var5.prefetch(arg2);
-			while (true) {
-				int var6 = arg1.gsmarts();
-				if (var6 == 0) {
-					break;
-				}
-				arg1.g1();
-			}
-		}
-	}
+         }
+      }
+   }
 
-	@ObfuscatedName("c.a(ILs;[Ljc;IZ[B)V")
-	public final void loadLocations(int arg0, World3D arg1, CollisionMap[] arg2, int arg3, byte[] arg5) {
-		Packet var7 = new Packet(arg5);
-		int var8 = -1;
-		while (true) {
-			int var9 = var7.gsmarts();
-			if (var9 == 0) {
-				return;
-			}
-			var8 += var9;
-			int var10 = 0;
-			while (true) {
-				int var11 = var7.gsmarts();
-				if (var11 == 0) {
-					break;
-				}
-				var10 += var11 - 1;
-				int var12 = var10 & 0x3F;
-				int var13 = var10 >> 6 & 0x3F;
-				int var14 = var10 >> 12;
-				int var15 = var7.g1();
-				int var16 = var15 >> 2;
-				int var17 = var15 & 0x3;
-				int var18 = arg3 + var13;
-				int var19 = arg0 + var12;
-				if (var18 > 0 && var19 > 0 && var18 < 103 && var19 < 103) {
-					int var20 = var14;
-					if ((this.flags[1][var18][var19] & 0x2) == 2) {
-						var20 = var14 - 1;
-					}
-					CollisionMap var21 = null;
-					if (var20 >= 0) {
-						var21 = arg2[var20];
-					}
-					this.addLoc(var8, var19, var17, arg1, var21, var18, var16, var14);
-				}
-			}
-		}
-	}
+   @ObfuscatedName("CHEOPWNH.a(IIII)V")
+   public final void a(int arg0, int arg1, int arg2, int arg3) {
+      if (this.w == arg0) {
+         for(int var5 = 0; var5 < 8; ++var5) {
+            for(int var6 = 0; var6 < 8; ++var6) {
+               this.l[arg1][arg3 + var5][arg2 + var6] = 0;
+            }
+         }
 
-	@ObfuscatedName("c.a(IIIZLs;Ljc;III)V")
-	public final void addLoc(int arg0, int arg1, int angle, World3D arg4, CollisionMap arg5, int arg6, int shape, int arg8) {
-		if (lowMemory) {
-			if ((this.flags[arg8][arg6][arg1] & 0x10) != 0) {
-				return;
-			}
-			if (this.getDrawLevel(arg6, arg8, arg1) != levelBuilt) {
-				return;
-			}
-		}
-		int var10 = this.heightmap[arg8][arg6][arg1];
-		int var11 = this.heightmap[arg8][arg6 + 1][arg1];
-		int var12 = this.heightmap[arg8][arg6 + 1][arg1 + 1];
-		int var13 = this.heightmap[arg8][arg6][arg1 + 1];
-		int var14 = var10 + var11 + var12 + var13 >> 2;
-		LocType loc = LocType.get(arg0);
-		int var16 = (arg0 << 14) + (arg1 << 7) + arg6 + 1073741824;
-		if (!loc.active) {
-			var16 += Integer.MIN_VALUE;
-		}
-		byte var17 = (byte) ((angle << 6) + shape);
-		if (shape == 22) {
-			if (!lowMemory || loc.active || loc.forcedecor) {
-				ModelSource var18;
-				if (loc.anim == -1) {
-					var18 = loc.getModel(22, angle, var10, var11, var12, var13, -1);
-				} else {
-					var18 = new ClientLocAnim(var13, var12, var10, 22, angle, true, var11, arg0, loc.anim);
-				}
-				arg4.addGroundDecor(arg1, arg8, arg6, var16, var14, var18, var17);
-				if (loc.blockwalk && loc.active && arg5 != null) {
-					arg5.setBlocked(arg1, arg6);
-				}
-			}
-		} else if (shape == 10 || shape == 11) {
-			ModelSource var34;
-			if (loc.anim == -1) {
-				var34 = loc.getModel(10, angle, var10, var11, var12, var13, -1);
-			} else {
-				var34 = new ClientLocAnim(var13, var12, var10, 10, angle, true, var11, arg0, loc.anim);
-			}
-			if (var34 != null) {
-				int var35 = 0;
-				if (shape == 11) {
-					var35 += 256;
-				}
-				int var36;
-				int var37;
-				if (angle == 1 || angle == 3) {
-					var36 = loc.length;
-					var37 = loc.width;
-				} else {
-					var36 = loc.width;
-					var37 = loc.length;
-				}
-				if (arg4.addLoc(var17, var16, arg6, arg8, var14, var36, var35, var34, var37, arg1) && loc.shadow) {
-					Model var38;
-					if (var34 instanceof Model) {
-						var38 = (Model) var34;
-					} else {
-						var38 = loc.getModel(10, angle, var10, var11, var12, var13, -1);
-					}
-					if (var38 != null) {
-						for (int var39 = 0; var39 <= var36; var39++) {
-							for (int var40 = 0; var40 <= var37; var40++) {
-								int var41 = var38.radius / 4;
-								if (var41 > 30) {
-									var41 = 30;
-								}
-								if (var41 > this.shadow[arg8][arg6 + var39][arg1 + var40]) {
-									this.shadow[arg8][arg6 + var39][arg1 + var40] = (byte) var41;
-								}
-							}
-						}
-					}
-				}
-			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addLoc(loc.blockrange, angle, arg6, loc.length, loc.width, arg1);
-			}
-		} else if (shape >= 12) {
-			ModelSource var19;
-			if (loc.anim == -1) {
-				var19 = loc.getModel(shape, angle, var10, var11, var12, var13, -1);
-			} else {
-				var19 = new ClientLocAnim(var13, var12, var10, shape, angle, true, var11, arg0, loc.anim);
-			}
-			arg4.addLoc(var17, var16, arg6, arg8, var14, 1, 0, var19, 1, arg1);
-			if (shape >= 12 && shape <= 17 && shape != 13 && arg8 > 0) {
-				this.occlusion[arg8][arg6][arg1] |= 0x924;
-			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addLoc(loc.blockrange, angle, arg6, loc.length, loc.width, arg1);
-			}
-		} else if (shape == 0) {
-			ModelSource var20;
-			if (loc.anim == -1) {
-				var20 = loc.getModel(0, angle, var10, var11, var12, var13, -1);
-			} else {
-				var20 = new ClientLocAnim(var13, var12, var10, 0, angle, true, var11, arg0, loc.anim);
-			}
-			arg4.addWall(arg6, var16, arg8, 0, ROTATION_WALL_TYPE[angle], var14, null, var20, var17, arg1);
-			if (angle == 0) {
-				if (loc.shadow) {
-					this.shadow[arg8][arg6][arg1] = 50;
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
-				}
-				if (loc.occlude) {
-					this.occlusion[arg8][arg6][arg1] |= 0x249;
-				}
-			} else if (angle == 1) {
-				if (loc.shadow) {
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
-				}
-				if (loc.occlude) {
-					this.occlusion[arg8][arg6][arg1 + 1] |= 0x492;
-				}
-			} else if (angle == 2) {
-				if (loc.shadow) {
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
-				}
-				if (loc.occlude) {
-					this.occlusion[arg8][arg6 + 1][arg1] |= 0x249;
-				}
-			} else if (angle == 3) {
-				if (loc.shadow) {
-					this.shadow[arg8][arg6][arg1] = 50;
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
-				}
-				if (loc.occlude) {
-					this.occlusion[arg8][arg6][arg1] |= 0x492;
-				}
-			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
-			}
-			if (loc.wallwidth != 16) {
-				arg4.setDecorOffset(loc.wallwidth, arg6, arg1, arg8);
-			}
-		} else if (shape == 1) {
-			ModelSource var21;
-			if (loc.anim == -1) {
-				var21 = loc.getModel(1, angle, var10, var11, var12, var13, -1);
-			} else {
-				var21 = new ClientLocAnim(var13, var12, var10, 1, angle, true, var11, arg0, loc.anim);
-			}
-			arg4.addWall(arg6, var16, arg8, 0, ROTATION_WALL_CORNER_TYPE[angle], var14, null, var21, var17, arg1);
-			if (loc.shadow) {
-				if (angle == 0) {
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
-				} else if (angle == 1) {
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
-				} else if (angle == 2) {
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
-				} else if (angle == 3) {
-					this.shadow[arg8][arg6][arg1] = 50;
-				}
-			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
-			}
-		} else if (shape == 2) {
-			int var22 = angle + 1 & 0x3;
-			ModelSource var23;
-			ModelSource var24;
-			if (loc.anim == -1) {
-				var23 = loc.getModel(2, angle + 4, var10, var11, var12, var13, -1);
-				var24 = loc.getModel(2, var22, var10, var11, var12, var13, -1);
-			} else {
-				var23 = new ClientLocAnim(var13, var12, var10, 2, angle + 4, true, var11, arg0, loc.anim);
-				var24 = new ClientLocAnim(var13, var12, var10, 2, var22, true, var11, arg0, loc.anim);
-			}
-			arg4.addWall(arg6, var16, arg8, ROTATION_WALL_TYPE[var22], ROTATION_WALL_TYPE[angle], var14, var24, var23, var17, arg1);
-			if (loc.occlude) {
-				if (angle == 0) {
-					this.occlusion[arg8][arg6][arg1] |= 0x249;
-					this.occlusion[arg8][arg6][arg1 + 1] |= 0x492;
-				} else if (angle == 1) {
-					this.occlusion[arg8][arg6][arg1 + 1] |= 0x492;
-					this.occlusion[arg8][arg6 + 1][arg1] |= 0x249;
-				} else if (angle == 2) {
-					this.occlusion[arg8][arg6 + 1][arg1] |= 0x249;
-					this.occlusion[arg8][arg6][arg1] |= 0x492;
-				} else if (angle == 3) {
-					this.occlusion[arg8][arg6][arg1] |= 0x492;
-					this.occlusion[arg8][arg6][arg1] |= 0x249;
-				}
-			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
-			}
-			if (loc.wallwidth != 16) {
-				arg4.setDecorOffset(loc.wallwidth, arg6, arg1, arg8);
-			}
-		} else if (shape == 3) {
-			ModelSource var25;
-			if (loc.anim == -1) {
-				var25 = loc.getModel(3, angle, var10, var11, var12, var13, -1);
-			} else {
-				var25 = new ClientLocAnim(var13, var12, var10, 3, angle, true, var11, arg0, loc.anim);
-			}
-			arg4.addWall(arg6, var16, arg8, 0, ROTATION_WALL_CORNER_TYPE[angle], var14, null, var25, var17, arg1);
-			if (loc.shadow) {
-				if (angle == 0) {
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
-				} else if (angle == 1) {
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
-				} else if (angle == 2) {
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
-				} else if (angle == 3) {
-					this.shadow[arg8][arg6][arg1] = 50;
-				}
-			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
-			}
-		} else if (shape == 9) {
-			ModelSource var26;
-			if (loc.anim == -1) {
-				var26 = loc.getModel(shape, angle, var10, var11, var12, var13, -1);
-			} else {
-				var26 = new ClientLocAnim(var13, var12, var10, shape, angle, true, var11, arg0, loc.anim);
-			}
-			arg4.addLoc(var17, var16, arg6, arg8, var14, 1, 0, var26, 1, arg1);
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addLoc(loc.blockrange, angle, arg6, loc.length, loc.width, arg1);
-			}
-		} else if (shape == 4) {
-			ModelSource model;
-			if (loc.anim == -1) {
-				model = loc.getModel(4, 0, var10, var11, var12, var13, -1);
-			} else {
-				model = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
-			}
-			arg4.addDecor(var17, model, 0, arg6, arg1, ROTATION_WALL_TYPE[angle], 0, angle * 512, arg8, var14, var16);
-		} else if (shape == 5) {
-			int var28 = 16;
-			int var29 = arg4.getWallTypecode(arg8, arg6, arg1);
-			if (var29 > 0) {
-				var28 = LocType.get(var29 >> 14 & 0x7FFF).wallwidth;
-			}
-			ModelSource var30;
-			if (loc.anim == -1) {
-				var30 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
-			} else {
-				var30 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
-			}
-			arg4.addDecor(var17, var30, WALL_DECORATION_ROTATION_FORWARD_X[angle] * var28, arg6, arg1, ROTATION_WALL_TYPE[angle], WALL_DECORATION_ROTATION_FORWARD_Z[angle] * var28, angle * 512, arg8, var14, var16);
-		} else if (shape == 6) {
-			ModelSource var31;
-			if (loc.anim == -1) {
-				var31 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
-			} else {
-				var31 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
-			}
-			arg4.addDecor(var17, var31, 0, arg6, arg1, 256, 0, angle, arg8, var14, var16);
-		} else if (shape == 7) {
-			ModelSource var32;
-			if (loc.anim == -1) {
-				var32 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
-			} else {
-				var32 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
-			}
-			arg4.addDecor(var17, var32, 0, arg6, arg1, 512, 0, angle, arg8, var14, var16);
-		} else if (shape == 8) {
-			ModelSource var33;
-			if (loc.anim == -1) {
-				var33 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
-			} else {
-				var33 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
-			}
-			arg4.addDecor(var17, var33, 0, arg6, arg1, 768, 0, angle, arg8, var14, var16);
-		}
-	}
+         if (arg3 > 0) {
+            for(int var7 = 1; var7 < 8; ++var7) {
+               this.l[arg1][arg3][arg2 + var7] = this.l[arg1][arg3 - 1][arg2 + var7];
+            }
+         }
 
-	@ObfuscatedName("c.a(Ls;[Ljc;Z)V")
-	public final void build(World3D arg0, CollisionMap[] arg1) {
-		for (int var4 = 0; var4 < 4; var4++) {
-			for (int var110 = 0; var110 < 104; var110++) {
-				for (int var111 = 0; var111 < 104; var111++) {
-					if ((this.flags[var4][var110][var111] & 0x1) == 1) {
-						int var112 = var4;
-						if ((this.flags[1][var110][var111] & 0x2) == 2) {
-							var112 = var4 - 1;
-						}
-						if (var112 >= 0) {
-							arg1[var112].setBlocked(var111, var110);
-						}
-					}
-				}
-			}
-		}
-		if (fullbright) {
-			randomHueOffset = 0;
-			randomLightnessOffset = 0;
-		} else {
-			randomHueOffset += (int) (Math.random() * 5.0D) - 2;
-			if (randomHueOffset < -8) {
-				randomHueOffset = -8;
-			}
-			if (randomHueOffset > 8) {
-				randomHueOffset = 8;
-			}
-			randomLightnessOffset += (int) (Math.random() * 5.0D) - 2;
-			if (randomLightnessOffset < -16) {
-				randomLightnessOffset = -16;
-			}
-			if (randomLightnessOffset > 16) {
-				randomLightnessOffset = 16;
-			}
-		}
-		for (int var5 = 0; var5 < 4; var5++) {
-			byte[][] var48 = this.shadow[var5];
-			byte var49 = 96;
-			short var50 = 768;
-			byte var51 = -50;
-			byte var52 = -10;
-			byte var53 = -50;
-			int var54 = (int) Math.sqrt((double) (var53 * var53 + var51 * var51 + var52 * var52));
-			int var55 = var50 * var54 >> 8;
-			for (int var56 = 1; var56 < this.maxTileZ - 1; var56++) {
-				for (int var101 = 1; var101 < this.maxTileX - 1; var101++) {
-					int var102 = this.heightmap[var5][var101 + 1][var56] - this.heightmap[var5][var101 - 1][var56];
-					int var103 = this.heightmap[var5][var101][var56 + 1] - this.heightmap[var5][var101][var56 - 1];
-					int var104 = (int) Math.sqrt((double) (var103 * var103 + var102 * var102 + 65536));
-					int var105 = (var102 << 8) / var104;
-					int var106 = 65536 / var104;
-					int var107 = (var103 << 8) / var104;
-					int var108 = (var53 * var107 + var51 * var105 + var52 * var106) / var55 + var49;
-					int var109 = (var48[var101][var56] >> 1) + (var48[var101][var56 + 1] >> 3) + (var48[var101][var56 - 1] >> 2) + (var48[var101 - 1][var56] >> 2) + (var48[var101 + 1][var56] >> 3);
-					this.lightness[var101][var56] = var108 - var109;
-				}
-			}
-			for (int var57 = 0; var57 < this.maxTileZ; var57++) {
-				this.blendChroma[var57] = 0;
-				this.blendSaturation[var57] = 0;
-				this.blendLightness[var57] = 0;
-				this.blendLuminance[var57] = 0;
-				this.blendMagnitude[var57] = 0;
-			}
-			for (int var58 = -5; var58 < this.maxTileX + 5; var58++) {
-				for (int var61 = 0; var61 < this.maxTileZ; var61++) {
-					int var95 = var58 + 5;
-					int var10002;
-					if (var95 >= 0 && var95 < this.maxTileX) {
-						int var96 = this.underlayType[var5][var95][var61] & 0xFF;
-						if (var96 > 0) {
-							FloType var97 = FloType.types[var96 - 1];
-							this.blendChroma[var61] += var97.chroma;
-							this.blendSaturation[var61] += var97.saturation;
-							this.blendLightness[var61] += var97.lightness;
-							this.blendLuminance[var61] += var97.luminance;
-							var10002 = this.blendMagnitude[var61]++;
-						}
-					}
-					int var98 = var58 - 5;
-					if (var98 >= 0 && var98 < this.maxTileX) {
-						int var99 = this.underlayType[var5][var98][var61] & 0xFF;
-						if (var99 > 0) {
-							FloType var100 = FloType.types[var99 - 1];
-							this.blendChroma[var61] -= var100.chroma;
-							this.blendSaturation[var61] -= var100.saturation;
-							this.blendLightness[var61] -= var100.lightness;
-							this.blendLuminance[var61] -= var100.luminance;
-							var10002 = this.blendMagnitude[var61]--;
-						}
-					}
-				}
-				if (var58 >= 1 && var58 < this.maxTileX - 1) {
-					int var62 = 0;
-					int var63 = 0;
-					int var64 = 0;
-					int var65 = 0;
-					int var66 = 0;
-					for (int var67 = -5; var67 < this.maxTileZ + 5; var67++) {
-						int var68 = var67 + 5;
-						if (var68 >= 0 && var68 < this.maxTileZ) {
-							var62 += this.blendChroma[var68];
-							var63 += this.blendSaturation[var68];
-							var64 += this.blendLightness[var68];
-							var65 += this.blendLuminance[var68];
-							var66 += this.blendMagnitude[var68];
-						}
-						int var69 = var67 - 5;
-						if (var69 >= 0 && var69 < this.maxTileZ) {
-							var62 -= this.blendChroma[var69];
-							var63 -= this.blendSaturation[var69];
-							var64 -= this.blendLightness[var69];
-							var65 -= this.blendLuminance[var69];
-							var66 -= this.blendMagnitude[var69];
-						}
-						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMemory || (this.flags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67) == levelBuilt)) {
-							int var70 = this.underlayType[var5][var58][var67] & 0xFF;
-							int var71 = this.overlayType[var5][var58][var67] & 0xFF;
-							if (var70 > 0 || var71 > 0) {
-								int var72 = this.heightmap[var5][var58][var67];
-								int var73 = this.heightmap[var5][var58 + 1][var67];
-								int var74 = this.heightmap[var5][var58 + 1][var67 + 1];
-								int var75 = this.heightmap[var5][var58][var67 + 1];
-								int var76 = this.lightness[var58][var67];
-								int var77 = this.lightness[var58 + 1][var67];
-								int var78 = this.lightness[var58 + 1][var67 + 1];
-								int var79 = this.lightness[var58][var67 + 1];
-								int var80 = -1;
-								int var81 = -1;
-								if (var70 > 0) {
-									int var82 = var62 * 256 / var65;
-									int var83 = var63 / var66;
-									int var84 = var64 / var66;
-									var80 = this.hsl24to16(var82, var83, var84);
-									int var85 = randomHueOffset + var82 & 0xFF;
-									int var86 = randomLightnessOffset + var84;
-									if (var86 < 0) {
-										var86 = 0;
-									} else if (var86 > 255) {
-										var86 = 255;
-									}
-									var81 = this.hsl24to16(var85, var83, var86);
-								}
-								if (var5 > 0) {
-									boolean var87 = true;
-									if (var70 == 0 && this.overlayShape[var5][var58][var67] != 0) {
-										var87 = false;
-									}
-									if (var71 > 0 && !FloType.types[var71 - 1].occlude) {
-										var87 = false;
-									}
-									if (var87 && var72 == var73 && var72 == var74 && var72 == var75) {
-										this.occlusion[var5][var58][var67] |= 0x924;
-									}
-								}
-								int var88 = 0;
-								if (var80 != -1) {
-									var88 = Pix3D.palette[mulHsl(var81, 96)];
-								}
-								if (var71 == 0) {
-									arg0.setTile(var5, var58, var67, 0, 0, -1, var72, var73, var74, var75, mulHsl(var80, var76), mulHsl(var80, var77), mulHsl(var80, var78), mulHsl(var80, var79), 0, 0, 0, 0, var88, 0);
-								} else {
-									int var89 = this.overlayShape[var5][var58][var67] + 1;
-									byte var90 = this.overlayAngle[var5][var58][var67];
-									FloType var91 = FloType.types[var71 - 1];
-									int var92 = var91.texture;
-									int var93;
-									int var94;
-									if (var92 >= 0) {
-										var93 = Pix3D.getAverageTextureRgb(var92);
-										var94 = -1;
-									} else if (var91.rgb == 16711935) {
-										var93 = 0;
-										var94 = -2;
-										var92 = -1;
-									} else {
-										var94 = this.hsl24to16(var91.hue, var91.saturation, var91.lightness);
-										var93 = Pix3D.palette[this.adjustLightness(var91.hsl, 96)];
-									}
-									arg0.setTile(var5, var58, var67, var89, var90, var92, var72, var73, var74, var75, mulHsl(var80, var76), mulHsl(var80, var77), mulHsl(var80, var78), mulHsl(var80, var79), this.adjustLightness(var94, var76), this.adjustLightness(var94, var77), this.adjustLightness(var94, var78), this.adjustLightness(var94, var79), var88, var93);
-								}
-							}
-						}
-					}
-				}
-			}
-			for (int var59 = 1; var59 < this.maxTileZ - 1; var59++) {
-				for (int var60 = 1; var60 < this.maxTileX - 1; var60++) {
-					arg0.setDrawLevel(var5, var60, var59, this.getDrawLevel(var60, var5, var59));
-				}
-			}
-		}
-		if (!fullbright) {
-			arg0.buildModels(-10, -50, -50, 64, 768);
-		}
-		for (int var6 = 0; var6 < this.maxTileX; var6++) {
-			for (int var47 = 0; var47 < this.maxTileZ; var47++) {
-				if ((this.flags[1][var6][var47] & 0x2) == 2) {
-					arg0.setBridge(var47, var6);
-				}
-			}
-		}
-		if (fullbright) {
-			return;
-		}
-		int var7 = 1;
-		int var8 = 2;
-		int var9 = 4;
-		for (int var10 = 0; var10 < 4; var10++) {
-			if (var10 > 0) {
-				var7 <<= 0x3;
-				var8 <<= 0x3;
-				var9 <<= 0x3;
-			}
-			for (int var11 = 0; var11 <= var10; var11++) {
-				for (int var12 = 0; var12 <= this.maxTileZ; var12++) {
-					for (int var13 = 0; var13 <= this.maxTileX; var13++) {
-						if ((this.occlusion[var11][var13][var12] & var7) != 0) {
-							int var14 = var12;
-							int var15 = var12;
-							int var16 = var11;
-							int var17 = var11;
-							while (var14 > 0 && (this.occlusion[var11][var13][var14 - 1] & var7) != 0) {
-								var14--;
-							}
-							while (var15 < this.maxTileZ && (this.occlusion[var11][var13][var15 + 1] & var7) != 0) {
-								var15++;
-							}
-							label337: while (var16 > 0) {
-								for (int var18 = var14; var18 <= var15; var18++) {
-									if ((this.occlusion[var16 - 1][var13][var18] & var7) == 0) {
-										break label337;
-									}
-								}
-								var16--;
-							}
-							label326: while (var17 < var10) {
-								for (int var19 = var14; var19 <= var15; var19++) {
-									if ((this.occlusion[var17 + 1][var13][var19] & var7) == 0) {
-										break label326;
-									}
-								}
-								var17++;
-							}
-							int var20 = (var17 + 1 - var16) * (var15 - var14 + 1);
-							if (var20 >= 8) {
-								short var21 = 240;
-								int var22 = this.heightmap[var17][var13][var14] - var21;
-								int var23 = this.heightmap[var16][var13][var14];
-								World3D.addOccluder(var13 * 128, 1, var23, var15 * 128 + 128, var10, var13 * 128, var22, var14 * 128);
-								for (int var24 = var16; var24 <= var17; var24++) {
-									for (int var25 = var14; var25 <= var15; var25++) {
-										this.occlusion[var24][var13][var25] &= ~var7;
-									}
-								}
-							}
-						}
-						if ((this.occlusion[var11][var13][var12] & var8) != 0) {
-							int var26 = var13;
-							int var27 = var13;
-							int var28 = var11;
-							int var29 = var11;
-							while (var26 > 0 && (this.occlusion[var11][var26 - 1][var12] & var8) != 0) {
-								var26--;
-							}
-							while (var27 < this.maxTileX && (this.occlusion[var11][var27 + 1][var12] & var8) != 0) {
-								var27++;
-							}
-							label390: while (var28 > 0) {
-								for (int var30 = var26; var30 <= var27; var30++) {
-									if ((this.occlusion[var28 - 1][var30][var12] & var8) == 0) {
-										break label390;
-									}
-								}
-								var28--;
-							}
-							label379: while (var29 < var10) {
-								for (int var31 = var26; var31 <= var27; var31++) {
-									if ((this.occlusion[var29 + 1][var31][var12] & var8) == 0) {
-										break label379;
-									}
-								}
-								var29++;
-							}
-							int var32 = (var29 + 1 - var28) * (var27 - var26 + 1);
-							if (var32 >= 8) {
-								short var33 = 240;
-								int var34 = this.heightmap[var29][var26][var12] - var33;
-								int var35 = this.heightmap[var28][var26][var12];
-								World3D.addOccluder(var26 * 128, 2, var35, var12 * 128, var10, var27 * 128 + 128, var34, var12 * 128);
-								for (int var36 = var28; var36 <= var29; var36++) {
-									for (int var37 = var26; var37 <= var27; var37++) {
-										this.occlusion[var36][var37][var12] &= ~var8;
-									}
-								}
-							}
-						}
-						if ((this.occlusion[var11][var13][var12] & var9) != 0) {
-							int var38 = var13;
-							int var39 = var13;
-							int var40 = var12;
-							int var41 = var12;
-							while (var40 > 0 && (this.occlusion[var11][var13][var40 - 1] & var9) != 0) {
-								var40--;
-							}
-							while (var41 < this.maxTileZ && (this.occlusion[var11][var13][var41 + 1] & var9) != 0) {
-								var41++;
-							}
-							label443: while (var38 > 0) {
-								for (int var42 = var40; var42 <= var41; var42++) {
-									if ((this.occlusion[var11][var38 - 1][var42] & var9) == 0) {
-										break label443;
-									}
-								}
-								var38--;
-							}
-							label432: while (var39 < this.maxTileX) {
-								for (int var43 = var40; var43 <= var41; var43++) {
-									if ((this.occlusion[var11][var39 + 1][var43] & var9) == 0) {
-										break label432;
-									}
-								}
-								var39++;
-							}
-							if ((var39 - var38 + 1) * (var41 - var40 + 1) >= 4) {
-								int var44 = this.heightmap[var11][var38][var40];
-								World3D.addOccluder(var38 * 128, 4, var44, var41 * 128 + 128, var10, var39 * 128 + 128, var44, var40 * 128);
-								for (int var45 = var38; var45 <= var39; var45++) {
-									for (int var46 = var40; var46 <= var41; var46++) {
-										this.occlusion[var11][var45][var46] &= ~var9;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+         if (arg2 > 0) {
+            for(int var8 = 1; var8 < 8; ++var8) {
+               this.l[arg1][arg3 + var8][arg2] = this.l[arg1][arg3 + var8][arg2 - 1];
+            }
+         }
 
-	@ObfuscatedName("c.a(IIII)I")
-	public int getDrawLevel(int arg0, int arg1, int arg2) {
-		if ((this.flags[arg1][arg0][arg2] & 0x8) == 0) {
-			return arg1 <= 0 || (this.flags[1][arg0][arg2] & 0x2) == 0 ? arg1 : arg1 - 1;
-		} else {
-			return 0;
-		}
-	}
+         if (arg3 > 0 && this.l[arg1][arg3 - 1][arg2] != 0) {
+            this.l[arg1][arg3][arg2] = this.l[arg1][arg3 - 1][arg2];
+         } else if (arg2 > 0 && this.l[arg1][arg3][arg2 - 1] != 0) {
+            this.l[arg1][arg3][arg2] = this.l[arg1][arg3][arg2 - 1];
+         } else if (arg3 > 0 && arg2 > 0 && this.l[arg1][arg3 - 1][arg2 - 1] != 0) {
+            this.l[arg1][arg3][arg2] = this.l[arg1][arg3 - 1][arg2 - 1];
+         }
+      }
+   }
 
-	@ObfuscatedName("c.a(II)I")
-	public static final int perlinNoise(int arg0, int arg1) {
-		int var2 = interpolatedNoise(arg0 + 45365, arg1 + 91923, 4) - 128 + (interpolatedNoise(arg0 + 10294, arg1 + 37821, 2) - 128 >> 1) + (interpolatedNoise(arg0, arg1, 1) - 128 >> 2);
-		int var3 = (int) ((double) var2 * 0.3D) + 35;
-		if (var3 < 10) {
-			var3 = 10;
-		} else if (var3 > 60) {
-			var3 = 60;
-		}
-		return var3;
-	}
+   @ObfuscatedName("CHEOPWNH.a([LXRENONSA;ILKJCMXHNO;)V")
+   public final void a(CollisionMap[] arg0, int arg1, World3D arg2) {
+      for(int var4 = 0; var4 < 4; ++var4) {
+         for(int var5 = 0; var5 < 104; ++var5) {
+            for(int var6 = 0; var6 < 104; ++var6) {
+               if ((this.a[var4][var5][var6] & 1) == 1) {
+                  int var7 = var4;
+                  if ((this.a[1][var5][var6] & 2) == 2) {
+                     var7 = var4 - 1;
+                  }
 
-	@ObfuscatedName("c.a(III)I")
-	public static final int interpolatedNoise(int arg0, int arg1, int arg2) {
-		int var3 = arg0 / arg2;
-		int var4 = arg0 & arg2 - 1;
-		int var5 = arg1 / arg2;
-		int var6 = arg1 & arg2 - 1;
-		int var7 = smoothNoise(var3, var5);
-		int var8 = smoothNoise(var3 + 1, var5);
-		int var9 = smoothNoise(var3, var5 + 1);
-		int var10 = smoothNoise(var3 + 1, var5 + 1);
-		int var11 = interpolate(var7, var8, var4, arg2);
-		int var12 = interpolate(var9, var10, var4, arg2);
-		return interpolate(var11, var12, var6, arg2);
-	}
+                  if (var7 >= 0) {
+                     arg0[var7].a(8, (int)var6, var5);
+                  }
+               }
+            }
+         }
+      }
 
-	@ObfuscatedName("c.b(IIII)I")
-	public static final int interpolate(int arg0, int arg1, int arg2, int arg3) {
-		int var4 = 65536 - Pix3D.cosTable[arg2 * 1024 / arg3] >> 1;
-		return ((65536 - var4) * arg0 >> 16) + (arg1 * var4 >> 16);
-	}
+      d += (int)(Math.random() * 5.0D) - 2;
+      if (d < -8) {
+         d = -8;
+      }
 
-	@ObfuscatedName("c.b(II)I")
-	public static final int smoothNoise(int arg0, int arg1) {
-		int var2 = noise(arg0 - 1, arg1 - 1) + noise(arg0 + 1, arg1 - 1) + noise(arg0 - 1, arg1 + 1) + noise(arg0 + 1, arg1 + 1);
-		int var3 = noise(arg0 - 1, arg1) + noise(arg0 + 1, arg1) + noise(arg0, arg1 - 1) + noise(arg0, arg1 + 1);
-		int var4 = noise(arg0, arg1);
-		return var4 / 4 + var2 / 16 + var3 / 8;
-	}
+      if (d > 8) {
+         d = 8;
+      }
 
-	@ObfuscatedName("c.c(II)I")
-	public static final int noise(int arg0, int arg1) {
-		int var2 = arg1 * 57 + arg0;
-		int var3 = var2 << 13 ^ var2;
-		int var4 = (var3 * var3 * 15731 + 789221) * var3 + 1376312589 & Integer.MAX_VALUE;
-		return var4 >> 19 & 0xFF;
-	}
+      z += (int)(Math.random() * 5.0D) - 2;
+      if (z < -16) {
+         z = -16;
+      }
 
-	@ObfuscatedName("c.d(II)I")
-	public static final int mulHsl(int arg0, int arg1) {
-		if (arg0 == -1) {
-			return 12345678;
-		}
-		int var2 = (arg0 & 0x7F) * arg1 / 128;
-		if (var2 < 2) {
-			var2 = 2;
-		} else if (var2 > 126) {
-			var2 = 126;
-		}
-		return (arg0 & 0xFF80) + var2;
-	}
+      if (z > 16) {
+         z = 16;
+      }
 
-	@ObfuscatedName("c.e(II)I")
-	public final int adjustLightness(int arg0, int arg1) {
-		if (arg0 == -2) {
-			return 12345678;
-		} else if (arg0 == -1) {
-			if (arg1 < 0) {
-				arg1 = 0;
-			} else if (arg1 > 127) {
-				arg1 = 127;
-			}
-			return 127 - arg1;
-		} else {
-			int var4 = (arg0 & 0x7F) * arg1 / 128;
-			if (var4 < 2) {
-				var4 = 2;
-			} else if (var4 > 126) {
-				var4 = 126;
-			}
-			return (arg0 & 0xFF80) + var4;
-		}
-	}
+      for(int var8 = 0; var8 < 4; ++var8) {
+         byte[][] var9 = this.A[var8];
+         byte var10 = 96;
+         short var11 = 768;
+         byte var12 = -50;
+         byte var13 = -10;
+         byte var14 = -50;
+         int var15 = (int)Math.sqrt((double)(var14 * var14 + var12 * var12 + var13 * var13));
+         int var16 = var11 * var15 >> 8;
 
-	@ObfuscatedName("c.b(III)I")
-	public final int hsl24to16(int arg0, int arg1, int arg2) {
-		if (arg2 > 179) {
-			arg1 /= 2;
-		}
-		if (arg2 > 192) {
-			arg1 /= 2;
-		}
-		if (arg2 > 217) {
-			arg1 /= 2;
-		}
-		if (arg2 > 243) {
-			arg1 /= 2;
-		}
-		return arg2 / 2 + (arg0 / 4 << 10) + (arg1 / 32 << 7);
-	}
+         for(int var17 = 1; var17 < this.o - 1; ++var17) {
+            for(int var18 = 1; var18 < this.n - 1; ++var18) {
+               int var19 = this.l[var8][var18 + 1][var17] - this.l[var8][var18 - 1][var17];
+               int var20 = this.l[var8][var18][var17 + 1] - this.l[var8][var18][var17 - 1];
+               int var21 = (int)Math.sqrt((double)(var20 * var20 + var19 * var19 + 65536));
+               int var22 = (var19 << 8) / var21;
+               int var23 = 65536 / var21;
+               int var24 = (var20 << 8) / var21;
+               int var25 = (var14 * var24 + var12 * var22 + var13 * var23) / var16 + var10;
+               int var26 = (var9[var18][var17] >> 1) + (var9[var18][var17 + 1] >> 3) + (var9[var18][var17 - 1] >> 2) + (var9[var18 - 1][var17] >> 2) + (var9[var18 + 1][var17] >> 3);
+               this.B[var18][var17] = var25 - var26;
+            }
+         }
 
-	@ObfuscatedName("c.c(III)Z")
-	public static final boolean isLocReady(int arg1, int arg2) {
-		LocType var3 = LocType.get(arg1);
-		if (arg2 == 11) {
-			arg2 = 10;
-		}
-		if (arg2 >= 5 && arg2 <= 8) {
-			arg2 = 4;
-		}
-		return var3.validate(arg2);
-	}
+         for(int var27 = 0; var27 < this.o; ++var27) {
+            this.g[var27] = 0;
+            this.h[var27] = 0;
+            this.i[var27] = 0;
+            this.j[var27] = 0;
+            this.k[var27] = 0;
+         }
 
-	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
-	public static final void addLoc(int arg0, int arg1, int arg2, int arg3, World3D arg4, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
-		int var11 = arg7[arg9][arg0][arg3];
-		int var12 = arg7[arg9][arg0 + 1][arg3];
-		int var13 = arg7[arg9][arg0 + 1][arg3 + 1];
-		int var14 = arg7[arg9][arg0][arg3 + 1];
-		int var15 = var11 + var12 + var13 + var14 >> 2;
-		LocType var16 = LocType.get(arg2);
-		int var17 = (arg2 << 14) + (arg3 << 7) + arg0 + 1073741824;
-		if (!var16.active) {
-			var17 += Integer.MIN_VALUE;
-		}
-		byte var18 = (byte) ((arg6 << 6) + arg1);
-		boolean var19 = false;
-		if (arg1 == 22) {
-			ModelSource var20;
-			if (var16.anim == -1) {
-				var20 = var16.getModel(22, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var20 = new ClientLocAnim(var14, var13, var11, 22, arg6, true, var12, arg2, var16.anim);
-			}
-			arg4.addGroundDecor(arg3, arg10, arg0, var17, var15, var20, var18);
-			if (var16.blockwalk && var16.active) {
-				arg8.setBlocked(arg3, arg0);
-			}
-		} else if (arg1 == 10 || arg1 == 11) {
-			ModelSource var36;
-			if (var16.anim == -1) {
-				var36 = var16.getModel(10, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var36 = new ClientLocAnim(var14, var13, var11, 10, arg6, true, var12, arg2, var16.anim);
-			}
-			if (var36 != null) {
-				int var37 = 0;
-				if (arg1 == 11) {
-					var37 += 256;
-				}
-				int var38;
-				int var39;
-				if (arg6 == 1 || arg6 == 3) {
-					var38 = var16.length;
-					var39 = var16.width;
-				} else {
-					var38 = var16.width;
-					var39 = var16.length;
-				}
-				arg4.addLoc(var18, var17, arg0, arg10, var15, var38, var37, var36, var39, arg3);
-			}
-			if (var16.blockwalk) {
-				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
-			}
-		} else if (arg1 >= 12) {
-			ModelSource var21;
-			if (var16.anim == -1) {
-				var21 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var21 = new ClientLocAnim(var14, var13, var11, arg1, arg6, true, var12, arg2, var16.anim);
-			}
-			arg4.addLoc(var18, var17, arg0, arg10, var15, 1, 0, var21, 1, arg3);
-			if (var16.blockwalk) {
-				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
-			}
-		} else if (arg1 == 0) {
-			ModelSource var22;
-			if (var16.anim == -1) {
-				var22 = var16.getModel(0, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var22 = new ClientLocAnim(var14, var13, var11, 0, arg6, true, var12, arg2, var16.anim);
-			}
-			arg4.addWall(arg0, var17, arg10, 0, ROTATION_WALL_TYPE[arg6], var15, null, var22, var18, arg3);
-			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
-			}
-		} else if (arg1 == 1) {
-			ModelSource var23;
-			if (var16.anim == -1) {
-				var23 = var16.getModel(1, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var23 = new ClientLocAnim(var14, var13, var11, 1, arg6, true, var12, arg2, var16.anim);
-			}
-			arg4.addWall(arg0, var17, arg10, 0, ROTATION_WALL_CORNER_TYPE[arg6], var15, null, var23, var18, arg3);
-			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
-			}
-		} else if (arg1 == 2) {
-			int var24 = arg6 + 1 & 0x3;
-			ModelSource var25;
-			ModelSource var26;
-			if (var16.anim == -1) {
-				var25 = var16.getModel(2, arg6 + 4, var11, var12, var13, var14, -1);
-				var26 = var16.getModel(2, var24, var11, var12, var13, var14, -1);
-			} else {
-				var25 = new ClientLocAnim(var14, var13, var11, 2, arg6 + 4, true, var12, arg2, var16.anim);
-				var26 = new ClientLocAnim(var14, var13, var11, 2, var24, true, var12, arg2, var16.anim);
-			}
-			arg4.addWall(arg0, var17, arg10, ROTATION_WALL_TYPE[var24], ROTATION_WALL_TYPE[arg6], var15, var26, var25, var18, arg3);
-			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
-			}
-		} else if (arg1 == 3) {
-			ModelSource var27;
-			if (var16.anim == -1) {
-				var27 = var16.getModel(3, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var27 = new ClientLocAnim(var14, var13, var11, 3, arg6, true, var12, arg2, var16.anim);
-			}
-			arg4.addWall(arg0, var17, arg10, 0, ROTATION_WALL_CORNER_TYPE[arg6], var15, null, var27, var18, arg3);
-			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
-			}
-		} else if (arg1 == 9) {
-			ModelSource var28;
-			if (var16.anim == -1) {
-				var28 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
-			} else {
-				var28 = new ClientLocAnim(var14, var13, var11, arg1, arg6, true, var12, arg2, var16.anim);
-			}
-			arg4.addLoc(var18, var17, arg0, arg10, var15, 1, 0, var28, 1, arg3);
-			if (var16.blockwalk) {
-				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
-			}
-		} else if (arg1 == 4) {
-			ModelSource var29;
-			if (var16.anim == -1) {
-				var29 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
-			} else {
-				var29 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
-			}
-			arg4.addDecor(var18, var29, 0, arg0, arg3, ROTATION_WALL_TYPE[arg6], 0, arg6 * 512, arg10, var15, var17);
-		} else if (arg1 == 5) {
-			int var30 = 16;
-			int var31 = arg4.getWallTypecode(arg10, arg0, arg3);
-			if (var31 > 0) {
-				var30 = LocType.get(var31 >> 14 & 0x7FFF).wallwidth;
-			}
-			ModelSource var32;
-			if (var16.anim == -1) {
-				var32 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
-			} else {
-				var32 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
-			}
-			arg4.addDecor(var18, var32, WALL_DECORATION_ROTATION_FORWARD_X[arg6] * var30, arg0, arg3, ROTATION_WALL_TYPE[arg6], WALL_DECORATION_ROTATION_FORWARD_Z[arg6] * var30, arg6 * 512, arg10, var15, var17);
-		} else if (arg1 == 6) {
-			ModelSource var33;
-			if (var16.anim == -1) {
-				var33 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
-			} else {
-				var33 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
-			}
-			arg4.addDecor(var18, var33, 0, arg0, arg3, 256, 0, arg6, arg10, var15, var17);
-		} else if (arg1 == 7) {
-			ModelSource var34;
-			if (var16.anim == -1) {
-				var34 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
-			} else {
-				var34 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
-			}
-			arg4.addDecor(var18, var34, 0, arg0, arg3, 512, 0, arg6, arg10, var15, var17);
-		} else if (arg1 == 8) {
-			ModelSource var35;
-			if (var16.anim == -1) {
-				var35 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
-			} else {
-				var35 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
-			}
-			arg4.addDecor(var18, var35, 0, arg0, arg3, 768, 0, arg6, arg10, var15, var17);
-		}
-	}
+         for(int var28 = -5; var28 < this.n + 5; ++var28) {
+            for(int var29 = 0; var29 < this.o; ++var29) {
+               int var30 = var28 + 5;
+               int var10002;
+               if (var30 >= 0 && var30 < this.n) {
+                  int var31 = this.v[var8][var30][var29] & 255;
+                  if (var31 > 0) {
+                     FloType var32 = FloType.e[var31 - 1];
+                     this.g[var29] += var32.n;
+                     this.h[var29] += var32.l;
+                     this.i[var29] += var32.m;
+                     this.j[var29] += var32.o;
+                     var10002 = this.k[var29]++;
+                  }
+               }
+
+               int var33 = var28 - 5;
+               if (var33 >= 0 && var33 < this.n) {
+                  int var34 = this.v[var8][var33][var29] & 255;
+                  if (var34 > 0) {
+                     FloType var35 = FloType.e[var34 - 1];
+                     this.g[var29] -= var35.n;
+                     this.h[var29] -= var35.l;
+                     this.i[var29] -= var35.m;
+                     this.j[var29] -= var35.o;
+                     var10002 = this.k[var29]--;
+                  }
+               }
+            }
+
+            if (var28 >= 1 && var28 < this.n - 1) {
+               int var36 = 0;
+               int var37 = 0;
+               int var38 = 0;
+               int var39 = 0;
+               int var40 = 0;
+
+               for(int var41 = -5; var41 < this.o + 5; ++var41) {
+                  int var42 = var41 + 5;
+                  if (var42 >= 0 && var42 < this.o) {
+                     var36 += this.g[var42];
+                     var37 += this.h[var42];
+                     var38 += this.i[var42];
+                     var39 += this.j[var42];
+                     var40 += this.k[var42];
+                  }
+
+                  int var43 = var41 - 5;
+                  if (var43 >= 0 && var43 < this.o) {
+                     var36 -= this.g[var43];
+                     var37 -= this.h[var43];
+                     var38 -= this.i[var43];
+                     var39 -= this.j[var43];
+                     var40 -= this.k[var43];
+                  }
+
+                  if (var41 >= 1 && var41 < this.o - 1 && (!F || (this.a[0][var28][var41] & 2) != 0 || (this.a[var8][var28][var41] & 16) == 0 && this.a(var41, var8, var28, (byte)0) == y)) {
+                     if (var8 < m) {
+                        m = var8;
+                     }
+
+                     int var44 = this.v[var8][var28][var41] & 255;
+                     int var45 = this.r[var8][var28][var41] & 255;
+                     if (var44 > 0 || var45 > 0) {
+                        int var46 = this.l[var8][var28][var41];
+                        int var47 = this.l[var8][var28 + 1][var41];
+                        int var48 = this.l[var8][var28 + 1][var41 + 1];
+                        int var49 = this.l[var8][var28][var41 + 1];
+                        int var50 = this.B[var28][var41];
+                        int var51 = this.B[var28 + 1][var41];
+                        int var52 = this.B[var28 + 1][var41 + 1];
+                        int var53 = this.B[var28][var41 + 1];
+                        int var54 = -1;
+                        int var55 = -1;
+                        if (var44 > 0) {
+                           int var56 = var36 * 256 / var39;
+                           int var57 = var37 / var40;
+                           int var58 = var38 / var40;
+                           var54 = this.b(var56, var57, var58);
+                           int var59 = d + var56 & 255;
+                           int var60 = z + var58;
+                           if (var60 < 0) {
+                              var60 = 0;
+                           } else if (var60 > 255) {
+                              var60 = 255;
+                           }
+
+                           var55 = this.b(var59, var57, var60);
+                        }
+
+                        if (var8 > 0) {
+                           boolean var61 = true;
+                           if (var44 == 0 && this.p[var8][var28][var41] != 0) {
+                              var61 = false;
+                           }
+
+                           if (var45 > 0 && !FloType.e[var45 - 1].j) {
+                              var61 = false;
+                           }
+
+                           if (var61 && var46 == var47 && var46 == var48 && var46 == var49) {
+                              this.E[var8][var28][var41] |= 2340;
+                           }
+                        }
+
+                        int var62 = 0;
+                        if (var54 != -1) {
+                           var62 = Pix3D.U[a(var55, 96)];
+                        }
+
+                        if (var45 == 0) {
+                           arg2.a(var8, var28, var41, 0, 0, -1, var46, var47, var48, var49, a(var54, var50), a(var54, var51), a(var54, var52), a(var54, var53), 0, 0, 0, 0, var62, 0);
+                        } else {
+                           int var63 = this.p[var8][var28][var41] + 1;
+                           byte var64 = this.e[var8][var28][var41];
+                           FloType var65 = FloType.e[var45 - 1];
+                           int var66 = var65.h;
+                           int var67;
+                           int var68;
+                           if (var66 >= 0) {
+                              var67 = Pix3D.a((int)var66, 0);
+                              var68 = -1;
+                           } else if (var65.g == 16711935) {
+                              var68 = -2;
+                              var66 = -1;
+                              var67 = Pix3D.U[this.d(var65.p, 96)];
+                           } else {
+                              var68 = this.b(var65.k, var65.l, var65.m);
+                              var67 = Pix3D.U[this.d(var65.p, 96)];
+                           }
+
+                           arg2.a(var8, var28, var41, var63, var64, var66, var46, var47, var48, var49, a(var54, var50), a(var54, var51), a(var54, var52), a(var54, var53), this.d(var68, var50), this.d(var68, var51), this.d(var68, var52), this.d(var68, var53), var62, var67);
+                        }
+                     }
+                  }
+               }
+            }
+         }
+
+         for(int var69 = 1; var69 < this.o - 1; ++var69) {
+            for(int var70 = 1; var70 < this.n - 1; ++var70) {
+               arg2.a(var8, var70, var69, this.a(var69, var8, var70, (byte)0));
+            }
+         }
+      }
+
+      arg2.a((byte)2, (int)-10, -50, -50);
+
+      for(int var71 = 0; var71 < this.n; ++var71) {
+         for(int var72 = 0; var72 < this.o; ++var72) {
+            if ((this.a[1][var71][var72] & 2) == 2) {
+               arg2.a(true, var71, var72);
+            }
+         }
+      }
+
+      if (arg1 <= 0) {
+         this.w = 313;
+      }
+
+      int var73 = 1;
+      int var74 = 2;
+      int var75 = 4;
+
+      for(int var76 = 0; var76 < 4; ++var76) {
+         if (var76 > 0) {
+            var73 <<= 3;
+            var74 <<= 3;
+            var75 <<= 3;
+         }
+
+         for(int var77 = 0; var77 <= var76; ++var77) {
+            for(int var78 = 0; var78 <= this.o; ++var78) {
+               for(int var79 = 0; var79 <= this.n; ++var79) {
+                  if ((this.E[var77][var79][var78] & var73) != 0) {
+                     int var80 = var78;
+                     int var81 = var78;
+                     int var82 = var77;
+                     int var83 = var77;
+
+                     while(var80 > 0 && (this.E[var77][var79][var80 - 1] & var73) != 0) {
+                        --var80;
+                     }
+
+                     while(var81 < this.o && (this.E[var77][var79][var81 + 1] & var73) != 0) {
+                        ++var81;
+                     }
+
+                     label329:
+                     while(var82 > 0) {
+                        for(int var84 = var80; var84 <= var81; ++var84) {
+                           if ((this.E[var82 - 1][var79][var84] & var73) == 0) {
+                              break label329;
+                           }
+                        }
+
+                        --var82;
+                     }
+
+                     label318:
+                     while(var83 < var76) {
+                        for(int var85 = var80; var85 <= var81; ++var85) {
+                           if ((this.E[var83 + 1][var79][var85] & var73) == 0) {
+                              break label318;
+                           }
+                        }
+
+                        ++var83;
+                     }
+
+                     int var86 = (var83 + 1 - var82) * (var81 - var80 + 1);
+                     if (var86 >= 8) {
+                        short var87 = 240;
+                        int var88 = this.l[var83][var79][var80] - var87;
+                        int var89 = this.l[var82][var79][var80];
+                        World3D.a(-8967, var79 * 128, var89, var79 * 128, var81 * 128 + 128, var76, var80 * 128, var88, 1);
+
+                        for(int var90 = var82; var90 <= var83; ++var90) {
+                           for(int var91 = var80; var91 <= var81; ++var91) {
+                              this.E[var90][var79][var91] &= ~var73;
+                           }
+                        }
+                     }
+                  }
+
+                  if ((this.E[var77][var79][var78] & var74) != 0) {
+                     int var92 = var79;
+                     int var93 = var79;
+                     int var94 = var77;
+                     int var95 = var77;
+
+                     while(var92 > 0 && (this.E[var77][var92 - 1][var78] & var74) != 0) {
+                        --var92;
+                     }
+
+                     while(var93 < this.n && (this.E[var77][var93 + 1][var78] & var74) != 0) {
+                        ++var93;
+                     }
+
+                     label382:
+                     while(var94 > 0) {
+                        for(int var96 = var92; var96 <= var93; ++var96) {
+                           if ((this.E[var94 - 1][var96][var78] & var74) == 0) {
+                              break label382;
+                           }
+                        }
+
+                        --var94;
+                     }
+
+                     label371:
+                     while(var95 < var76) {
+                        for(int var97 = var92; var97 <= var93; ++var97) {
+                           if ((this.E[var95 + 1][var97][var78] & var74) == 0) {
+                              break label371;
+                           }
+                        }
+
+                        ++var95;
+                     }
+
+                     int var98 = (var95 + 1 - var94) * (var93 - var92 + 1);
+                     if (var98 >= 8) {
+                        short var99 = 240;
+                        int var100 = this.l[var95][var92][var78] - var99;
+                        int var101 = this.l[var94][var92][var78];
+                        World3D.a(-8967, var92 * 128, var101, var93 * 128 + 128, var78 * 128, var76, var78 * 128, var100, 2);
+
+                        for(int var102 = var94; var102 <= var95; ++var102) {
+                           for(int var103 = var92; var103 <= var93; ++var103) {
+                              this.E[var102][var103][var78] &= ~var74;
+                           }
+                        }
+                     }
+                  }
+
+                  if ((this.E[var77][var79][var78] & var75) != 0) {
+                     int var104 = var79;
+                     int var105 = var79;
+                     int var106 = var78;
+                     int var107 = var78;
+
+                     while(var106 > 0 && (this.E[var77][var79][var106 - 1] & var75) != 0) {
+                        --var106;
+                     }
+
+                     while(var107 < this.o && (this.E[var77][var79][var107 + 1] & var75) != 0) {
+                        ++var107;
+                     }
+
+                     label435:
+                     while(var104 > 0) {
+                        for(int var108 = var106; var108 <= var107; ++var108) {
+                           if ((this.E[var77][var104 - 1][var108] & var75) == 0) {
+                              break label435;
+                           }
+                        }
+
+                        --var104;
+                     }
+
+                     label424:
+                     while(var105 < this.n) {
+                        for(int var109 = var106; var109 <= var107; ++var109) {
+                           if ((this.E[var77][var105 + 1][var109] & var75) == 0) {
+                              break label424;
+                           }
+                        }
+
+                        ++var105;
+                     }
+
+                     if ((var105 - var104 + 1) * (var107 - var106 + 1) >= 4) {
+                        int var110 = this.l[var77][var104][var106];
+                        World3D.a(-8967, var104 * 128, var110, var105 * 128 + 128, var107 * 128 + 128, var76, var106 * 128, var110, 4);
+
+                        for(int var111 = var104; var111 <= var105; ++var111) {
+                           for(int var112 = var106; var112 <= var107; ++var112) {
+                              this.E[var77][var111][var112] &= ~var75;
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(IIZ[BIII[LXRENONSA;II)V")
+   public final void a(int arg0, int arg1, boolean arg2, byte[] arg3, int arg4, int arg5, int arg6, CollisionMap[] arg7, int arg8, int arg9) {
+      if (arg2) {
+         this.C = 476;
+      }
+
+      for(int var11 = 0; var11 < 8; ++var11) {
+         for(int var12 = 0; var12 < 8; ++var12) {
+            if (arg6 + var11 > 0 && arg6 + var11 < 103 && arg8 + var12 > 0 && arg8 + var12 < 103) {
+               arg7[arg4].j[arg6 + var11][arg8 + var12] &= -16777217;
+            }
+         }
+      }
+
+      Packet var13 = new Packet(arg3);
+
+      for(int var14 = 0; var14 < 4; ++var14) {
+         for(int var15 = 0; var15 < 64; ++var15) {
+            for(int var16 = 0; var16 < 64; ++var16) {
+               if (arg5 == var14 && var15 >= arg9 && var15 < arg9 + 8 && var16 >= arg1 && var16 < arg1 + 8) {
+                  this.a(0, (byte)-61, 0, var13, arg0, arg6 + WorldRegion.a((byte)7, arg0, var15 & 7, (int)(var16 & 7)), arg4, arg8 + WorldRegion.a((int)(var16 & 7), var15 & 7, arg0, (byte)5));
+               } else {
+                  this.a(0, (byte)-61, 0, var13, 0, -1, 0, -1);
+               }
+            }
+         }
+      }
+
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(LZPGPWCCV;LMFMVIYHT;B)V")
+   public static final void a(OnDemand arg0, Packet arg1, byte arg2) {
+      if (arg2 == -3) {
+         int var3 = -1;
+
+         while(true) {
+            int var4 = arg1.gsmarts();
+            if (var4 == 0) {
+               return;
+            }
+
+            var3 += var4;
+            LocType var5 = LocType.a(var3);
+            var5.a(arg0, -747);
+
+            while(true) {
+               int var6 = arg1.gsmarts();
+               if (var6 == 0) {
+                  break;
+               }
+
+               arg1.g1();
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(IBI)Z")
+   public static final boolean a(int arg0, byte arg1, int arg2) {
+      LocType var3 = LocType.a(arg2);
+      if (q != arg1) {
+         for(int var4 = 1; var4 > 0; ++var4) {
+         }
+      }
+
+      if (arg0 == 11) {
+         arg0 = 10;
+      }
+
+      if (arg0 >= 5 && arg0 <= 8) {
+         arg0 = 4;
+      }
+
+      return var3.a(26261, arg0);
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(II)I")
+   public static final int a(int arg0, int arg1) {
+      if (arg0 == -1) {
+         return 12345678;
+      } else {
+         int var2 = (arg0 & 127) * arg1 / 128;
+         if (var2 < 2) {
+            var2 = 2;
+         } else if (var2 > 126) {
+            var2 = 126;
+         }
+
+         return (arg0 & 65408) + var2;
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(I[LXRENONSA;LKJCMXHNO;Z[BIIIIII)V")
+   public final void a(int arg0, CollisionMap[] arg1, World3D arg2, boolean arg3, byte[] arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+      Packet var12 = new Packet(arg4);
+      if (!arg3) {
+         int var13 = -1;
+
+         while(true) {
+            int var14 = var12.gsmarts();
+            if (var14 == 0) {
+               return;
+            }
+
+            var13 += var14;
+            int var15 = 0;
+
+            while(true) {
+               int var16 = var12.gsmarts();
+               if (var16 == 0) {
+                  break;
+               }
+
+               var15 += var16 - 1;
+               int var17 = var15 & 63;
+               int var18 = var15 >> 6 & 63;
+               int var19 = var15 >> 12;
+               int var20 = var12.g1();
+               int var21 = var20 >> 2;
+               int var22 = var20 & 3;
+               if (arg10 == var19 && var18 >= arg7 && var18 < arg7 + 8 && var17 >= arg9 && var17 < arg9 + 8) {
+                  LocType var23 = LocType.a(var13);
+                  int var24 = arg8 + WorldRegion.a(arg6, var23.r, var22, var18 & 7, (byte)-117, var23.R, var17 & 7);
+                  int var25 = arg5 + WorldRegion.a(var23.R, arg6, 671, var18 & 7, (int)(var17 & 7), var23.r, var22);
+                  if (var24 > 0 && var25 > 0 && var24 < 103 && var25 < 103) {
+                     int var26 = arg0;
+                     if ((this.a[1][var24][var25] & 2) == 2) {
+                        var26 = arg0 - 1;
+                     }
+
+                     CollisionMap var27 = null;
+                     if (var26 >= 0) {
+                        var27 = arg1[var26];
+                     }
+
+                     this.a(arg2, var27, var25, arg0, var24, this.b, arg6 + var22 & 3, var21, var13);
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(LKJCMXHNO;LXRENONSA;IIIBIII)V")
+   public final void a(World3D arg0, CollisionMap arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, int arg7, int arg8) {
+      if (F && (this.a[0][arg4][arg2] & 2) == 0) {
+         if ((this.a[arg3][arg4][arg2] & 16) != 0) {
+            return;
+         }
+
+         if (this.a(arg2, arg3, arg4, (byte)0) != y) {
+            return;
+         }
+      }
+
+      if (arg3 < m) {
+         m = arg3;
+      }
+
+      int var10 = this.l[arg3][arg4][arg2];
+      int var11 = this.l[arg3][arg4 + 1][arg2];
+      int var12 = this.l[arg3][arg4 + 1][arg2 + 1];
+      int var13 = this.l[arg3][arg4][arg2 + 1];
+      int var14 = var10 + var11 + var12 + var13 >> 2;
+      LocType var15 = LocType.a(arg8);
+      int var16 = (arg8 << 14) + (arg2 << 7) + arg4 + 1073741824;
+      if (arg5 != 0) {
+         this.t = !this.t;
+      }
+
+      if (!var15.b) {
+         var16 += Integer.MIN_VALUE;
+      }
+
+      byte var17 = (byte)((arg6 << 6) + arg7);
+      if (arg7 == 22) {
+         if (!F || var15.b || var15.h) {
+            ModelSource var18;
+            if (var15.T == -1 && var15.V == null) {
+               var18 = var15.a(22, arg6, var10, var11, var12, var13, -1);
+            } else {
+               var18 = new ClientLocAnim(var15.T, var12, var13, var11, 22, (byte)3, arg8, true, var10, arg6);
+            }
+
+            arg0.a(arg4, arg2, 669, var17, var16, var14, arg3, var18);
+            if (var15.ab && var15.b && arg1 != null) {
+               arg1.a(8, (int)arg2, arg4);
+            }
+
+         }
+      } else if (arg7 != 10 && arg7 != 11) {
+         if (arg7 >= 12) {
+            ModelSource var27;
+            if (var15.T == -1 && var15.V == null) {
+               var27 = var15.a(arg7, arg6, var10, var11, var12, var13, -1);
+            } else {
+               var27 = new ClientLocAnim(var15.T, var12, var13, var11, arg7, (byte)3, arg8, true, var10, arg6);
+            }
+
+            arg0.a(arg3, 1, arg2, var27, var17, 0, arg4, -896, 1, var14, var16);
+            if (arg7 >= 12 && arg7 <= 17 && arg7 != 13 && arg3 > 0) {
+               this.E[arg3][arg4][arg2] |= 2340;
+            }
+
+            if (var15.ab && arg1 != null) {
+               arg1.a(arg2, arg6, var15.r, var15.R, var15.Z, arg4, (byte)52);
+            }
+
+         } else if (arg7 == 0) {
+            ModelSource var28;
+            if (var15.T == -1 && var15.V == null) {
+               var28 = var15.a(0, arg6, var10, var11, var12, var13, -1);
+            } else {
+               var28 = new ClientLocAnim(var15.T, var12, var13, var11, 0, (byte)3, arg8, true, var10, arg6);
+            }
+
+            arg0.a(var14, 49878, 0, u[arg6], (ModelSource)null, arg4, var16, var17, arg2, var28, arg3);
+            if (arg6 == 0) {
+               if (var15.X) {
+                  this.A[arg3][arg4][arg2] = 50;
+                  this.A[arg3][arg4][arg2 + 1] = 50;
+               }
+
+               if (var15.N) {
+                  this.E[arg3][arg4][arg2] |= 585;
+               }
+            } else if (arg6 == 1) {
+               if (var15.X) {
+                  this.A[arg3][arg4][arg2 + 1] = 50;
+                  this.A[arg3][arg4 + 1][arg2 + 1] = 50;
+               }
+
+               if (var15.N) {
+                  this.E[arg3][arg4][arg2 + 1] |= 1170;
+               }
+            } else if (arg6 == 2) {
+               if (var15.X) {
+                  this.A[arg3][arg4 + 1][arg2] = 50;
+                  this.A[arg3][arg4 + 1][arg2 + 1] = 50;
+               }
+
+               if (var15.N) {
+                  this.E[arg3][arg4 + 1][arg2] |= 585;
+               }
+            } else if (arg6 == 3) {
+               if (var15.X) {
+                  this.A[arg3][arg4][arg2] = 50;
+                  this.A[arg3][arg4 + 1][arg2] = 50;
+               }
+
+               if (var15.N) {
+                  this.E[arg3][arg4][arg2] |= 1170;
+               }
+            }
+
+            if (var15.ab && arg1 != null) {
+               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            }
+
+            if (var15.S != 16) {
+               arg0.a(arg2, var15.S, arg3, arg4, 0);
+            }
+
+         } else if (arg7 == 1) {
+            ModelSource var29;
+            if (var15.T == -1 && var15.V == null) {
+               var29 = var15.a(1, arg6, var10, var11, var12, var13, -1);
+            } else {
+               var29 = new ClientLocAnim(var15.T, var12, var13, var11, 1, (byte)3, arg8, true, var10, arg6);
+            }
+
+            arg0.a(var14, 49878, 0, D[arg6], (ModelSource)null, arg4, var16, var17, arg2, var29, arg3);
+            if (var15.X) {
+               if (arg6 == 0) {
+                  this.A[arg3][arg4][arg2 + 1] = 50;
+               } else if (arg6 == 1) {
+                  this.A[arg3][arg4 + 1][arg2 + 1] = 50;
+               } else if (arg6 == 2) {
+                  this.A[arg3][arg4 + 1][arg2] = 50;
+               } else if (arg6 == 3) {
+                  this.A[arg3][arg4][arg2] = 50;
+               }
+            }
+
+            if (var15.ab && arg1 != null) {
+               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            }
+
+         } else if (arg7 == 2) {
+            int var30 = arg6 + 1 & 3;
+            ModelSource var31;
+            ModelSource var32;
+            if (var15.T == -1 && var15.V == null) {
+               var31 = var15.a(2, arg6 + 4, var10, var11, var12, var13, -1);
+               var32 = var15.a(2, var30, var10, var11, var12, var13, -1);
+            } else {
+               var31 = new ClientLocAnim(var15.T, var12, var13, var11, 2, (byte)3, arg8, true, var10, arg6 + 4);
+               var32 = new ClientLocAnim(var15.T, var12, var13, var11, 2, (byte)3, arg8, true, var10, var30);
+            }
+
+            arg0.a(var14, 49878, u[var30], u[arg6], var32, arg4, var16, var17, arg2, var31, arg3);
+            if (var15.N) {
+               if (arg6 == 0) {
+                  this.E[arg3][arg4][arg2] |= 585;
+                  this.E[arg3][arg4][arg2 + 1] |= 1170;
+               } else if (arg6 == 1) {
+                  this.E[arg3][arg4][arg2 + 1] |= 1170;
+                  this.E[arg3][arg4 + 1][arg2] |= 585;
+               } else if (arg6 == 2) {
+                  this.E[arg3][arg4 + 1][arg2] |= 585;
+                  this.E[arg3][arg4][arg2] |= 1170;
+               } else if (arg6 == 3) {
+                  this.E[arg3][arg4][arg2] |= 1170;
+                  this.E[arg3][arg4][arg2] |= 585;
+               }
+            }
+
+            if (var15.ab && arg1 != null) {
+               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            }
+
+            if (var15.S != 16) {
+               arg0.a(arg2, var15.S, arg3, arg4, 0);
+            }
+
+         } else if (arg7 == 3) {
+            ModelSource var33;
+            if (var15.T == -1 && var15.V == null) {
+               var33 = var15.a(3, arg6, var10, var11, var12, var13, -1);
+            } else {
+               var33 = new ClientLocAnim(var15.T, var12, var13, var11, 3, (byte)3, arg8, true, var10, arg6);
+            }
+
+            arg0.a(var14, 49878, 0, D[arg6], (ModelSource)null, arg4, var16, var17, arg2, var33, arg3);
+            if (var15.X) {
+               if (arg6 == 0) {
+                  this.A[arg3][arg4][arg2 + 1] = 50;
+               } else if (arg6 == 1) {
+                  this.A[arg3][arg4 + 1][arg2 + 1] = 50;
+               } else if (arg6 == 2) {
+                  this.A[arg3][arg4 + 1][arg2] = 50;
+               } else if (arg6 == 3) {
+                  this.A[arg3][arg4][arg2] = 50;
+               }
+            }
+
+            if (var15.ab && arg1 != null) {
+               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            }
+
+         } else if (arg7 == 9) {
+            ModelSource var34;
+            if (var15.T == -1 && var15.V == null) {
+               var34 = var15.a(arg7, arg6, var10, var11, var12, var13, -1);
+            } else {
+               var34 = new ClientLocAnim(var15.T, var12, var13, var11, arg7, (byte)3, arg8, true, var10, arg6);
+            }
+
+            arg0.a(arg3, 1, arg2, var34, var17, 0, arg4, -896, 1, var14, var16);
+            if (var15.ab && arg1 != null) {
+               arg1.a(arg2, arg6, var15.r, var15.R, var15.Z, arg4, (byte)52);
+            }
+
+         } else {
+            if (var15.l) {
+               if (arg6 == 1) {
+                  int var35 = var13;
+                  var13 = var12;
+                  var12 = var11;
+                  var11 = var10;
+                  var10 = var35;
+               } else if (arg6 == 2) {
+                  int var36 = var13;
+                  var13 = var11;
+                  var11 = var36;
+                  int var37 = var12;
+                  var12 = var10;
+                  var10 = var37;
+               } else if (arg6 == 3) {
+                  int var38 = var13;
+                  var13 = var10;
+                  var10 = var11;
+                  var11 = var12;
+                  var12 = var38;
+               }
+            }
+
+            if (arg7 == 4) {
+               ModelSource var39;
+               if (var15.T == -1 && var15.V == null) {
+                  var39 = var15.a(4, 0, var10, var11, var12, var13, -1);
+               } else {
+                  var39 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+               }
+
+               arg0.a(arg3, u[arg6], arg6 * 512, var16, var17, arg4, 0, arg2, 0, var14, var39, -930);
+            } else if (arg7 == 5) {
+               int var40 = 16;
+               int var41 = arg0.b(arg3, arg4, arg2);
+               if (var41 > 0) {
+                  var40 = LocType.a(var41 >> 14 & 32767).S;
+               }
+
+               ModelSource var42;
+               if (var15.T == -1 && var15.V == null) {
+                  var42 = var15.a(4, 0, var10, var11, var12, var13, -1);
+               } else {
+                  var42 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+               }
+
+               arg0.a(arg3, u[arg6], arg6 * 512, var16, var17, arg4, f[arg6] * var40, arg2, x[arg6] * var40, var14, var42, -930);
+            } else if (arg7 == 6) {
+               ModelSource var43;
+               if (var15.T == -1 && var15.V == null) {
+                  var43 = var15.a(4, 0, var10, var11, var12, var13, -1);
+               } else {
+                  var43 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+               }
+
+               arg0.a(arg3, 256, arg6, var16, var17, arg4, 0, arg2, 0, var14, var43, -930);
+            } else if (arg7 == 7) {
+               ModelSource var44;
+               if (var15.T == -1 && var15.V == null) {
+                  var44 = var15.a(4, 0, var10, var11, var12, var13, -1);
+               } else {
+                  var44 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+               }
+
+               arg0.a(arg3, 512, arg6, var16, var17, arg4, 0, arg2, 0, var14, var44, -930);
+            } else if (arg7 == 8) {
+               ModelSource var45;
+               if (var15.T == -1 && var15.V == null) {
+                  var45 = var15.a(4, 0, var10, var11, var12, var13, -1);
+               } else {
+                  var45 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+               }
+
+               arg0.a(arg3, 768, arg6, var16, var17, arg4, 0, arg2, 0, var14, var45, -930);
+            }
+         }
+      } else {
+         ModelSource var19;
+         if (var15.T == -1 && var15.V == null) {
+            var19 = var15.a(10, arg6, var10, var11, var12, var13, -1);
+         } else {
+            var19 = new ClientLocAnim(var15.T, var12, var13, var11, 10, (byte)3, arg8, true, var10, arg6);
+         }
+
+         if (var19 != null) {
+            int var20 = 0;
+            if (arg7 == 11) {
+               var20 += 256;
+            }
+
+            int var21;
+            int var22;
+            if (arg6 != 1 && arg6 != 3) {
+               var21 = var15.R;
+               var22 = var15.r;
+            } else {
+               var21 = var15.r;
+               var22 = var15.R;
+            }
+
+            if (arg0.a(arg3, var21, arg2, var19, var17, var20, arg4, -896, var22, var14, var16) && var15.X) {
+               Model var23;
+               if (var19 instanceof Model) {
+                  var23 = (Model)var19;
+               } else {
+                  var23 = var15.a(10, arg6, var10, var11, var12, var13, -1);
+               }
+
+               if (var23 != null) {
+                  for(int var24 = 0; var24 <= var21; ++var24) {
+                     for(int var25 = 0; var25 <= var22; ++var25) {
+                        int var26 = var23.V / 4;
+                        if (var26 > 30) {
+                           var26 = 30;
+                        }
+
+                        if (var26 > this.A[arg3][arg4 + var24][arg2 + var25]) {
+                           this.A[arg3][arg4 + var24][arg2 + var25] = (byte)var26;
+                        }
+                     }
+                  }
+               }
+            }
+         }
+
+         if (var15.ab && arg1 != null) {
+            arg1.a(arg2, arg6, var15.r, var15.R, var15.Z, arg4, (byte)52);
+         }
+
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(IZII[BI[LXRENONSA;)V")
+   public final void a(int arg0, boolean arg1, int arg2, int arg3, byte[] arg4, int arg5, CollisionMap[] arg6) {
+      if (arg1) {
+         this.C = -379;
+      }
+
+      for(int var8 = 0; var8 < 4; ++var8) {
+         for(int var9 = 0; var9 < 64; ++var9) {
+            for(int var10 = 0; var10 < 64; ++var10) {
+               if (arg3 + var9 > 0 && arg3 + var9 < 103 && arg0 + var10 > 0 && arg0 + var10 < 103) {
+                  arg6[var8].j[arg3 + var9][arg0 + var10] &= -16777217;
+               }
+            }
+         }
+      }
+
+      Packet var11 = new Packet(arg4);
+
+      for(int var12 = 0; var12 < 4; ++var12) {
+         for(int var13 = 0; var13 < 64; ++var13) {
+            for(int var14 = 0; var14 < 64; ++var14) {
+               this.a(arg5, (byte)-61, arg2, var11, 0, arg3 + var13, var12, arg0 + var14);
+            }
+         }
+      }
+
+   }
+
+   public World(int[][][] arg0, int arg1, byte[][][] arg2, int arg3, int arg4) {
+      m = 99;
+      this.n = arg4;
+      this.o = arg3;
+      this.l = arg0;
+      this.a = arg2;
+      this.v = new byte[4][this.n][this.o];
+      this.r = new byte[4][this.n][this.o];
+      this.p = new byte[4][this.n][this.o];
+      this.e = new byte[4][this.n][this.o];
+      this.E = new int[4][this.n + 1][this.o + 1];
+      this.A = new byte[4][this.n + 1][this.o + 1];
+      this.B = new int[this.n + 1][this.o + 1];
+      this.g = new int[this.o];
+      this.h = new int[this.o];
+      this.i = new int[this.o];
+      this.j = new int[this.o];
+      this.k = new int[this.o];
+      if (arg1 != 14290) {
+         throw new NullPointerException();
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.b(II)I")
+   public static final int b(int arg0, int arg1) {
+      int var2 = arg1 * 57 + arg0;
+      int var3 = var2 << 13 ^ var2;
+      int var4 = (var3 * var3 * 15731 + 789221) * var3 + 1376312589 & Integer.MAX_VALUE;
+      return var4 >> 19 & 255;
+   }
+
+   @ObfuscatedName("CHEOPWNH.b(IIII)I")
+   public static final int b(int arg0, int arg1, int arg2, int arg3) {
+      int var4 = 65536 - Pix3D.J[arg2 * 1024 / arg3] >> 1;
+      return ((65536 - var4) * arg0 >> 16) + (arg1 * var4 >> 16);
+   }
+
+   @ObfuscatedName("CHEOPWNH.b(III)I")
+   public final int b(int arg0, int arg1, int arg2) {
+      if (arg2 > 179) {
+         arg1 /= 2;
+      }
+
+      if (arg2 > 192) {
+         arg1 /= 2;
+      }
+
+      if (arg2 > 217) {
+         arg1 /= 2;
+      }
+
+      if (arg2 > 243) {
+         arg1 /= 2;
+      }
+
+      return arg2 / 2 + (arg0 / 4 << 10) + (arg1 / 32 << 7);
+   }
+
+   @ObfuscatedName("CHEOPWNH.c(II)I")
+   public static final int c(int arg0, int arg1) {
+      int var2 = b(arg0 - 1, arg1 - 1) + b(arg0 + 1, arg1 - 1) + b(arg0 - 1, arg1 + 1) + b(arg0 + 1, arg1 + 1);
+      int var3 = b(arg0 - 1, arg1) + b(arg0 + 1, arg1) + b(arg0, arg1 - 1) + b(arg0, arg1 + 1);
+      int var4 = b(arg0, arg1);
+      return var4 / 4 + var2 / 16 + var3 / 8;
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(I[LXRENONSA;IILKJCMXHNO;[B)V")
+   public final void a(int arg0, CollisionMap[] arg1, int arg2, int arg3, World3D arg4, byte[] arg5) {
+      if (arg3 < 0) {
+         Packet var7 = new Packet(arg5);
+         int var8 = -1;
+
+         while(true) {
+            int var9 = var7.gsmarts();
+            if (var9 == 0) {
+               return;
+            }
+
+            var8 += var9;
+            int var10 = 0;
+
+            while(true) {
+               int var11 = var7.gsmarts();
+               if (var11 == 0) {
+                  break;
+               }
+
+               var10 += var11 - 1;
+               int var12 = var10 & 63;
+               int var13 = var10 >> 6 & 63;
+               int var14 = var10 >> 12;
+               int var15 = var7.g1();
+               int var16 = var15 >> 2;
+               int var17 = var15 & 3;
+               int var18 = arg2 + var13;
+               int var19 = arg0 + var12;
+               if (var18 > 0 && var19 > 0 && var18 < 103 && var19 < 103) {
+                  int var20 = var14;
+                  if ((this.a[1][var18][var19] & 2) == 2) {
+                     var20 = var14 - 1;
+                  }
+
+                  CollisionMap var21 = null;
+                  if (var20 >= 0) {
+                     var21 = arg1[var20];
+                  }
+
+                  this.a(arg4, var21, var19, var14, var18, this.b, var17, var16, var8);
+               }
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(IIIII)V")
+   public final void a(int arg0, int arg1, int arg2, int arg3, int arg4) {
+      if (arg3 < 0) {
+         for(int var6 = arg1; var6 <= arg1 + arg2; ++var6) {
+            for(int var7 = arg0; var7 <= arg0 + arg4; ++var7) {
+               if (var7 >= 0 && var7 < this.n && var6 >= 0 && var6 < this.o) {
+                  this.A[0][var7][var6] = 127;
+                  if (arg0 == var7 && var7 > 0) {
+                     this.l[0][var7][var6] = this.l[0][var7 - 1][var6];
+                  }
+
+                  if (arg0 + arg4 == var7 && var7 < this.n - 1) {
+                     this.l[0][var7][var6] = this.l[0][var7 + 1][var6];
+                  }
+
+                  if (arg1 == var6 && var6 > 0) {
+                     this.l[0][var7][var6] = this.l[0][var7][var6 - 1];
+                  }
+
+                  if (arg1 + arg2 == var6 && var6 < this.o - 1) {
+                     this.l[0][var7][var6] = this.l[0][var7][var6 + 1];
+                  }
+               }
+            }
+         }
+
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(II[BI)Z")
+   public static final boolean a(int arg0, int arg1, byte[] arg2, int arg3) {
+      boolean var4 = true;
+      Packet var5 = new Packet(arg2);
+      if (arg3 != 24515) {
+         throw new NullPointerException();
+      } else {
+         int var6 = -1;
+
+         label54:
+         while(true) {
+            int var7 = var5.gsmarts();
+            if (var7 == 0) {
+               return var4;
+            }
+
+            var6 += var7;
+            int var8 = 0;
+            boolean var9 = false;
+
+            while(true) {
+               while(!var9) {
+                  int var11 = var5.gsmarts();
+                  if (var11 == 0) {
+                     continue label54;
+                  }
+
+                  var8 += var11 - 1;
+                  int var12 = var8 & 63;
+                  int var13 = var8 >> 6 & 63;
+                  int var14 = var5.g1() >> 2;
+                  int var15 = arg0 + var13;
+                  int var16 = arg1 + var12;
+                  if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
+                     LocType var17 = LocType.a(var6);
+                     if (var14 != 22 || !F || var17.b || var17.h) {
+                        var4 &= var17.c(-321);
+                        var9 = true;
+                     }
+                  }
+               }
+
+               int var10 = var5.gsmarts();
+               if (var10 == 0) {
+                  break;
+               }
+
+               var5.g1();
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.d(II)I")
+   public final int d(int arg0, int arg1) {
+      if (arg0 == -2) {
+         return 12345678;
+      } else if (arg0 == -1) {
+         if (arg1 < 0) {
+            arg1 = 0;
+         } else if (arg1 > 127) {
+            arg1 = 127;
+         }
+
+         return 127 - arg1;
+      } else {
+         int var4 = (arg0 & 127) * arg1 / 128;
+         if (var4 < 2) {
+            var4 = 2;
+         } else if (var4 > 126) {
+            var4 = 126;
+         }
+
+         return (arg0 & 65408) + var4;
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.a(IBILMFMVIYHT;IIII)V")
+   public final void a(int arg0, byte arg1, int arg2, Packet arg3, int arg4, int arg5, int arg6, int arg7) {
+      if (arg1 != -61) {
+         this.c = !this.c;
+      }
+
+      if (arg5 >= 0 && arg5 < 104 && arg7 >= 0 && arg7 < 104) {
+         this.a[arg6][arg5][arg7] = 0;
+
+         while(true) {
+            int var9 = arg3.g1();
+            if (var9 == 0) {
+               if (arg6 == 0) {
+                  this.l[0][arg5][arg7] = -e(arg5 + 932731 + arg0, arg7 + 556238 + arg2) * 8;
+                  return;
+               } else {
+                  this.l[arg6][arg5][arg7] = this.l[arg6 - 1][arg5][arg7] - 240;
+                  return;
+               }
+            }
+
+            if (var9 == 1) {
+               int var10 = arg3.g1();
+               if (var10 == 1) {
+                  var10 = 0;
+               }
+
+               if (arg6 == 0) {
+                  this.l[0][arg5][arg7] = -var10 * 8;
+                  return;
+               }
+
+               this.l[arg6][arg5][arg7] = this.l[arg6 - 1][arg5][arg7] - var10 * 8;
+               return;
+            }
+
+            if (var9 <= 49) {
+               this.r[arg6][arg5][arg7] = arg3.d();
+               this.p[arg6][arg5][arg7] = (byte)((var9 - 2) / 4);
+               this.e[arg6][arg5][arg7] = (byte)(var9 - 2 + arg4 & 3);
+            } else if (var9 <= 81) {
+               this.a[arg6][arg5][arg7] = (byte)(var9 - 49);
+            } else {
+               this.v[arg6][arg5][arg7] = (byte)(var9 - 81);
+            }
+         }
+      } else {
+         while(true) {
+            int var11 = arg3.g1();
+            if (var11 == 0) {
+               return;
+            }
+
+            if (var11 == 1) {
+               arg3.g1();
+               return;
+            }
+
+            if (var11 <= 49) {
+               arg3.g1();
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("CHEOPWNH.e(II)I")
+   public static final int e(int arg0, int arg1) {
+      int var2 = a(arg0 + 45365, (int)(arg1 + 91923), 4) - 128 + (a(arg0 + 10294, (int)(arg1 + 37821), 2) - 128 >> 1) + (a(arg0, (int)arg1, 1) - 128 >> 2);
+      int var3 = (int)((double)var2 * 0.3D) + 35;
+      if (var3 < 10) {
+         var3 = 10;
+      } else if (var3 > 60) {
+         var3 = 60;
+      }
+
+      return var3;
+   }
 }

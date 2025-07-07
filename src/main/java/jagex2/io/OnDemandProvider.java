@@ -2,10 +2,11 @@ package jagex2.io;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("ub")
 public class OnDemandProvider {
+   @ObfuscatedName("QUWTPUDC.a")
+   public boolean a = true;
 
-	@ObfuscatedName("ub.a(I)V")
-	public void requestModel(int id) {
-	}
+   @ObfuscatedName("QUWTPUDC.a(I)V")
+   public void a(int arg0) {
+   }
 }

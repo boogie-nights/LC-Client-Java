@@ -2,33 +2,23 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("r")
 public class Wall {
-
-	@ObfuscatedName("r.a")
-	public int y;
-
-	@ObfuscatedName("r.b")
-	public int x;
-
-	@ObfuscatedName("r.c")
-	public int z;
-
-	@ObfuscatedName("r.d")
-	public int angle1;
-
-	@ObfuscatedName("r.e")
-	public int angle2;
-
-	@ObfuscatedName("r.f")
-	public ModelSource model1;
-
-	@ObfuscatedName("r.g")
-	public ModelSource model2;
-
-	@ObfuscatedName("r.h")
-	public int typecode;
-
-	@ObfuscatedName("r.i")
-	public byte typecode2;
+   @ObfuscatedName("WQXKHZYN.i")
+   public byte i;
+   @ObfuscatedName("WQXKHZYN.a")
+   public int a;
+   @ObfuscatedName("WQXKHZYN.b")
+   public int b;
+   @ObfuscatedName("WQXKHZYN.c")
+   public int c;
+   @ObfuscatedName("WQXKHZYN.d")
+   public int d;
+   @ObfuscatedName("WQXKHZYN.e")
+   public int e;
+   @ObfuscatedName("WQXKHZYN.h")
+   public int h;
+   @ObfuscatedName("WQXKHZYN.f")
+   public ModelSource f;
+   @ObfuscatedName("WQXKHZYN.g")
+   public ModelSource g;
 }

@@ -2,100 +2,104 @@ package jagex2.graphics;
 
 import deob.ObfuscatedName;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.ColorModel;
 import java.awt.image.DirectColorModel;
 import java.awt.image.ImageConsumer;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import java.util.Hashtable;
 
-@ObfuscatedName("rb")
 public class PixMap implements ImageProducer, ImageObserver {
+   @ObfuscatedName("ISZGOOMR.a")
+   public boolean a = true;
+   @ObfuscatedName("ISZGOOMR.c")
+   public int c;
+   @ObfuscatedName("ISZGOOMR.d")
+   public int d;
+   @ObfuscatedName("ISZGOOMR.b")
+   public int[] b;
+   @ObfuscatedName("ISZGOOMR.e")
+   public ColorModel e;
+   @ObfuscatedName("ISZGOOMR.g")
+   public Image g;
+   @ObfuscatedName("ISZGOOMR.f")
+   public ImageConsumer f;
 
-	@ObfuscatedName("rb.c")
-	public int[] data;
+   public PixMap(int arg0, byte arg1, java.awt.Component arg2, int arg3) {
+      this.c = arg3;
+      this.d = arg0;
+      this.b = new int[arg0 * arg3];
+      this.e = new DirectColorModel(32, 16711680, 65280, 255);
+      this.g = arg2.createImage(this);
+      this.a();
+      arg2.prepareImage(this.g, this);
+      this.a();
+      arg2.prepareImage(this.g, this);
+      if (arg1 != -12) {
+         throw new NullPointerException();
+      } else {
+         this.a();
+         arg2.prepareImage(this.g, this);
+         this.a(false);
+      }
+   }
 
-	@ObfuscatedName("rb.d")
-	public int width;
+   @ObfuscatedName("ISZGOOMR.a(Z)V")
+   public void a(boolean arg0) {
+      if (arg0) {
+         for(int var2 = 1; var2 > 0; ++var2) {
+         }
+      }
 
-	@ObfuscatedName("rb.e")
-	public int height;
+      Pix2D.a(this.a, this.c, this.d, this.b);
+   }
 
-	@ObfuscatedName("rb.f")
-	public ColorModel colorModel;
+   @ObfuscatedName("ISZGOOMR.a(IILjava/awt/Graphics;Z)V")
+   public void a(int arg0, int arg1, Graphics arg2, boolean arg3) {
+      if (!arg3) {
+         this.a();
+         arg2.drawImage(this.g, arg1, arg0, this);
+      }
+   }
 
-	@ObfuscatedName("rb.g")
-	public ImageConsumer consumer;
+   public synchronized void addConsumer(ImageConsumer arg0) {
+      this.f = arg0;
+      arg0.setDimensions(this.c, this.d);
+      arg0.setProperties((Hashtable)null);
+      arg0.setColorModel(this.e);
+      arg0.setHints(14);
+   }
 
-	@ObfuscatedName("rb.h")
-	public Image image;
+   public synchronized boolean isConsumer(ImageConsumer arg0) {
+      return this.f == arg0;
+   }
 
-	public PixMap(int width, int height, Component c) {
-		this.width = width;
-		this.height = height;
-		this.data = new int[height * width];
-		this.colorModel = new DirectColorModel(32, 0xff0000, 0x00ff00, 0x0000ff);
+   public synchronized void removeConsumer(ImageConsumer arg0) {
+      if (this.f == arg0) {
+         this.f = null;
+      }
 
-		this.image = c.createImage(this);
+   }
 
-		this.setPixels();
-		c.prepareImage(this.image, this);
+   public void startProduction(ImageConsumer arg0) {
+      this.addConsumer(arg0);
+   }
 
-		this.setPixels();
-		c.prepareImage(this.image, this);
+   public void requestTopDownLeftRightResend(ImageConsumer arg0) {
+      System.out.println("TDLR");
+   }
 
-		this.setPixels();
-		c.prepareImage(this.image, this);
+   @ObfuscatedName("ISZGOOMR.a()V")
+   public synchronized void a() {
+      if (this.f != null) {
+         this.f.setPixels(0, 0, this.c, this.d, this.e, this.b, 0, this.c);
+         this.f.imageComplete(2);
+      }
+   }
 
-		this.bind();
-	}
-
-	@ObfuscatedName("rb.a(I)V")
-	public void bind() {
-		Pix2D.bind(this.width, this.data, this.height);
-	}
-
-	@ObfuscatedName("rb.a(Ljava/awt/Graphics;IBI)V")
-	public void draw(Graphics g, int x, int y) {
-		this.setPixels();
-		g.drawImage(this.image, x, y, this);
-	}
-
-	public synchronized void addConsumer(ImageConsumer c) {
-		this.consumer = c;
-		c.setDimensions(this.width, this.height);
-		c.setProperties(null);
-		c.setColorModel(this.colorModel);
-		c.setHints(14);
-	}
-
-	public synchronized boolean isConsumer(ImageConsumer c) {
-		return this.consumer == c;
-	}
-
-	public synchronized void removeConsumer(ImageConsumer c) {
-		if (this.consumer == c) {
-			this.consumer = null;
-		}
-	}
-
-	public void startProduction(ImageConsumer c) {
-		this.addConsumer(c);
-	}
-
-	public void requestTopDownLeftRightResend(ImageConsumer c) {
-		System.out.println("TDLR");
-	}
-
-	@ObfuscatedName("rb.a()V")
-	public synchronized void setPixels() {
-		if (this.consumer != null) {
-			this.consumer.setPixels(0, 0, this.width, this.height, this.colorModel, this.data, 0, this.width);
-			this.consumer.imageComplete(2);
-		}
-	}
-
-	public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		return true;
-	}
+   public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+      return true;
+   }
 }

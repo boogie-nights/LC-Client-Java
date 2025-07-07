@@ -2,79 +2,84 @@ package jagex2.datastruct;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("t")
 public class LruCache {
+   @ObfuscatedName("RHNYLZZL.a")
+   public int a = 256;
+   @ObfuscatedName("RHNYLZZL.d")
+   public DoublyLinkable d = new DoublyLinkable();
+   @ObfuscatedName("RHNYLZZL.h")
+   public DoublyLinkList h = new DoublyLinkList(true);
+   @ObfuscatedName("RHNYLZZL.e")
+   public int e;
+   @ObfuscatedName("RHNYLZZL.f")
+   public int f;
+   @ObfuscatedName("RHNYLZZL.g")
+   public HashTable g;
+   @ObfuscatedName("RHNYLZZL.b")
+   public int b;
+   @ObfuscatedName("RHNYLZZL.c")
+   public int c;
 
-	@ObfuscatedName("t.a")
-	public int notFound;
+   public LruCache(int arg0, int arg1) {
+      this.e = arg0;
+      if (arg1 >= 0) {
+         this.a = 433;
+      }
 
-	@ObfuscatedName("t.b")
-	public int found;
+      this.f = arg0;
+      this.g = new HashTable((byte)0, 1024);
+   }
 
-	@ObfuscatedName("t.c")
-	public DoublyLinkable search = new DoublyLinkable();
+   @ObfuscatedName("RHNYLZZL.a(J)LDPPNUUMQ;")
+   public DoublyLinkable a(long arg0) {
+      DoublyLinkable var3 = (DoublyLinkable)this.g.a(arg0);
+      if (var3 != null) {
+         this.h.a(var3);
+         ++this.c;
+      } else {
+         ++this.b;
+      }
 
-	@ObfuscatedName("t.d")
-	public int capacity;
+      return var3;
+   }
 
-	@ObfuscatedName("t.e")
-	public int available;
+   @ObfuscatedName("RHNYLZZL.a(LDPPNUUMQ;JI)V")
+   public void a(DoublyLinkable arg0, long arg1, int arg2) {
+      if (arg2 != 5) {
+         this.a = 150;
+      }
 
-	@ObfuscatedName("t.f")
-	public HashTable table = new HashTable(1024);
+      if (this.f == 0) {
+         DoublyLinkable var5 = this.h.a();
+         var5.a();
+         var5.b();
+         if (this.d == var5) {
+            DoublyLinkable var6 = this.h.a();
+            var6.a();
+            var6.b();
+         }
+      } else {
+         --this.f;
+      }
 
-	@ObfuscatedName("t.g")
-	public DoublyLinkList history = new DoublyLinkList();
+      this.g.a(6, arg0, arg1);
+      this.h.a(arg0);
+      if (Linkable.d) {
+      }
 
-	public LruCache(int size) {
-		this.capacity = size;
-		this.available = size;
-	}
+   }
 
-	@ObfuscatedName("t.a(J)Lx;")
-	public DoublyLinkable get(long key) {
-		DoublyLinkable node = (DoublyLinkable) this.table.get(key);
-		if (node == null) {
-			this.notFound++;
-		} else {
-			this.history.addTail(node);
-			this.found++;
-		}
+   @ObfuscatedName("RHNYLZZL.a()V")
+   public void a() {
+      while(true) {
+         DoublyLinkable var1 = this.h.a();
+         if (var1 == null) {
+            this.f = this.e;
+            return;
+         }
 
-		return node;
-	}
-
-	@ObfuscatedName("t.a(Lx;JI)V")
-	public void put(DoublyLinkable node, long key) {
-		if (this.available == 0) {
-			DoublyLinkable sentinel = this.history.removeHead();
-			sentinel.unlink();
-			sentinel.unlink2();
-
-			if (this.search == sentinel) {
-				DoublyLinkable next = this.history.removeHead();
-				next.unlink();
-				next.unlink2();
-			}
-		} else {
-			this.available--;
-		}
-
-		this.table.put(key, node);
-		this.history.addTail(node);
-	}
-
-	@ObfuscatedName("t.a()V")
-	public void clear() {
-		while (true) {
-			DoublyLinkable node = this.history.removeHead();
-			if (node == null) {
-				this.available = this.capacity;
-				return;
-			}
-
-			node.unlink();
-			node.unlink2();
-		}
-	}
+         var1.a();
+         var1.b();
+      }
+   }
 }

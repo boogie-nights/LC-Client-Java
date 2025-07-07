@@ -1,184 +1,187 @@
 package jagex2.config;
 
+import jagex2.dash3d.AnimFrame;
 import jagex2.io.Jagfile;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
-import jagex2.dash3d.AnimFrame;
 
-@ObfuscatedName("nc")
 public class SeqType {
+   @ObfuscatedName("FHWCLIAS.b")
+   public boolean b = false;
+   @ObfuscatedName("FHWCLIAS.i")
+   public int i = -1;
+   @ObfuscatedName("FHWCLIAS.k")
+   public boolean k = false;
+   @ObfuscatedName("FHWCLIAS.l")
+   public int l = 5;
+   @ObfuscatedName("FHWCLIAS.m")
+   public int m = -1;
+   @ObfuscatedName("FHWCLIAS.n")
+   public int n = -1;
+   @ObfuscatedName("FHWCLIAS.o")
+   public int o = 99;
+   @ObfuscatedName("FHWCLIAS.p")
+   public int p = -1;
+   @ObfuscatedName("FHWCLIAS.q")
+   public int q = -1;
+   @ObfuscatedName("FHWCLIAS.r")
+   public int r = 2;
+   @ObfuscatedName("FHWCLIAS.a")
+   public static byte a = 6;
+   @ObfuscatedName("FHWCLIAS.c")
+   public static int c;
+   @ObfuscatedName("FHWCLIAS.e")
+   public int e;
+   @ObfuscatedName("FHWCLIAS.s")
+   public int s;
+   @ObfuscatedName("FHWCLIAS.t")
+   public static int t;
+   @ObfuscatedName("FHWCLIAS.f")
+   public int[] f;
+   @ObfuscatedName("FHWCLIAS.g")
+   public int[] g;
+   @ObfuscatedName("FHWCLIAS.h")
+   public int[] h;
+   @ObfuscatedName("FHWCLIAS.j")
+   public int[] j;
+   @ObfuscatedName("FHWCLIAS.d")
+   public static SeqType[] d;
 
-	@ObfuscatedName("nc.c")
-	public static int count;
+   @ObfuscatedName("FHWCLIAS.a(LATJMVOZR;I)V")
+   public static void a(Jagfile arg0, int arg1) {
+      Packet var2 = new Packet(arg0.a("seq.dat", (byte[])null));
+      c = var2.e();
+      if (d == null) {
+         d = new SeqType[c];
+      }
 
-	@ObfuscatedName("nc.d")
-	public static SeqType[] types;
+      for(int var3 = 0; var3 < c; ++var3) {
+         if (d[var3] == null) {
+            d[var3] = new SeqType();
+         }
 
-	@ObfuscatedName("nc.e")
-	public int frameCount;
+         d[var3].a(a, var2);
+      }
 
-	@ObfuscatedName("nc.f")
-	public int[] frames;
+      if (arg1 == 36135) {
+         ;
+      }
+   }
 
-	@ObfuscatedName("nc.g")
-	public int[] iframes;
+   @ObfuscatedName("FHWCLIAS.a(II)I")
+   public int a(int arg0, int arg1) {
+      int var3 = this.h[arg1];
+      if (arg0 != 0) {
+         return 1;
+      } else {
+         if (var3 == 0) {
+            AnimFrame var4 = AnimFrame.b(this.f[arg1]);
+            if (var4 != null) {
+               var3 = this.h[arg1] = var4.d;
+            }
+         }
 
-	@ObfuscatedName("nc.h")
-	public int[] delay;
+         if (var3 == 0) {
+            var3 = 1;
+         }
 
-	@ObfuscatedName("nc.i")
-	public int replayoff = -1;
+         return var3;
+      }
+   }
 
-	@ObfuscatedName("nc.j")
-	public int[] walkmerge;
+   @ObfuscatedName("FHWCLIAS.a(BLMFMVIYHT;)V")
+   public void a(byte arg0, Packet arg1) {
+      if (arg0 == 6) {
+         boolean var3 = false;
+      } else {
+         this.b = !this.b;
+      }
 
-	@ObfuscatedName("nc.k")
-	public boolean stretches = false;
+      while(true) {
+         while(true) {
+            int var4 = arg1.g1();
+            if (var4 == 0) {
+               if (this.e == 0) {
+                  this.e = 1;
+                  this.f = new int[1];
+                  this.f[0] = -1;
+                  this.g = new int[1];
+                  this.g[0] = -1;
+                  this.h = new int[1];
+                  this.h[0] = -1;
+               }
 
-	@ObfuscatedName("nc.l")
-	public int priority = 5;
+               if (this.p == -1) {
+                  if (this.j != null) {
+                     this.p = 2;
+                  } else {
+                     this.p = 0;
+                  }
+               }
 
-	@ObfuscatedName("nc.m")
-	public int righthand = -1;
+               if (this.q == -1) {
+                  if (this.j != null) {
+                     this.q = 2;
+                     return;
+                  }
 
-	@ObfuscatedName("nc.n")
-	public int lefthand = -1;
+                  this.q = 0;
+                  return;
+               }
 
-	@ObfuscatedName("nc.o")
-	public int replaycount = 99;
+               return;
+            }
 
-	@ObfuscatedName("nc.p")
-	public int preanim_move = -1;
+            if (var4 == 1) {
+               this.e = arg1.g1();
+               this.f = new int[this.e];
+               this.g = new int[this.e];
+               this.h = new int[this.e];
 
-	@ObfuscatedName("nc.q")
-	public int postanim_mode = -1;
+               for(int var5 = 0; var5 < this.e; ++var5) {
+                  this.f[var5] = arg1.e();
+                  this.g[var5] = arg1.e();
+                  if (this.g[var5] == 65535) {
+                     this.g[var5] = -1;
+                  }
 
-	@ObfuscatedName("nc.r")
-	public int restart_mode;
+                  this.h[var5] = arg1.e();
+               }
+            } else if (var4 == 2) {
+               this.i = arg1.e();
+            } else if (var4 != 3) {
+               if (var4 == 4) {
+                  this.k = true;
+               } else if (var4 == 5) {
+                  this.l = arg1.g1();
+               } else if (var4 == 6) {
+                  this.m = arg1.e();
+               } else if (var4 == 7) {
+                  this.n = arg1.e();
+               } else if (var4 == 8) {
+                  this.o = arg1.g1();
+               } else if (var4 == 9) {
+                  this.p = arg1.g1();
+               } else if (var4 == 10) {
+                  this.q = arg1.g1();
+               } else if (var4 == 11) {
+                  this.r = arg1.g1();
+               } else if (var4 == 12) {
+                  this.s = arg1.g4();
+               } else {
+                  System.out.println("Error unrecognised seq config code: " + var4);
+               }
+            } else {
+               int var6 = arg1.g1();
+               this.j = new int[var6 + 1];
 
-	@ObfuscatedName("nc.a(Lyb;B)V")
-	public static void unpack(Jagfile config) {
-		Packet dat = new Packet(config.read("seq.dat", null));
-		count = dat.g2();
+               for(int var7 = 0; var7 < var6; ++var7) {
+                  this.j[var7] = arg1.g1();
+               }
 
-		if (types == null) {
-			types = new SeqType[count];
-		}
-
-		for (int i = 0; i < count; i++) {
-			if (types[i] == null) {
-				types[i] = new SeqType();
-			}
-
-			types[i].decode(dat);
-		}
-	}
-
-	@ObfuscatedName("nc.a(II)I")
-	public int getFrameDuration(int frame) {
-		int duration = this.delay[frame];
-
-		if (duration == 0) {
-			AnimFrame transform = AnimFrame.get(this.frames[frame]);
-			if (transform != null) {
-				duration = this.delay[frame] = transform.id;
-			}
-		}
-
-		if (duration == 0) {
-			duration = 1;
-		}
-
-		return duration;
-	}
-
-	@ObfuscatedName("nc.a(ILmb;)V")
-	public void decode(Packet buf) {
-		while (true) {
-			int code = buf.g1();
-
-			if (code == 0) {
-				if (this.frameCount == 0) {
-					this.frameCount = 1;
-
-					this.frames = new int[1];
-					this.frames[0] = -1;
-
-					this.iframes = new int[1];
-					this.iframes[0] = -1;
-
-					this.delay = new int[1];
-					this.delay[0] = -1;
-				}
-
-				if (this.preanim_move == -1) {
-					if (this.walkmerge == null) {
-						this.preanim_move = 0;
-					} else {
-						this.preanim_move = 2;
-					}
-				}
-
-				if (this.postanim_mode == -1) {
-					if (this.walkmerge != null) {
-						this.postanim_mode = 2;
-						return;
-					}
-
-					this.postanim_mode = 0;
-					return;
-				}
-
-				return;
-			}
-
-			if (code == 1) {
-				this.frameCount = buf.g1();
-
-				this.frames = new int[this.frameCount];
-				this.iframes = new int[this.frameCount];
-				this.delay = new int[this.frameCount];
-
-				for (int i = 0; i < this.frameCount; i++) {
-					this.frames[i] = buf.g2();
-
-					this.iframes[i] = buf.g2();
-					if (this.iframes[i] == 65535) {
-						this.iframes[i] = -1;
-					}
-
-					this.delay[i] = buf.g2();
-				}
-			} else if (code == 2) {
-				this.replayoff = buf.g2();
-			} else if (code == 3) {
-				int count = buf.g1();
-				this.walkmerge = new int[count + 1];
-
-				for (int i = 0; i < count; i++) {
-					this.walkmerge[i] = buf.g1();
-				}
-
-				this.walkmerge[count] = 9999999;
-			} else if (code == 4) {
-				this.stretches = true;
-			} else if (code == 5) {
-				this.priority = buf.g1();
-			} else if (code == 6) {
-				this.righthand = buf.g2();
-			} else if (code == 7) {
-				this.lefthand = buf.g2();
-			} else if (code == 8) {
-				this.replaycount = buf.g1();
-			} else if (code == 9) {
-				this.preanim_move = buf.g1();
-			} else if (code == 10) {
-				this.postanim_mode = buf.g1();
-			} else if (code == 11) {
-				this.restart_mode = buf.g1();
-			} else {
-				System.out.println("Error unrecognised seq config code: " + code);
-			}
-		}
-	}
+               this.j[var6] = 9999999;
+            }
+         }
+      }
+   }
 }

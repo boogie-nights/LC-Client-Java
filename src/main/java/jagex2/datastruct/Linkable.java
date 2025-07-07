@@ -2,25 +2,23 @@ package jagex2.datastruct;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("v")
 public class Linkable {
+   @ObfuscatedName("ZUOIJLRD.a")
+   public long a;
+   @ObfuscatedName("ZUOIJLRD.b")
+   public Linkable b;
+   @ObfuscatedName("ZUOIJLRD.c")
+   public Linkable c;
+   @ObfuscatedName("ZUOIJLRD.d")
+   public static boolean d;
 
-	@ObfuscatedName("v.b")
-	public long key;
-
-	@ObfuscatedName("v.c")
-	public Linkable next;
-
-	@ObfuscatedName("v.d")
-	public Linkable prev;
-
-	@ObfuscatedName("v.a()V")
-	public void unlink() {
-		if (this.prev != null) {
-			this.prev.next = this.next;
-			this.next.prev = this.prev;
-			this.next = null;
-			this.prev = null;
-		}
-	}
+   @ObfuscatedName("ZUOIJLRD.a()V")
+   public void a() {
+      if (this.c != null) {
+         this.c.b = this.b;
+         this.b.c = this.c;
+         this.b = null;
+         this.c = null;
+      }
+   }
 }

@@ -4,112 +4,110 @@ import jagex2.io.Jagfile;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
-@ObfuscatedName("pc")
 public class VarpType {
+   @ObfuscatedName("WEUDDWZB.h")
+   public boolean h = false;
+   @ObfuscatedName("WEUDDWZB.i")
+   public boolean i = true;
+   @ObfuscatedName("WEUDDWZB.k")
+   public boolean k = false;
+   @ObfuscatedName("WEUDDWZB.n")
+   public boolean n = false;
+   @ObfuscatedName("WEUDDWZB.o")
+   public int o = -1;
+   @ObfuscatedName("WEUDDWZB.p")
+   public boolean p = true;
+   @ObfuscatedName("WEUDDWZB.a")
+   public static int a;
+   @ObfuscatedName("WEUDDWZB.c")
+   public static int c;
+   @ObfuscatedName("WEUDDWZB.f")
+   public int f;
+   @ObfuscatedName("WEUDDWZB.g")
+   public int g;
+   @ObfuscatedName("WEUDDWZB.j")
+   public int j;
+   @ObfuscatedName("WEUDDWZB.l")
+   public int l;
+   @ObfuscatedName("WEUDDWZB.m")
+   public int m;
+   @ObfuscatedName("WEUDDWZB.e")
+   public String e;
+   @ObfuscatedName("WEUDDWZB.d")
+   public static int[] d;
+   @ObfuscatedName("WEUDDWZB.b")
+   public static VarpType[] b;
 
-	@ObfuscatedName("pc.b")
-	public static int count;
+   @ObfuscatedName("WEUDDWZB.a(LATJMVOZR;I)V")
+   public static void a(Jagfile arg0, int arg1) {
+      Packet var2 = new Packet(arg0.a("varp.dat", (byte[])null));
+      if (arg1 == 36135) {
+         c = 0;
+         a = var2.e();
+         if (b == null) {
+            b = new VarpType[a];
+         }
 
-	@ObfuscatedName("pc.c")
-	public static VarpType[] types;
+         if (d == null) {
+            d = new int[a];
+         }
 
-	@ObfuscatedName("pc.d")
-	public static int field1155;
+         for(int var3 = 0; var3 < a; ++var3) {
+            if (b[var3] == null) {
+               b[var3] = new VarpType();
+            }
 
-	@ObfuscatedName("pc.e")
-	public static int[] field1156;
+            b[var3].a(-954, var3, var2);
+         }
 
-	@ObfuscatedName("pc.f")
-	public String field1157;
+         if (var2.data.length != var2.pos) {
+            System.out.println("varptype load mismatch");
+         }
+      }
+   }
 
-	@ObfuscatedName("pc.g")
-	public int field1158;
+   @ObfuscatedName("WEUDDWZB.a(IILMFMVIYHT;)V")
+   public void a(int arg0, int arg1, Packet arg2) {
+      if (arg0 < 0) {
+         while(true) {
+            int var4 = arg2.g1();
+            if (var4 == 0) {
+               return;
+            }
 
-	@ObfuscatedName("pc.h")
-	public int field1159;
-
-	@ObfuscatedName("pc.i")
-	public boolean field1160 = false;
-
-	@ObfuscatedName("pc.j")
-	public boolean field1161 = true;
-
-	@ObfuscatedName("pc.k")
-	public int clientcode;
-
-	@ObfuscatedName("pc.l")
-	public boolean field1163 = false;
-
-	@ObfuscatedName("pc.m")
-	public int field1164;
-
-	@ObfuscatedName("pc.n")
-	public boolean field1165 = false;
-
-	@ObfuscatedName("pc.o")
-	public boolean field1166 = false;
-
-	@ObfuscatedName("pc.a(Lyb;B)V")
-	public static void unpack(Jagfile config) {
-		Packet dat = new Packet(config.read("varp.dat", null));
-
-		field1155 = 0;
-		count = dat.g2();
-
-		if (types == null) {
-			types = new VarpType[count];
-		}
-
-		if (field1156 == null) {
-			field1156 = new int[count];
-		}
-
-		for (int i = 0; i < count; i++) {
-			if (types[i] == null) {
-				types[i] = new VarpType();
-			}
-
-			types[i].decode(dat, i);
-		}
-
-		if (dat.data.length != dat.pos) {
-			System.out.println("varptype load mismatch");
-		}
-	}
-
-	@ObfuscatedName("pc.a(Lmb;II)V")
-	public void decode(Packet buf, int id) {
-		while (true) {
-			int code = buf.g1();
-			if (code == 0) {
-				return;
-			}
-
-			if (code == 1) {
-				this.field1158 = buf.g1();
-			} else if (code == 2) {
-				this.field1159 = buf.g1();
-			} else if (code == 3) {
-				this.field1160 = true;
-				field1156[field1155++] = id;
-			} else if (code == 4) {
-				this.field1161 = false;
-			} else if (code == 5) {
-				this.clientcode = buf.g2();
-			} else if (code == 6) {
-				this.field1163 = true;
-			} else if (code == 7) {
-				this.field1164 = buf.g4();
-			} else if (code == 8) {
-				this.field1165 = true;
-				this.field1166 = true;
-			} else if (code == 10) {
-				this.field1157 = buf.gjstr();
-			} else if (code == 11) {
-				this.field1166 = true;
-			} else {
-				System.out.println("Error unrecognised config code: " + code);
-			}
-		}
-	}
+            if (var4 == 1) {
+               this.f = arg2.g1();
+            } else if (var4 == 2) {
+               this.g = arg2.g1();
+            } else if (var4 == 3) {
+               this.h = true;
+               d[c++] = arg1;
+            } else if (var4 == 4) {
+               this.i = false;
+            } else if (var4 == 5) {
+               this.j = arg2.e();
+            } else if (var4 == 6) {
+               this.k = true;
+            } else if (var4 == 7) {
+               this.l = arg2.g4();
+            } else if (var4 == 8) {
+               this.m = 1;
+               this.n = true;
+            } else if (var4 == 10) {
+               this.e = arg2.gjstr();
+            } else if (var4 == 11) {
+               this.n = true;
+            } else if (var4 == 12) {
+               this.o = arg2.g4();
+            } else if (var4 == 13) {
+               this.m = 2;
+               this.n = true;
+            } else if (var4 == 14) {
+               this.p = false;
+            } else {
+               System.out.println("Error unrecognised config code: " + var4);
+            }
+         }
+      }
+   }
 }

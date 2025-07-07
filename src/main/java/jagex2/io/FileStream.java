@@ -5,248 +5,262 @@ import deob.ObfuscatedName;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-@ObfuscatedName("wb")
 public class FileStream {
+   @ObfuscatedName("KNWRHOKF.b")
+   public boolean b = false;
+   @ObfuscatedName("KNWRHOKF.c")
+   public int c = 3;
+   @ObfuscatedName("KNWRHOKF.h")
+   public int h = 65000;
+   @ObfuscatedName("KNWRHOKF.g")
+   public int g;
+   @ObfuscatedName("KNWRHOKF.e")
+   public RandomAccessFile e;
+   @ObfuscatedName("KNWRHOKF.f")
+   public RandomAccessFile f;
+   @ObfuscatedName("KNWRHOKF.d")
+   public static byte[] d = new byte[520];
+   @ObfuscatedName("KNWRHOKF.a")
+   public int a;
 
-	@ObfuscatedName("wb.c")
-	public static byte[] temp = new byte[520];
+   public FileStream(int arg0, int arg1, RandomAccessFile arg2, RandomAccessFile arg3, int arg4) {
+      this.g = arg0;
+      if (arg4 < 4 || arg4 > 4) {
+         this.c = 148;
+      }
 
-	@ObfuscatedName("wb.d")
-	public RandomAccessFile dat;
+      this.e = arg2;
+      this.f = arg3;
+      this.h = arg1;
+   }
 
-	@ObfuscatedName("wb.e")
-	public RandomAccessFile idx;
+   @ObfuscatedName("KNWRHOKF.a(BI)[B")
+   public synchronized byte[] a(byte arg0, int arg1) {
+      if (arg0 == 6) {
+         boolean var3 = false;
+      } else {
+         this.b = !this.b;
+      }
 
-	@ObfuscatedName("wb.f")
-	public int archive;
+      try {
+         this.a(true, arg1 * 6, this.f);
 
-	@ObfuscatedName("wb.g")
-	public int maxFileSize = 65000;
+         int var5;
+         for(int var4 = 0; var4 < 6; var4 += var5) {
+            var5 = this.f.read(d, var4, 6 - var4);
+            if (var5 == -1) {
+               return null;
+            }
+         }
 
-	public FileStream(int archive, RandomAccessFile idx, RandomAccessFile dat, int maxFileSize) {
-		this.archive = archive;
-		this.dat = dat;
-		this.idx = idx;
-		this.maxFileSize = maxFileSize;
-	}
+         int var6 = (d[2] & 255) + ((d[0] & 255) << 16) + ((d[1] & 255) << 8);
+         int var7 = (d[5] & 255) + ((d[3] & 255) << 16) + ((d[4] & 255) << 8);
+         if (var6 >= 0 && var6 <= this.h) {
+            if (var7 > 0 && (long)var7 <= this.e.length() / 520L) {
+               byte[] var8 = new byte[var6];
+               int var9 = 0;
+               int var10 = 0;
 
-	@ObfuscatedName("wb.a(II)[B")
-	public synchronized byte[] read(int file) {
-		try {
-			this.seek(file * 6, this.idx);
+               while(var9 < var6) {
+                  if (var7 == 0) {
+                     return null;
+                  }
 
-			int n;
-			for (int off = 0; off < 6; off += n) {
-				n = this.idx.read(temp, off, 6 - off);
-				if (n == -1) {
-					return null;
-				}
-			}
+                  this.a(true, var7 * 520, this.e);
+                  int var11 = 0;
+                  int var12 = var6 - var9;
+                  if (var12 > 512) {
+                     var12 = 512;
+                  }
 
-			int size = (temp[2] & 0xFF) + ((temp[0] & 0xFF) << 16) + ((temp[1] & 0xFF) << 8);
-			int sector = (temp[5] & 0xFF) + ((temp[3] & 0xFF) << 16) + ((temp[4] & 0xFF) << 8);
+                  while(var11 < var12 + 8) {
+                     int var13 = this.e.read(d, var11, var12 + 8 - var11);
+                     if (var13 == -1) {
+                        return null;
+                     }
 
-			if (size < 0 || size > this.maxFileSize) {
-				return null;
-			}
+                     var11 += var13;
+                  }
 
-			if (sector <= 0 || (long) sector > this.dat.length() / 520L) {
-				return null;
-			}
+                  int var14 = ((d[0] & 255) << 8) + (d[1] & 255);
+                  int var15 = ((d[2] & 255) << 8) + (d[3] & 255);
+                  int var16 = (d[6] & 255) + ((d[4] & 255) << 16) + ((d[5] & 255) << 8);
+                  int var17 = d[7] & 255;
+                  if (arg1 == var14 && var10 == var15 && this.g == var17) {
+                     if (var16 >= 0 && (long)var16 <= this.e.length() / 520L) {
+                        for(int var18 = 0; var18 < var12; ++var18) {
+                           var8[var9++] = d[var18 + 8];
+                        }
 
-			byte[] data = new byte[size];
-			int pos = 0;
-			int part = 0;
-			while (pos < size) {
-				if (sector == 0) {
-					return null;
-				}
+                        var7 = var16;
+                        ++var10;
+                        continue;
+                     }
 
-				this.seek(sector * 520, this.dat);
+                     return null;
+                  }
 
-				int off = 0;
-				int available = size - pos;
-				if (available > 512) {
-					available = 512;
-				}
+                  return null;
+               }
 
-				while (off < available + 8) {
-					int read = this.dat.read(temp, off, available + 8 - off);
-					if (read == -1) {
-						return null;
-					}
+               return var8;
+            } else {
+               return null;
+            }
+         } else {
+            return null;
+         }
+      } catch (IOException var19) {
+         return null;
+      }
+   }
 
-					off += read;
-				}
+   @ObfuscatedName("KNWRHOKF.a(IZ[BI)Z")
+   public synchronized boolean a(int arg0, boolean arg1, byte[] arg2, int arg3) {
+      if (!arg1) {
+         for(int var5 = 1; var5 > 0; ++var5) {
+         }
+      }
 
-				int sectorFile = ((temp[0] & 0xFF) << 8) + (temp[1] & 0xFF);
-				int sectorPart = ((temp[2] & 0xFF) << 8) + (temp[3] & 0xFF);
-				int nextSector = (temp[6] & 0xFF) + ((temp[4] & 0xFF) << 16) + ((temp[5] & 0xFF) << 8);
-				int sectorArchive = temp[7] & 0xFF;
+      boolean var6 = this.a(arg2, this.a, arg3, true, arg0);
+      if (!var6) {
+         var6 = this.a(arg2, this.a, arg3, false, arg0);
+      }
 
-				if (file != sectorFile || part != sectorPart || this.archive != sectorArchive) {
-					return null;
-				}
+      return var6;
+   }
 
-				if (nextSector < 0 || (long) nextSector > this.dat.length() / 520L) {
-					return null;
-				}
+   @ObfuscatedName("KNWRHOKF.a([BIIZI)Z")
+   public synchronized boolean a(byte[] arg0, int arg1, int arg2, boolean arg3, int arg4) {
+      if (arg1 != 0) {
+         throw new NullPointerException();
+      } else {
+         try {
+            int var8;
+            if (!arg3) {
+               var8 = (int)((this.e.length() + 519L) / 520L);
+               if (var8 == 0) {
+                  var8 = 1;
+               }
+            } else {
+               this.a(true, arg2 * 6, this.f);
 
-				for (int i = 0; i < available; i++) {
-					data[pos++] = temp[i + 8];
-				}
+               int var7;
+               for(int var6 = 0; var6 < 6; var6 += var7) {
+                  var7 = this.f.read(d, var6, 6 - var6);
+                  if (var7 == -1) {
+                     return false;
+                  }
+               }
 
-				sector = nextSector;
-				part++;
-			}
+               var8 = (d[5] & 255) + ((d[3] & 255) << 16) + ((d[4] & 255) << 8);
+               if (var8 <= 0 || (long)var8 > this.e.length() / 520L) {
+                  return false;
+               }
+            }
 
-			return data;
-		} catch (IOException ignore) {
-			return null;
-		}
-	}
+            d[0] = (byte)(arg4 >> 16);
+            d[1] = (byte)(arg4 >> 8);
+            d[2] = (byte)arg4;
+            d[3] = (byte)(var8 >> 16);
+            d[4] = (byte)(var8 >> 8);
+            d[5] = (byte)var8;
+            this.a(true, arg2 * 6, this.f);
+            this.f.write(d, 0, 6);
+            int var9 = 0;
+            int var10 = 0;
 
-	@ObfuscatedName("wb.a([BIZI)Z")
-	public synchronized boolean write(byte[] src, int file, int len) {
-		boolean written = this.write(src, file, true, len);
-		if (!written) {
-			written = this.write(src, file, false, len);
-		}
-		return written;
-	}
+            while(var9 < arg4) {
+               int var11 = 0;
+               if (arg3) {
+                  this.a(true, var8 * 520, this.e);
 
-	@ObfuscatedName("wb.a([BIZII)Z")
-	public synchronized boolean write(byte[] data, int file, boolean overwrite, int len) {
-		try {
-			int sector;
+                  int var12;
+                  int var13;
+                  for(var12 = 0; var12 < 8; var12 += var13) {
+                     var13 = this.e.read(d, var12, 8 - var12);
+                     if (var13 == -1) {
+                        break;
+                     }
+                  }
 
-			if (overwrite) {
-				this.seek(file * 6, this.idx);
+                  if (var12 == 8) {
+                     label110: {
+                        int var14 = ((d[0] & 255) << 8) + (d[1] & 255);
+                        int var15 = ((d[2] & 255) << 8) + (d[3] & 255);
+                        var11 = (d[6] & 255) + ((d[4] & 255) << 16) + ((d[5] & 255) << 8);
+                        int var16 = d[7] & 255;
+                        if (arg2 == var14 && var10 == var15 && this.g == var16) {
+                           if (var11 >= 0 && (long)var11 <= this.e.length() / 520L) {
+                              break label110;
+                           }
 
-				int n;
-				for (int off = 0; off < 6; off += n) {
-					n = this.idx.read(temp, off, 6 - off);
-					if (n == -1) {
-						return false;
-					}
-				}
+                           return false;
+                        }
 
-				sector = (temp[5] & 0xFF) + ((temp[3] & 0xFF) << 16) + ((temp[4] & 0xFF) << 8);
-				if (sector <= 0 || (long) sector > this.dat.length() / 520L) {
-					return false;
-				}
-			} else {
-				sector = (int) ((this.dat.length() + 519L) / 520L);
-				if (sector == 0) {
-					sector = 1;
-				}
-			}
+                        return false;
+                     }
+                  }
+               }
 
-			temp[0] = (byte) (len >> 16);
-			temp[1] = (byte) (len >> 8);
-			temp[2] = (byte) len;
+               if (var11 == 0) {
+                  arg3 = false;
+                  var11 = (int)((this.e.length() + 519L) / 520L);
+                  if (var11 == 0) {
+                     ++var11;
+                  }
 
-			temp[3] = (byte) (sector >> 16);
-			temp[4] = (byte) (sector >> 8);
-			temp[5] = (byte) sector;
+                  if (var8 == var11) {
+                     ++var11;
+                  }
+               }
 
-			this.seek(file * 6, this.idx);
-			this.idx.write(temp, 0, 6);
+               if (arg4 - var9 <= 512) {
+                  var11 = 0;
+               }
 
-			int pos = 0;
-			int part = 0;
-			while (pos < len) {
-				int nextSector = 0;
+               d[0] = (byte)(arg2 >> 8);
+               d[1] = (byte)arg2;
+               d[2] = (byte)(var10 >> 8);
+               d[3] = (byte)var10;
+               d[4] = (byte)(var11 >> 16);
+               d[5] = (byte)(var11 >> 8);
+               d[6] = (byte)var11;
+               d[7] = (byte)this.g;
+               this.a(true, var8 * 520, this.e);
+               this.e.write(d, 0, 8);
+               int var17 = arg4 - var9;
+               if (var17 > 512) {
+                  var17 = 512;
+               }
 
-				if (overwrite) {
-					this.seek(sector * 520, this.dat);
+               this.e.write(arg0, var9, var17);
+               var9 += var17;
+               var8 = var11;
+               ++var10;
+            }
 
-					int off;
-					int read;
-					for (off = 0; off < 8; off += read) {
-						read = this.dat.read(temp, off, 8 - off);
-						if (read == -1) {
-							break;
-						}
-					}
+            return true;
+         } catch (IOException var18) {
+            return false;
+         }
+      }
+   }
 
-					if (off == 8) {
-						int sectorFile = ((temp[0] & 0xFF) << 8) + (temp[1] & 0xFF);
-						int sectorPart = ((temp[2] & 0xFF) << 8) + (temp[3] & 0xFF);
-						nextSector = (temp[6] & 0xFF) + ((temp[4] & 0xFF) << 16) + ((temp[5] & 0xFF) << 8);
-						int sectorStore = temp[7] & 0xFF;
+   @ObfuscatedName("KNWRHOKF.a(ZILjava/io/RandomAccessFile;)V")
+   public synchronized void a(boolean arg0, int arg1, RandomAccessFile arg2) throws IOException {
+      if (arg0) {
+         if (arg1 < 0 || arg1 > 62914560) {
+            System.out.println("Badseek - pos:" + arg1 + " len:" + arg2.length());
+            arg1 = 62914560;
 
-						if (file != sectorFile || part != sectorPart || this.archive != sectorStore) {
-							return false;
-						}
+            try {
+               Thread.sleep(1000L);
+            } catch (Exception var4) {
+            }
+         }
 
-						if (nextSector < 0 || (long) nextSector > this.dat.length() / 520L) {
-							return false;
-						}
-					}
-				}
-
-				if (nextSector == 0) {
-					overwrite = false;
-					nextSector = (int) ((this.dat.length() + 519L) / 520L);
-
-					if (nextSector == 0) {
-						nextSector++;
-					}
-
-					if (sector == nextSector) {
-						nextSector++;
-					}
-				}
-
-				if (len - pos <= 512) {
-					nextSector = 0;
-				}
-
-				temp[0] = (byte) (file >> 8);
-				temp[1] = (byte) file;
-
-				temp[2] = (byte) (part >> 8);
-				temp[3] = (byte) part;
-
-				temp[4] = (byte) (nextSector >> 16);
-				temp[5] = (byte) (nextSector >> 8);
-				temp[6] = (byte) nextSector;
-
-				temp[7] = (byte) this.archive;
-
-				this.seek(sector * 520, this.dat);
-				this.dat.write(temp, 0, 8);
-
-				int available = len - pos;
-				if (available > 512) {
-					available = 512;
-				}
-
-				this.dat.write(data, pos, available);
-				pos += available;
-				sector = nextSector;
-				part++;
-			}
-
-			return true;
-		} catch (IOException ignore) {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("wb.a(IILjava/io/RandomAccessFile;)V")
-	public synchronized void seek(int pos, RandomAccessFile file) throws IOException {
-		if (pos < 0 || pos > 0x3c00000) {
-			System.out.println("Badseek - pos:" + pos + " len:" + file.length());
-			pos = 0x3c00000;
-
-			try {
-				Thread.sleep(1000L);
-			} catch (Exception ignore) {
-			}
-		}
-
-		file.seek(pos);
-	}
+         arg2.seek((long)arg1);
+      }
+   }
 }

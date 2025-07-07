@@ -1,202 +1,204 @@
 package jagex2.io;
 
-import jagex2.client.GameShell;
 import deob.ObfuscatedName;
+import jagex2.client.GameShell;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-@ObfuscatedName("e")
 public class ClientStream implements Runnable {
+   @ObfuscatedName("GXWEWMHV.b")
+   public byte b = 2;
+   @ObfuscatedName("GXWEWMHV.f")
+   public boolean f = false;
+   @ObfuscatedName("GXWEWMHV.k")
+   public boolean k = false;
+   @ObfuscatedName("GXWEWMHV.l")
+   public boolean l = false;
+   @ObfuscatedName("GXWEWMHV.g")
+   public GameShell g;
+   @ObfuscatedName("GXWEWMHV.e")
+   public Socket e;
+   @ObfuscatedName("GXWEWMHV.a")
+   public int a;
+   @ObfuscatedName("GXWEWMHV.c")
+   public InputStream c;
+   @ObfuscatedName("GXWEWMHV.d")
+   public OutputStream d;
+   @ObfuscatedName("GXWEWMHV.i")
+   public int i;
+   @ObfuscatedName("GXWEWMHV.j")
+   public int j;
+   @ObfuscatedName("GXWEWMHV.h")
+   public byte[] h;
 
-	@ObfuscatedName("e.a")
-	public InputStream in;
+   public ClientStream(byte arg0, Socket arg1, GameShell arg2) throws IOException {
+      this.g = arg2;
+      this.e = arg1;
+      if (this.b == arg0) {
+         boolean var4 = false;
+      } else {
+         this.a = -5;
+      }
 
-	@ObfuscatedName("e.b")
-	public OutputStream out;
+      this.e.setSoTimeout(30000);
+      this.e.setTcpNoDelay(true);
+      this.c = this.e.getInputStream();
+      this.d = this.e.getOutputStream();
+   }
 
-	@ObfuscatedName("e.c")
-	public Socket socket;
+   @ObfuscatedName("GXWEWMHV.a()V")
+   public void a() {
+      this.f = true;
 
-	@ObfuscatedName("e.d")
-	public boolean dummy = false;
+      try {
+         if (this.c != null) {
+            this.c.close();
+         }
 
-	@ObfuscatedName("e.e")
-	public GameShell shell;
+         if (this.d != null) {
+            this.d.close();
+         }
 
-	@ObfuscatedName("e.f")
-	public byte[] data;
+         if (this.e != null) {
+            this.e.close();
+         }
+      } catch (IOException var3) {
+         System.out.println("Error closing stream");
+      }
 
-	@ObfuscatedName("e.g")
-	public int tcycl;
+      this.k = false;
+      synchronized(this) {
+         this.notify();
+      }
 
-	@ObfuscatedName("e.h")
-	public int tnum;
+      this.h = null;
+   }
 
-	@ObfuscatedName("e.i")
-	public boolean writer = false;
+   @ObfuscatedName("GXWEWMHV.b()I")
+   public int b() throws IOException {
+      return this.f ? 0 : this.c.read();
+   }
 
-	@ObfuscatedName("e.j")
-	public boolean ioerror = false;
+   @ObfuscatedName("GXWEWMHV.c()I")
+   public int c() throws IOException {
+      return this.f ? 0 : this.c.available();
+   }
 
-	public ClientStream(Socket socket, GameShell shell) throws IOException {
-		this.shell = shell;
-		this.socket = socket;
-		this.socket.setSoTimeout(30000);
-		this.socket.setTcpNoDelay(true);
-		this.in = this.socket.getInputStream();
-		this.out = this.socket.getOutputStream();
-	}
+   @ObfuscatedName("GXWEWMHV.a([BII)V")
+   public void a(byte[] arg0, int arg1, int arg2) throws IOException {
+      if (!this.f) {
+         while(arg2 > 0) {
+            int var4 = this.c.read(arg0, arg1, arg2);
+            if (var4 <= 0) {
+               throw new IOException("EOF");
+            }
 
-	@ObfuscatedName("e.a()V")
-	public void close() {
-		this.dummy = true;
+            arg1 += var4;
+            arg2 -= var4;
+         }
 
-		try {
-			if (this.in != null) {
-				this.in.close();
-			}
+      }
+   }
 
-			if (this.out != null) {
-				this.out.close();
-			}
+   @ObfuscatedName("GXWEWMHV.a(III[B)V")
+   public void a(int arg0, int arg1, int arg2, byte[] arg3) throws IOException {
+      if (!this.f) {
+         if (this.l) {
+            this.l = false;
+            throw new IOException("Error in writer thread");
+         } else {
+            if (this.h == null) {
+               this.h = new byte[5000];
+            }
 
-			if (this.socket != null) {
-				this.socket.close();
-			}
-		} catch (IOException ignore) {
-			System.out.println("Error closing stream");
-		}
+            synchronized(this) {
+               for(int var6 = 0; var6 < arg1; ++var6) {
+                  this.h[this.j] = arg3[arg2 + var6];
+                  this.j = (this.j + 1) % 5000;
+                  if ((this.i + 4900) % 5000 == this.j) {
+                     throw new IOException("buffer overflow");
+                  }
+               }
 
-		this.writer = false;
+               if (!this.k) {
+                  this.k = true;
+                  this.g.a(this, 3);
+               }
 
-		synchronized (this) {
-			this.notify();
-		}
+               this.notify();
+            }
 
-		this.data = null;
-	}
+            if (arg0 == 0) {
+               ;
+            }
+         }
+      }
+   }
 
-	@ObfuscatedName("e.b()I")
-	public int read() throws IOException {
-		return this.dummy ? 0 : this.in.read();
-	}
+   public void run() {
+      while(this.k) {
+         int var2;
+         int var3;
+         label54: {
+            synchronized(this) {
+               if (this.j == this.i) {
+                  try {
+                     this.wait();
+                  } catch (InterruptedException var7) {
+                  }
+               }
 
-	@ObfuscatedName("e.c()I")
-	public int available() throws IOException {
-		return this.dummy ? 0 : this.in.available();
-	}
+               if (this.k) {
+                  var2 = this.i;
+                  if (this.j >= this.i) {
+                     var3 = this.j - this.i;
+                  } else {
+                     var3 = 5000 - this.i;
+                  }
+                  break label54;
+               }
+            }
 
-	@ObfuscatedName("e.a([BII)V")
-	public void read(byte[] dst, int off, int len) throws IOException {
-		if (this.dummy) {
-			return;
-		}
+            return;
+         }
 
-		while (len > 0) {
-			int n = this.in.read(dst, off, len);
-			if (n <= 0) {
-				throw new IOException("EOF");
-			}
+         if (var3 > 0) {
+            try {
+               this.d.write(this.h, var2, var3);
+            } catch (IOException var6) {
+               this.l = true;
+            }
 
-			off += n;
-			len -= n;
-		}
-	}
+            this.i = (this.i + var3) % 5000;
 
-	@ObfuscatedName("e.a(IZI[B)V")
-	public void write(int len, int off, byte[] src) throws IOException {
-		if (this.dummy) {
-			return;
-		}
+            try {
+               if (this.j == this.i) {
+                  this.d.flush();
+               }
+            } catch (IOException var5) {
+               this.l = true;
+            }
+         }
+      }
 
-		if (this.ioerror) {
-			this.ioerror = false;
-			throw new IOException("Error in writer thread");
-		}
+   }
 
-		if (this.data == null) {
-			this.data = new byte[5000];
-		}
+   @ObfuscatedName("GXWEWMHV.a(Z)V")
+   public void a(boolean arg0) {
+      System.out.println("dummy:" + this.f);
+      System.out.println("tcycl:" + this.i);
+      System.out.println("tnum:" + this.j);
+      System.out.println("writer:" + this.k);
+      if (!arg0) {
+         System.out.println("ioerror:" + this.l);
 
-		synchronized (this) {
-			for (int i = 0; i < len; i++) {
-				this.data[this.tnum] = src[off + i];
-				this.tnum = (this.tnum + 1) % 5000;
-
-				if ((this.tcycl + 4900) % 5000 == this.tnum) {
-					throw new IOException("buffer overflow");
-				}
-			}
-
-			if (!this.writer) {
-				this.writer = true;
-				this.shell.startThread(this, 3);
-			}
-
-			this.notify();
-		}
-	}
-
-	public void run() {
-		while (this.writer) {
-			int off;
-			int len;
-
-			label54: {
-				synchronized (this) {
-					if (this.tnum == this.tcycl) {
-						try {
-							this.wait();
-						} catch (InterruptedException ignore) {
-						}
-					}
-
-					if (this.writer) {
-						off = this.tcycl;
-						if (this.tnum >= this.tcycl) {
-							len = this.tnum - this.tcycl;
-						} else {
-							len = 5000 - this.tcycl;
-						}
-						break label54;
-					}
-				}
-				return;
-			}
-
-			if (len > 0) {
-				try {
-					this.out.write(this.data, off, len);
-				} catch (IOException ignore) {
-					this.ioerror = true;
-				}
-
-				this.tcycl = (this.tcycl + len) % 5000;
-
-				try {
-					if (this.tnum == this.tcycl) {
-						this.out.flush();
-					}
-				} catch (IOException ignore) {
-					this.ioerror = true;
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("e.a(B)V")
-	public void debug() {
-		System.out.println("dummy:" + this.dummy);
-		System.out.println("tcycl:" + this.tcycl);
-		System.out.println("tnum:" + this.tnum);
-		System.out.println("writer:" + this.writer);
-		System.out.println("ioerror:" + this.ioerror);
-		try {
-			System.out.println("available:" + this.available());
-		} catch (IOException ignore) {
-		}
-	}
+         try {
+            System.out.println("available:" + this.c());
+         } catch (IOException var2) {
+         }
+      }
+   }
 }

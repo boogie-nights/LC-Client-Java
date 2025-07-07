@@ -2,98 +2,110 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 import jagex2.config.SpotAnimType;
-import jagex2.graphics.Model;
 
-@ObfuscatedName("gb")
 public class MapSpotAnim extends ModelSource {
+   @ObfuscatedName("WHUAOHZM.q")
+   public boolean q = true;
+   @ObfuscatedName("WHUAOHZM.r")
+   public boolean r = false;
+   @ObfuscatedName("WHUAOHZM.u")
+   public SpotAnimType u;
+   @ObfuscatedName("WHUAOHZM.m")
+   public int m;
+   @ObfuscatedName("WHUAOHZM.n")
+   public int n;
+   @ObfuscatedName("WHUAOHZM.o")
+   public int o;
+   @ObfuscatedName("WHUAOHZM.p")
+   public int p;
+   @ObfuscatedName("WHUAOHZM.v")
+   public int v;
+   @ObfuscatedName("WHUAOHZM.s")
+   public int s;
+   @ObfuscatedName("WHUAOHZM.t")
+   public int t;
 
-	@ObfuscatedName("gb.m")
-	public SpotAnimType type;
+   @ObfuscatedName("WHUAOHZM.a(BI)V")
+   public final void a(byte arg0, int arg1) {
+      this.t += arg1;
+      if (arg0 == 1) {
+         boolean var3 = false;
 
-	@ObfuscatedName("gb.n")
-	public int startCycle;
+         while(true) {
+            do {
+               do {
+                  if (this.t <= this.u.i.a(0, this.s)) {
+                     return;
+                  }
 
-	@ObfuscatedName("gb.o")
-	public int level;
+                  this.t -= this.u.i.a(0, this.s);
+                  ++this.s;
+               } while(this.s < this.u.i.e);
+            } while(this.s >= 0 && this.s < this.u.i.e);
 
-	@ObfuscatedName("gb.p")
-	public int x;
+            this.s = 0;
+            this.r = true;
+         }
+      }
+   }
 
-	@ObfuscatedName("gb.q")
-	public int z;
+   public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+      this.u = SpotAnimType.e[arg4];
+      this.m = arg1;
+      this.n = arg0;
+      this.o = arg6;
+      if (arg7 != 10709) {
+         for(int var9 = 1; var9 > 0; ++var9) {
+         }
+      }
 
-	@ObfuscatedName("gb.r")
-	public int y;
+      this.p = arg2;
+      this.v = arg3 + arg5;
+      this.r = false;
+   }
 
-	@ObfuscatedName("gb.s")
-	public int seqFrame;
+   @ObfuscatedName("WHUAOHZM.a(B)LLZYQDKJV;")
+   public final Model a(byte arg0) {
+      if (arg0 != 3) {
+         throw new NullPointerException();
+      } else {
+         Model var2 = this.u.a();
+         if (var2 == null) {
+            return null;
+         } else {
+            int var3 = this.u.i.f[this.s];
+            Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.q, var3));
+            if (!this.r) {
+               var4.f(7);
+               var4.a(var3, (byte)6);
+               var4.db = null;
+               var4.cb = null;
+            }
 
-	@ObfuscatedName("gb.t")
-	public int seqCycle;
+            if (this.u.l != 128 || this.u.m != 128) {
+               var4.a(this.u.m, this.u.l, 9, this.u.l);
+            }
 
-	@ObfuscatedName("gb.u")
-	public boolean seqComplete = false;
+            if (this.u.n != 0) {
+               if (this.u.n == 90) {
+                  var4.b(true);
+               }
 
-	public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, int arg7) {
-		this.type = SpotAnimType.types[arg3];
-		this.level = arg2;
-		this.x = arg1;
-		this.z = arg0;
-		this.y = arg4;
-		this.startCycle = arg6 + arg7;
-		this.seqComplete = false;
-	}
+               if (this.u.n == 180) {
+                  var4.b(true);
+                  var4.b(true);
+               }
 
-	@ObfuscatedName("gb.a(II)V")
-	public final void update(int arg1) {
-		this.seqCycle += arg1;
-		while (true) {
-			do {
-				do {
-					if (this.seqCycle <= this.type.seq.getFrameDuration(this.seqFrame)) {
-						return;
-					}
-					this.seqCycle -= this.type.seq.getFrameDuration(this.seqFrame) + 1;
-					this.seqFrame++;
-				} while (this.seqFrame < this.type.seq.frameCount);
-			} while (this.seqFrame >= 0 && this.seqFrame < this.type.seq.frameCount);
-			this.seqFrame = 0;
-			this.seqComplete = true;
-		}
-	}
+               if (this.u.n == 270) {
+                  var4.b(true);
+                  var4.b(true);
+                  var4.b(true);
+               }
+            }
 
-	@ObfuscatedName("gb.a(I)Lfb;")
-	public final Model getTempModel() {
-		Model var2 = this.type.getModel();
-		if (var2 == null) {
-			return null;
-		} else {
-			Model var3 = new Model(var2, true, false, !this.type.animHasAlpha);
-			if (!this.seqComplete) {
-				var3.createLabelReferences();
-				var3.applyTransform(this.type.seq.frames[this.seqFrame]);
-				var3.labelFaces = null;
-				var3.labelVertices = null;
-			}
-			if (this.type.resizeh != 128 || this.type.resizev != 128) {
-				var3.scale(this.type.resizev, this.type.resizeh, this.type.resizeh);
-			}
-			if (this.type.angle != 0) {
-				if (this.type.angle == 90) {
-					var3.rotateY90();
-				}
-				if (this.type.angle == 180) {
-					var3.rotateY90();
-					var3.rotateY90();
-				}
-				if (this.type.angle == 270) {
-					var3.rotateY90();
-					var3.rotateY90();
-					var3.rotateY90();
-				}
-			}
-			var3.calculateNormals(this.type.ambient + 64, this.type.contrast + 850, -30, -50, -30, true);
-			return var3;
-		}
-	}
+            var4.a(this.u.o + 64, this.u.p + 850, -30, -50, -30, true);
+            return var4;
+         }
+      }
+   }
 }

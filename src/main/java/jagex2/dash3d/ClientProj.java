@@ -2,164 +2,166 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 import jagex2.config.SpotAnimType;
-import jagex2.graphics.Model;
 
-@ObfuscatedName("eb")
 public class ClientProj extends ModelSource {
+   @ObfuscatedName("KFJRVZCI.u")
+   public boolean u = false;
+   @ObfuscatedName("KFJRVZCI.x")
+   public byte x = -41;
+   @ObfuscatedName("KFJRVZCI.G")
+   public boolean G = true;
+   @ObfuscatedName("KFJRVZCI.I")
+   public boolean I = false;
+   @ObfuscatedName("KFJRVZCI.m")
+   public SpotAnimType m;
+   @ObfuscatedName("KFJRVZCI.n")
+   public int n;
+   @ObfuscatedName("KFJRVZCI.J")
+   public int J;
+   @ObfuscatedName("KFJRVZCI.K")
+   public int K;
+   @ObfuscatedName("KFJRVZCI.L")
+   public int L;
+   @ObfuscatedName("KFJRVZCI.y")
+   public int y;
+   @ObfuscatedName("KFJRVZCI.z")
+   public int z;
+   @ObfuscatedName("KFJRVZCI.r")
+   public int r;
+   @ObfuscatedName("KFJRVZCI.s")
+   public int s;
+   @ObfuscatedName("KFJRVZCI.t")
+   public int t;
+   @ObfuscatedName("KFJRVZCI.M")
+   public int M;
+   @ObfuscatedName("KFJRVZCI.C")
+   public double C;
+   @ObfuscatedName("KFJRVZCI.D")
+   public double D;
+   @ObfuscatedName("KFJRVZCI.E")
+   public double E;
+   @ObfuscatedName("KFJRVZCI.F")
+   public double F;
+   @ObfuscatedName("KFJRVZCI.H")
+   public double H;
+   @ObfuscatedName("KFJRVZCI.o")
+   public double o;
+   @ObfuscatedName("KFJRVZCI.p")
+   public double p;
+   @ObfuscatedName("KFJRVZCI.q")
+   public double q;
+   @ObfuscatedName("KFJRVZCI.A")
+   public int A;
+   @ObfuscatedName("KFJRVZCI.B")
+   public int B;
+   @ObfuscatedName("KFJRVZCI.v")
+   public int v;
+   @ObfuscatedName("KFJRVZCI.w")
+   public int w;
 
-	@ObfuscatedName("eb.l")
-	public boolean field502 = true;
+   @ObfuscatedName("KFJRVZCI.a(IIIII)V")
+   public final void a(int arg0, int arg1, int arg2, int arg3, int arg4) {
+      if (!this.I) {
+         double var6 = (double)(arg0 - this.J);
+         double var8 = (double)(arg1 - this.K);
+         double var10 = Math.sqrt(var6 * var6 + var8 * var8);
+         this.o = (double)this.s * var6 / var10 + (double)this.J;
+         this.p = (double)this.s * var8 / var10 + (double)this.K;
+         this.q = (double)this.L;
+      }
 
-	@ObfuscatedName("eb.m")
-	public byte field503 = -2;
+      double var12 = (double)(this.z + 1 - arg3);
+      this.C = ((double)arg0 - this.o) / var12;
+      this.D = ((double)arg1 - this.p) / var12;
+      if (arg4 == 0) {
+         this.E = Math.sqrt(this.D * this.D + this.C * this.C);
+         if (!this.I) {
+            this.F = -this.E * Math.tan((double)this.r * 0.02454369D);
+         }
 
-	@ObfuscatedName("eb.n")
-	public SpotAnimType field504;
+         this.H = ((double)arg2 - this.q - this.F * var12) * 2.0D / (var12 * var12);
+      }
+   }
 
-	@ObfuscatedName("eb.o")
-	public int level;
+   @ObfuscatedName("KFJRVZCI.a(IZ)V")
+   public final void a(int arg0, boolean arg1) {
+      this.I = true;
+      this.o += (double)arg0 * this.C;
+      if (arg1) {
+         for(int var3 = 1; var3 > 0; ++var3) {
+         }
+      }
 
-	@ObfuscatedName("eb.p")
-	public int field506;
+      this.p += (double)arg0 * this.D;
+      this.q += this.H * 0.5D * (double)arg0 * (double)arg0 + (double)arg0 * this.F;
+      this.F += (double)arg0 * this.H;
+      this.v = (int)(Math.atan2(this.C, this.D) * 325.949D) + 1024 & 2047;
+      this.w = (int)(Math.atan2(this.F, this.E) * 325.949D) & 2047;
+      if (this.m.i != null) {
+         this.B += arg0;
 
-	@ObfuscatedName("eb.q")
-	public int field507;
+         while(this.B > this.m.i.a(0, this.A)) {
+            this.B -= this.m.i.a(0, this.A);
+            ++this.A;
+            if (this.A >= this.m.i.e) {
+               this.A = 0;
+            }
+         }
 
-	@ObfuscatedName("eb.r")
-	public int field508;
+      }
+   }
 
-	@ObfuscatedName("eb.s")
-	public int offsetY;
+   @ObfuscatedName("KFJRVZCI.a(B)LLZYQDKJV;")
+   public final Model a(byte arg0) {
+      Model var2 = this.m.a();
+      if (var2 == null) {
+         return null;
+      } else {
+         int var3 = -1;
+         if (this.m.i != null) {
+            var3 = this.m.i.f[this.A];
+         }
 
-	@ObfuscatedName("eb.t")
-	public int startCycle;
+         Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.G, var3));
+         if (var3 != -1) {
+            var4.f(7);
+            var4.a(var3, (byte)6);
+            var4.db = null;
+            var4.cb = null;
+         }
 
-	@ObfuscatedName("eb.u")
-	public int endCycle;
+         if (this.m.l != 128 || this.m.m != 128) {
+            var4.a(this.m.m, this.m.l, 9, this.m.l);
+         }
 
-	@ObfuscatedName("eb.v")
-	public int field512;
+         var4.b(this.w, 341);
+         var4.a(this.m.o + 64, this.m.p + 850, -30, -50, -30, true);
+         if (arg0 == 3) {
+            boolean var5 = false;
+         } else {
+            this.u = !this.u;
+         }
 
-	@ObfuscatedName("eb.w")
-	public int field513;
+         return var4;
+      }
+   }
 
-	@ObfuscatedName("eb.x")
-	public int target;
-
-	@ObfuscatedName("eb.y")
-	public boolean field515 = false;
-
-	@ObfuscatedName("eb.z")
-	public double field516;
-
-	@ObfuscatedName("eb.A")
-	public double field517;
-
-	@ObfuscatedName("eb.B")
-	public double field518;
-
-	@ObfuscatedName("eb.C")
-	public double field519;
-
-	@ObfuscatedName("eb.D")
-	public double field520;
-
-	@ObfuscatedName("eb.E")
-	public double field521;
-
-	@ObfuscatedName("eb.F")
-	public double field522;
-
-	@ObfuscatedName("eb.G")
-	public double field523;
-
-	@ObfuscatedName("eb.H")
-	public int field524;
-
-	@ObfuscatedName("eb.I")
-	public int field525;
-
-	@ObfuscatedName("eb.J")
-	public int field526;
-
-	@ObfuscatedName("eb.K")
-	public int field527;
-
-	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
-		this.field504 = SpotAnimType.types[arg1];
-		this.level = arg5;
-		this.field506 = arg0;
-		this.field507 = arg6;
-		this.field508 = arg7;
-		this.startCycle = arg9;
-		this.endCycle = arg11;
-		this.field512 = arg2;
-		this.field513 = arg8;
-		this.target = arg10;
-		this.offsetY = arg3;
-		this.field515 = false;
-	}
-
-	@ObfuscatedName("eb.a(IBIII)V")
-	public final void updateVelocity(int arg0, int arg2, int arg3, int arg4) {
-		if (!this.field515) {
-			double var6 = (double) (arg3 - this.field506);
-			double var8 = (double) (arg0 - this.field507);
-			double var10 = Math.sqrt(var6 * var6 + var8 * var8);
-			this.field516 = (double) this.field513 * var6 / var10 + (double) this.field506;
-			this.field517 = (double) this.field513 * var8 / var10 + (double) this.field507;
-			this.field518 = this.field508;
-		}
-		double var12 = (double) (this.endCycle + 1 - arg4);
-		this.field519 = ((double) arg3 - this.field516) / var12;
-		this.field520 = ((double) arg0 - this.field517) / var12;
-		this.field521 = Math.sqrt(this.field520 * this.field520 + this.field519 * this.field519);
-		if (!this.field515) {
-			this.field522 = -this.field521 * Math.tan((double) this.field512 * 0.02454369D);
-		}
-		this.field523 = ((double) arg2 - this.field518 - this.field522 * var12) * 2.0D / (var12 * var12);
-	}
-
-	@ObfuscatedName("eb.a(II)V")
-	public final void update(int arg1) {
-		this.field515 = true;
-		this.field516 += (double) arg1 * this.field519;
-		this.field517 += (double) arg1 * this.field520;
-		this.field518 += this.field523 * 0.5D * (double) arg1 * (double) arg1 + (double) arg1 * this.field522;
-		this.field522 += (double) arg1 * this.field523;
-		this.field524 = (int) (Math.atan2(this.field519, this.field520) * 325.949D) + 1024 & 0x7FF;
-		this.field525 = (int) (Math.atan2(this.field522, this.field521) * 325.949D) & 0x7FF;
-		if (this.field504.seq == null) {
-			return;
-		}
-		this.field527 += arg1;
-		while (this.field527 > this.field504.seq.getFrameDuration(this.field526)) {
-			this.field527 -= this.field504.seq.getFrameDuration(this.field526) + 1;
-			this.field526++;
-			if (this.field526 >= this.field504.seq.frameCount) {
-				this.field526 = 0;
-			}
-		}
-	}
-
-	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model getTempModel() {
-		Model var2 = this.field504.getModel();
-		if (var2 == null) {
-			return null;
-		}
-		Model var4 = new Model(var2, true, false, !this.field504.animHasAlpha);
-		if (this.field504.seq != null) {
-			var4.createLabelReferences();
-			var4.applyTransform(this.field504.seq.frames[this.field526]);
-			var4.labelFaces = null;
-			var4.labelVertices = null;
-		}
-		if (this.field504.resizeh != 128 || this.field504.resizev != 128) {
-			var4.scale(this.field504.resizev, this.field504.resizeh, this.field504.resizeh);
-		}
-		var4.rotateX(this.field525);
-		var4.calculateNormals(this.field504.ambient + 64, this.field504.contrast + 850, -30, -50, -30, true);
-		return var4;
-	}
+   public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, byte arg8, int arg9, int arg10, int arg11) {
+      this.m = SpotAnimType.e[arg4];
+      this.n = arg0;
+      this.J = arg10;
+      this.K = arg3;
+      this.L = arg9;
+      this.y = arg11;
+      this.z = arg5;
+      if (this.x != arg8) {
+         throw new NullPointerException();
+      } else {
+         this.r = arg6;
+         this.s = arg2;
+         this.t = arg7;
+         this.M = arg1;
+         this.I = false;
+      }
+   }
 }

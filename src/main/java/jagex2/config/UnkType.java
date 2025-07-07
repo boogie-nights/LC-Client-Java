@@ -2,33 +2,27 @@ package jagex2.config;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("mc")
 public class UnkType {
-
-	@ObfuscatedName("mc.a")
-	public static UnkType[] types;
-
-	@ObfuscatedName("mc.b")
-	public static int field1109 = -1;
-
-	@ObfuscatedName("mc.c")
-	public static int field1110 = -1;
-
-	@ObfuscatedName("mc.d")
-	public static int field1111 = -1;
-
-	@ObfuscatedName("mc.e")
-	public boolean field1112 = true;
-
-	@ObfuscatedName("mc.f")
-	public boolean field1113 = false;
-
-	@ObfuscatedName("mc.g")
-	public boolean field1114 = true;
-
-	@ObfuscatedName("mc.h")
-	public boolean field1115 = true;
-
-	@ObfuscatedName("mc.i")
-	public boolean field1116 = false;
+   @ObfuscatedName("BGGPIAHI.d")
+   public int d = 1;
+   @ObfuscatedName("BGGPIAHI.e")
+   public boolean e = true;
+   @ObfuscatedName("BGGPIAHI.f")
+   public boolean f = false;
+   @ObfuscatedName("BGGPIAHI.g")
+   public boolean g = true;
+   @ObfuscatedName("BGGPIAHI.h")
+   public boolean h = true;
+   @ObfuscatedName("BGGPIAHI.i")
+   public boolean i = false;
+   @ObfuscatedName("BGGPIAHI.j")
+   public boolean j = false;
+   @ObfuscatedName("BGGPIAHI.k")
+   public boolean k = false;
+   @ObfuscatedName("BGGPIAHI.a")
+   public static byte a = 6;
+   @ObfuscatedName("BGGPIAHI.c")
+   public static int c = -1;
+   @ObfuscatedName("BGGPIAHI.b")
+   public static UnkType[] b;
 }

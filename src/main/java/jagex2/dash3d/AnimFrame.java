@@ -3,140 +3,166 @@ package jagex2.dash3d;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
-@ObfuscatedName("h")
 public class AnimFrame {
+   @ObfuscatedName("JULFQTYK.a")
+   public static int a = 217;
+   @ObfuscatedName("JULFQTYK.d")
+   public int d;
+   @ObfuscatedName("JULFQTYK.f")
+   public int f;
+   @ObfuscatedName("JULFQTYK.e")
+   public AnimBase e;
+   @ObfuscatedName("JULFQTYK.b")
+   public static boolean b;
+   @ObfuscatedName("JULFQTYK.g")
+   public int[] g;
+   @ObfuscatedName("JULFQTYK.h")
+   public int[] h;
+   @ObfuscatedName("JULFQTYK.i")
+   public int[] i;
+   @ObfuscatedName("JULFQTYK.j")
+   public int[] j;
+   @ObfuscatedName("JULFQTYK.c")
+   public static AnimFrame[] c;
+   @ObfuscatedName("JULFQTYK.k")
+   public static boolean[] k;
 
-	@ObfuscatedName("h.c")
-	public static AnimFrame[] instances;
+   @ObfuscatedName("JULFQTYK.a(I)V")
+   public static void a(int arg0) {
+      c = new AnimFrame[arg0 + 1];
+      k = new boolean[arg0 + 1];
 
-	@ObfuscatedName("h.d")
-	public int id;
+      for(int var1 = 0; var1 < arg0 + 1; ++var1) {
+         k[var1] = true;
+      }
 
-	@ObfuscatedName("h.e")
-	public AnimBase base;
+   }
 
-	@ObfuscatedName("h.f")
-	public int length;
+   @ObfuscatedName("JULFQTYK.a([BZ)V")
+   public static void a(byte[] arg0, boolean arg1) {
+      Packet var2 = new Packet(arg0);
+      var2.pos = arg0.length - 8;
+      int var3 = var2.e();
+      int var4 = var2.e();
+      int var5 = var2.e();
+      if (arg1) {
+         int var6 = var2.e();
+         byte var7 = 0;
+         Packet var8 = new Packet(arg0);
+         var8.pos = var7;
+         int var9 = var3 + 2 + var7;
+         Packet var10 = new Packet(arg0);
+         var10.pos = var9;
+         int var11 = var4 + var9;
+         Packet var12 = new Packet(arg0);
+         var12.pos = var11;
+         int var13 = var5 + var11;
+         Packet var14 = new Packet(arg0);
+         var14.pos = var13;
+         int var15 = var6 + var13;
+         Packet var16 = new Packet(arg0);
+         var16.pos = var15;
+         AnimBase var17 = new AnimBase(var16, 0);
+         int var18 = var8.e();
+         int[] var19 = new int[500];
+         int[] var20 = new int[500];
+         int[] var21 = new int[500];
+         int[] var22 = new int[500];
 
-	@ObfuscatedName("h.g")
-	public int[] groups;
+         for(int var23 = 0; var23 < var18; ++var23) {
+            int var24 = var8.e();
+            AnimFrame var25 = c[var24] = new AnimFrame();
+            var25.d = var14.g1();
+            var25.e = var17;
+            int var26 = var8.g1();
+            int var27 = -1;
+            int var28 = 0;
 
-	@ObfuscatedName("h.h")
-	public int[] x;
+            for(int var29 = 0; var29 < var26; ++var29) {
+               int var30 = var10.g1();
+               if (var30 > 0) {
+                  if (var17.b[var29] != 0) {
+                     for(int var31 = var29 - 1; var31 > var27; --var31) {
+                        if (var17.b[var31] == 0) {
+                           var19[var28] = var31;
+                           var20[var28] = 0;
+                           var21[var28] = 0;
+                           var22[var28] = 0;
+                           ++var28;
+                           break;
+                        }
+                     }
+                  }
 
-	@ObfuscatedName("h.i")
-	public int[] y;
+                  var19[var28] = var29;
+                  short var32 = 0;
+                  if (var17.b[var29] == 3) {
+                     var32 = 128;
+                  }
 
-	@ObfuscatedName("h.j")
-	public int[] z;
+                  if ((var30 & 1) != 0) {
+                     var20[var28] = var12.gsmart();
+                  } else {
+                     var20[var28] = var32;
+                  }
 
-	@ObfuscatedName("h.a(I)V")
-	public static void init(int arg0) {
-		instances = new AnimFrame[arg0 + 1];
-	}
+                  if ((var30 & 2) != 0) {
+                     var21[var28] = var12.gsmart();
+                  } else {
+                     var21[var28] = var32;
+                  }
 
-	@ObfuscatedName("h.a(I[B)V")
-	public static void unpack(int arg0, byte[] arg1) {
-		Packet var2 = new Packet(arg1);
-		var2.pos = arg1.length - 8;
-		int var3 = var2.g2();
-		int var4 = var2.g2();
-		int var5 = var2.g2();
-		int var6 = var2.g2();
-		byte var7 = 0;
-		Packet var8 = new Packet(arg1);
-		int var9 = 88 / arg0;
-		var8.pos = var7;
-		int var10 = var3 + 2 + var7;
-		Packet var11 = new Packet(arg1);
-		var11.pos = var10;
-		int var12 = var4 + var10;
-		Packet var13 = new Packet(arg1);
-		var13.pos = var12;
-		int var14 = var5 + var12;
-		Packet var15 = new Packet(arg1);
-		var15.pos = var14;
-		int var16 = var6 + var14;
-		Packet var17 = new Packet(arg1);
-		var17.pos = var16;
-		AnimBase var18 = new AnimBase(var17);
-		int var19 = var8.g2();
-		int[] var20 = new int[500];
-		int[] var21 = new int[500];
-		int[] var22 = new int[500];
-		int[] var23 = new int[500];
-		for (int var24 = 0; var24 < var19; var24++) {
-			int var25 = var8.g2();
-			AnimFrame var26 = instances[var25] = new AnimFrame();
-			var26.id = var15.g1();
-			var26.base = var18;
-			int var27 = var8.g1();
-			int var28 = -1;
-			int var29 = 0;
-			for (int var30 = 0; var30 < var27; var30++) {
-				int var32 = var11.g1();
-				if (var32 > 0) {
-					if (var18.types[var30] != 0) {
-						for (int var33 = var30 - 1; var33 > var28; var33--) {
-							if (var18.types[var33] == 0) {
-								var20[var29] = var33;
-								var21[var29] = 0;
-								var22[var29] = 0;
-								var23[var29] = 0;
-								var29++;
-								break;
-							}
-						}
-					}
-					var20[var29] = var30;
-					short var34 = 0;
-					if (var18.types[var20[var29]] == 3) {
-						var34 = 128;
-					}
-					if ((var32 & 0x1) == 0) {
-						var21[var29] = var34;
-					} else {
-						var21[var29] = var13.gsmart();
-					}
-					if ((var32 & 0x2) == 0) {
-						var22[var29] = var34;
-					} else {
-						var22[var29] = var13.gsmart();
-					}
-					if ((var32 & 0x4) == 0) {
-						var23[var29] = var34;
-					} else {
-						var23[var29] = var13.gsmart();
-					}
-					var28 = var30;
-					var29++;
-				}
-			}
-			var26.length = var29;
-			var26.groups = new int[var29];
-			var26.x = new int[var29];
-			var26.y = new int[var29];
-			var26.z = new int[var29];
-			for (int var31 = 0; var31 < var29; var31++) {
-				var26.groups[var31] = var20[var31];
-				var26.x[var31] = var21[var31];
-				var26.y[var31] = var22[var31];
-				var26.z[var31] = var23[var31];
-			}
-		}
-	}
+                  if ((var30 & 4) != 0) {
+                     var22[var28] = var12.gsmart();
+                  } else {
+                     var22[var28] = var32;
+                  }
 
-	@ObfuscatedName("h.a(B)V")
-	public static void unload() {
-		instances = null;
-	}
+                  var27 = var29;
+                  ++var28;
+                  if (var17.b[var29] == 5) {
+                     k[var24] = false;
+                  }
+               }
+            }
 
-	@ObfuscatedName("h.a(II)Lh;")
-	public static AnimFrame get(int arg0) {
-		if (instances == null) {
-			return null;
-		} else {
-			return instances[arg0];
-		}
-	}
+            var25.f = var28;
+            var25.g = new int[var28];
+            var25.h = new int[var28];
+            var25.i = new int[var28];
+            var25.j = new int[var28];
+
+            for(int var33 = 0; var33 < var28; ++var33) {
+               var25.g[var33] = var19[var33];
+               var25.h[var33] = var20[var33];
+               var25.i[var33] = var21[var33];
+               var25.j[var33] = var22[var33];
+            }
+         }
+
+      }
+   }
+
+   @ObfuscatedName("JULFQTYK.a(Z)V")
+   public static void a(boolean arg0) {
+      if (arg0) {
+         a = 189;
+      }
+
+      c = null;
+   }
+
+   @ObfuscatedName("JULFQTYK.b(I)LJULFQTYK;")
+   public static AnimFrame b(int arg0) {
+      return c == null ? null : c[arg0];
+   }
+
+   @ObfuscatedName("JULFQTYK.a(ZI)Z")
+   public static boolean a(boolean arg0, int arg1) {
+      if (!arg0) {
+         b = !b;
+      }
+
+      return arg1 == -1;
+   }
 }

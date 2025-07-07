@@ -2,2182 +2,2535 @@ package jagex2.dash3d;
 
 import deob.*;
 import jagex2.datastruct.LinkList;
-import jagex2.graphics.Model;
 import jagex2.graphics.Pix2D;
 import jagex2.graphics.Pix3D;
-import jagex2.graphics.VertexNormal;
 
-@ObfuscatedName("s")
 public class World3D {
-
-	@ObfuscatedName("s.g")
-	public static boolean lowMemory = true;
-
-	@ObfuscatedName("s.h")
-	public int maxLevel;
-
-	@ObfuscatedName("s.i")
-	public int maxTileX;
-
-	@ObfuscatedName("s.j")
-	public int maxTileZ;
-
-	@ObfuscatedName("s.k")
-	public int[][][] levelHeightmaps;
-
-	@ObfuscatedName("s.l")
-	public Square[][][] levelTiles;
-
-	@ObfuscatedName("s.m")
-	public int minLevel;
-
-	@ObfuscatedName("s.n")
-	public int changedLocCount;
-
-	@ObfuscatedName("s.o")
-	public Sprite[] changedLocs = new Sprite[5000];
-
-	@ObfuscatedName("s.p")
-	public int[][][] levelTileOcclusionCycles;
-
-	@ObfuscatedName("s.q")
-	public static int tilesRemaining;
-
-	@ObfuscatedName("s.r")
-	public static int topLevel;
-
-	@ObfuscatedName("s.s")
-	public static int cycle;
-
-	@ObfuscatedName("s.t")
-	public static int minDrawTileX;
-
-	@ObfuscatedName("s.u")
-	public static int maxDrawTileX;
-
-	@ObfuscatedName("s.v")
-	public static int minDrawTileZ;
-
-	@ObfuscatedName("s.w")
-	public static int maxDrawTileZ;
-
-	@ObfuscatedName("s.x")
-	public static int eyeTileX;
-
-	@ObfuscatedName("s.y")
-	public static int eyeTileZ;
-
-	@ObfuscatedName("s.z")
-	public static int eyeX;
-
-	@ObfuscatedName("s.ab")
-	public static final int[] MIDDEP_32 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
-
-	@ObfuscatedName("s.bb")
-	public static final int[] MIDDEP_64 = new int[] { 0, 4, 4, 8, 0, 0, 8, 0, 0 };
-
-	@ObfuscatedName("s.cb")
-	public static final int[] MIDDEP_128 = new int[] { 1, 1, 0, 0, 0, 8, 0, 0, 8 };
-
-	@ObfuscatedName("s.db")
-	public static final int[] TEXTURE_HSL = new int[] { 41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 43086, 41, 41, 41, 41, 41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41, 41, 5056, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 3131, 41, 41, 41 };
-
-	@ObfuscatedName("s.eb")
-	public int[] mergeIndexA = new int[10000];
-
-	@ObfuscatedName("s.fb")
-	public int[] mergeIndexB = new int[10000];
-
-	@ObfuscatedName("s.gb")
-	public int tmpMergeIndex;
-
-	@ObfuscatedName("s.hb")
-	public int[][] MINIMAP_OVERLAY_SHAPE = new int[][] { new int[16], { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 } };
-
-	@ObfuscatedName("s.ib")
-	public int[][] MINIMAP_OVERLAY_ANGLE = new int[][] { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, { 12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3 }, { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }, { 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12 } };
-
-	@ObfuscatedName("s.jb")
-	public static boolean[][][][] visibilityMatrix = new boolean[8][32][51][51];
-
-	@ObfuscatedName("s.kb")
-	public static boolean[][] visibilityMap;
-
-	@ObfuscatedName("s.lb")
-	public static int viewportCenterX;
-
-	@ObfuscatedName("s.mb")
-	public static int viewportCenterY;
-
-	@ObfuscatedName("s.nb")
-	public static int viewportLeft;
-
-	@ObfuscatedName("s.ob")
-	public static int viewportTop;
-
-	@ObfuscatedName("s.pb")
-	public static int viewportRight;
-
-	@ObfuscatedName("s.qb")
-	public static int viewportBottom;
-
-	@ObfuscatedName("s.G")
-	public static Sprite[] locBuffer = new Sprite[100];
-
-	@ObfuscatedName("s.H")
-	public static final int[] WALL_DECORATION_INSET_X = new int[] { 53, -53, -53, 53 };
-
-	@ObfuscatedName("s.I")
-	public static final int[] WALL_DECORATION_INSET_Z = new int[] { -53, -53, 53, 53 };
-
-	@ObfuscatedName("s.J")
-	public static final int[] WALL_DECORATION_OUTSET_X = new int[] { -45, 45, 45, -45 };
-
-	@ObfuscatedName("s.K")
-	public static final int[] WALL_DECORATION_OUTSET_Z = new int[] { 45, 45, -45, -45 };
-
-	@ObfuscatedName("s.O")
-	public static int clickTileX = -1;
-
-	@ObfuscatedName("s.P")
-	public static int clickTileZ = -1;
-
-	@ObfuscatedName("s.Q")
-	public static int field331 = 4;
-
-	@ObfuscatedName("s.R")
-	public static int[] levelOccluderCunt = new int[field331];
-
-	@ObfuscatedName("s.S")
-	public static Occlude[][] levelOccluders = new Occlude[field331][500];
-
-	@ObfuscatedName("s.U")
-	public static Occlude[] activeOccluders = new Occlude[500];
-
-	@ObfuscatedName("s.V")
-	public static LinkList drawTileQueue = new LinkList();
-
-	@ObfuscatedName("s.W")
-	public static final int[] FRONT_WALL_TYPES = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
-
-	@ObfuscatedName("s.X")
-	public static final int[] DIRECTION_ALLOW_WALL_CORNER_TYPE = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
-
-	@ObfuscatedName("s.Y")
-	public static final int[] BACK_WALL_TYPES = new int[] { 76, 8, 137, 4, 0, 1, 38, 2, 19 };
-
-	@ObfuscatedName("s.Z")
-	public static final int[] MIDDEP_16 = new int[] { 0, 0, 2, 0, 0, 2, 1, 1, 0 };
-
-	@ObfuscatedName("s.A")
-	public static int eyeY;
-
-	@ObfuscatedName("s.B")
-	public static int eyeZ;
-
-	@ObfuscatedName("s.C")
-	public static int sinEyePitch;
-
-	@ObfuscatedName("s.D")
-	public static int cosEyePitch;
-
-	@ObfuscatedName("s.E")
-	public static int sinEyeYaw;
-
-	@ObfuscatedName("s.F")
-	public static int cosEyeYaw;
-
-	@ObfuscatedName("s.M")
-	public static int mouseX;
-
-	@ObfuscatedName("s.N")
-	public static int mouseY;
-
-	@ObfuscatedName("s.T")
-	public static int activeOccluderCount;
-
-	@ObfuscatedName("s.L")
-	public static boolean takingInput;
-
-	public World3D(int arg0, int[][][] arg1, int arg2, int arg3) {
-		this.maxLevel = arg3;
-		this.maxTileX = arg2;
-		this.maxTileZ = arg0;
-		this.levelTiles = new Square[arg3][arg2][arg0];
-		this.levelTileOcclusionCycles = new int[arg3][arg2 + 1][arg0 + 1];
-		this.levelHeightmaps = arg1;
-		this.reset();
-	}
-
-	@ObfuscatedName("s.a(B)V")
-	public static void unload() {
-		locBuffer = null;
-		levelOccluderCunt = null;
-		levelOccluders = null;
-		drawTileQueue = null;
-		visibilityMatrix = null;
-		visibilityMap = null;
-	}
-
-	@ObfuscatedName("s.a(I)V")
-	public void reset() {
-		for (int var2 = 0; var2 < this.maxLevel; var2++) {
-			for (int var8 = 0; var8 < this.maxTileX; var8++) {
-				for (int var9 = 0; var9 < this.maxTileZ; var9++) {
-					this.levelTiles[var2][var8][var9] = null;
-				}
-			}
-		}
-		for (int var3 = 0; var3 < field331; var3++) {
-			for (int var7 = 0; var7 < levelOccluderCunt[var3]; var7++) {
-				levelOccluders[var3][var7] = null;
-			}
-			levelOccluderCunt[var3] = 0;
-		}
-		for (int var4 = 0; var4 < this.changedLocCount; var4++) {
-			this.changedLocs[var4] = null;
-		}
-		this.changedLocCount = 0;
-		for (int var6 = 0; var6 < locBuffer.length; var6++) {
-			locBuffer[var6] = null;
-		}
-	}
-
-	@ObfuscatedName("s.a(II)V")
-	public void setMinLevel(int arg1) {
-		this.minLevel = arg1;
-		for (int var3 = 0; var3 < this.maxTileX; var3++) {
-			for (int var5 = 0; var5 < this.maxTileZ; var5++) {
-				this.levelTiles[arg1][var3][var5] = new Square(arg1, var3, var5);
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(ZII)V")
-	public void setBridge(int arg1, int arg2) {
-		Square var4 = this.levelTiles[0][arg2][arg1];
-		for (int var5 = 0; var5 < 3; var5++) {
-			this.levelTiles[var5][arg2][arg1] = this.levelTiles[var5 + 1][arg2][arg1];
-			if (this.levelTiles[var5][arg2][arg1] != null) {
-				this.levelTiles[var5][arg2][arg1].level--;
-			}
-		}
-		if (this.levelTiles[0][arg2][arg1] == null) {
-			this.levelTiles[0][arg2][arg1] = new Square(0, arg2, arg1);
-		}
-		this.levelTiles[0][arg2][arg1].linkedSquare = var4;
-		this.levelTiles[3][arg2][arg1] = null;
-	}
-
-	@ObfuscatedName("s.a(IIIIIIBII)V")
-	public static void addOccluder(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg7, int arg8) {
-		Occlude var9 = new Occlude();
-		var9.minGridX = arg0 / 128;
-		var9.maxGridX = arg5 / 128;
-		var9.minGridZ = arg8 / 128;
-		var9.maxGridZ = arg3 / 128;
-		var9.type = arg1;
-		var9.minX = arg0;
-		var9.maxX = arg5;
-		var9.minZ = arg8;
-		var9.maxZ = arg3;
-		var9.minY = arg7;
-		var9.maxY = arg2;
-		levelOccluders[arg4][levelOccluderCunt[arg4]++] = var9;
-	}
-
-	@ObfuscatedName("s.a(IIII)V")
-	public void setDrawLevel(int arg0, int arg1, int arg2, int arg3) {
-		Square var5 = this.levelTiles[arg0][arg1][arg2];
-		if (var5 != null) {
-			this.levelTiles[arg0][arg1][arg2].drawLevel = arg3;
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIIIIIIIIIIIIIIIIII)V")
-	public void setTile(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
-		if (arg3 == 0) {
-			QuickGround var21 = new QuickGround(arg10, arg11, arg12, arg13, -1, arg18, false);
-			for (int var22 = arg0; var22 >= 0; var22--) {
-				if (this.levelTiles[var22][arg1][arg2] == null) {
-					this.levelTiles[var22][arg1][arg2] = new Square(var22, arg1, arg2);
-				}
-			}
-			this.levelTiles[arg0][arg1][arg2].quickGround = var21;
-		} else if (arg3 == 1) {
-			QuickGround var23 = new QuickGround(arg14, arg15, arg16, arg17, arg5, arg19, arg6 == arg7 && arg6 == arg8 && arg6 == arg9);
-			for (int var24 = arg0; var24 >= 0; var24--) {
-				if (this.levelTiles[var24][arg1][arg2] == null) {
-					this.levelTiles[var24][arg1][arg2] = new Square(var24, arg1, arg2);
-				}
-			}
-			this.levelTiles[arg0][arg1][arg2].quickGround = var23;
-		} else {
-			Ground var25 = new Ground(arg13, arg8, arg19, arg18, arg3, arg6, arg5, arg11, arg4, arg14, arg16, arg1, arg9, arg17, arg2, arg12, arg15, arg10, arg7);
-			for (int var26 = arg0; var26 >= 0; var26--) {
-				if (this.levelTiles[var26][arg1][arg2] == null) {
-					this.levelTiles[var26][arg1][arg2] = new Square(var26, arg1, arg2);
-				}
-			}
-			this.levelTiles[arg0][arg1][arg2].ground = var25;
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIIIILy;B)V")
-	public void addGroundDecor(int arg0, int arg1, int arg2, int arg4, int arg5, ModelSource arg6, byte arg7) {
-		if (arg6 == null) {
-			return;
-		}
-		GroundDecor var9 = new GroundDecor();
-		var9.model = arg6;
-		var9.x = arg2 * 128 + 64;
-		var9.z = arg0 * 128 + 64;
-		var9.y = arg5;
-		var9.typecode = arg4;
-		var9.typecode2 = arg7;
-		if (this.levelTiles[arg1][arg2][arg0] == null) {
-			this.levelTiles[arg1][arg2][arg0] = new Square(arg1, arg2, arg0);
-		}
-		this.levelTiles[arg1][arg2][arg0].groundDecor = var9;
-	}
-
-	@ObfuscatedName("s.a(IZIIILy;Ly;ILy;)V")
-	public void addGroundObject(int arg0, int arg2, int arg3, int arg4, ModelSource arg5, ModelSource arg6, int arg7, ModelSource arg8) {
-		GroundObject var10 = new GroundObject();
-		var10.top = arg6;
-		var10.x = arg3 * 128 + 64;
-		var10.z = arg4 * 128 + 64;
-		var10.y = arg2;
-		var10.typecode = arg0;
-		var10.bottom = arg8;
-		var10.middle = arg5;
-		int var11 = 0;
-		Square var12 = this.levelTiles[arg7][arg3][arg4];
-		if (var12 != null) {
-			for (int var14 = 0; var14 < var12.primaryCount; var14++) {
-				if (var12.sprite[var14].model instanceof Model) {
-					int var15 = ((Model) var12.sprite[var14].model).objRaise;
-					if (var15 > var11) {
-						var11 = var15;
-					}
-				}
-			}
-		}
-		var10.height = var11;
-		if (this.levelTiles[arg7][arg3][arg4] == null) {
-			this.levelTiles[arg7][arg3][arg4] = new Square(arg7, arg3, arg4);
-		}
-		this.levelTiles[arg7][arg3][arg4].groundObject = var10;
-	}
-
-	@ObfuscatedName("s.a(IIIIZIILy;Ly;BI)V")
-	public void addWall(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, ModelSource arg7, ModelSource arg8, byte arg9, int arg10) {
-		if (arg8 == null && arg7 == null) {
-			return;
-		}
-		Wall var12 = new Wall();
-		var12.typecode = arg1;
-		var12.typecode2 = arg9;
-		var12.x = arg0 * 128 + 64;
-		var12.z = arg10 * 128 + 64;
-		var12.y = arg6;
-		var12.model1 = arg8;
-		var12.model2 = arg7;
-		var12.angle1 = arg5;
-		var12.angle2 = arg3;
-		for (int var13 = arg2; var13 >= 0; var13--) {
-			if (this.levelTiles[var13][arg0][arg10] == null) {
-				this.levelTiles[var13][arg0][arg10] = new Square(var13, arg0, arg10);
-			}
-		}
-		this.levelTiles[arg2][arg0][arg10].wall = var12;
-	}
-
-	@ObfuscatedName("s.a(BLy;IIIIIIIIII)V")
-	public void addDecor(byte typecode2, ModelSource model, int xOffset, int x, int z, int angle1, int zOffset, int angle2, int level, int y, int typecode) {
-		if (model == null) {
-			return;
-		}
-		Decor decor = new Decor();
-		decor.typecode = typecode;
-		decor.typecode2 = typecode2;
-		decor.x = x * 128 + 64 + xOffset;
-		decor.z = z * 128 + 64 + zOffset;
-		decor.y = y;
-		decor.model = model;
-		decor.angle1 = angle1;
-		decor.angle2 = angle2;
-		for (int l = level; l >= 0; l--) {
-			if (this.levelTiles[l][x][z] == null) {
-				this.levelTiles[l][x][z] = new Square(l, x, z);
-			}
-		}
-		this.levelTiles[level][x][z].decor = decor;
-	}
-
-	@ObfuscatedName("s.a(BIIIIIIILy;II)Z")
-	public boolean addLoc(byte arg0, int arg1, int arg3, int arg4, int arg5, int arg6, int arg7, ModelSource arg8, int arg9, int arg10) {
-		if (arg8 == null) {
-			return true;
-		} else {
-			int var12 = arg3 * 128 + arg6 * 64;
-			int var13 = arg9 * 64 + arg10 * 128;
-			return this.addLoc(arg4, arg3, arg10, arg6, arg9, var12, var13, arg5, arg8, arg7, false, arg1, arg0);
-		}
-	}
-
-	@ObfuscatedName("s.a(IZIIILy;IZII)Z")
-	public boolean addTemporary(int arg0, boolean arg1, int arg2, int arg3, int arg4, ModelSource arg5, int arg6, int arg8, int arg9) {
-		if (arg5 == null) {
-			return true;
-		}
-		int var11 = arg6 - arg0;
-		int var12 = arg4 - arg0;
-		int var13 = arg0 + arg6;
-		int var14 = arg0 + arg4;
-		if (arg1) {
-			if (arg3 > 640 && arg3 < 1408) {
-				var14 += 128;
-			}
-			if (arg3 > 1152 && arg3 < 1920) {
-				var13 += 128;
-			}
-			if (arg3 > 1664 || arg3 < 384) {
-				var12 -= 128;
-			}
-			if (arg3 > 128 && arg3 < 896) {
-				var11 -= 128;
-			}
-		}
-		int var15 = var11 / 128;
-		int var16 = var12 / 128;
-		int var17 = var13 / 128;
-		int var18 = var14 / 128;
-		return this.addLoc(arg9, var15, var16, var17 - var15 + 1, var18 - var16 + 1, arg6, arg4, arg2, arg5, arg3, true, arg8, (byte) 0);
-	}
-
-	@ObfuscatedName("s.a(ILy;IIIBIIIIIII)Z")
-	public boolean addTemporary(int arg0, ModelSource arg1, int arg2, int arg3, int arg4, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
-		return arg1 == null ? true : this.addLoc(arg0, arg9, arg12, arg3 - arg9 + 1, arg4 - arg12 + 1, arg8, arg2, arg6, arg1, arg7, true, arg11, (byte) 0);
-	}
-
-	@ObfuscatedName("s.a(IIIIIIIILy;IZIB)Z")
-	public boolean addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, ModelSource arg8, int arg9, boolean arg10, int arg11, byte arg12) {
-		for (int var14 = arg1; var14 < arg1 + arg3; var14++) {
-			for (int var21 = arg2; var21 < arg2 + arg4; var21++) {
-				if (var14 < 0 || var21 < 0 || var14 >= this.maxTileX || var21 >= this.maxTileZ) {
-					return false;
-				}
-				Square var22 = this.levelTiles[arg0][var14][var21];
-				if (var22 != null && var22.primaryCount >= 5) {
-					return false;
-				}
-			}
-		}
-		Sprite var15 = new Sprite();
-		var15.typecode = arg11;
-		var15.typecode2 = arg12;
-		var15.level = arg0;
-		var15.x = arg5;
-		var15.z = arg6;
-		var15.y = arg7;
-		var15.model = arg8;
-		var15.angle = arg9;
-		var15.minGridX = arg1;
-		var15.minGridZ = arg2;
-		var15.maxGridX = arg1 + arg3 - 1;
-		var15.maxGridZ = arg2 + arg4 - 1;
-		for (int var16 = arg1; var16 < arg1 + arg3; var16++) {
-			for (int var17 = arg2; var17 < arg2 + arg4; var17++) {
-				int var18 = 0;
-				if (var16 > arg1) {
-					var18++;
-				}
-				if (var16 < arg1 + arg3 - 1) {
-					var18 += 4;
-				}
-				if (var17 > arg2) {
-					var18 += 8;
-				}
-				if (var17 < arg2 + arg4 - 1) {
-					var18 += 2;
-				}
-				for (int var19 = arg0; var19 >= 0; var19--) {
-					if (this.levelTiles[var19][var16][var17] == null) {
-						this.levelTiles[var19][var16][var17] = new Square(var19, var16, var17);
-					}
-				}
-				Square var20 = this.levelTiles[arg0][var16][var17];
-				var20.sprite[var20.primaryCount] = var15;
-				var20.primaryExtendDirections[var20.primaryCount] = var18;
-				var20.combinedPrimaryExtendDirections |= var18;
-				var20.primaryCount++;
-			}
-		}
-		if (arg10) {
-			this.changedLocs[this.changedLocCount++] = var15;
-		}
-		return true;
-	}
-
-	@ObfuscatedName("s.b(B)V")
-	public void clearLocChanges() {
-		for (int i = 0; i < this.changedLocCount; i++) {
-			Sprite loc = this.changedLocs[i];
-			this.removeLoc(loc);
-			this.changedLocs[i] = null;
-		}
-
-		this.changedLocCount = 0;
-	}
-
-	@ObfuscatedName("s.a(ILq;)V")
-	public void removeLoc(Sprite arg1) {
-		for (int var4 = arg1.minGridX; var4 <= arg1.maxGridX; var4++) {
-			for (int var5 = arg1.minGridZ; var5 <= arg1.maxGridZ; var5++) {
-				Square var6 = this.levelTiles[arg1.level][var4][var5];
-				if (var6 != null) {
-					for (int var7 = 0; var7 < var6.primaryCount; var7++) {
-						if (var6.sprite[var7] == arg1) {
-							var6.primaryCount--;
-							for (int var8 = var7; var8 < var6.primaryCount; var8++) {
-								var6.sprite[var8] = var6.sprite[var8 + 1];
-								var6.primaryExtendDirections[var8] = var6.primaryExtendDirections[var8 + 1];
-							}
-							var6.sprite[var6.primaryCount] = null;
-							break;
-						}
-					}
-					var6.combinedPrimaryExtendDirections = 0;
-					for (int var9 = 0; var9 < var6.primaryCount; var9++) {
-						var6.combinedPrimaryExtendDirections |= var6.primaryExtendDirections[var9];
-					}
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIII)V")
-	public void setDecorOffset(int arg0, int arg1, int arg2, int arg3) {
-		Square var6 = this.levelTiles[arg3][arg1][arg2];
-		if (var6 == null) {
-			return;
-		}
-		Decor var7 = var6.decor;
-		if (var7 == null) {
-			return;
-		}
-		int var8 = arg1 * 128 + 64;
-		int var9 = arg2 * 128 + 64;
-		var7.x = (var7.x - var8) * arg0 / 16 + var8;
-		var7.z = (var7.z - var9) * arg0 / 16 + var9;
-	}
-
-	@ObfuscatedName("s.b(IIII)V")
-	public void removeWall(int arg0, int arg1, int arg2) {
-		Square var5 = this.levelTiles[arg1][arg0][arg2];
-		if (var5 != null) {
-			var5.wall = null;
-		}
-	}
-
-	@ObfuscatedName("s.a(IBII)V")
-	public void removeDecor(int arg0, int arg2, int arg3) {
-		Square var5 = this.levelTiles[arg3][arg2][arg0];
-		if (var5 != null) {
-			var5.decor = null;
-		}
-	}
-
-	@ObfuscatedName("s.c(IIII)V")
-	public void removeLoc(int arg0, int arg1, int arg3) {
-		Square var5 = this.levelTiles[arg3][arg0][arg1];
-		if (var5 == null) {
-			return;
-		}
-		for (int var6 = 0; var6 < var5.primaryCount; var6++) {
-			Sprite var7 = var5.sprite[var6];
-			if ((var7.typecode >> 29 & 0x3) == 2 && var7.minGridX == arg0 && var7.minGridZ == arg1) {
-				this.removeLoc(var7);
-				return;
-			}
-		}
-	}
-
-	@ObfuscatedName("s.d(IIII)V")
-	public void removeGroundDecor(int arg0, int arg1, int arg2) {
-		Square var5 = this.levelTiles[arg1][arg2][arg0];
-		if (var5 != null) {
-			var5.groundDecor = null;
-		}
-	}
-
-	@ObfuscatedName("s.a(III)V")
-	public void removeGroundObj(int arg0, int arg1, int arg2) {
-		Square var4 = this.levelTiles[arg0][arg1][arg2];
-		if (var4 != null) {
-			var4.groundObject = null;
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIZ)Lr;")
-	public Wall getWall(int arg0, int arg1, int arg2) {
-		Square var6 = this.levelTiles[arg2][arg0][arg1];
-		return var6 == null ? null : var6.wall;
-	}
-
-	@ObfuscatedName("s.e(IIII)Li;")
-	public Decor getDecor(int arg0, int arg1, int arg3) {
-		Square var5 = this.levelTiles[arg1][arg0][arg3];
-		return var5 == null ? null : var5.decor;
-	}
-
-	@ObfuscatedName("s.f(IIII)Lq;")
-	public Sprite getLoc(int arg0, int arg1, int arg3) {
-		Square var5 = this.levelTiles[arg0][arg3][arg1];
-		if (var5 == null) {
-			return null;
-		} else {
-			for (int var6 = 0; var6 < var5.primaryCount; var6++) {
-				Sprite var7 = var5.sprite[var6];
-				if ((var7.typecode >> 29 & 0x3) == 2 && var7.minGridX == arg3 && var7.minGridZ == arg1) {
-					return var7;
-				}
-			}
-			return null;
-		}
-	}
-
-	@ObfuscatedName("s.a(ZIII)Lk;")
-	public GroundDecor getGroundDecor(int arg1, int arg2, int arg3) {
-		Square var5 = this.levelTiles[arg3][arg1][arg2];
-		return var5 == null || var5.groundDecor == null ? null : var5.groundDecor;
-	}
-
-	@ObfuscatedName("s.b(III)I")
-	public int getWallTypecode(int arg0, int arg1, int arg2) {
-		Square var4 = this.levelTiles[arg0][arg1][arg2];
-		return var4 == null || var4.wall == null ? 0 : var4.wall.typecode;
-	}
-
-	@ObfuscatedName("s.g(IIII)I")
-	public int getDecorTypecode(int arg0, int arg2, int arg3) {
-		Square var5 = this.levelTiles[arg2][arg3][arg0];
-		return var5 == null || var5.decor == null ? 0 : var5.decor.typecode;
-	}
-
-	@ObfuscatedName("s.c(III)I")
-	public int getLocTypecode(int arg0, int arg1, int arg2) {
-		Square var4 = this.levelTiles[arg0][arg1][arg2];
-		if (var4 == null) {
-			return 0;
-		}
-		for (int var5 = 0; var5 < var4.primaryCount; var5++) {
-			Sprite var6 = var4.sprite[var5];
-			if ((var6.typecode >> 29 & 0x3) == 2 && var6.minGridX == arg1 && var6.minGridZ == arg2) {
-				return var6.typecode;
-			}
-		}
-		return 0;
-	}
-
-	@ObfuscatedName("s.d(III)I")
-	public int getGroundDecorTypecode(int arg0, int arg1, int arg2) {
-		Square var4 = this.levelTiles[arg0][arg1][arg2];
-		return var4 == null || var4.groundDecor == null ? 0 : var4.groundDecor.typecode;
-	}
-
-	@ObfuscatedName("s.h(IIII)I")
-	public int getInfo(int arg0, int arg1, int arg2, int arg3) {
-		Square var5 = this.levelTiles[arg0][arg1][arg2];
-		if (var5 == null) {
-			return -1;
-		} else if (var5.wall != null && var5.wall.typecode == arg3) {
-			return var5.wall.typecode2 & 0xFF;
-		} else if (var5.decor != null && var5.decor.typecode == arg3) {
-			return var5.decor.typecode2 & 0xFF;
-		} else if (var5.groundDecor != null && var5.groundDecor.typecode == arg3) {
-			return var5.groundDecor.typecode2 & 0xFF;
-		} else {
-			for (int var6 = 0; var6 < var5.primaryCount; var6++) {
-				if (var5.sprite[var6].typecode == arg3) {
-					return var5.sprite[var6].typecode2 & 0xFF;
-				}
-			}
-			return -1;
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIIII)V")
-	public void buildModels(int arg0, int arg1, int arg3, int arg4, int arg5) {
-		int var7 = (int) Math.sqrt((double) (arg1 * arg1 + arg0 * arg0 + arg3 * arg3));
-		int var8 = arg5 * var7 >> 8;
-		for (int var9 = 0; var9 < this.maxLevel; var9++) {
-			for (int var10 = 0; var10 < this.maxTileX; var10++) {
-				for (int var11 = 0; var11 < this.maxTileZ; var11++) {
-					Square var12 = this.levelTiles[var9][var10][var11];
-					if (var12 != null) {
-						Wall var13 = var12.wall;
-						if (var13 != null && var13.model1 != null && var13.model1.vertexNormal != null) {
-							this.mergeLocNormals(var11, (Model) var13.model1, var10, var9, 1, 1);
-							if (var13.model2 != null && var13.model2.vertexNormal != null) {
-								this.mergeLocNormals(var11, (Model) var13.model2, var10, var9, 1, 1);
-								this.mergeNormals((Model) var13.model1, (Model) var13.model2, 0, 0, 0, false);
-								((Model) var13.model2).applyLighting(arg4, var8, arg3, arg0, arg1);
-							}
-							((Model) var13.model1).applyLighting(arg4, var8, arg3, arg0, arg1);
-						}
-						for (int var14 = 0; var14 < var12.primaryCount; var14++) {
-							Sprite var16 = var12.sprite[var14];
-							if (var16 != null && var16.model != null && var16.model.vertexNormal != null) {
-								this.mergeLocNormals(var11, (Model) var16.model, var10, var9, var16.maxGridX - var16.minGridX + 1, var16.maxGridZ - var16.minGridZ + 1);
-								((Model) var16.model).applyLighting(arg4, var8, arg3, arg0, arg1);
-							}
-						}
-						GroundDecor var15 = var12.groundDecor;
-						if (var15 != null && var15.model.vertexNormal != null) {
-							this.mergeGroundDecorNormals(var11, var9, var10, (Model) var15.model);
-							((Model) var15.model).applyLighting(arg4, var8, arg3, arg0, arg1);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIILfb;)V")
-	public void mergeGroundDecorNormals(int arg0, int arg2, int arg3, Model arg4) {
-		if (arg3 < this.maxTileX) {
-			Square var7 = this.levelTiles[arg2][arg3 + 1][arg0];
-			if (var7 != null && var7.groundDecor != null && var7.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg4, (Model) var7.groundDecor.model, 128, 0, 0, true);
-			}
-		}
-		if (arg0 < this.maxTileX) {
-			Square var8 = this.levelTiles[arg2][arg3][arg0 + 1];
-			if (var8 != null && var8.groundDecor != null && var8.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg4, (Model) var8.groundDecor.model, 0, 0, 128, true);
-			}
-		}
-		if (arg3 < this.maxTileX && arg0 < this.maxTileZ) {
-			Square var9 = this.levelTiles[arg2][arg3 + 1][arg0 + 1];
-			if (var9 != null && var9.groundDecor != null && var9.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg4, (Model) var9.groundDecor.model, 128, 0, 128, true);
-			}
-		}
-		if (arg3 < this.maxTileX && arg0 > 0) {
-			Square var10 = this.levelTiles[arg2][arg3 + 1][arg0 - 1];
-			if (var10 != null && var10.groundDecor != null && var10.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg4, (Model) var10.groundDecor.model, 128, 0, -128, true);
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(IILfb;IIII)V")
-	public void mergeLocNormals(int arg1, Model arg2, int arg3, int arg4, int arg5, int arg6) {
-		boolean var8 = true;
-		int var9 = arg3;
-		int var10 = arg3 + arg5;
-		int var11 = arg1 - 1;
-		int var12 = arg1 + arg6;
-		for (int var13 = arg4; var13 <= arg4 + 1; var13++) {
-			if (this.maxLevel != var13) {
-				for (int var15 = var9; var15 <= var10; var15++) {
-					if (var15 >= 0 && var15 < this.maxTileX) {
-						for (int var16 = var11; var16 <= var12; var16++) {
-							if (var16 >= 0 && var16 < this.maxTileZ && (!var8 || var15 >= var10 || var16 >= var12 || var16 < arg1 && arg3 != var15)) {
-								Square var17 = this.levelTiles[var13][var15][var16];
-								if (var17 != null) {
-									int var18 = (this.levelHeightmaps[var13][var15 + 1][var16] + this.levelHeightmaps[var13][var15][var16] + this.levelHeightmaps[var13][var15][var16 + 1] + this.levelHeightmaps[var13][var15 + 1][var16 + 1]) / 4 - (this.levelHeightmaps[arg4][arg3 + 1][arg1] + this.levelHeightmaps[arg4][arg3][arg1] + this.levelHeightmaps[arg4][arg3][arg1 + 1] + this.levelHeightmaps[arg4][arg3 + 1][arg1 + 1]) / 4;
-									Wall var19 = var17.wall;
-									if (var19 != null && var19.model1 != null && var19.model1.vertexNormal != null) {
-										this.mergeNormals(arg2, (Model) var19.model1, (var15 - arg3) * 128 + (1 - arg5) * 64, var18, (var16 - arg1) * 128 + (1 - arg6) * 64, var8);
-									}
-									if (var19 != null && var19.model2 != null && var19.model2.vertexNormal != null) {
-										this.mergeNormals(arg2, (Model) var19.model2, (var15 - arg3) * 128 + (1 - arg5) * 64, var18, (var16 - arg1) * 128 + (1 - arg6) * 64, var8);
-									}
-									for (int var20 = 0; var20 < var17.primaryCount; var20++) {
-										Sprite var21 = var17.sprite[var20];
-										if (var21 != null && var21.model != null && var21.model.vertexNormal != null) {
-											int var22 = var21.maxGridX - var21.minGridX + 1;
-											int var23 = var21.maxGridZ - var21.minGridZ + 1;
-											this.mergeNormals(arg2, (Model) var21.model, (var21.minGridX - arg3) * 128 + (var22 - arg5) * 64, var18, (var21.minGridZ - arg1) * 128 + (var23 - arg6) * 64, var8);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-				var9--;
-				var8 = false;
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(Lfb;Lfb;IIIZ)V")
-	public void mergeNormals(Model arg0, Model arg1, int arg2, int arg3, int arg4, boolean arg5) {
-		this.tmpMergeIndex++;
-		int var7 = 0;
-		int[] var8 = arg1.vertexX;
-		int var9 = arg1.vertexCount;
-		for (int var10 = 0; var10 < arg0.vertexCount; var10++) {
-			VertexNormal var13 = arg0.vertexNormal[var10];
-			VertexNormal var14 = arg0.vertexNormalOriginal[var10];
-			if (var14.w != 0) {
-				int var15 = arg0.vertexY[var10] - arg3;
-				if (var15 <= arg1.maxY) {
-					int var16 = arg0.vertexX[var10] - arg2;
-					if (var16 >= arg1.minX && var16 <= arg1.maxX) {
-						int var17 = arg0.vertexZ[var10] - arg4;
-						if (var17 >= arg1.minZ && var17 <= arg1.maxZ) {
-							for (int var18 = 0; var18 < var9; var18++) {
-								VertexNormal var19 = arg1.vertexNormal[var18];
-								VertexNormal var20 = arg1.vertexNormalOriginal[var18];
-								if (var8[var18] == var16 && arg1.vertexZ[var18] == var17 && arg1.vertexY[var18] == var15 && var20.w != 0) {
-									var13.x += var20.x;
-									var13.y += var20.y;
-									var13.z += var20.z;
-									var13.w += var20.w;
-									var19.x += var14.x;
-									var19.y += var14.y;
-									var19.z += var14.z;
-									var19.w += var14.w;
-									var7++;
-									this.mergeIndexA[var10] = this.tmpMergeIndex;
-									this.mergeIndexB[var18] = this.tmpMergeIndex;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		if (var7 < 3 || !arg5) {
-			return;
-		}
-		for (int var11 = 0; var11 < arg0.faceCount; var11++) {
-			if (this.mergeIndexA[arg0.faceVertexA[var11]] == this.tmpMergeIndex && this.mergeIndexA[arg0.faceVertexB[var11]] == this.tmpMergeIndex && this.mergeIndexA[arg0.faceVertexC[var11]] == this.tmpMergeIndex) {
-				arg0.faceInfo[var11] = -1;
-			}
-		}
-		for (int var12 = 0; var12 < arg1.faceCount; var12++) {
-			if (this.mergeIndexB[arg1.faceVertexA[var12]] == this.tmpMergeIndex && this.mergeIndexB[arg1.faceVertexB[var12]] == this.tmpMergeIndex && this.mergeIndexB[arg1.faceVertexC[var12]] == this.tmpMergeIndex) {
-				arg1.faceInfo[var12] = -1;
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a([IIIIII)V")
-	public void drawMinimapTile(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		Square var7 = this.levelTiles[arg3][arg4][arg5];
-		if (var7 == null) {
-			return;
-		}
-		QuickGround var8 = var7.quickGround;
-		if (var8 != null) {
-			int var9 = var8.rgb;
-			if (var9 != 0) {
-				for (int var10 = 0; var10 < 4; var10++) {
-					arg0[arg1] = var9;
-					arg0[arg1 + 1] = var9;
-					arg0[arg1 + 2] = var9;
-					arg0[arg1 + 3] = var9;
-					arg1 += arg2;
-				}
-			}
-			return;
-		}
-		Ground var11 = var7.ground;
-		if (var11 == null) {
-			return;
-		}
-		int var12 = var11.shape;
-		int var13 = var11.angle;
-		int var14 = var11.underlayColour;
-		int var15 = var11.overlayColour;
-		int[] var16 = this.MINIMAP_OVERLAY_SHAPE[var12];
-		int[] var17 = this.MINIMAP_OVERLAY_ANGLE[var13];
-		int var18 = 0;
-		if (var14 != 0) {
-			for (int var19 = 0; var19 < 4; var19++) {
-				arg0[arg1] = var16[var17[var18++]] == 0 ? var14 : var15;
-				arg0[arg1 + 1] = var16[var17[var18++]] == 0 ? var14 : var15;
-				arg0[arg1 + 2] = var16[var17[var18++]] == 0 ? var14 : var15;
-				arg0[arg1 + 3] = var16[var17[var18++]] == 0 ? var14 : var15;
-				arg1 += arg2;
-			}
-			return;
-		}
-		for (int var20 = 0; var20 < 4; var20++) {
-			if (var16[var17[var18++]] != 0) {
-				arg0[arg1] = var15;
-			}
-			if (var16[var17[var18++]] != 0) {
-				arg0[arg1 + 1] = var15;
-			}
-			if (var16[var17[var18++]] != 0) {
-				arg0[arg1 + 2] = var15;
-			}
-			if (var16[var17[var18++]] != 0) {
-				arg0[arg1 + 3] = var15;
-			}
-			arg1 += arg2;
-		}
-	}
-
-	@ObfuscatedName("s.a(IIBII[I)V")
-	public static void init(int arg0, int arg1, int arg3, int arg4, int[] arg5) {
-		viewportLeft = 0;
-		viewportTop = 0;
-		viewportRight = arg4;
-		viewportBottom = arg1;
-		viewportCenterX = arg4 / 2;
-		viewportCenterY = arg1 / 2;
-		boolean[][][][] var6 = new boolean[9][32][53][53];
-		for (int var7 = 128; var7 <= 384; var7 += 32) {
-			for (int var15 = 0; var15 < 2048; var15 += 64) {
-				sinEyePitch = Model.sinTable[var7];
-				cosEyePitch = Model.cosTable[var7];
-				sinEyeYaw = Model.sinTable[var15];
-				cosEyeYaw = Model.cosTable[var15];
-				int var16 = (var7 - 128) / 32;
-				int var17 = var15 / 64;
-				for (int var18 = -26; var18 <= 26; var18++) {
-					for (int var19 = -26; var19 <= 26; var19++) {
-						int var20 = var18 * 128;
-						int var21 = var19 * 128;
-						boolean var22 = false;
-						for (int var23 = -arg3; var23 <= arg0; var23 += 128) {
-							if (testPoint(var21, arg5[var16] + var23, var20)) {
-								var22 = true;
-								break;
-							}
-						}
-						var6[var16][var17][var18 + 25 + 1][var19 + 25 + 1] = var22;
-					}
-				}
-			}
-		}
-		for (int var8 = 0; var8 < 8; var8++) {
-			for (int var9 = 0; var9 < 32; var9++) {
-				for (int var10 = -25; var10 < 25; var10++) {
-					for (int var11 = -25; var11 < 25; var11++) {
-						boolean var12 = false;
-						label82: for (int var13 = -1; var13 <= 1; var13++) {
-							for (int var14 = -1; var14 <= 1; var14++) {
-								if (var6[var8][var9][var10 + var13 + 25 + 1][var11 + var14 + 25 + 1]) {
-									var12 = true;
-									break label82;
-								}
-								if (var6[var8][(var9 + 1) % 31][var10 + var13 + 25 + 1][var11 + var14 + 25 + 1]) {
-									var12 = true;
-									break label82;
-								}
-								if (var6[var8 + 1][var9][var10 + var13 + 25 + 1][var11 + var14 + 25 + 1]) {
-									var12 = true;
-									break label82;
-								}
-								if (var6[var8 + 1][(var9 + 1) % 31][var10 + var13 + 25 + 1][var11 + var14 + 25 + 1]) {
-									var12 = true;
-									break label82;
-								}
-							}
-						}
-						visibilityMatrix[var8][var9][var10 + 25][var11 + 25] = var12;
-					}
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.i(IIII)Z")
-	public static boolean testPoint(int arg0, int arg1, int arg3) {
-		int var4 = cosEyeYaw * arg3 + sinEyeYaw * arg0 >> 16;
-		int var5 = cosEyeYaw * arg0 - sinEyeYaw * arg3 >> 16;
-		int var6 = cosEyePitch * var5 + sinEyePitch * arg1 >> 16;
-		int var7 = cosEyePitch * arg1 - sinEyePitch * var5 >> 16;
-		if (var6 >= 50 && var6 <= 3500) {
-			int var8 = (var4 << 9) / var6 + viewportCenterX;
-			int var9 = (var7 << 9) / var6 + viewportCenterY;
-			return var8 >= viewportLeft && var8 <= viewportRight && var9 >= viewportTop && var9 <= viewportBottom;
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("s.a(BII)V")
-	public void click(int arg1, int arg2) {
-		takingInput = true;
-		mouseX = arg2;
-		mouseY = arg1;
-		clickTileX = -1;
-		clickTileZ = -1;
-	}
-
-	@ObfuscatedName("s.a(IIIIIII)V")
-	public void draw(int arg0, int arg1, int arg3, int arg4, int arg5, int arg6) {
-		if (arg0 < 0) {
-			arg0 = 0;
-		} else if (arg0 >= this.maxTileX * 128) {
-			arg0 = this.maxTileX * 128 - 1;
-		}
-		if (arg5 < 0) {
-			arg5 = 0;
-		} else if (arg5 >= this.maxTileZ * 128) {
-			arg5 = this.maxTileZ * 128 - 1;
-		}
-		cycle++;
-		sinEyePitch = Model.sinTable[arg4];
-		cosEyePitch = Model.cosTable[arg4];
-		sinEyeYaw = Model.sinTable[arg3];
-		cosEyeYaw = Model.cosTable[arg3];
-		visibilityMap = visibilityMatrix[(arg4 - 128) / 32][arg3 / 64];
-		eyeX = arg0;
-		eyeY = arg6;
-		eyeZ = arg5;
-		eyeTileX = arg0 / 128;
-		eyeTileZ = arg5 / 128;
-		topLevel = arg1;
-		minDrawTileX = eyeTileX - 25;
-		if (minDrawTileX < 0) {
-			minDrawTileX = 0;
-		}
-		minDrawTileZ = eyeTileZ - 25;
-		if (minDrawTileZ < 0) {
-			minDrawTileZ = 0;
-		}
-		maxDrawTileX = eyeTileX + 25;
-		if (maxDrawTileX > this.maxTileX) {
-			maxDrawTileX = this.maxTileX;
-		}
-		maxDrawTileZ = eyeTileZ + 25;
-		if (maxDrawTileZ > this.maxTileZ) {
-			maxDrawTileZ = this.maxTileZ;
-		}
-		this.updateActiveOccluders();
-		tilesRemaining = 0;
-		for (int var8 = this.minLevel; var8 < this.maxLevel; var8++) {
-			Square[][] var33 = this.levelTiles[var8];
-			for (int var34 = minDrawTileX; var34 < maxDrawTileX; var34++) {
-				for (int var35 = minDrawTileZ; var35 < maxDrawTileZ; var35++) {
-					Square var36 = var33[var34][var35];
-					if (var36 != null) {
-						if (var36.drawLevel <= arg1 && (visibilityMap[var34 - eyeTileX + 25][var35 - eyeTileZ + 25] || this.levelHeightmaps[var8][var34][var35] - arg6 >= 2000)) {
-							var36.drawFront = true;
-							var36.drawBack = true;
-							if (var36.primaryCount > 0) {
-								var36.drawPrimaries = true;
-							} else {
-								var36.drawPrimaries = false;
-							}
-							tilesRemaining++;
-						} else {
-							var36.drawFront = false;
-							var36.drawBack = false;
-							var36.cornerSides = 0;
-						}
-					}
-				}
-			}
-		}
-		for (int var9 = this.minLevel; var9 < this.maxLevel; var9++) {
-			Square[][] var22 = this.levelTiles[var9];
-			for (int var23 = -25; var23 <= 0; var23++) {
-				int var24 = eyeTileX + var23;
-				int var25 = eyeTileX - var23;
-				if (var24 >= minDrawTileX || var25 < maxDrawTileX) {
-					for (int var26 = -25; var26 <= 0; var26++) {
-						int var27 = eyeTileZ + var26;
-						int var28 = eyeTileZ - var26;
-						if (var24 >= minDrawTileX) {
-							if (var27 >= minDrawTileZ) {
-								Square var29 = var22[var24][var27];
-								if (var29 != null && var29.drawFront) {
-									this.drawTile(var29, true);
-								}
-							}
-							if (var28 < maxDrawTileZ) {
-								Square var30 = var22[var24][var28];
-								if (var30 != null && var30.drawFront) {
-									this.drawTile(var30, true);
-								}
-							}
-						}
-						if (var25 < maxDrawTileX) {
-							if (var27 >= minDrawTileZ) {
-								Square var31 = var22[var25][var27];
-								if (var31 != null && var31.drawFront) {
-									this.drawTile(var31, true);
-								}
-							}
-							if (var28 < maxDrawTileZ) {
-								Square var32 = var22[var25][var28];
-								if (var32 != null && var32.drawFront) {
-									this.drawTile(var32, true);
-								}
-							}
-						}
-						if (tilesRemaining == 0) {
-							takingInput = false;
-							return;
-						}
-					}
-				}
-			}
-		}
-		for (int var10 = this.minLevel; var10 < this.maxLevel; var10++) {
-			Square[][] var11 = this.levelTiles[var10];
-			for (int var12 = -25; var12 <= 0; var12++) {
-				int var13 = eyeTileX + var12;
-				int var14 = eyeTileX - var12;
-				if (var13 >= minDrawTileX || var14 < maxDrawTileX) {
-					for (int var15 = -25; var15 <= 0; var15++) {
-						int var16 = eyeTileZ + var15;
-						int var17 = eyeTileZ - var15;
-						if (var13 >= minDrawTileX) {
-							if (var16 >= minDrawTileZ) {
-								Square var18 = var11[var13][var16];
-								if (var18 != null && var18.drawFront) {
-									this.drawTile(var18, false);
-								}
-							}
-							if (var17 < maxDrawTileZ) {
-								Square var19 = var11[var13][var17];
-								if (var19 != null && var19.drawFront) {
-									this.drawTile(var19, false);
-								}
-							}
-						}
-						if (var14 < maxDrawTileX) {
-							if (var16 >= minDrawTileZ) {
-								Square var20 = var11[var14][var16];
-								if (var20 != null && var20.drawFront) {
-									this.drawTile(var20, false);
-								}
-							}
-							if (var17 < maxDrawTileZ) {
-								Square var21 = var11[var14][var17];
-								if (var21 != null && var21.drawFront) {
-									this.drawTile(var21, false);
-								}
-							}
-						}
-						if (tilesRemaining == 0) {
-							takingInput = false;
-							return;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(Lw;Z)V")
-	public void drawTile(Square arg0, boolean arg1) {
-		drawTileQueue.addTail(arg0);
-		while (true) {
-			Square var3;
-			int var4;
-			int var5;
-			int var6;
-			int var7;
-			Square[][] var8;
-			Square var66;
-			do {
-				Square var65;
-				do {
-					Square var64;
-					do {
-						Square var63;
-						do {
-							do {
-								do {
-									while (true) {
-										while (true) {
-											do {
-												var3 = (Square) drawTileQueue.removeHead();
-												if (var3 == null) {
-													return;
-												}
-											} while (!var3.drawBack);
-											var4 = var3.x;
-											var5 = var3.z;
-											var6 = var3.level;
-											var7 = var3.originalLevel;
-											var8 = this.levelTiles[var6];
-											if (!var3.drawFront) {
-												break;
-											}
-											if (arg1) {
-												if (var6 > 0) {
-													Square var9 = this.levelTiles[var6 - 1][var4][var5];
-													if (var9 != null && var9.drawBack) {
-														continue;
-													}
-												}
-												if (var4 <= eyeTileX && var4 > minDrawTileX) {
-													Square var10 = var8[var4 - 1][var5];
-													if (var10 != null && var10.drawBack && (var10.drawFront || (var3.combinedPrimaryExtendDirections & 0x1) == 0)) {
-														continue;
-													}
-												}
-												if (var4 >= eyeTileX && var4 < maxDrawTileX - 1) {
-													Square var11 = var8[var4 + 1][var5];
-													if (var11 != null && var11.drawBack && (var11.drawFront || (var3.combinedPrimaryExtendDirections & 0x4) == 0)) {
-														continue;
-													}
-												}
-												if (var5 <= eyeTileZ && var5 > minDrawTileZ) {
-													Square var12 = var8[var4][var5 - 1];
-													if (var12 != null && var12.drawBack && (var12.drawFront || (var3.combinedPrimaryExtendDirections & 0x8) == 0)) {
-														continue;
-													}
-												}
-												if (var5 >= eyeTileZ && var5 < maxDrawTileZ - 1) {
-													Square var13 = var8[var4][var5 + 1];
-													if (var13 != null && var13.drawBack && (var13.drawFront || (var3.combinedPrimaryExtendDirections & 0x2) == 0)) {
-														continue;
-													}
-												}
-											} else {
-												arg1 = true;
-											}
-											var3.drawFront = false;
-											if (var3.linkedSquare != null) {
-												Square var14 = var3.linkedSquare;
-												if (var14.quickGround == null) {
-													if (var14.ground != null && !this.tileVisible(0, var4, var5)) {
-														this.drawTileOverlay(var4, sinEyePitch, sinEyeYaw, cosEyeYaw, var14.ground, cosEyePitch, var5);
-													}
-												} else if (!this.tileVisible(0, var4, var5)) {
-													this.drawTileUnderlay(var14.quickGround, 0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
-												}
-												Wall var15 = var14.wall;
-												if (var15 != null) {
-													var15.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var15.x - eyeX, var15.y - eyeY, var15.z - eyeZ, var15.typecode);
-												}
-												for (int var16 = 0; var16 < var14.primaryCount; var16++) {
-													Sprite var17 = var14.sprite[var16];
-													if (var17 != null) {
-														var17.model.draw(var17.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var17.x - eyeX, var17.y - eyeY, var17.z - eyeZ, var17.typecode);
-													}
-												}
-											}
-											boolean var18 = false;
-											if (var3.quickGround == null) {
-												if (var3.ground != null && !this.tileVisible(var7, var4, var5)) {
-													var18 = true;
-													this.drawTileOverlay(var4, sinEyePitch, sinEyeYaw, cosEyeYaw, var3.ground, cosEyePitch, var5);
-												}
-											} else if (!this.tileVisible(var7, var4, var5)) {
-												var18 = true;
-												this.drawTileUnderlay(var3.quickGround, var7, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
-											}
-											int var19 = 0;
-											int var20 = 0;
-											Wall var21 = var3.wall;
-											Decor var22 = var3.decor;
-											if (var21 != null || var22 != null) {
-												if (eyeTileX == var4) {
-													var19++;
-												} else if (eyeTileX < var4) {
-													var19 += 2;
-												}
-												if (eyeTileZ == var5) {
-													var19 += 3;
-												} else if (eyeTileZ > var5) {
-													var19 += 6;
-												}
-												var20 = FRONT_WALL_TYPES[var19];
-												var3.backWallTypes = BACK_WALL_TYPES[var19];
-											}
-											if (var21 != null) {
-												if ((var21.angle1 & DIRECTION_ALLOW_WALL_CORNER_TYPE[var19]) == 0) {
-													var3.cornerSides = 0;
-												} else if (var21.angle1 == 16) {
-													var3.cornerSides = 3;
-													var3.sidesBeforeCorner = MIDDEP_16[var19];
-													var3.sidesAfterCorner = 3 - var3.sidesBeforeCorner;
-												} else if (var21.angle1 == 32) {
-													var3.cornerSides = 6;
-													var3.sidesBeforeCorner = MIDDEP_32[var19];
-													var3.sidesAfterCorner = 6 - var3.sidesBeforeCorner;
-												} else if (var21.angle1 == 64) {
-													var3.cornerSides = 12;
-													var3.sidesBeforeCorner = MIDDEP_64[var19];
-													var3.sidesAfterCorner = 12 - var3.sidesBeforeCorner;
-												} else {
-													var3.cornerSides = 9;
-													var3.sidesBeforeCorner = MIDDEP_128[var19];
-													var3.sidesAfterCorner = 9 - var3.sidesBeforeCorner;
-												}
-												if ((var21.angle1 & var20) != 0 && !this.isTileSideOccluded(var7, var4, var5, var21.angle1)) {
-													var21.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var21.x - eyeX, var21.y - eyeY, var21.z - eyeZ, var21.typecode);
-												}
-												if ((var21.angle2 & var20) != 0 && !this.isTileSideOccluded(var7, var4, var5, var21.angle2)) {
-													var21.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var21.x - eyeX, var21.y - eyeY, var21.z - eyeZ, var21.typecode);
-												}
-											}
-											if (var22 != null && !this.isTileColumnOccluded(var7, var4, var5, var22.model.minY)) {
-												if ((var22.angle1 & var20) != 0) {
-													var22.model.draw(var22.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var22.x - eyeX, var22.y - eyeY, var22.z - eyeZ, var22.typecode);
-												} else if ((var22.angle1 & 0x300) != 0) {
-													int var23 = var22.x - eyeX;
-													int var24 = var22.y - eyeY;
-													int var25 = var22.z - eyeZ;
-													int var26 = var22.angle2;
-													int var27;
-													if (var26 == 1 || var26 == 2) {
-														var27 = -var23;
-													} else {
-														var27 = var23;
-													}
-													int var28;
-													if (var26 == 2 || var26 == 3) {
-														var28 = -var25;
-													} else {
-														var28 = var25;
-													}
-													if ((var22.angle1 & 0x100) != 0 && var28 < var27) {
-														int var29 = WALL_DECORATION_INSET_X[var26] + var23;
-														int var30 = WALL_DECORATION_INSET_Z[var26] + var25;
-														var22.model.draw(var26 * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var29, var24, var30, var22.typecode);
-													}
-													if ((var22.angle1 & 0x200) != 0 && var28 > var27) {
-														int var31 = WALL_DECORATION_OUTSET_X[var26] + var23;
-														int var32 = WALL_DECORATION_OUTSET_Z[var26] + var25;
-														var22.model.draw(var26 * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var31, var24, var32, var22.typecode);
-													}
-												}
-											}
-											if (var18) {
-												GroundDecor var33 = var3.groundDecor;
-												if (var33 != null) {
-													var33.model.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var33.x - eyeX, var33.y - eyeY, var33.z - eyeZ, var33.typecode);
-												}
-												GroundObject var34 = var3.groundObject;
-												if (var34 != null && var34.height == 0) {
-													if (var34.bottom != null) {
-														var34.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
-													}
-													if (var34.middle != null) {
-														var34.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
-													}
-													if (var34.top != null) {
-														var34.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
-													}
-												}
-											}
-											int var35 = var3.combinedPrimaryExtendDirections;
-											if (var35 != 0) {
-												if (var4 < eyeTileX && (var35 & 0x4) != 0) {
-													Square var36 = var8[var4 + 1][var5];
-													if (var36 != null && var36.drawBack) {
-														drawTileQueue.addTail(var36);
-													}
-												}
-												if (var5 < eyeTileZ && (var35 & 0x2) != 0) {
-													Square var37 = var8[var4][var5 + 1];
-													if (var37 != null && var37.drawBack) {
-														drawTileQueue.addTail(var37);
-													}
-												}
-												if (var4 > eyeTileX && (var35 & 0x1) != 0) {
-													Square var38 = var8[var4 - 1][var5];
-													if (var38 != null && var38.drawBack) {
-														drawTileQueue.addTail(var38);
-													}
-												}
-												if (var5 > eyeTileZ && (var35 & 0x8) != 0) {
-													Square var39 = var8[var4][var5 - 1];
-													if (var39 != null && var39.drawBack) {
-														drawTileQueue.addTail(var39);
-													}
-												}
-											}
-											break;
-										}
-										if (var3.cornerSides != 0) {
-											boolean var40 = true;
-											for (int var41 = 0; var41 < var3.primaryCount; var41++) {
-												if (cycle != var3.sprite[var41].cycle && (var3.primaryExtendDirections[var41] & var3.cornerSides) == var3.sidesBeforeCorner) {
-													var40 = false;
-													break;
-												}
-											}
-											if (var40) {
-												Wall var42 = var3.wall;
-												if (!this.isTileSideOccluded(var7, var4, var5, var42.angle1)) {
-													var42.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var42.x - eyeX, var42.y - eyeY, var42.z - eyeZ, var42.typecode);
-												}
-												var3.cornerSides = 0;
-											}
-										}
-										if (!var3.drawPrimaries) {
-											break;
-										}
-										int var43 = var3.primaryCount;
-										var3.drawPrimaries = false;
-										int var44 = 0;
-										label558: for (int var45 = 0; var45 < var43; var45++) {
-											Sprite var54 = var3.sprite[var45];
-											if (cycle != var54.cycle) {
-												for (int var55 = var54.minGridX; var55 <= var54.maxGridX; var55++) {
-													for (int var60 = var54.minGridZ; var60 <= var54.maxGridZ; var60++) {
-														Square var61 = var8[var55][var60];
-														if (var61.drawFront) {
-															var3.drawPrimaries = true;
-															continue label558;
-														}
-														if (var61.cornerSides != 0) {
-															int var62 = 0;
-															if (var55 > var54.minGridX) {
-																var62++;
-															}
-															if (var55 < var54.maxGridX) {
-																var62 += 4;
-															}
-															if (var60 > var54.minGridZ) {
-																var62 += 8;
-															}
-															if (var60 < var54.maxGridZ) {
-																var62 += 2;
-															}
-															if ((var62 & var61.cornerSides) == var3.sidesAfterCorner) {
-																var3.drawPrimaries = true;
-																continue label558;
-															}
-														}
-													}
-												}
-												locBuffer[var44++] = var54;
-												int var56 = eyeTileX - var54.minGridX;
-												int var57 = var54.maxGridX - eyeTileX;
-												if (var57 > var56) {
-													var56 = var57;
-												}
-												int var58 = eyeTileZ - var54.minGridZ;
-												int var59 = var54.maxGridZ - eyeTileZ;
-												if (var59 > var58) {
-													var54.distance = var56 + var59;
-												} else {
-													var54.distance = var56 + var58;
-												}
-											}
-										}
-										while (var44 > 0) {
-											int var46 = -50;
-											int var47 = -1;
-											for (int var48 = 0; var48 < var44; var48++) {
-												Sprite var53 = locBuffer[var48];
-												if (var53.distance > var46 && cycle != var53.cycle) {
-													var46 = var53.distance;
-													var47 = var48;
-												}
-											}
-											if (var47 == -1) {
-												break;
-											}
-											Sprite var49 = locBuffer[var47];
-											var49.cycle = cycle;
-											if (!this.locVisible(var7, var49.minGridX, var49.maxGridX, var49.minGridZ, var49.maxGridZ, var49.model.minY)) {
-												var49.model.draw(var49.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var49.x - eyeX, var49.y - eyeY, var49.z - eyeZ, var49.typecode);
-											}
-											for (int var50 = var49.minGridX; var50 <= var49.maxGridX; var50++) {
-												for (int var51 = var49.minGridZ; var51 <= var49.maxGridZ; var51++) {
-													Square var52 = var8[var50][var51];
-													if (var52.cornerSides != 0) {
-														drawTileQueue.addTail(var52);
-													} else if ((var4 != var50 || var5 != var51) && var52.drawBack) {
-														drawTileQueue.addTail(var52);
-													}
-												}
-											}
-										}
-										if (!var3.drawPrimaries) {
-											break;
-										}
-									}
-								} while (!var3.drawBack);
-							} while (var3.cornerSides != 0);
-							if (var4 > eyeTileX || var4 <= minDrawTileX) {
-								break;
-							}
-							var63 = var8[var4 - 1][var5];
-						} while (var63 != null && var63.drawBack);
-						if (var4 < eyeTileX || var4 >= maxDrawTileX - 1) {
-							break;
-						}
-						var64 = var8[var4 + 1][var5];
-					} while (var64 != null && var64.drawBack);
-					if (var5 > eyeTileZ || var5 <= minDrawTileZ) {
-						break;
-					}
-					var65 = var8[var4][var5 - 1];
-				} while (var65 != null && var65.drawBack);
-				if (var5 < eyeTileZ || var5 >= maxDrawTileZ - 1) {
-					break;
-				}
-				var66 = var8[var4][var5 + 1];
-			} while (var66 != null && var66.drawBack);
-			var3.drawBack = false;
-			tilesRemaining--;
-			GroundObject var67 = var3.groundObject;
-			if (var67 != null && var67.height != 0) {
-				if (var67.bottom != null) {
-					var67.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var67.x - eyeX, var67.y - eyeY - var67.height, var67.z - eyeZ, var67.typecode);
-				}
-				if (var67.middle != null) {
-					var67.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var67.x - eyeX, var67.y - eyeY - var67.height, var67.z - eyeZ, var67.typecode);
-				}
-				if (var67.top != null) {
-					var67.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var67.x - eyeX, var67.y - eyeY - var67.height, var67.z - eyeZ, var67.typecode);
-				}
-			}
-			if (var3.backWallTypes != 0) {
-				Decor var68 = var3.decor;
-				if (var68 != null && !this.isTileColumnOccluded(var7, var4, var5, var68.model.minY)) {
-					if ((var68.angle1 & var3.backWallTypes) != 0) {
-						var68.model.draw(var68.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var68.x - eyeX, var68.y - eyeY, var68.z - eyeZ, var68.typecode);
-					} else if ((var68.angle1 & 0x300) != 0) {
-						int var69 = var68.x - eyeX;
-						int var70 = var68.y - eyeY;
-						int var71 = var68.z - eyeZ;
-						int var72 = var68.angle2;
-						int var73;
-						if (var72 == 1 || var72 == 2) {
-							var73 = -var69;
-						} else {
-							var73 = var69;
-						}
-						int var74;
-						if (var72 == 2 || var72 == 3) {
-							var74 = -var71;
-						} else {
-							var74 = var71;
-						}
-						if ((var68.angle1 & 0x100) != 0 && var74 >= var73) {
-							int var75 = WALL_DECORATION_INSET_X[var72] + var69;
-							int var76 = WALL_DECORATION_INSET_Z[var72] + var71;
-							var68.model.draw(var72 * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var75, var70, var76, var68.typecode);
-						}
-						if ((var68.angle1 & 0x200) != 0 && var74 <= var73) {
-							int var77 = WALL_DECORATION_OUTSET_X[var72] + var69;
-							int var78 = WALL_DECORATION_OUTSET_Z[var72] + var71;
-							var68.model.draw(var72 * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var77, var70, var78, var68.typecode);
-						}
-					}
-				}
-				Wall var79 = var3.wall;
-				if (var79 != null) {
-					if ((var79.angle2 & var3.backWallTypes) != 0 && !this.isTileSideOccluded(var7, var4, var5, var79.angle2)) {
-						var79.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var79.x - eyeX, var79.y - eyeY, var79.z - eyeZ, var79.typecode);
-					}
-					if ((var79.angle1 & var3.backWallTypes) != 0 && !this.isTileSideOccluded(var7, var4, var5, var79.angle1)) {
-						var79.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var79.x - eyeX, var79.y - eyeY, var79.z - eyeZ, var79.typecode);
-					}
-				}
-			}
-			if (var6 < this.maxLevel - 1) {
-				Square var80 = this.levelTiles[var6 + 1][var4][var5];
-				if (var80 != null && var80.drawBack) {
-					drawTileQueue.addTail(var80);
-				}
-			}
-			if (var4 < eyeTileX) {
-				Square var81 = var8[var4 + 1][var5];
-				if (var81 != null && var81.drawBack) {
-					drawTileQueue.addTail(var81);
-				}
-			}
-			if (var5 < eyeTileZ) {
-				Square var82 = var8[var4][var5 + 1];
-				if (var82 != null && var82.drawBack) {
-					drawTileQueue.addTail(var82);
-				}
-			}
-			if (var4 > eyeTileX) {
-				Square var83 = var8[var4 - 1][var5];
-				if (var83 != null && var83.drawBack) {
-					drawTileQueue.addTail(var83);
-				}
-			}
-			if (var5 > eyeTileZ) {
-				Square var84 = var8[var4][var5 - 1];
-				if (var84 != null && var84.drawBack) {
-					drawTileQueue.addTail(var84);
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.a(Lp;IIIIIII)V")
-	public void drawTileUnderlay(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
-		int var9;
-		int var10 = var9 = (arg6 << 7) - eyeX;
-		int var11;
-		int var12 = var11 = (arg7 << 7) - eyeZ;
-		int var13;
-		int var14 = var13 = var10 + 128;
-		int var15;
-		int var16 = var15 = var12 + 128;
-		int var17 = this.levelHeightmaps[arg1][arg6][arg7] - eyeY;
-		int var18 = this.levelHeightmaps[arg1][arg6 + 1][arg7] - eyeY;
-		int var19 = this.levelHeightmaps[arg1][arg6 + 1][arg7 + 1] - eyeY;
-		int var20 = this.levelHeightmaps[arg1][arg6][arg7 + 1] - eyeY;
-		int var21 = arg4 * var12 + arg5 * var10 >> 16;
-		int var22 = arg5 * var12 - arg4 * var10 >> 16;
-		int var24 = arg3 * var17 - arg2 * var22 >> 16;
-		int var25 = arg2 * var17 + arg3 * var22 >> 16;
-		if (var25 < 50) {
-			return;
-		}
-		int var27 = arg4 * var11 + arg5 * var14 >> 16;
-		int var28 = arg5 * var11 - arg4 * var14 >> 16;
-		int var30 = arg3 * var18 - arg2 * var28 >> 16;
-		int var31 = arg2 * var18 + arg3 * var28 >> 16;
-		if (var31 < 50) {
-			return;
-		}
-		int var33 = arg4 * var16 + arg5 * var13 >> 16;
-		int var34 = arg5 * var16 - arg4 * var13 >> 16;
-		int var36 = arg3 * var19 - arg2 * var34 >> 16;
-		int var37 = arg2 * var19 + arg3 * var34 >> 16;
-		if (var37 < 50) {
-			return;
-		}
-		int var39 = arg4 * var15 + arg5 * var9 >> 16;
-		int var40 = arg5 * var15 - arg4 * var9 >> 16;
-		int var42 = arg3 * var20 - arg2 * var40 >> 16;
-		int var43 = arg2 * var20 + arg3 * var40 >> 16;
-		if (var43 < 50) {
-			return;
-		}
-		int var45 = (var21 << 9) / var25 + Pix3D.centerX;
-		int var46 = (var24 << 9) / var25 + Pix3D.centerY;
-		int var47 = (var27 << 9) / var31 + Pix3D.centerX;
-		int var48 = (var30 << 9) / var31 + Pix3D.centerY;
-		int var49 = (var33 << 9) / var37 + Pix3D.centerX;
-		int var50 = (var36 << 9) / var37 + Pix3D.centerY;
-		int var51 = (var39 << 9) / var43 + Pix3D.centerX;
-		int var52 = (var42 << 9) / var43 + Pix3D.centerY;
-		Pix3D.trans = 0;
-		if ((var48 - var52) * (var49 - var51) - (var47 - var51) * (var50 - var52) > 0) {
-			Pix3D.hclip = false;
-			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.safeWidth || var51 > Pix2D.safeWidth || var47 > Pix2D.safeWidth) {
-				Pix3D.hclip = true;
-			}
-			if (takingInput && this.pointInsideTriangle(mouseX, mouseY, var50, var52, var48, var49, var51, var47)) {
-				clickTileX = arg6;
-				clickTileZ = arg7;
-			}
-			if (arg0.textureId == -1) {
-				if (arg0.neColour != 12345678) {
-					Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.field262, arg0.field260);
-				}
-			} else if (lowMemory) {
-				int var53 = TEXTURE_HSL[arg0.textureId];
-				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.mulLightness(arg0.neColour, var53), this.mulLightness(arg0.field262, var53), this.mulLightness(arg0.field260, var53));
-			} else if (arg0.field264) {
-				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.textureId);
-			} else {
-				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.field262, arg0.field260, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.textureId);
-			}
-		}
-		if ((var45 - var47) * (var52 - var48) - (var46 - var48) * (var51 - var47) <= 0) {
-			return;
-		}
-		Pix3D.hclip = false;
-		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.safeWidth || var47 > Pix2D.safeWidth || var51 > Pix2D.safeWidth) {
-			Pix3D.hclip = true;
-		}
-		if (takingInput && this.pointInsideTriangle(mouseX, mouseY, var46, var48, var52, var45, var47, var51)) {
-			clickTileX = arg6;
-			clickTileZ = arg7;
-		}
-		if (arg0.textureId != -1) {
-			if (!lowMemory) {
-				Pix3D.textureTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.textureId);
-				return;
-			}
-			int var54 = TEXTURE_HSL[arg0.textureId];
-			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.mulLightness(arg0.field259, var54), this.mulLightness(arg0.field260, var54), this.mulLightness(arg0.field262, var54));
-		} else if (arg0.field259 != 12345678) {
-			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
-			return;
-		}
-	}
-
-	@ObfuscatedName("s.a(IIIILj;III)V")
-	public void drawTileOverlay(int arg0, int arg1, int arg2, int arg3, Ground arg4, int arg5, int arg7) {
-		int var9 = arg4.vertexX.length;
-		for (int var10 = 0; var10 < var9; var10++) {
-			int var23 = arg4.vertexX[var10] - eyeX;
-			int var24 = arg4.vertexY[var10] - eyeY;
-			int var25 = arg4.vertexZ[var10] - eyeZ;
-			int var26 = arg2 * var25 + arg3 * var23 >> 16;
-			int var27 = arg3 * var25 - arg2 * var23 >> 16;
-			int var29 = arg5 * var24 - arg1 * var27 >> 16;
-			int var30 = arg1 * var24 + arg5 * var27 >> 16;
-			if (var30 < 50) {
-				return;
-			}
-			if (arg4.triangleTexture != null) {
-				Ground.drawTextureVertexX[var10] = var26;
-				Ground.drawTextureVertexY[var10] = var29;
-				Ground.drawTextureVertexZ[var10] = var30;
-			}
-			Ground.drawVertexX[var10] = (var26 << 9) / var30 + Pix3D.centerX;
-			Ground.drawVertexY[var10] = (var29 << 9) / var30 + Pix3D.centerY;
-		}
-		Pix3D.trans = 0;
-		int var11 = arg4.triangleVertexA.length;
-		for (int var12 = 0; var12 < var11; var12++) {
-			int var13 = arg4.triangleVertexA[var12];
-			int var14 = arg4.triangleVertexB[var12];
-			int var15 = arg4.triangleVertexC[var12];
-			int var16 = Ground.drawVertexX[var13];
-			int var17 = Ground.drawVertexX[var14];
-			int var18 = Ground.drawVertexX[var15];
-			int var19 = Ground.drawVertexY[var13];
-			int var20 = Ground.drawVertexY[var14];
-			int var21 = Ground.drawVertexY[var15];
-			if ((var16 - var17) * (var21 - var20) - (var18 - var17) * (var19 - var20) > 0) {
-				Pix3D.hclip = false;
-				if (var16 < 0 || var17 < 0 || var18 < 0 || var16 > Pix2D.safeWidth || var17 > Pix2D.safeWidth || var18 > Pix2D.safeWidth) {
-					Pix3D.hclip = true;
-				}
-				if (takingInput && this.pointInsideTriangle(mouseX, mouseY, var19, var20, var21, var16, var17, var18)) {
-					clickTileX = arg0;
-					clickTileZ = arg7;
-				}
-				if (arg4.triangleTexture == null || arg4.triangleTexture[var12] == -1) {
-					if (arg4.triangleColourA[var12] != 12345678) {
-						Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, arg4.triangleColourA[var12], arg4.triangleColourB[var12], arg4.triangleColourC[var12]);
-					}
-				} else if (lowMemory) {
-					int var22 = TEXTURE_HSL[arg4.triangleTexture[var12]];
-					Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, this.mulLightness(arg4.triangleColourA[var12], var22), this.mulLightness(arg4.triangleColourB[var12], var22), this.mulLightness(arg4.triangleColourC[var12], var22));
-				} else if (arg4.flat) {
-					Pix3D.textureTriangle(var19, var20, var21, var16, var17, var18, arg4.triangleColourA[var12], arg4.triangleColourB[var12], arg4.triangleColourC[var12], Ground.drawTextureVertexX[0], Ground.drawTextureVertexX[1], Ground.drawTextureVertexX[3], Ground.drawTextureVertexY[0], Ground.drawTextureVertexY[1], Ground.drawTextureVertexY[3], Ground.drawTextureVertexZ[0], Ground.drawTextureVertexZ[1], Ground.drawTextureVertexZ[3], arg4.triangleTexture[var12]);
-				} else {
-					Pix3D.textureTriangle(var19, var20, var21, var16, var17, var18, arg4.triangleColourA[var12], arg4.triangleColourB[var12], arg4.triangleColourC[var12], Ground.drawTextureVertexX[var13], Ground.drawTextureVertexX[var14], Ground.drawTextureVertexX[var15], Ground.drawTextureVertexY[var13], Ground.drawTextureVertexY[var14], Ground.drawTextureVertexY[var15], Ground.drawTextureVertexZ[var13], Ground.drawTextureVertexZ[var14], Ground.drawTextureVertexZ[var15], arg4.triangleTexture[var12]);
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.e(III)I")
-	public int mulLightness(int arg0, int arg2) {
-		int var4 = 127 - arg0;
-		int var5 = (arg2 & 0x7F) * var4 / 160;
-		if (var5 < 2) {
-			var5 = 2;
-		} else if (var5 > 126) {
-			var5 = 126;
-		}
-		return (arg2 & 0xFF80) + var5;
-	}
-
-	@ObfuscatedName("s.a(IIIIIIII)Z")
-	public boolean pointInsideTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
-		if (arg1 < arg2 && arg1 < arg3 && arg1 < arg4) {
-			return false;
-		} else if (arg1 > arg2 && arg1 > arg3 && arg1 > arg4) {
-			return false;
-		} else if (arg0 < arg5 && arg0 < arg6 && arg0 < arg7) {
-			return false;
-		} else if (arg0 > arg5 && arg0 > arg6 && arg0 > arg7) {
-			return false;
-		} else {
-			int var9 = (arg1 - arg2) * (arg6 - arg5) - (arg0 - arg5) * (arg3 - arg2);
-			int var10 = (arg1 - arg4) * (arg5 - arg7) - (arg0 - arg7) * (arg2 - arg4);
-			int var11 = (arg1 - arg3) * (arg7 - arg6) - (arg0 - arg6) * (arg4 - arg3);
-			return var9 * var11 > 0 && var10 * var11 > 0;
-		}
-	}
-
-	@ObfuscatedName("s.b(I)V")
-	public void updateActiveOccluders() {
-		int var2 = levelOccluderCunt[topLevel];
-		Occlude[] var4 = levelOccluders[topLevel];
-		activeOccluderCount = 0;
-		for (int var5 = 0; var5 < var2; var5++) {
-			Occlude var6 = var4[var5];
-			if (var6.type == 1) {
-				int var7 = var6.minGridX - eyeTileX + 25;
-				if (var7 >= 0 && var7 <= 50) {
-					int var8 = var6.minGridZ - eyeTileZ + 25;
-					if (var8 < 0) {
-						var8 = 0;
-					}
-					int var9 = var6.maxGridZ - eyeTileZ + 25;
-					if (var9 > 50) {
-						var9 = 50;
-					}
-					boolean var10 = false;
-					while (var8 <= var9) {
-						if (visibilityMap[var7][var8++]) {
-							var10 = true;
-							break;
-						}
-					}
-					if (var10) {
-						int var11 = eyeX - var6.minX;
-						if (var11 > 32) {
-							var6.mode = 1;
-						} else {
-							if (var11 >= -32) {
-								continue;
-							}
-							var6.mode = 2;
-							var11 = -var11;
-						}
-						var6.minDeltaZ = (var6.minZ - eyeZ << 8) / var11;
-						var6.maxDeltaZ = (var6.maxZ - eyeZ << 8) / var11;
-						var6.minDeltaY = (var6.minY - eyeY << 8) / var11;
-						var6.maxDeltaY = (var6.maxY - eyeY << 8) / var11;
-						activeOccluders[activeOccluderCount++] = var6;
-					}
-				}
-			} else if (var6.type == 2) {
-				int var12 = var6.minGridZ - eyeTileZ + 25;
-				if (var12 >= 0 && var12 <= 50) {
-					int var13 = var6.minGridX - eyeTileX + 25;
-					if (var13 < 0) {
-						var13 = 0;
-					}
-					int var14 = var6.maxGridX - eyeTileX + 25;
-					if (var14 > 50) {
-						var14 = 50;
-					}
-					boolean var15 = false;
-					while (var13 <= var14) {
-						if (visibilityMap[var13++][var12]) {
-							var15 = true;
-							break;
-						}
-					}
-					if (var15) {
-						int var16 = eyeZ - var6.minZ;
-						if (var16 > 32) {
-							var6.mode = 3;
-						} else {
-							if (var16 >= -32) {
-								continue;
-							}
-							var6.mode = 4;
-							var16 = -var16;
-						}
-						var6.minDeltaX = (var6.minX - eyeX << 8) / var16;
-						var6.maxDeltaX = (var6.maxX - eyeX << 8) / var16;
-						var6.minDeltaY = (var6.minY - eyeY << 8) / var16;
-						var6.maxDeltaY = (var6.maxY - eyeY << 8) / var16;
-						activeOccluders[activeOccluderCount++] = var6;
-					}
-				}
-			} else if (var6.type == 4) {
-				int var17 = var6.minY - eyeY;
-				if (var17 > 128) {
-					int var18 = var6.minGridZ - eyeTileZ + 25;
-					if (var18 < 0) {
-						var18 = 0;
-					}
-					int var19 = var6.maxGridZ - eyeTileZ + 25;
-					if (var19 > 50) {
-						var19 = 50;
-					}
-					if (var18 <= var19) {
-						int var20 = var6.minGridX - eyeTileX + 25;
-						if (var20 < 0) {
-							var20 = 0;
-						}
-						int var21 = var6.maxGridX - eyeTileX + 25;
-						if (var21 > 50) {
-							var21 = 50;
-						}
-						boolean var22 = false;
-						label145: for (int var23 = var20; var23 <= var21; var23++) {
-							for (int var24 = var18; var24 <= var19; var24++) {
-								if (visibilityMap[var23][var24]) {
-									var22 = true;
-									break label145;
-								}
-							}
-						}
-						if (var22) {
-							var6.mode = 5;
-							var6.minDeltaX = (var6.minX - eyeX << 8) / var17;
-							var6.maxDeltaX = (var6.maxX - eyeX << 8) / var17;
-							var6.minDeltaZ = (var6.minZ - eyeZ << 8) / var17;
-							var6.maxDeltaZ = (var6.maxZ - eyeZ << 8) / var17;
-							activeOccluders[activeOccluderCount++] = var6;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("s.f(III)Z")
-	public boolean tileVisible(int arg0, int arg1, int arg2) {
-		int var4 = this.levelTileOcclusionCycles[arg0][arg1][arg2];
-		if (-cycle == var4) {
-			return false;
-		} else if (cycle == var4) {
-			return true;
-		} else {
-			int var5 = arg1 << 7;
-			int var6 = arg2 << 7;
-			if (this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2], var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2], var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2 + 1], var6 + 128 - 1) && this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2 + 1], var6 + 128 - 1)) {
-				this.levelTileOcclusionCycles[arg0][arg1][arg2] = cycle;
-				return true;
-			} else {
-				this.levelTileOcclusionCycles[arg0][arg1][arg2] = -cycle;
-				return false;
-			}
-		}
-	}
-
-	@ObfuscatedName("s.j(IIII)Z")
-	public boolean isTileSideOccluded(int arg0, int arg1, int arg2, int arg3) {
-		if (!this.tileVisible(arg0, arg1, arg2)) {
-			return false;
-		}
-		int var5 = arg1 << 7;
-		int var6 = arg2 << 7;
-		int var7 = this.levelHeightmaps[arg0][arg1][arg2] - 1;
-		int var8 = var7 - 120;
-		int var9 = var7 - 230;
-		int var10 = var7 - 238;
-		if (arg3 < 16) {
-			if (arg3 == 1) {
-				if (var5 > eyeX) {
-					if (!this.occluded(var5, var7, var6)) {
-						return false;
-					}
-					if (!this.occluded(var5, var7, var6 + 128)) {
-						return false;
-					}
-				}
-				if (arg0 > 0) {
-					if (!this.occluded(var5, var8, var6)) {
-						return false;
-					}
-					if (!this.occluded(var5, var8, var6 + 128)) {
-						return false;
-					}
-				}
-				if (!this.occluded(var5, var9, var6)) {
-					return false;
-				}
-				if (!this.occluded(var5, var9, var6 + 128)) {
-					return false;
-				}
-				return true;
-			}
-			if (arg3 == 2) {
-				if (var6 < eyeZ) {
-					if (!this.occluded(var5, var7, var6 + 128)) {
-						return false;
-					}
-					if (!this.occluded(var5 + 128, var7, var6 + 128)) {
-						return false;
-					}
-				}
-				if (arg0 > 0) {
-					if (!this.occluded(var5, var8, var6 + 128)) {
-						return false;
-					}
-					if (!this.occluded(var5 + 128, var8, var6 + 128)) {
-						return false;
-					}
-				}
-				if (!this.occluded(var5, var9, var6 + 128)) {
-					return false;
-				}
-				if (!this.occluded(var5 + 128, var9, var6 + 128)) {
-					return false;
-				}
-				return true;
-			}
-			if (arg3 == 4) {
-				if (var5 < eyeX) {
-					if (!this.occluded(var5 + 128, var7, var6)) {
-						return false;
-					}
-					if (!this.occluded(var5 + 128, var7, var6 + 128)) {
-						return false;
-					}
-				}
-				if (arg0 > 0) {
-					if (!this.occluded(var5 + 128, var8, var6)) {
-						return false;
-					}
-					if (!this.occluded(var5 + 128, var8, var6 + 128)) {
-						return false;
-					}
-				}
-				if (!this.occluded(var5 + 128, var9, var6)) {
-					return false;
-				}
-				if (!this.occluded(var5 + 128, var9, var6 + 128)) {
-					return false;
-				}
-				return true;
-			}
-			if (arg3 == 8) {
-				if (var6 > eyeZ) {
-					if (!this.occluded(var5, var7, var6)) {
-						return false;
-					}
-					if (!this.occluded(var5 + 128, var7, var6)) {
-						return false;
-					}
-				}
-				if (arg0 > 0) {
-					if (!this.occluded(var5, var8, var6)) {
-						return false;
-					}
-					if (!this.occluded(var5 + 128, var8, var6)) {
-						return false;
-					}
-				}
-				if (!this.occluded(var5, var9, var6)) {
-					return false;
-				}
-				if (!this.occluded(var5 + 128, var9, var6)) {
-					return false;
-				}
-				return true;
-			}
-		}
-		if (!this.occluded(var5 + 64, var10, var6 + 64)) {
-			return false;
-		} else if (arg3 == 16) {
-			return this.occluded(var5, var9, var6 + 128);
-		} else if (arg3 == 32) {
-			return this.occluded(var5 + 128, var9, var6 + 128);
-		} else if (arg3 == 64) {
-			return this.occluded(var5 + 128, var9, var6);
-		} else if (arg3 == 128) {
-			return this.occluded(var5, var9, var6);
-		} else {
-			System.out.println("Warning unsupported wall type");
-			return true;
-		}
-	}
-
-	@ObfuscatedName("s.k(IIII)Z")
-	public boolean isTileColumnOccluded(int arg0, int arg1, int arg2, int arg3) {
-		if (this.tileVisible(arg0, arg1, arg2)) {
-			int var5 = arg1 << 7;
-			int var6 = arg2 << 7;
-			return this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2] - arg3, var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2] - arg3, var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2 + 1] - arg3, var6 + 128 - 1) && this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2 + 1] - arg3, var6 + 128 - 1);
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("s.b(IIIIII)Z")
-	public boolean locVisible(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg1 != arg2 || arg3 != arg4) {
-			for (int var9 = arg1; var9 <= arg2; var9++) {
-				for (int var15 = arg3; var15 <= arg4; var15++) {
-					if (this.levelTileOcclusionCycles[arg0][var9][var15] == -cycle) {
-						return false;
-					}
-				}
-			}
-			int var10 = (arg1 << 7) + 1;
-			int var11 = (arg3 << 7) + 2;
-			int var12 = this.levelHeightmaps[arg0][arg1][arg3] - arg5;
-			if (!this.occluded(var10, var12, var11)) {
-				return false;
-			}
-			int var13 = (arg2 << 7) - 1;
-			if (!this.occluded(var13, var12, var11)) {
-				return false;
-			}
-			int var14 = (arg4 << 7) - 1;
-			if (!this.occluded(var10, var12, var14)) {
-				return false;
-			} else if (this.occluded(var13, var12, var14)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else if (this.tileVisible(arg0, arg1, arg3)) {
-			int var7 = arg1 << 7;
-			int var8 = arg3 << 7;
-			return this.occluded(var7 + 1, this.levelHeightmaps[arg0][arg1][arg3] - arg5, var8 + 1) && this.occluded(var7 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg3] - arg5, var8 + 1) && this.occluded(var7 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg3 + 1] - arg5, var8 + 128 - 1) && this.occluded(var7 + 1, this.levelHeightmaps[arg0][arg1][arg3 + 1] - arg5, var8 + 128 - 1);
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("s.g(III)Z")
-	public boolean occluded(int arg0, int arg1, int arg2) {
-		for (int var4 = 0; var4 < activeOccluderCount; var4++) {
-			Occlude var5 = activeOccluders[var4];
-			if (var5.mode == 1) {
-				int var6 = var5.minX - arg0;
-				if (var6 > 0) {
-					int var7 = (var5.minDeltaZ * var6 >> 8) + var5.minZ;
-					int var8 = (var5.maxDeltaZ * var6 >> 8) + var5.maxZ;
-					int var9 = (var5.minDeltaY * var6 >> 8) + var5.minY;
-					int var10 = (var5.maxDeltaY * var6 >> 8) + var5.maxY;
-					if (arg2 >= var7 && arg2 <= var8 && arg1 >= var9 && arg1 <= var10) {
-						return true;
-					}
-				}
-			} else if (var5.mode == 2) {
-				int var11 = arg0 - var5.minX;
-				if (var11 > 0) {
-					int var12 = (var5.minDeltaZ * var11 >> 8) + var5.minZ;
-					int var13 = (var5.maxDeltaZ * var11 >> 8) + var5.maxZ;
-					int var14 = (var5.minDeltaY * var11 >> 8) + var5.minY;
-					int var15 = (var5.maxDeltaY * var11 >> 8) + var5.maxY;
-					if (arg2 >= var12 && arg2 <= var13 && arg1 >= var14 && arg1 <= var15) {
-						return true;
-					}
-				}
-			} else if (var5.mode == 3) {
-				int var16 = var5.minZ - arg2;
-				if (var16 > 0) {
-					int var17 = (var5.minDeltaX * var16 >> 8) + var5.minX;
-					int var18 = (var5.maxDeltaX * var16 >> 8) + var5.maxX;
-					int var19 = (var5.minDeltaY * var16 >> 8) + var5.minY;
-					int var20 = (var5.maxDeltaY * var16 >> 8) + var5.maxY;
-					if (arg0 >= var17 && arg0 <= var18 && arg1 >= var19 && arg1 <= var20) {
-						return true;
-					}
-				}
-			} else if (var5.mode == 4) {
-				int var21 = arg2 - var5.minZ;
-				if (var21 > 0) {
-					int var22 = (var5.minDeltaX * var21 >> 8) + var5.minX;
-					int var23 = (var5.maxDeltaX * var21 >> 8) + var5.maxX;
-					int var24 = (var5.minDeltaY * var21 >> 8) + var5.minY;
-					int var25 = (var5.maxDeltaY * var21 >> 8) + var5.maxY;
-					if (arg0 >= var22 && arg0 <= var23 && arg1 >= var24 && arg1 <= var25) {
-						return true;
-					}
-				}
-			} else if (var5.mode == 5) {
-				int var26 = arg1 - var5.minY;
-				if (var26 > 0) {
-					int var27 = (var5.minDeltaX * var26 >> 8) + var5.minX;
-					int var28 = (var5.maxDeltaX * var26 >> 8) + var5.maxX;
-					int var29 = (var5.minDeltaZ * var26 >> 8) + var5.minZ;
-					int var30 = (var5.maxDeltaZ * var26 >> 8) + var5.maxZ;
-					if (arg0 >= var27 && arg0 <= var28 && arg2 >= var29 && arg2 <= var30) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+   @ObfuscatedName("KJCMXHNO.b")
+   public int b = -203;
+   @ObfuscatedName("KJCMXHNO.c")
+   public boolean c = true;
+   @ObfuscatedName("KJCMXHNO.d")
+   public boolean d = false;
+   @ObfuscatedName("KJCMXHNO.g")
+   public int g = 2;
+   @ObfuscatedName("KJCMXHNO.h")
+   public int h = -766;
+   @ObfuscatedName("KJCMXHNO.i")
+   public boolean i = true;
+   @ObfuscatedName("KJCMXHNO.j")
+   public boolean j = true;
+   @ObfuscatedName("KJCMXHNO.k")
+   public boolean k = false;
+   @ObfuscatedName("KJCMXHNO.l")
+   public int l = -68;
+   @ObfuscatedName("KJCMXHNO.u")
+   public Loc[] u = new Loc[5000];
+   @ObfuscatedName("KJCMXHNO.kb")
+   public int[] kb = new int[10000];
+   @ObfuscatedName("KJCMXHNO.lb")
+   public int[] lb = new int[10000];
+   @ObfuscatedName("KJCMXHNO.nb")
+   public int[][] nb = new int[][]{new int[16], {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1}, {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1}};
+   @ObfuscatedName("KJCMXHNO.ob")
+   public int[][] ob = new int[][]{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, {12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3}, {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, {3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12}};
+   @ObfuscatedName("KJCMXHNO.n")
+   public int n;
+   @ObfuscatedName("KJCMXHNO.o")
+   public int o;
+   @ObfuscatedName("KJCMXHNO.p")
+   public int p;
+   @ObfuscatedName("KJCMXHNO.r")
+   public Square[][][] r;
+   @ObfuscatedName("KJCMXHNO.v")
+   public int[][][] v;
+   @ObfuscatedName("KJCMXHNO.q")
+   public int[][][] q;
+   @ObfuscatedName("KJCMXHNO.m")
+   public static boolean m = true;
+   @ObfuscatedName("KJCMXHNO.M")
+   public static Loc[] M = new Loc[100];
+   @ObfuscatedName("KJCMXHNO.N")
+   public static final int[] N = new int[]{53, -53, -53, 53};
+   @ObfuscatedName("KJCMXHNO.O")
+   public static final int[] O = new int[]{-53, -53, 53, 53};
+   @ObfuscatedName("KJCMXHNO.P")
+   public static final int[] P = new int[]{-45, 45, 45, -45};
+   @ObfuscatedName("KJCMXHNO.Q")
+   public static final int[] Q = new int[]{45, 45, -45, -45};
+   @ObfuscatedName("KJCMXHNO.U")
+   public static int U = -1;
+   @ObfuscatedName("KJCMXHNO.V")
+   public static int V = -1;
+   @ObfuscatedName("KJCMXHNO.W")
+   public static int W = 4;
+   @ObfuscatedName("KJCMXHNO.X")
+   public static int[] X = new int[W];
+   @ObfuscatedName("KJCMXHNO.Y")
+   public static Occlude[][] Y = new Occlude[W][500];
+   @ObfuscatedName("KJCMXHNO.ab")
+   public static Occlude[] ab = new Occlude[500];
+   @ObfuscatedName("KJCMXHNO.bb")
+   public static LinkList bb = new LinkList();
+   @ObfuscatedName("KJCMXHNO.cb")
+   public static final int[] cb = new int[]{19, 55, 38, 155, 255, 110, 137, 205, 76};
+   @ObfuscatedName("KJCMXHNO.db")
+   public static final int[] db = new int[]{160, 192, 80, 96, 0, 144, 80, 48, 160};
+   @ObfuscatedName("KJCMXHNO.eb")
+   public static final int[] eb = new int[]{76, 8, 137, 4, 0, 1, 38, 2, 19};
+   @ObfuscatedName("KJCMXHNO.fb")
+   public static final int[] fb = new int[]{0, 0, 2, 0, 0, 2, 1, 1, 0};
+   @ObfuscatedName("KJCMXHNO.gb")
+   public static final int[] gb = new int[]{2, 0, 0, 2, 0, 0, 0, 4, 4};
+   @ObfuscatedName("KJCMXHNO.hb")
+   public static final int[] hb = new int[]{0, 4, 4, 8, 0, 0, 8, 0, 0};
+   @ObfuscatedName("KJCMXHNO.ib")
+   public static final int[] ib = new int[]{1, 1, 0, 0, 0, 8, 0, 0, 8};
+   @ObfuscatedName("KJCMXHNO.jb")
+   public static final int[] jb = new int[]{41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 43086, 41, 41, 41, 41, 41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41, 41, 5056, 41, 41, 41, 7079, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 3131, 41, 41, 41};
+   @ObfuscatedName("KJCMXHNO.pb")
+   public static boolean[][][][] pb = new boolean[8][32][51][51];
+   @ObfuscatedName("KJCMXHNO.A")
+   public static int A;
+   @ObfuscatedName("KJCMXHNO.B")
+   public static int B;
+   @ObfuscatedName("KJCMXHNO.C")
+   public static int C;
+   @ObfuscatedName("KJCMXHNO.D")
+   public static int D;
+   @ObfuscatedName("KJCMXHNO.E")
+   public static int E;
+   @ObfuscatedName("KJCMXHNO.F")
+   public static int F;
+   @ObfuscatedName("KJCMXHNO.G")
+   public static int G;
+   @ObfuscatedName("KJCMXHNO.H")
+   public static int H;
+   @ObfuscatedName("KJCMXHNO.I")
+   public static int I;
+   @ObfuscatedName("KJCMXHNO.J")
+   public static int J;
+   @ObfuscatedName("KJCMXHNO.K")
+   public static int K;
+   @ObfuscatedName("KJCMXHNO.L")
+   public static int L;
+   @ObfuscatedName("KJCMXHNO.S")
+   public static int S;
+   @ObfuscatedName("KJCMXHNO.T")
+   public static int T;
+   @ObfuscatedName("KJCMXHNO.Z")
+   public static int Z;
+   @ObfuscatedName("KJCMXHNO.e")
+   public int e;
+   @ObfuscatedName("KJCMXHNO.f")
+   public static int f;
+   @ObfuscatedName("KJCMXHNO.mb")
+   public int mb;
+   @ObfuscatedName("KJCMXHNO.rb")
+   public static int rb;
+   @ObfuscatedName("KJCMXHNO.s")
+   public int s;
+   @ObfuscatedName("KJCMXHNO.sb")
+   public static int sb;
+   @ObfuscatedName("KJCMXHNO.t")
+   public int t;
+   @ObfuscatedName("KJCMXHNO.tb")
+   public static int tb;
+   @ObfuscatedName("KJCMXHNO.ub")
+   public static int ub;
+   @ObfuscatedName("KJCMXHNO.vb")
+   public static int vb;
+   @ObfuscatedName("KJCMXHNO.w")
+   public static int w;
+   @ObfuscatedName("KJCMXHNO.wb")
+   public static int wb;
+   @ObfuscatedName("KJCMXHNO.x")
+   public static int x;
+   @ObfuscatedName("KJCMXHNO.y")
+   public static int y;
+   @ObfuscatedName("KJCMXHNO.z")
+   public static int z;
+   @ObfuscatedName("KJCMXHNO.R")
+   public static boolean R;
+   @ObfuscatedName("KJCMXHNO.a")
+   public static boolean a;
+   @ObfuscatedName("KJCMXHNO.qb")
+   public static boolean[][] qb;
+
+   public World3D(int[][][] arg0, int arg1, int arg2, int arg3, byte arg4) {
+      this.n = arg2;
+      this.o = arg3;
+      this.p = arg1;
+      this.r = new Square[arg2][arg3][arg1];
+      this.v = new int[arg2][arg3 + 1][arg1 + 1];
+      this.q = arg0;
+      if (arg4 == 5) {
+         boolean var6 = false;
+      } else {
+         this.h = 272;
+      }
+
+      this.a((byte)7);
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(Z)V")
+   public static void a(boolean arg0) {
+      M = null;
+      X = null;
+      Y = null;
+      bb = null;
+      pb = null;
+      if (!arg0) {
+         qb = null;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(B)V")
+   public void a(byte arg0) {
+      for(int var2 = 0; var2 < this.n; ++var2) {
+         for(int var3 = 0; var3 < this.o; ++var3) {
+            for(int var4 = 0; var4 < this.p; ++var4) {
+               this.r[var2][var3][var4] = null;
+            }
+         }
+      }
+
+      if (arg0 != 7) {
+         for(int var5 = 1; var5 > 0; ++var5) {
+         }
+      }
+
+      for(int var6 = 0; var6 < W; ++var6) {
+         for(int var7 = 0; var7 < X[var6]; ++var7) {
+            Y[var6][var7] = null;
+         }
+
+         X[var6] = 0;
+      }
+
+      for(int var8 = 0; var8 < this.t; ++var8) {
+         this.u[var8] = null;
+      }
+
+      this.t = 0;
+
+      for(int var9 = 0; var9 < M.length; ++var9) {
+         M[var9] = null;
+      }
+
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IZ)V")
+   public void a(int arg0, boolean arg1) {
+      if (!arg1) {
+         this.j = !this.j;
+      }
+
+      this.s = arg0;
+
+      for(int var3 = 0; var3 < this.o; ++var3) {
+         for(int var4 = 0; var4 < this.p; ++var4) {
+            if (this.r[arg0][var3][var4] == null) {
+               this.r[arg0][var3][var4] = new Square(arg0, var3, var4);
+            }
+         }
+      }
+
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(ZII)V")
+   public void a(boolean arg0, int arg1, int arg2) {
+      Square var4 = this.r[0][arg1][arg2];
+
+      for(int var5 = 0; var5 < 3; ++var5) {
+         Square var6 = this.r[var5][arg1][arg2] = this.r[var5 + 1][arg1][arg2];
+         if (var6 != null) {
+            --var6.f;
+
+            for(int var7 = 0; var7 < var6.p; ++var7) {
+               Loc var8 = var6.q[var7];
+               if ((var8.m >> 29 & 3) == 2 && var8.g == arg1 && var8.i == arg2) {
+                  --var8.a;
+               }
+            }
+         }
+      }
+
+      if (this.r[0][arg1][arg2] == null) {
+         this.r[0][arg1][arg2] = new Square(0, arg1, arg2);
+      }
+
+      this.r[0][arg1][arg2].B = var4;
+      if (!arg0) {
+         for(int var9 = 1; var9 > 0; ++var9) {
+         }
+      }
+
+      this.r[3][arg1][arg2] = null;
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIIIIII)V")
+   public static void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+      Occlude var9 = new Occlude();
+      if (arg0 != -8967) {
+         for(int var10 = 1; var10 > 0; ++var10) {
+         }
+      }
+
+      var9.a = arg1 / 128;
+      var9.b = arg3 / 128;
+      var9.c = arg6 / 128;
+      var9.d = arg4 / 128;
+      var9.e = arg8;
+      var9.f = arg1;
+      var9.g = arg3;
+      var9.h = arg6;
+      var9.i = arg4;
+      var9.j = arg7;
+      var9.k = arg2;
+      Y[arg5][X[arg5]++] = var9;
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIII)V")
+   public void a(int arg0, int arg1, int arg2, int arg3) {
+      Square var5 = this.r[arg0][arg1][arg2];
+      if (var5 != null) {
+         this.r[arg0][arg1][arg2].t = arg3;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIIIIIIIIIIIIIIIII)V")
+   public void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
+      if (arg3 == 0) {
+         QuickGround var21 = new QuickGround(arg10, arg11, arg12, arg13, -1, arg18, false);
+
+         for(int var22 = arg0; var22 >= 0; --var22) {
+            if (this.r[var22][arg1][arg2] == null) {
+               this.r[var22][arg1][arg2] = new Square(var22, arg1, arg2);
+            }
+         }
+
+         this.r[arg0][arg1][arg2].j = var21;
+      } else if (arg3 != 1) {
+         Ground var25 = new Ground(arg9, arg14, arg8, arg6, arg1, arg12, arg13, arg19, arg11, arg16, 0, arg10, arg3, arg7, arg17, arg5, arg18, arg15, arg2, arg4);
+
+         for(int var26 = arg0; var26 >= 0; --var26) {
+            if (this.r[var26][arg1][arg2] == null) {
+               this.r[var26][arg1][arg2] = new Square(var26, arg1, arg2);
+            }
+         }
+
+         this.r[arg0][arg1][arg2].k = var25;
+      } else {
+         QuickGround var23 = new QuickGround(arg14, arg15, arg16, arg17, arg5, arg19, arg6 == arg7 && arg6 == arg8 && arg6 == arg9);
+
+         for(int var24 = arg0; var24 >= 0; --var24) {
+            if (this.r[var24][arg1][arg2] == null) {
+               this.r[var24][arg1][arg2] = new Square(var24, arg1, arg2);
+            }
+         }
+
+         this.r[arg0][arg1][arg2].j = var23;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIBIIILZOXDNIET;)V")
+   public void a(int arg0, int arg1, int arg2, byte arg3, int arg4, int arg5, int arg6, ModelSource arg7) {
+      if (arg2 > 0) {
+         if (arg7 != null) {
+            GroundDecor var9 = new GroundDecor();
+            var9.d = arg7;
+            var9.b = arg0 * 128 + 64;
+            var9.c = arg1 * 128 + 64;
+            var9.a = arg5;
+            var9.e = arg4;
+            var9.f = arg3;
+            if (this.r[arg6][arg0][arg1] == null) {
+               this.r[arg6][arg0][arg1] = new Square(arg6, arg0, arg1);
+            }
+
+            this.r[arg6][arg0][arg1].n = var9;
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IILZOXDNIET;LZOXDNIET;ILZOXDNIET;III)V")
+   public void a(int arg0, int arg1, ModelSource arg2, ModelSource arg3, int arg4, ModelSource arg5, int arg6, int arg7, int arg8) {
+      GroundObject var10 = new GroundObject();
+      var10.d = arg2;
+      var10.b = arg8 * 128 + 64;
+      var10.c = arg7 * 128 + 64;
+      var10.a = arg0;
+      var10.g = arg4;
+      var10.e = arg3;
+      var10.f = arg5;
+      if (arg6 < 2 || arg6 > 2) {
+         this.i = !this.i;
+      }
+
+      int var11 = 0;
+      Square var12 = this.r[arg1][arg8][arg7];
+      if (var12 != null) {
+         for(int var13 = 0; var13 < var12.p; ++var13) {
+            if (var12.q[var13].e instanceof Model) {
+               int var14 = ((Model)var12.q[var13].e).Z;
+               if (var14 > var11) {
+                  var11 = var14;
+               }
+            }
+         }
+      }
+
+      var10.h = var11;
+      if (this.r[arg1][arg8][arg7] == null) {
+         this.r[arg1][arg8][arg7] = new Square(arg1, arg8, arg7);
+      }
+
+      this.r[arg1][arg8][arg7].o = var10;
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIILZOXDNIET;IIBILZOXDNIET;I)V")
+   public void a(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, byte arg7, int arg8, ModelSource arg9, int arg10) {
+      if (arg9 != null || arg4 != null) {
+         Wall var12 = new Wall();
+         var12.h = arg6;
+         var12.i = arg7;
+         var12.b = arg5 * 128 + 64;
+         var12.c = arg8 * 128 + 64;
+         var12.a = arg0;
+         if (arg1 != 49878) {
+            for(int var13 = 1; var13 > 0; ++var13) {
+            }
+         }
+
+         var12.f = arg9;
+         var12.g = arg4;
+         var12.d = arg3;
+         var12.e = arg2;
+
+         for(int var14 = arg10; var14 >= 0; --var14) {
+            if (this.r[var14][arg5][arg8] == null) {
+               this.r[var14][arg5][arg8] = new Square(var14, arg5, arg8);
+            }
+         }
+
+         this.r[arg10][arg5][arg8].l = var12;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIBIIIIILZOXDNIET;I)V")
+   public void a(int arg0, int arg1, int arg2, int arg3, byte arg4, int arg5, int arg6, int arg7, int arg8, int arg9, ModelSource arg10, int arg11) {
+      if (arg10 != null) {
+         Decor var13 = new Decor();
+         var13.g = arg3;
+         var13.h = arg4;
+         var13.b = arg5 * 128 + 64 + arg8;
+         var13.c = arg7 * 128 + 64 + arg6;
+         if (arg11 >= 0) {
+            this.h = 308;
+         }
+
+         var13.a = arg9;
+         var13.f = arg10;
+         var13.d = arg1;
+         var13.e = arg2;
+
+         for(int var14 = arg0; var14 >= 0; --var14) {
+            if (this.r[var14][arg5][arg7] == null) {
+               this.r[var14][arg5][arg7] = new Square(var14, arg5, arg7);
+            }
+         }
+
+         this.r[arg0][arg5][arg7].m = var13;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIILZOXDNIET;BIIIIII)Z")
+   public boolean a(int arg0, int arg1, int arg2, ModelSource arg3, byte arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+      if (arg7 < 0) {
+         if (arg3 == null) {
+            return true;
+         } else {
+            int var12 = arg1 * 64 + arg6 * 128;
+            int var13 = arg2 * 128 + arg8 * 64;
+            return this.a(arg0, arg6, arg2, arg1, arg8, var12, var13, arg9, arg3, arg5, false, arg10, arg4);
+         }
+      } else {
+         throw new NullPointerException();
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(ILZOXDNIET;IIZIIIII)Z")
+   public boolean a(int arg0, ModelSource arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+      if (arg1 == null) {
+         return true;
+      } else {
+         int var11 = arg2 - arg7;
+         int var12 = arg8 - arg7;
+         int var13 = arg2 + arg7;
+         int var14 = arg7 + arg8;
+         if (arg4) {
+            if (arg9 > 640 && arg9 < 1408) {
+               var14 += 128;
+            }
+
+            if (arg9 > 1152 && arg9 < 1920) {
+               var13 += 128;
+            }
+
+            if (arg9 > 1664 || arg9 < 384) {
+               var12 -= 128;
+            }
+
+            if (arg9 > 128 && arg9 < 896) {
+               var11 -= 128;
+            }
+         }
+
+         int var15 = var11 / 128;
+         if (arg5 != 0) {
+            this.l = 368;
+         }
+
+         int var16 = var12 / 128;
+         int var17 = var13 / 128;
+         int var18 = var14 / 128;
+         return this.a(arg6, var15, var16, var17 - var15 + 1, var18 - var16 + 1, arg2, arg8, arg3, arg1, arg9, true, arg0, (byte)0);
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIILZOXDNIET;IIIIIIII)Z")
+   public boolean a(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
+      if (arg3 < 7 || arg3 > 7) {
+         this.k = !this.k;
+      }
+
+      return arg4 == null ? true : this.a(arg11, arg5, arg1, arg10 - arg5 + 1, arg7 - arg1 + 1, arg8, arg6, arg0, arg4, arg9, true, arg12, (byte)0);
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIIIIILZOXDNIET;IZIB)Z")
+   public boolean a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, ModelSource arg8, int arg9, boolean arg10, int arg11, byte arg12) {
+      for(int var14 = arg1; var14 < arg1 + arg3; ++var14) {
+         for(int var15 = arg2; var15 < arg2 + arg4; ++var15) {
+            if (var14 < 0 || var15 < 0 || var14 >= this.o || var15 >= this.p) {
+               return false;
+            }
+
+            Square var16 = this.r[arg0][var14][var15];
+            if (var16 != null && var16.p >= 5) {
+               return false;
+            }
+         }
+      }
+
+      Loc var17 = new Loc();
+      var17.m = arg11;
+      var17.n = arg12;
+      var17.a = arg0;
+      var17.c = arg5;
+      var17.d = arg6;
+      var17.b = arg7;
+      var17.e = arg8;
+      var17.f = arg9;
+      var17.g = arg1;
+      var17.i = arg2;
+      var17.h = arg1 + arg3 - 1;
+      var17.j = arg2 + arg4 - 1;
+
+      for(int var18 = arg1; var18 < arg1 + arg3; ++var18) {
+         for(int var19 = arg2; var19 < arg2 + arg4; ++var19) {
+            int var20 = 0;
+            if (var18 > arg1) {
+               ++var20;
+            }
+
+            if (var18 < arg1 + arg3 - 1) {
+               var20 += 4;
+            }
+
+            if (var19 > arg2) {
+               var20 += 8;
+            }
+
+            if (var19 < arg2 + arg4 - 1) {
+               var20 += 2;
+            }
+
+            for(int var21 = arg0; var21 >= 0; --var21) {
+               if (this.r[var21][var18][var19] == null) {
+                  this.r[var21][var18][var19] = new Square(var21, var18, var19);
+               }
+            }
+
+            Square var22 = this.r[arg0][var18][var19];
+            var22.q[var22.p] = var17;
+            var22.r[var22.p] = var20;
+            var22.s |= var20;
+            ++var22.p;
+         }
+      }
+
+      if (arg10) {
+         this.u[this.t++] = var17;
+      }
+
+      return true;
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(I)V")
+   public void a(int arg0) {
+      int var2 = 16 / arg0;
+
+      for(int var3 = 0; var3 < this.t; ++var3) {
+         Loc var4 = this.u[var3];
+         this.a(var4, 0);
+         this.u[var3] = null;
+      }
+
+      this.t = 0;
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(LBHOSVTIT;I)V")
+   public void a(Loc arg0, int arg1) {
+      for(int var3 = arg0.g; var3 <= arg0.h; ++var3) {
+         for(int var4 = arg0.i; var4 <= arg0.j; ++var4) {
+            Square var5 = this.r[arg0.a][var3][var4];
+            if (var5 != null) {
+               for(int var6 = 0; var6 < var5.p; ++var6) {
+                  if (var5.q[var6] == arg0) {
+                     --var5.p;
+
+                     for(int var7 = var6; var7 < var5.p; ++var7) {
+                        var5.q[var7] = var5.q[var7 + 1];
+                        var5.r[var7] = var5.r[var7 + 1];
+                     }
+
+                     var5.q[var5.p] = null;
+                     break;
+                  }
+               }
+
+               var5.s = 0;
+
+               for(int var8 = 0; var8 < var5.p; ++var8) {
+                  var5.s |= var5.r[var8];
+               }
+            }
+         }
+      }
+
+      if (arg1 != 0) {
+         this.e = -317;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIII)V")
+   public void a(int arg0, int arg1, int arg2, int arg3, int arg4) {
+      Square var6 = this.r[arg2][arg3][arg0];
+      if (var6 != null) {
+         Decor var7 = var6.m;
+         if (var7 != null) {
+            int var8 = arg3 * 128 + 64;
+            int var9 = arg0 * 128 + 64;
+            if (arg4 == 0) {
+               var7.b = (var7.b - var8) * arg1 / 16 + var8;
+               var7.c = (var7.c - var9) * arg1 / 16 + var9;
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIZ)V")
+   public void a(int arg0, int arg1, int arg2, boolean arg3) {
+      Square var5 = this.r[arg1][arg2][arg0];
+      if (var5 != null) {
+         var5.l = null;
+         if (!arg3) {
+            this.b = -232;
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(ZIII)V")
+   public void a(boolean arg0, int arg1, int arg2, int arg3) {
+      Square var5 = this.r[arg3][arg1][arg2];
+      if (!arg0) {
+         if (var5 != null) {
+            var5.m = null;
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.b(IIII)V")
+   public void b(int arg0, int arg1, int arg2, int arg3) {
+      if (arg2 < 0) {
+         Square var5 = this.r[arg1][arg3][arg0];
+         if (var5 != null) {
+            for(int var6 = 0; var6 < var5.p; ++var6) {
+               Loc var7 = var5.q[var6];
+               if ((var7.m >> 29 & 3) == 2 && var7.g == arg3 && var7.i == arg0) {
+                  this.a(var7, 0);
+                  return;
+               }
+            }
+
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIZI)V")
+   public void a(int arg0, int arg1, boolean arg2, int arg3) {
+      Square var5 = this.r[arg3][arg0][arg1];
+      if (var5 != null) {
+         var5.n = null;
+         if (!arg2) {
+            for(int var6 = 1; var6 > 0; ++var6) {
+            }
+
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(III)V")
+   public void a(int arg0, int arg1, int arg2) {
+      Square var4 = this.r[arg0][arg1][arg2];
+      if (var4 != null) {
+         var4.o = null;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.c(IIII)LWQXKHZYN;")
+   public Wall c(int arg0, int arg1, int arg2, int arg3) {
+      Square var5 = this.r[arg0][arg2][arg3];
+      if (arg1 != 17734) {
+         throw new NullPointerException();
+      } else {
+         return var5 == null ? null : var5.l;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.b(IIIZ)LSEMZHDXN;")
+   public Decor b(int arg0, int arg1, int arg2, boolean arg3) {
+      Square var5 = this.r[arg0][arg2][arg1];
+      if (arg3) {
+         throw new NullPointerException();
+      } else {
+         return var5 == null ? null : var5.m;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IBII)LBHOSVTIT;")
+   public Loc a(int arg0, byte arg1, int arg2, int arg3) {
+      if (arg1 != 32) {
+         for(int var5 = 1; var5 > 0; ++var5) {
+         }
+      }
+
+      Square var6 = this.r[arg3][arg0][arg2];
+      if (var6 == null) {
+         return null;
+      } else {
+         for(int var7 = 0; var7 < var6.p; ++var7) {
+            Loc var8 = var6.q[var7];
+            if ((var8.m >> 29 & 3) == 2 && var8.g == arg0 && var8.i == arg2) {
+               return var8;
+            }
+         }
+
+         return null;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.d(IIII)LMOLUZZPG;")
+   public GroundDecor d(int arg0, int arg1, int arg2, int arg3) {
+      if (arg2 != 0) {
+         throw new NullPointerException();
+      } else {
+         Square var5 = this.r[arg0][arg3][arg1];
+         return var5 != null && var5.n != null ? var5.n : null;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.b(III)I")
+   public int b(int arg0, int arg1, int arg2) {
+      Square var4 = this.r[arg0][arg1][arg2];
+      return var4 != null && var4.l != null ? var4.l.h : 0;
+   }
+
+   @ObfuscatedName("KJCMXHNO.b(IBII)I")
+   public int b(int arg0, byte arg1, int arg2, int arg3) {
+      if (arg1 != 4) {
+         this.k = !this.k;
+      }
+
+      Square var5 = this.r[arg2][arg0][arg3];
+      return var5 != null && var5.m != null ? var5.m.g : 0;
+   }
+
+   @ObfuscatedName("KJCMXHNO.c(III)I")
+   public int c(int arg0, int arg1, int arg2) {
+      Square var4 = this.r[arg0][arg1][arg2];
+      if (var4 == null) {
+         return 0;
+      } else {
+         for(int var5 = 0; var5 < var4.p; ++var5) {
+            Loc var6 = var4.q[var5];
+            if ((var6.m >> 29 & 3) == 2 && var6.g == arg1 && var6.i == arg2) {
+               return var6.m;
+            }
+         }
+
+         return 0;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.d(III)I")
+   public int d(int arg0, int arg1, int arg2) {
+      Square var4 = this.r[arg0][arg1][arg2];
+      return var4 != null && var4.n != null ? var4.n.e : 0;
+   }
+
+   @ObfuscatedName("KJCMXHNO.e(IIII)I")
+   public int e(int arg0, int arg1, int arg2, int arg3) {
+      Square var5 = this.r[arg0][arg1][arg2];
+      if (var5 == null) {
+         return -1;
+      } else if (var5.l != null && var5.l.h == arg3) {
+         return var5.l.i & 255;
+      } else if (var5.m != null && var5.m.g == arg3) {
+         return var5.m.h & 255;
+      } else if (var5.n != null && var5.n.e == arg3) {
+         return var5.n.f & 255;
+      } else {
+         for(int var6 = 0; var6 < var5.p; ++var6) {
+            if (var5.q[var6].m == arg3) {
+               return var5.q[var6].n & 255;
+            }
+         }
+
+         return -1;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(BIII)V")
+   public void a(byte arg0, int arg1, int arg2, int arg3) {
+      for(int var5 = 0; var5 < this.n; ++var5) {
+         for(int var6 = 0; var6 < this.o; ++var6) {
+            for(int var7 = 0; var7 < this.p; ++var7) {
+               Square var8 = this.r[var5][var6][var7];
+               if (var8 != null) {
+                  Wall var9 = var8.l;
+                  if (var9 != null && var9.f != null && var9.f.j != null) {
+                     this.a(var7, var5, 0, 1, (Model)var9.f, var6, 1);
+                     if (var9.g != null && var9.g.j != null) {
+                        this.a(var7, var5, 0, 1, (Model)var9.g, var6, 1);
+                        this.a((Model)var9.f, (Model)var9.g, 0, 0, 0, false);
+                        ((Model)var9.g).b(arg1, arg2, 0, arg3);
+                     }
+
+                     ((Model)var9.f).b(arg1, arg2, 0, arg3);
+                  }
+
+                  for(int var10 = 0; var10 < var8.p; ++var10) {
+                     Loc var11 = var8.q[var10];
+                     if (var11 != null && var11.e != null && var11.e.j != null) {
+                        this.a(var7, var5, 0, var11.h - var11.g + 1, (Model)var11.e, var6, var11.j - var11.i + 1);
+                        ((Model)var11.e).b(arg1, arg2, 0, arg3);
+                     }
+                  }
+
+                  GroundDecor var12 = var8.n;
+                  if (var12 != null && var12.d.j != null) {
+                     this.a(var6, (Model)var12.d, var7, var5, 0);
+                     ((Model)var12.d).b(arg1, arg2, 0, arg3);
+                  }
+               }
+            }
+         }
+      }
+
+      if (arg0 == 2) {
+         boolean var13 = false;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(ILLZYQDKJV;III)V")
+   public void a(int arg0, Model arg1, int arg2, int arg3, int arg4) {
+      if (arg4 == 0) {
+         if (arg0 < this.o) {
+            Square var6 = this.r[arg3][arg0 + 1][arg2];
+            if (var6 != null && var6.n != null && var6.n.d.j != null) {
+               this.a(arg1, (Model)var6.n.d, 128, 0, 0, true);
+            }
+         }
+
+         if (arg2 < this.o) {
+            Square var7 = this.r[arg3][arg0][arg2 + 1];
+            if (var7 != null && var7.n != null && var7.n.d.j != null) {
+               this.a(arg1, (Model)var7.n.d, 0, 0, 128, true);
+            }
+         }
+
+         if (arg0 < this.o && arg2 < this.p) {
+            Square var8 = this.r[arg3][arg0 + 1][arg2 + 1];
+            if (var8 != null && var8.n != null && var8.n.d.j != null) {
+               this.a(arg1, (Model)var8.n.d, 128, 0, 128, true);
+            }
+         }
+
+         if (arg0 < this.o && arg2 > 0) {
+            Square var9 = this.r[arg3][arg0 + 1][arg2 - 1];
+            if (var9 != null && var9.n != null && var9.n.d.j != null) {
+               this.a(arg1, (Model)var9.n.d, 128, 0, -128, true);
+               return;
+            }
+         }
+
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIILLZYQDKJV;II)V")
+   public void a(int arg0, int arg1, int arg2, int arg3, Model arg4, int arg5, int arg6) {
+      boolean var8 = true;
+      int var9 = arg5;
+      int var10 = arg3 + arg5;
+      int var11 = arg0 - 1;
+      int var12 = arg0 + arg6;
+
+      for(int var13 = arg1; var13 <= arg1 + 1; ++var13) {
+         if (this.n != var13) {
+            for(int var14 = var9; var14 <= var10; ++var14) {
+               if (var14 >= 0 && var14 < this.o) {
+                  for(int var15 = var11; var15 <= var12; ++var15) {
+                     if (var15 >= 0 && var15 < this.p && (!var8 || var14 >= var10 || var15 >= var12 || var15 < arg0 && arg5 != var14)) {
+                        Square var16 = this.r[var13][var14][var15];
+                        if (var16 != null) {
+                           int var17 = (this.q[var13][var14 + 1][var15] + this.q[var13][var14][var15] + this.q[var13][var14][var15 + 1] + this.q[var13][var14 + 1][var15 + 1]) / 4 - (this.q[arg1][arg5 + 1][arg0] + this.q[arg1][arg5][arg0] + this.q[arg1][arg5][arg0 + 1] + this.q[arg1][arg5 + 1][arg0 + 1]) / 4;
+                           Wall var18 = var16.l;
+                           if (var18 != null && var18.f != null && var18.f.j != null) {
+                              this.a(arg4, (Model)var18.f, (1 - arg3) * 64 + (var14 - arg5) * 128, var17, (var15 - arg0) * 128 + (1 - arg6) * 64, var8);
+                           }
+
+                           if (var18 != null && var18.g != null && var18.g.j != null) {
+                              this.a(arg4, (Model)var18.g, (1 - arg3) * 64 + (var14 - arg5) * 128, var17, (var15 - arg0) * 128 + (1 - arg6) * 64, var8);
+                           }
+
+                           for(int var19 = 0; var19 < var16.p; ++var19) {
+                              Loc var20 = var16.q[var19];
+                              if (var20 != null && var20.e != null && var20.e.j != null) {
+                                 int var21 = var20.h - var20.g + 1;
+                                 int var22 = var20.j - var20.i + 1;
+                                 this.a(arg4, (Model)var20.e, (var20.g - arg5) * 128 + (var21 - arg3) * 64, var17, (var20.i - arg0) * 128 + (var22 - arg6) * 64, var8);
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+
+            --var9;
+            var8 = false;
+         }
+      }
+
+      if (arg2 == 0) {
+         ;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(LLZYQDKJV;LLZYQDKJV;IIIZ)V")
+   public void a(Model arg0, Model arg1, int arg2, int arg3, int arg4, boolean arg5) {
+      ++this.mb;
+      int var7 = 0;
+      int[] var8 = arg1.z;
+      int var9 = arg1.y;
+      int var10 = arg1.T >> 16;
+      int var11 = arg1.T << 16 >> 16;
+      int var12 = arg1.U >> 16;
+      int var13 = arg1.U << 16 >> 16;
+
+      for(int var14 = 0; var14 < arg0.y; ++var14) {
+         VertexNormal var15 = arg0.j[var14];
+         VertexNormal var16 = arg0.fb[var14];
+         if (var16.d != 0) {
+            int var17 = arg0.A[var14] - arg3;
+            if (var17 <= arg1.W) {
+               int var18 = arg0.z[var14] - arg2;
+               if (var18 >= var10 && var18 <= var11) {
+                  int var19 = arg0.B[var14] - arg4;
+                  if (var19 >= var13 && var19 <= var12) {
+                     for(int var20 = 0; var20 < var9; ++var20) {
+                        VertexNormal var21 = arg1.j[var20];
+                        VertexNormal var22 = arg1.fb[var20];
+                        if (var8[var20] == var18 && arg1.B[var20] == var19 && arg1.A[var20] == var17 && var22.d != 0) {
+                           var15.a += var22.a;
+                           var15.b += var22.b;
+                           var15.c += var22.c;
+                           var15.d += var22.d;
+                           var21.a += var16.a;
+                           var21.b += var16.b;
+                           var21.c += var16.c;
+                           var21.d += var16.d;
+                           ++var7;
+                           this.kb[var14] = this.mb;
+                           this.lb[var20] = this.mb;
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      if (var7 >= 3 && arg5) {
+         for(int var23 = 0; var23 < arg0.C; ++var23) {
+            if (this.kb[arg0.D[var23]] == this.mb && this.kb[arg0.E[var23]] == this.mb && this.kb[arg0.F[var23]] == this.mb) {
+               arg0.J[var23] = -1;
+            }
+         }
+
+         for(int var24 = 0; var24 < arg1.C; ++var24) {
+            if (this.lb[arg1.D[var24]] == this.mb && this.lb[arg1.E[var24]] == this.mb && this.lb[arg1.F[var24]] == this.mb) {
+               arg1.J[var24] = -1;
+            }
+         }
+
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a([IIIIII)V")
+   public void a(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+      Square var7 = this.r[arg3][arg4][arg5];
+      if (var7 != null) {
+         QuickGround var8 = var7.j;
+         if (var8 == null) {
+            Ground var11 = var7.k;
+            if (var11 != null) {
+               int var12 = var11.m;
+               int var13 = var11.n;
+               int var14 = var11.o;
+               int var15 = var11.p;
+               int[] var16 = this.nb[var12];
+               int[] var17 = this.ob[var13];
+               int var18 = 0;
+               if (var14 != 0) {
+                  for(int var19 = 0; var19 < 4; ++var19) {
+                     arg0[arg1] = var16[var17[var18++]] == 0 ? var14 : var15;
+                     arg0[arg1 + 1] = var16[var17[var18++]] == 0 ? var14 : var15;
+                     arg0[arg1 + 2] = var16[var17[var18++]] == 0 ? var14 : var15;
+                     arg0[arg1 + 3] = var16[var17[var18++]] == 0 ? var14 : var15;
+                     arg1 += arg2;
+                  }
+
+               } else {
+                  for(int var20 = 0; var20 < 4; ++var20) {
+                     if (var16[var17[var18++]] != 0) {
+                        arg0[arg1] = var15;
+                     }
+
+                     if (var16[var17[var18++]] != 0) {
+                        arg0[arg1 + 1] = var15;
+                     }
+
+                     if (var16[var17[var18++]] != 0) {
+                        arg0[arg1 + 2] = var15;
+                     }
+
+                     if (var16[var17[var18++]] != 0) {
+                        arg0[arg1 + 3] = var15;
+                     }
+
+                     arg1 += arg2;
+                  }
+
+               }
+            }
+         } else {
+            int var9 = var8.g;
+            if (var9 != 0) {
+               for(int var10 = 0; var10 < 4; ++var10) {
+                  arg0[arg1] = var9;
+                  arg0[arg1 + 1] = var9;
+                  arg0[arg1 + 2] = var9;
+                  arg0[arg1 + 3] = var9;
+                  arg1 += arg2;
+               }
+
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(II[IIII)V")
+   public static void a(int arg0, int arg1, int[] arg2, int arg3, int arg4, int arg5) {
+      tb = 0;
+      ub = 0;
+      vb = arg5;
+      wb = arg0;
+      rb = arg5 / 2;
+      sb = arg0 / 2;
+      boolean[][][][] var6 = new boolean[9][32][53][53];
+
+      for(int var7 = 128; var7 <= 384; var7 += 32) {
+         for(int var8 = 0; var8 < 2048; var8 += 64) {
+            I = Model.Ib[var7];
+            J = Model.Jb[var7];
+            K = Model.Ib[var8];
+            L = Model.Jb[var8];
+            int var9 = (var7 - 128) / 32;
+            int var10 = var8 / 64;
+
+            for(int var11 = -26; var11 <= 26; ++var11) {
+               for(int var12 = -26; var12 <= 26; ++var12) {
+                  int var13 = var11 * 128;
+                  int var14 = var12 * 128;
+                  boolean var15 = false;
+
+                  for(int var16 = -arg4; var16 <= arg3; var16 += 128) {
+                     if (f(var14, var13, f, arg2[var9] + var16)) {
+                        var15 = true;
+                        break;
+                     }
+                  }
+
+                  var6[var9][var10][var11 + 25 + 1][var12 + 25 + 1] = var15;
+               }
+            }
+         }
+      }
+
+      for(int var17 = 0; var17 < 8; ++var17) {
+         for(int var18 = 0; var18 < 32; ++var18) {
+            for(int var19 = -25; var19 < 25; ++var19) {
+               for(int var20 = -25; var20 < 25; ++var20) {
+                  boolean var21 = false;
+
+                  label80:
+                  for(int var22 = -1; var22 <= 1; ++var22) {
+                     for(int var23 = -1; var23 <= 1; ++var23) {
+                        if (var6[var17][var18][var19 + var22 + 25 + 1][var20 + var23 + 25 + 1]) {
+                           var21 = true;
+                           break label80;
+                        }
+
+                        if (var6[var17][(var18 + 1) % 31][var19 + var22 + 25 + 1][var20 + var23 + 25 + 1]) {
+                           var21 = true;
+                           break label80;
+                        }
+
+                        if (var6[var17 + 1][var18][var19 + var22 + 25 + 1][var20 + var23 + 25 + 1]) {
+                           var21 = true;
+                           break label80;
+                        }
+
+                        if (var6[var17 + 1][(var18 + 1) % 31][var19 + var22 + 25 + 1][var20 + var23 + 25 + 1]) {
+                           var21 = true;
+                           break label80;
+                        }
+                     }
+                  }
+
+                  pb[var17][var18][var19 + 25][var20 + 25] = var21;
+               }
+            }
+         }
+      }
+
+      if (arg1 == 22845) {
+         ;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.f(IIII)Z")
+   public static boolean f(int arg0, int arg1, int arg2, int arg3) {
+      int var4 = L * arg1 + K * arg0 >> 16;
+      int var5 = L * arg0 - K * arg1 >> 16;
+      if (arg2 != 0) {
+         a = !a;
+      }
+
+      int var6 = J * var5 + I * arg3 >> 16;
+      int var7 = J * arg3 - I * var5 >> 16;
+      if (var6 >= 50 && var6 <= 3500) {
+         int var8 = (var4 << 9) / var6 + rb;
+         int var9 = (var7 << 9) / var6 + sb;
+         return var8 >= tb && var8 <= vb && var9 >= ub && var9 <= wb;
+      } else {
+         return false;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.e(III)V")
+   public void e(int arg0, int arg1, int arg2) {
+      R = true;
+      S = arg1;
+      T = arg2;
+      U = -1;
+      if (arg0 == 0) {
+         V = -1;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIIII)V")
+   public void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+      if (arg0 < 0) {
+         arg0 = 0;
+      } else if (arg0 >= this.o * 128) {
+         arg0 = this.o * 128 - 1;
+      }
+
+      if (arg4 < 0) {
+         arg4 = 0;
+      } else if (arg4 >= this.p * 128) {
+         arg4 = this.p * 128 - 1;
+      }
+
+      ++y;
+      I = Model.Ib[arg6];
+      J = Model.Jb[arg6];
+      K = Model.Ib[arg5];
+      L = Model.Jb[arg5];
+      qb = pb[(arg6 - 128) / 32][arg5 / 64];
+      F = arg0;
+      G = arg3;
+      H = arg4;
+      D = arg0 / 128;
+      E = arg4 / 128;
+      x = arg1;
+      z = D - 25;
+      if (arg2 == 0) {
+         if (z < 0) {
+            z = 0;
+         }
+
+         B = E - 25;
+         if (B < 0) {
+            B = 0;
+         }
+
+         A = D + 25;
+         if (A > this.o) {
+            A = this.o;
+         }
+
+         C = E + 25;
+         if (C > this.p) {
+            C = this.p;
+         }
+
+         this.b(this.g);
+         w = 0;
+
+         for(int var8 = this.s; var8 < this.n; ++var8) {
+            Square[][] var9 = this.r[var8];
+
+            for(int var10 = z; var10 < A; ++var10) {
+               for(int var11 = B; var11 < C; ++var11) {
+                  Square var12 = var9[var10][var11];
+                  if (var12 != null) {
+                     if (var12.t > arg1 || !qb[var10 - D + 25][var11 - E + 25] && this.q[var8][var10][var11] - arg3 < 2000) {
+                        var12.u = false;
+                        var12.v = false;
+                        var12.x = 0;
+                     } else {
+                        var12.u = true;
+                        var12.v = true;
+                        if (var12.p > 0) {
+                           var12.w = true;
+                        } else {
+                           var12.w = false;
+                        }
+
+                        ++w;
+                     }
+                  }
+               }
+            }
+         }
+
+         for(int var13 = this.s; var13 < this.n; ++var13) {
+            Square[][] var14 = this.r[var13];
+
+            for(int var15 = -25; var15 <= 0; ++var15) {
+               int var16 = D + var15;
+               int var17 = D - var15;
+               if (var16 >= z || var17 < A) {
+                  for(int var18 = -25; var18 <= 0; ++var18) {
+                     int var19 = E + var18;
+                     int var20 = E - var18;
+                     if (var16 >= z) {
+                        if (var19 >= B) {
+                           Square var21 = var14[var16][var19];
+                           if (var21 != null && var21.u) {
+                              this.a(var21, true);
+                           }
+                        }
+
+                        if (var20 < C) {
+                           Square var22 = var14[var16][var20];
+                           if (var22 != null && var22.u) {
+                              this.a(var22, true);
+                           }
+                        }
+                     }
+
+                     if (var17 < A) {
+                        if (var19 >= B) {
+                           Square var23 = var14[var17][var19];
+                           if (var23 != null && var23.u) {
+                              this.a(var23, true);
+                           }
+                        }
+
+                        if (var20 < C) {
+                           Square var24 = var14[var17][var20];
+                           if (var24 != null && var24.u) {
+                              this.a(var24, true);
+                           }
+                        }
+                     }
+
+                     if (w == 0) {
+                        R = false;
+                        return;
+                     }
+                  }
+               }
+            }
+         }
+
+         for(int var25 = this.s; var25 < this.n; ++var25) {
+            Square[][] var26 = this.r[var25];
+
+            for(int var27 = -25; var27 <= 0; ++var27) {
+               int var28 = D + var27;
+               int var29 = D - var27;
+               if (var28 >= z || var29 < A) {
+                  for(int var30 = -25; var30 <= 0; ++var30) {
+                     int var31 = E + var30;
+                     int var32 = E - var30;
+                     if (var28 >= z) {
+                        if (var31 >= B) {
+                           Square var33 = var26[var28][var31];
+                           if (var33 != null && var33.u) {
+                              this.a(var33, false);
+                           }
+                        }
+
+                        if (var32 < C) {
+                           Square var34 = var26[var28][var32];
+                           if (var34 != null && var34.u) {
+                              this.a(var34, false);
+                           }
+                        }
+                     }
+
+                     if (var29 < A) {
+                        if (var31 >= B) {
+                           Square var35 = var26[var29][var31];
+                           if (var35 != null && var35.u) {
+                              this.a(var35, false);
+                           }
+                        }
+
+                        if (var32 < C) {
+                           Square var36 = var26[var29][var32];
+                           if (var36 != null && var36.u) {
+                              this.a(var36, false);
+                           }
+                        }
+                     }
+
+                     if (w == 0) {
+                        R = false;
+                        return;
+                     }
+                  }
+               }
+            }
+         }
+
+         R = false;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(LRIEEXHOP;Z)V")
+   public void a(Square arg0, boolean arg1) {
+      bb.a(arg0);
+
+      while(true) {
+         Square var3;
+         int var4;
+         int var5;
+         int var6;
+         int var7;
+         Square[][] var8;
+         Square var70;
+         do {
+            Square var69;
+            do {
+               Square var68;
+               do {
+                  Square var67;
+                  do {
+                     do {
+                        do {
+                           while(true) {
+                              while(true) {
+                                 do {
+                                    var3 = (Square)bb.pop();
+                                    if (var3 == null) {
+                                       return;
+                                    }
+                                 } while(!var3.v);
+
+                                 var4 = var3.g;
+                                 var5 = var3.h;
+                                 var6 = var3.f;
+                                 var7 = var3.i;
+                                 var8 = this.r[var6];
+                                 if (!var3.u) {
+                                    break;
+                                 }
+
+                                 if (arg1) {
+                                    if (var6 > 0) {
+                                       Square var9 = this.r[var6 - 1][var4][var5];
+                                       if (var9 != null && var9.v) {
+                                          continue;
+                                       }
+                                    }
+
+                                    if (var4 <= D && var4 > z) {
+                                       Square var10 = var8[var4 - 1][var5];
+                                       if (var10 != null && var10.v && (var10.u || (var3.s & 1) == 0)) {
+                                          continue;
+                                       }
+                                    }
+
+                                    if (var4 >= D && var4 < A - 1) {
+                                       Square var11 = var8[var4 + 1][var5];
+                                       if (var11 != null && var11.v && (var11.u || (var3.s & 4) == 0)) {
+                                          continue;
+                                       }
+                                    }
+
+                                    if (var5 <= E && var5 > B) {
+                                       Square var12 = var8[var4][var5 - 1];
+                                       if (var12 != null && var12.v && (var12.u || (var3.s & 8) == 0)) {
+                                          continue;
+                                       }
+                                    }
+
+                                    if (var5 >= E && var5 < C - 1) {
+                                       Square var13 = var8[var4][var5 + 1];
+                                       if (var13 != null && var13.v && (var13.u || (var3.s & 2) == 0)) {
+                                          continue;
+                                       }
+                                    }
+                                 } else {
+                                    arg1 = true;
+                                 }
+
+                                 var3.u = false;
+                                 if (var3.B != null) {
+                                    Square var14 = var3.B;
+                                    if (var14.j != null) {
+                                       if (!this.g(0, var4, var5)) {
+                                          this.a(var14.j, 0, I, J, K, L, var4, var5);
+                                       }
+                                    } else if (var14.k != null && !this.g(0, var4, var5)) {
+                                       this.a(J, L, var14.k, I, var5, var4, K, (byte)3);
+                                    }
+
+                                    Wall var15 = var14.l;
+                                    if (var15 != null) {
+                                       var15.f.a(0, I, J, K, L, var15.b - F, var15.a - G, var15.c - H, var15.h);
+                                    }
+
+                                    for(int var16 = 0; var16 < var14.p; ++var16) {
+                                       Loc var17 = var14.q[var16];
+                                       if (var17 != null) {
+                                          var17.e.a(var17.f, I, J, K, L, var17.c - F, var17.b - G, var17.d - H, var17.m);
+                                       }
+                                    }
+                                 }
+
+                                 boolean var18 = false;
+                                 if (var3.j != null) {
+                                    if (!this.g(var7, var4, var5)) {
+                                       var18 = true;
+                                       this.a(var3.j, var7, I, J, K, L, var4, var5);
+                                    }
+                                 } else if (var3.k != null && !this.g(var7, var4, var5)) {
+                                    var18 = true;
+                                    this.a(J, L, var3.k, I, var5, var4, K, (byte)3);
+                                 }
+
+                                 int var19 = 0;
+                                 int var20 = 0;
+                                 Wall var21 = var3.l;
+                                 Decor var22 = var3.m;
+                                 if (var21 != null || var22 != null) {
+                                    if (D == var4) {
+                                       ++var19;
+                                    } else if (D < var4) {
+                                       var19 += 2;
+                                    }
+
+                                    if (E == var5) {
+                                       var19 += 3;
+                                    } else if (E > var5) {
+                                       var19 += 6;
+                                    }
+
+                                    var20 = cb[var19];
+                                    var3.A = eb[var19];
+                                 }
+
+                                 if (var21 != null) {
+                                    if ((var21.d & db[var19]) != 0) {
+                                       if (var21.d == 16) {
+                                          var3.x = 3;
+                                          var3.y = fb[var19];
+                                          var3.z = 3 - var3.y;
+                                       } else if (var21.d == 32) {
+                                          var3.x = 6;
+                                          var3.y = gb[var19];
+                                          var3.z = 6 - var3.y;
+                                       } else if (var21.d == 64) {
+                                          var3.x = 12;
+                                          var3.y = hb[var19];
+                                          var3.z = 12 - var3.y;
+                                       } else {
+                                          var3.x = 9;
+                                          var3.y = ib[var19];
+                                          var3.z = 9 - var3.y;
+                                       }
+                                    } else {
+                                       var3.x = 0;
+                                    }
+
+                                    if ((var21.d & var20) != 0 && !this.g(var7, var4, var5, var21.d)) {
+                                       var21.f.a(0, I, J, K, L, var21.b - F, var21.a - G, var21.c - H, var21.h);
+                                    }
+
+                                    if ((var21.e & var20) != 0 && !this.g(var7, var4, var5, var21.e)) {
+                                       var21.g.a(0, I, J, K, L, var21.b - F, var21.a - G, var21.c - H, var21.h);
+                                    }
+                                 }
+
+                                 if (var22 != null && !this.h(var7, var4, var5, var22.f.k)) {
+                                    if ((var22.d & var20) != 0) {
+                                       var22.f.a(var22.e, I, J, K, L, var22.b - F, var22.a - G, var22.c - H, var22.g);
+                                    } else if ((var22.d & 768) != 0) {
+                                       int var23 = var22.b - F;
+                                       int var24 = var22.a - G;
+                                       int var25 = var22.c - H;
+                                       int var26 = var22.e;
+                                       int var27;
+                                       if (var26 != 1 && var26 != 2) {
+                                          var27 = var23;
+                                       } else {
+                                          var27 = -var23;
+                                       }
+
+                                       int var28;
+                                       if (var26 != 2 && var26 != 3) {
+                                          var28 = var25;
+                                       } else {
+                                          var28 = -var25;
+                                       }
+
+                                       if ((var22.d & 256) != 0 && var28 < var27) {
+                                          int var29 = N[var26] + var23;
+                                          int var30 = O[var26] + var25;
+                                          var22.f.a(var26 * 512 + 256, I, J, K, L, var29, var24, var30, var22.g);
+                                       }
+
+                                       if ((var22.d & 512) != 0 && var28 > var27) {
+                                          int var31 = P[var26] + var23;
+                                          int var32 = Q[var26] + var25;
+                                          var22.f.a(var26 * 512 + 1280 & 2047, I, J, K, L, var31, var24, var32, var22.g);
+                                       }
+                                    }
+                                 }
+
+                                 if (var18) {
+                                    GroundDecor var33 = var3.n;
+                                    if (var33 != null) {
+                                       var33.d.a(0, I, J, K, L, var33.b - F, var33.a - G, var33.c - H, var33.e);
+                                    }
+
+                                    GroundObject var34 = var3.o;
+                                    if (var34 != null && var34.h == 0) {
+                                       if (var34.e != null) {
+                                          var34.e.a(0, I, J, K, L, var34.b - F, var34.a - G, var34.c - H, var34.g);
+                                       }
+
+                                       if (var34.f != null) {
+                                          var34.f.a(0, I, J, K, L, var34.b - F, var34.a - G, var34.c - H, var34.g);
+                                       }
+
+                                       if (var34.d != null) {
+                                          var34.d.a(0, I, J, K, L, var34.b - F, var34.a - G, var34.c - H, var34.g);
+                                       }
+                                    }
+                                 }
+
+                                 int var35 = var3.s;
+                                 if (var35 != 0) {
+                                    if (var4 < D && (var35 & 4) != 0) {
+                                       Square var36 = var8[var4 + 1][var5];
+                                       if (var36 != null && var36.v) {
+                                          bb.a(var36);
+                                       }
+                                    }
+
+                                    if (var5 < E && (var35 & 2) != 0) {
+                                       Square var37 = var8[var4][var5 + 1];
+                                       if (var37 != null && var37.v) {
+                                          bb.a(var37);
+                                       }
+                                    }
+
+                                    if (var4 > D && (var35 & 1) != 0) {
+                                       Square var38 = var8[var4 - 1][var5];
+                                       if (var38 != null && var38.v) {
+                                          bb.a(var38);
+                                       }
+                                    }
+
+                                    if (var5 > E && (var35 & 8) != 0) {
+                                       Square var39 = var8[var4][var5 - 1];
+                                       if (var39 != null && var39.v) {
+                                          bb.a(var39);
+                                       }
+                                    }
+                                 }
+                                 break;
+                              }
+
+                              if (var3.x != 0) {
+                                 boolean var40 = true;
+
+                                 for(int var41 = 0; var41 < var3.p; ++var41) {
+                                    if (y != var3.q[var41].l && (var3.r[var41] & var3.x) == var3.y) {
+                                       var40 = false;
+                                       break;
+                                    }
+                                 }
+
+                                 if (var40) {
+                                    Wall var42 = var3.l;
+                                    if (!this.g(var7, var4, var5, var42.d)) {
+                                       var42.f.a(0, I, J, K, L, var42.b - F, var42.a - G, var42.c - H, var42.h);
+                                    }
+
+                                    var3.x = 0;
+                                 }
+                              }
+
+                              if (!var3.w) {
+                                 break;
+                              }
+
+                              try {
+                                 int var43 = var3.p;
+                                 var3.w = false;
+                                 int var44 = 0;
+
+                                 label559:
+                                 for(int var45 = 0; var45 < var43; ++var45) {
+                                    Loc var46 = var3.q[var45];
+                                    if (y != var46.l) {
+                                       for(int var47 = var46.g; var47 <= var46.h; ++var47) {
+                                          for(int var48 = var46.i; var48 <= var46.j; ++var48) {
+                                             Square var49 = var8[var47][var48];
+                                             if (var49.u) {
+                                                var3.w = true;
+                                                continue label559;
+                                             }
+
+                                             if (var49.x != 0) {
+                                                int var50 = 0;
+                                                if (var47 > var46.g) {
+                                                   ++var50;
+                                                }
+
+                                                if (var47 < var46.h) {
+                                                   var50 += 4;
+                                                }
+
+                                                if (var48 > var46.i) {
+                                                   var50 += 8;
+                                                }
+
+                                                if (var48 < var46.j) {
+                                                   var50 += 2;
+                                                }
+
+                                                if ((var50 & var49.x) == var3.z) {
+                                                   var3.w = true;
+                                                   continue label559;
+                                                }
+                                             }
+                                          }
+                                       }
+
+                                       M[var44++] = var46;
+                                       int var51 = D - var46.g;
+                                       int var52 = var46.h - D;
+                                       if (var52 > var51) {
+                                          var51 = var52;
+                                       }
+
+                                       int var53 = E - var46.i;
+                                       int var54 = var46.j - E;
+                                       if (var54 > var53) {
+                                          var46.k = var51 + var54;
+                                       } else {
+                                          var46.k = var51 + var53;
+                                       }
+                                    }
+                                 }
+
+                                 while(var44 > 0) {
+                                    int var55 = -50;
+                                    int var56 = -1;
+
+                                    for(int var57 = 0; var57 < var44; ++var57) {
+                                       Loc var58 = M[var57];
+                                       if (y != var58.l) {
+                                          if (var58.k > var55) {
+                                             var55 = var58.k;
+                                             var56 = var57;
+                                          } else if (var58.k == var55) {
+                                             int var59 = var58.c - F;
+                                             int var60 = var58.d - H;
+                                             int var61 = M[var56].c - F;
+                                             int var62 = M[var56].d - H;
+                                             if (var59 * var59 + var60 * var60 > var61 * var61 + var62 * var62) {
+                                                var56 = var57;
+                                             }
+                                          }
+                                       }
+                                    }
+
+                                    if (var56 == -1) {
+                                       break;
+                                    }
+
+                                    Loc var63 = M[var56];
+                                    var63.l = y;
+                                    if (!this.a(var7, var63.g, var63.h, var63.i, var63.j, var63.e.k)) {
+                                       var63.e.a(var63.f, I, J, K, L, var63.c - F, var63.b - G, var63.d - H, var63.m);
+                                    }
+
+                                    for(int var64 = var63.g; var64 <= var63.h; ++var64) {
+                                       for(int var65 = var63.i; var65 <= var63.j; ++var65) {
+                                          Square var66 = var8[var64][var65];
+                                          if (var66.x != 0) {
+                                             bb.a(var66);
+                                          } else if ((var4 != var64 || var5 != var65) && var66.v) {
+                                             bb.a(var66);
+                                          }
+                                       }
+                                    }
+                                 }
+
+                                 if (!var3.w) {
+                                    break;
+                                 }
+                              } catch (Exception var89) {
+                                 var3.w = false;
+                                 break;
+                              }
+                           }
+                        } while(!var3.v);
+                     } while(var3.x != 0);
+
+                     if (var4 > D || var4 <= z) {
+                        break;
+                     }
+
+                     var67 = var8[var4 - 1][var5];
+                  } while(var67 != null && var67.v);
+
+                  if (var4 < D || var4 >= A - 1) {
+                     break;
+                  }
+
+                  var68 = var8[var4 + 1][var5];
+               } while(var68 != null && var68.v);
+
+               if (var5 > E || var5 <= B) {
+                  break;
+               }
+
+               var69 = var8[var4][var5 - 1];
+            } while(var69 != null && var69.v);
+
+            if (var5 < E || var5 >= C - 1) {
+               break;
+            }
+
+            var70 = var8[var4][var5 + 1];
+         } while(var70 != null && var70.v);
+
+         var3.v = false;
+         --w;
+         GroundObject var71 = var3.o;
+         if (var71 != null && var71.h != 0) {
+            if (var71.e != null) {
+               var71.e.a(0, I, J, K, L, var71.b - F, var71.a - G - var71.h, var71.c - H, var71.g);
+            }
+
+            if (var71.f != null) {
+               var71.f.a(0, I, J, K, L, var71.b - F, var71.a - G - var71.h, var71.c - H, var71.g);
+            }
+
+            if (var71.d != null) {
+               var71.d.a(0, I, J, K, L, var71.b - F, var71.a - G - var71.h, var71.c - H, var71.g);
+            }
+         }
+
+         if (var3.A != 0) {
+            Decor var72 = var3.m;
+            if (var72 != null && !this.h(var7, var4, var5, var72.f.k)) {
+               if ((var72.d & var3.A) != 0) {
+                  var72.f.a(var72.e, I, J, K, L, var72.b - F, var72.a - G, var72.c - H, var72.g);
+               } else if ((var72.d & 768) != 0) {
+                  int var73 = var72.b - F;
+                  int var74 = var72.a - G;
+                  int var75 = var72.c - H;
+                  int var76 = var72.e;
+                  int var77;
+                  if (var76 != 1 && var76 != 2) {
+                     var77 = var73;
+                  } else {
+                     var77 = -var73;
+                  }
+
+                  int var78;
+                  if (var76 != 2 && var76 != 3) {
+                     var78 = var75;
+                  } else {
+                     var78 = -var75;
+                  }
+
+                  if ((var72.d & 256) != 0 && var78 >= var77) {
+                     int var79 = N[var76] + var73;
+                     int var80 = O[var76] + var75;
+                     var72.f.a(var76 * 512 + 256, I, J, K, L, var79, var74, var80, var72.g);
+                  }
+
+                  if ((var72.d & 512) != 0 && var78 <= var77) {
+                     int var81 = P[var76] + var73;
+                     int var82 = Q[var76] + var75;
+                     var72.f.a(var76 * 512 + 1280 & 2047, I, J, K, L, var81, var74, var82, var72.g);
+                  }
+               }
+            }
+
+            Wall var83 = var3.l;
+            if (var83 != null) {
+               if ((var83.e & var3.A) != 0 && !this.g(var7, var4, var5, var83.e)) {
+                  var83.g.a(0, I, J, K, L, var83.b - F, var83.a - G, var83.c - H, var83.h);
+               }
+
+               if ((var83.d & var3.A) != 0 && !this.g(var7, var4, var5, var83.d)) {
+                  var83.f.a(0, I, J, K, L, var83.b - F, var83.a - G, var83.c - H, var83.h);
+               }
+            }
+         }
+
+         if (var6 < this.n - 1) {
+            Square var84 = this.r[var6 + 1][var4][var5];
+            if (var84 != null && var84.v) {
+               bb.a(var84);
+            }
+         }
+
+         if (var4 < D) {
+            Square var85 = var8[var4 + 1][var5];
+            if (var85 != null && var85.v) {
+               bb.a(var85);
+            }
+         }
+
+         if (var5 < E) {
+            Square var86 = var8[var4][var5 + 1];
+            if (var86 != null && var86.v) {
+               bb.a(var86);
+            }
+         }
+
+         if (var4 > D) {
+            Square var87 = var8[var4 - 1][var5];
+            if (var87 != null && var87.v) {
+               bb.a(var87);
+            }
+         }
+
+         if (var5 > E) {
+            Square var88 = var8[var4][var5 - 1];
+            if (var88 != null && var88.v) {
+               bb.a(var88);
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(LAYYYSATX;IIIIIII)V")
+   public void a(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+      int var9;
+      int var10 = var9 = (arg6 << 7) - F;
+      int var11;
+      int var12 = var11 = (arg7 << 7) - H;
+      int var13;
+      int var14 = var13 = var10 + 128;
+      int var15;
+      int var16 = var15 = var12 + 128;
+      int var17 = this.q[arg1][arg6][arg7] - G;
+      int var18 = this.q[arg1][arg6 + 1][arg7] - G;
+      int var19 = this.q[arg1][arg6 + 1][arg7 + 1] - G;
+      int var20 = this.q[arg1][arg6][arg7 + 1] - G;
+      int var21 = arg4 * var12 + arg5 * var10 >> 16;
+      int var22 = arg5 * var12 - arg4 * var10 >> 16;
+      int var24 = arg3 * var17 - arg2 * var22 >> 16;
+      int var25 = arg2 * var17 + arg3 * var22 >> 16;
+      if (var25 >= 50) {
+         int var27 = arg4 * var11 + arg5 * var14 >> 16;
+         int var28 = arg5 * var11 - arg4 * var14 >> 16;
+         int var30 = arg3 * var18 - arg2 * var28 >> 16;
+         int var31 = arg2 * var18 + arg3 * var28 >> 16;
+         if (var31 >= 50) {
+            int var33 = arg4 * var16 + arg5 * var13 >> 16;
+            int var34 = arg5 * var16 - arg4 * var13 >> 16;
+            int var36 = arg3 * var19 - arg2 * var34 >> 16;
+            int var37 = arg2 * var19 + arg3 * var34 >> 16;
+            if (var37 >= 50) {
+               int var39 = arg4 * var15 + arg5 * var9 >> 16;
+               int var40 = arg5 * var15 - arg4 * var9 >> 16;
+               int var42 = arg3 * var20 - arg2 * var40 >> 16;
+               int var43 = arg2 * var20 + arg3 * var40 >> 16;
+               if (var43 >= 50) {
+                  int var45 = (var21 << 9) / var25 + Pix3D.E;
+                  int var46 = (var24 << 9) / var25 + Pix3D.F;
+                  int var47 = (var27 << 9) / var31 + Pix3D.E;
+                  int var48 = (var30 << 9) / var31 + Pix3D.F;
+                  int var49 = (var33 << 9) / var37 + Pix3D.E;
+                  int var50 = (var36 << 9) / var37 + Pix3D.F;
+                  int var51 = (var39 << 9) / var43 + Pix3D.E;
+                  int var52 = (var42 << 9) / var43 + Pix3D.F;
+                  Pix3D.D = 0;
+                  if ((var48 - var52) * (var49 - var51) - (var47 - var51) * (var50 - var52) > 0) {
+                     Pix3D.A = false;
+                     if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.s || var51 > Pix2D.s || var47 > Pix2D.s) {
+                        Pix3D.A = true;
+                     }
+
+                     if (R && this.a(S, T, var50, var52, var48, var49, var51, var47)) {
+                        U = arg6;
+                        V = arg7;
+                     }
+
+                     if (arg0.e == -1) {
+                        if (arg0.c != 12345678) {
+                           Pix3D.a(var50, var52, var48, var49, var51, var47, arg0.c, arg0.d, arg0.b);
+                        }
+                     } else if (!m) {
+                        if (arg0.f) {
+                           Pix3D.a(var50, var52, var48, var49, var51, var47, arg0.c, arg0.d, arg0.b, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.e);
+                        } else {
+                           Pix3D.a(var50, var52, var48, var49, var51, var47, arg0.c, arg0.d, arg0.b, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.e);
+                        }
+                     } else {
+                        int var53 = jb[arg0.e];
+                        Pix3D.a(var50, var52, var48, var49, var51, var47, this.f(arg0.c, var53, 0), this.f(arg0.d, var53, 0), this.f(arg0.b, var53, 0));
+                     }
+                  }
+
+                  if ((var45 - var47) * (var52 - var48) - (var46 - var48) * (var51 - var47) > 0) {
+                     Pix3D.A = false;
+                     if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.s || var47 > Pix2D.s || var51 > Pix2D.s) {
+                        Pix3D.A = true;
+                     }
+
+                     if (R && this.a(S, T, var46, var48, var52, var45, var47, var51)) {
+                        U = arg6;
+                        V = arg7;
+                     }
+
+                     if (arg0.e == -1) {
+                        if (arg0.a != 12345678) {
+                           Pix3D.a(var46, var48, var52, var45, var47, var51, arg0.a, arg0.b, arg0.d);
+                           return;
+                        }
+                     } else {
+                        if (!m) {
+                           Pix3D.a(var46, var48, var52, var45, var47, var51, arg0.a, arg0.b, arg0.d, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.e);
+                           return;
+                        }
+
+                        int var54 = jb[arg0.e];
+                        Pix3D.a(var46, var48, var52, var45, var47, var51, this.f(arg0.a, var54, 0), this.f(arg0.b, var54, 0), this.f(arg0.d, var54, 0));
+                     }
+                  }
+
+               }
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IILJQCVNYYR;IIIIB)V")
+   public void a(int arg0, int arg1, Ground arg2, int arg3, int arg4, int arg5, int arg6, byte arg7) {
+      int var9 = arg2.b.length;
+
+      for(int var10 = 0; var10 < var9; ++var10) {
+         int var11 = arg2.b[var10] - F;
+         int var12 = arg2.c[var10] - G;
+         int var13 = arg2.d[var10] - H;
+         int var14 = arg1 * var11 + arg6 * var13 >> 16;
+         int var15 = arg1 * var13 - arg6 * var11 >> 16;
+         int var17 = arg0 * var12 - arg3 * var15 >> 16;
+         int var18 = arg0 * var15 + arg3 * var12 >> 16;
+         if (var18 < 50) {
+            return;
+         }
+
+         if (arg2.k != null) {
+            Ground.s[var10] = var14;
+            Ground.t[var10] = var17;
+            Ground.u[var10] = var18;
+         }
+
+         Ground.q[var10] = (var14 << 9) / var18 + Pix3D.E;
+         Ground.r[var10] = (var17 << 9) / var18 + Pix3D.F;
+      }
+
+      Pix3D.D = 0;
+      int var20 = arg2.h.length;
+      if (arg7 == 3) {
+         for(int var21 = 0; var21 < var20; ++var21) {
+            int var22 = arg2.h[var21];
+            int var23 = arg2.i[var21];
+            int var24 = arg2.j[var21];
+            int var25 = Ground.q[var22];
+            int var26 = Ground.q[var23];
+            int var27 = Ground.q[var24];
+            int var28 = Ground.r[var22];
+            int var29 = Ground.r[var23];
+            int var30 = Ground.r[var24];
+            if ((var25 - var26) * (var30 - var29) - (var27 - var26) * (var28 - var29) > 0) {
+               Pix3D.A = false;
+               if (var25 < 0 || var26 < 0 || var27 < 0 || var25 > Pix2D.s || var26 > Pix2D.s || var27 > Pix2D.s) {
+                  Pix3D.A = true;
+               }
+
+               if (R && this.a(S, T, var28, var29, var30, var25, var26, var27)) {
+                  U = arg5;
+                  V = arg4;
+               }
+
+               if (arg2.k != null && arg2.k[var21] != -1) {
+                  if (!m) {
+                     if (arg2.l) {
+                        Pix3D.a(var28, var29, var30, var25, var26, var27, arg2.e[var21], arg2.f[var21], arg2.g[var21], Ground.s[0], Ground.s[1], Ground.s[3], Ground.t[0], Ground.t[1], Ground.t[3], Ground.u[0], Ground.u[1], Ground.u[3], arg2.k[var21]);
+                     } else {
+                        Pix3D.a(var28, var29, var30, var25, var26, var27, arg2.e[var21], arg2.f[var21], arg2.g[var21], Ground.s[var22], Ground.s[var23], Ground.s[var24], Ground.t[var22], Ground.t[var23], Ground.t[var24], Ground.u[var22], Ground.u[var23], Ground.u[var24], arg2.k[var21]);
+                     }
+                  } else {
+                     int var31 = jb[arg2.k[var21]];
+                     Pix3D.a(var28, var29, var30, var25, var26, var27, this.f(arg2.e[var21], var31, 0), this.f(arg2.f[var21], var31, 0), this.f(arg2.g[var21], var31, 0));
+                  }
+               } else if (arg2.e[var21] != 12345678) {
+                  Pix3D.a(var28, var29, var30, var25, var26, var27, arg2.e[var21], arg2.f[var21], arg2.g[var21]);
+               }
+            }
+         }
+
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.f(III)I")
+   public int f(int arg0, int arg1, int arg2) {
+      int var4 = 127 - arg0;
+      if (arg2 != 0) {
+         return this.e;
+      } else {
+         int var5 = (arg1 & 127) * var4 / 160;
+         if (var5 < 2) {
+            var5 = 2;
+         } else if (var5 > 126) {
+            var5 = 126;
+         }
+
+         return (arg1 & 65408) + var5;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIIIII)Z")
+   public boolean a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+      if (arg1 < arg2 && arg1 < arg3 && arg1 < arg4) {
+         return false;
+      } else if (arg1 > arg2 && arg1 > arg3 && arg1 > arg4) {
+         return false;
+      } else if (arg0 < arg5 && arg0 < arg6 && arg0 < arg7) {
+         return false;
+      } else if (arg0 > arg5 && arg0 > arg6 && arg0 > arg7) {
+         return false;
+      } else {
+         int var9 = (arg1 - arg2) * (arg6 - arg5) - (arg0 - arg5) * (arg3 - arg2);
+         int var10 = (arg1 - arg4) * (arg5 - arg7) - (arg0 - arg7) * (arg2 - arg4);
+         int var11 = (arg1 - arg3) * (arg7 - arg6) - (arg0 - arg6) * (arg4 - arg3);
+         return var9 * var11 > 0 && var10 * var11 > 0;
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.b(I)V")
+   public void b(int arg0) {
+      int var2 = X[x];
+      Occlude[] var3 = Y[x];
+      if (arg0 < 2 || arg0 > 2) {
+         this.c = !this.c;
+      }
+
+      Z = 0;
+
+      for(int var4 = 0; var4 < var2; ++var4) {
+         Occlude var5 = var3[var4];
+         if (var5.e == 1) {
+            int var6 = var5.a - D + 25;
+            if (var6 >= 0 && var6 <= 50) {
+               int var7 = var5.c - E + 25;
+               if (var7 < 0) {
+                  var7 = 0;
+               }
+
+               int var8 = var5.d - E + 25;
+               if (var8 > 50) {
+                  var8 = 50;
+               }
+
+               boolean var9 = false;
+
+               while(var7 <= var8) {
+                  if (qb[var6][var7++]) {
+                     var9 = true;
+                     break;
+                  }
+               }
+
+               if (var9) {
+                  int var10 = F - var5.f;
+                  if (var10 > 32) {
+                     var5.l = 1;
+                  } else {
+                     if (var10 >= -32) {
+                        continue;
+                     }
+
+                     var5.l = 2;
+                     var10 = -var10;
+                  }
+
+                  var5.o = (var5.h - H << 8) / var10;
+                  var5.p = (var5.i - H << 8) / var10;
+                  var5.q = (var5.j - G << 8) / var10;
+                  var5.r = (var5.k - G << 8) / var10;
+                  ab[Z++] = var5;
+               }
+            }
+         } else if (var5.e == 2) {
+            int var11 = var5.c - E + 25;
+            if (var11 >= 0 && var11 <= 50) {
+               int var12 = var5.a - D + 25;
+               if (var12 < 0) {
+                  var12 = 0;
+               }
+
+               int var13 = var5.b - D + 25;
+               if (var13 > 50) {
+                  var13 = 50;
+               }
+
+               boolean var14 = false;
+
+               while(var12 <= var13) {
+                  if (qb[var12++][var11]) {
+                     var14 = true;
+                     break;
+                  }
+               }
+
+               if (var14) {
+                  int var15 = H - var5.h;
+                  if (var15 > 32) {
+                     var5.l = 3;
+                  } else {
+                     if (var15 >= -32) {
+                        continue;
+                     }
+
+                     var5.l = 4;
+                     var15 = -var15;
+                  }
+
+                  var5.m = (var5.f - F << 8) / var15;
+                  var5.n = (var5.g - F << 8) / var15;
+                  var5.q = (var5.j - G << 8) / var15;
+                  var5.r = (var5.k - G << 8) / var15;
+                  ab[Z++] = var5;
+               }
+            }
+         } else if (var5.e == 4) {
+            int var16 = var5.j - G;
+            if (var16 > 128) {
+               int var17 = var5.c - E + 25;
+               if (var17 < 0) {
+                  var17 = 0;
+               }
+
+               int var18 = var5.d - E + 25;
+               if (var18 > 50) {
+                  var18 = 50;
+               }
+
+               if (var17 <= var18) {
+                  int var19 = var5.a - D + 25;
+                  if (var19 < 0) {
+                     var19 = 0;
+                  }
+
+                  int var20 = var5.b - D + 25;
+                  if (var20 > 50) {
+                     var20 = 50;
+                  }
+
+                  boolean var21 = false;
+
+                  label150:
+                  for(int var22 = var19; var22 <= var20; ++var22) {
+                     for(int var23 = var17; var23 <= var18; ++var23) {
+                        if (qb[var22][var23]) {
+                           var21 = true;
+                           break label150;
+                        }
+                     }
+                  }
+
+                  if (var21) {
+                     var5.l = 5;
+                     var5.m = (var5.f - F << 8) / var16;
+                     var5.n = (var5.g - F << 8) / var16;
+                     var5.o = (var5.h - H << 8) / var16;
+                     var5.p = (var5.i - H << 8) / var16;
+                     ab[Z++] = var5;
+                  }
+               }
+            }
+         }
+      }
+
+   }
+
+   @ObfuscatedName("KJCMXHNO.g(III)Z")
+   public boolean g(int arg0, int arg1, int arg2) {
+      int var4 = this.v[arg0][arg1][arg2];
+      if (-y == var4) {
+         return false;
+      } else if (y == var4) {
+         return true;
+      } else {
+         int var5 = arg1 << 7;
+         int var6 = arg2 << 7;
+         if (this.h(var5 + 1, this.q[arg0][arg1][arg2], var6 + 1) && this.h(var5 + 128 - 1, this.q[arg0][arg1 + 1][arg2], var6 + 1) && this.h(var5 + 128 - 1, this.q[arg0][arg1 + 1][arg2 + 1], var6 + 128 - 1) && this.h(var5 + 1, this.q[arg0][arg1][arg2 + 1], var6 + 128 - 1)) {
+            this.v[arg0][arg1][arg2] = y;
+            return true;
+         } else {
+            this.v[arg0][arg1][arg2] = -y;
+            return false;
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.g(IIII)Z")
+   public boolean g(int arg0, int arg1, int arg2, int arg3) {
+      if (!this.g(arg0, arg1, arg2)) {
+         return false;
+      } else {
+         int var5 = arg1 << 7;
+         int var6 = arg2 << 7;
+         int var7 = this.q[arg0][arg1][arg2] - 1;
+         int var8 = var7 - 120;
+         int var9 = var7 - 230;
+         int var10 = var7 - 238;
+         if (arg3 < 16) {
+            if (arg3 == 1) {
+               if (var5 > F) {
+                  if (!this.h(var5, var7, var6)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5, var7, var6 + 128)) {
+                     return false;
+                  }
+               }
+
+               if (arg0 > 0) {
+                  if (!this.h(var5, var8, var6)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5, var8, var6 + 128)) {
+                     return false;
+                  }
+               }
+
+               if (!this.h(var5, var9, var6)) {
+                  return false;
+               }
+
+               if (!this.h(var5, var9, var6 + 128)) {
+                  return false;
+               }
+
+               return true;
+            }
+
+            if (arg3 == 2) {
+               if (var6 < H) {
+                  if (!this.h(var5, var7, var6 + 128)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5 + 128, var7, var6 + 128)) {
+                     return false;
+                  }
+               }
+
+               if (arg0 > 0) {
+                  if (!this.h(var5, var8, var6 + 128)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5 + 128, var8, var6 + 128)) {
+                     return false;
+                  }
+               }
+
+               if (!this.h(var5, var9, var6 + 128)) {
+                  return false;
+               }
+
+               if (!this.h(var5 + 128, var9, var6 + 128)) {
+                  return false;
+               }
+
+               return true;
+            }
+
+            if (arg3 == 4) {
+               if (var5 < F) {
+                  if (!this.h(var5 + 128, var7, var6)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5 + 128, var7, var6 + 128)) {
+                     return false;
+                  }
+               }
+
+               if (arg0 > 0) {
+                  if (!this.h(var5 + 128, var8, var6)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5 + 128, var8, var6 + 128)) {
+                     return false;
+                  }
+               }
+
+               if (!this.h(var5 + 128, var9, var6)) {
+                  return false;
+               }
+
+               if (!this.h(var5 + 128, var9, var6 + 128)) {
+                  return false;
+               }
+
+               return true;
+            }
+
+            if (arg3 == 8) {
+               if (var6 > H) {
+                  if (!this.h(var5, var7, var6)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5 + 128, var7, var6)) {
+                     return false;
+                  }
+               }
+
+               if (arg0 > 0) {
+                  if (!this.h(var5, var8, var6)) {
+                     return false;
+                  }
+
+                  if (!this.h(var5 + 128, var8, var6)) {
+                     return false;
+                  }
+               }
+
+               if (!this.h(var5, var9, var6)) {
+                  return false;
+               }
+
+               if (!this.h(var5 + 128, var9, var6)) {
+                  return false;
+               }
+
+               return true;
+            }
+         }
+
+         if (!this.h(var5 + 64, var10, var6 + 64)) {
+            return false;
+         } else if (arg3 == 16) {
+            return this.h(var5, var9, var6 + 128);
+         } else if (arg3 == 32) {
+            return this.h(var5 + 128, var9, var6 + 128);
+         } else if (arg3 == 64) {
+            return this.h(var5 + 128, var9, var6);
+         } else if (arg3 == 128) {
+            return this.h(var5, var9, var6);
+         } else {
+            System.out.println("Warning unsupported wall type");
+            return true;
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.h(IIII)Z")
+   public boolean h(int arg0, int arg1, int arg2, int arg3) {
+      if (!this.g(arg0, arg1, arg2)) {
+         return false;
+      } else {
+         int var5 = arg1 << 7;
+         int var6 = arg2 << 7;
+         return this.h(var5 + 1, this.q[arg0][arg1][arg2] - arg3, var6 + 1) && this.h(var5 + 128 - 1, this.q[arg0][arg1 + 1][arg2] - arg3, var6 + 1) && this.h(var5 + 128 - 1, this.q[arg0][arg1 + 1][arg2 + 1] - arg3, var6 + 128 - 1) && this.h(var5 + 1, this.q[arg0][arg1][arg2 + 1] - arg3, var6 + 128 - 1);
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.a(IIIIII)Z")
+   public boolean a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+      if (arg1 == arg2 && arg3 == arg4) {
+         if (!this.g(arg0, arg1, arg3)) {
+            return false;
+         } else {
+            int var7 = arg1 << 7;
+            int var8 = arg3 << 7;
+            return this.h(var7 + 1, this.q[arg0][arg1][arg3] - arg5, var8 + 1) && this.h(var7 + 128 - 1, this.q[arg0][arg1 + 1][arg3] - arg5, var8 + 1) && this.h(var7 + 128 - 1, this.q[arg0][arg1 + 1][arg3 + 1] - arg5, var8 + 128 - 1) && this.h(var7 + 1, this.q[arg0][arg1][arg3 + 1] - arg5, var8 + 128 - 1);
+         }
+      } else {
+         for(int var9 = arg1; var9 <= arg2; ++var9) {
+            for(int var10 = arg3; var10 <= arg4; ++var10) {
+               if (this.v[arg0][var9][var10] == -y) {
+                  return false;
+               }
+            }
+         }
+
+         int var11 = (arg1 << 7) + 1;
+         int var12 = (arg3 << 7) + 2;
+         int var13 = this.q[arg0][arg1][arg3] - arg5;
+         if (!this.h(var11, var13, var12)) {
+            return false;
+         } else {
+            int var14 = (arg2 << 7) - 1;
+            if (!this.h(var14, var13, var12)) {
+               return false;
+            } else {
+               int var15 = (arg4 << 7) - 1;
+               if (!this.h(var11, var13, var15)) {
+                  return false;
+               } else if (!this.h(var14, var13, var15)) {
+                  return false;
+               } else {
+                  return true;
+               }
+            }
+         }
+      }
+   }
+
+   @ObfuscatedName("KJCMXHNO.h(III)Z")
+   public boolean h(int arg0, int arg1, int arg2) {
+      for(int var4 = 0; var4 < Z; ++var4) {
+         Occlude var5 = ab[var4];
+         if (var5.l == 1) {
+            int var6 = var5.f - arg0;
+            if (var6 > 0) {
+               int var7 = (var5.o * var6 >> 8) + var5.h;
+               int var8 = (var5.p * var6 >> 8) + var5.i;
+               int var9 = (var5.q * var6 >> 8) + var5.j;
+               int var10 = (var5.r * var6 >> 8) + var5.k;
+               if (arg2 >= var7 && arg2 <= var8 && arg1 >= var9 && arg1 <= var10) {
+                  return true;
+               }
+            }
+         } else if (var5.l == 2) {
+            int var11 = arg0 - var5.f;
+            if (var11 > 0) {
+               int var12 = (var5.o * var11 >> 8) + var5.h;
+               int var13 = (var5.p * var11 >> 8) + var5.i;
+               int var14 = (var5.q * var11 >> 8) + var5.j;
+               int var15 = (var5.r * var11 >> 8) + var5.k;
+               if (arg2 >= var12 && arg2 <= var13 && arg1 >= var14 && arg1 <= var15) {
+                  return true;
+               }
+            }
+         } else if (var5.l == 3) {
+            int var16 = var5.h - arg2;
+            if (var16 > 0) {
+               int var17 = (var5.m * var16 >> 8) + var5.f;
+               int var18 = (var5.n * var16 >> 8) + var5.g;
+               int var19 = (var5.q * var16 >> 8) + var5.j;
+               int var20 = (var5.r * var16 >> 8) + var5.k;
+               if (arg0 >= var17 && arg0 <= var18 && arg1 >= var19 && arg1 <= var20) {
+                  return true;
+               }
+            }
+         } else if (var5.l == 4) {
+            int var21 = arg2 - var5.h;
+            if (var21 > 0) {
+               int var22 = (var5.m * var21 >> 8) + var5.f;
+               int var23 = (var5.n * var21 >> 8) + var5.g;
+               int var24 = (var5.q * var21 >> 8) + var5.j;
+               int var25 = (var5.r * var21 >> 8) + var5.k;
+               if (arg0 >= var22 && arg0 <= var23 && arg1 >= var24 && arg1 <= var25) {
+                  return true;
+               }
+            }
+         } else if (var5.l == 5) {
+            int var26 = arg1 - var5.j;
+            if (var26 > 0) {
+               int var27 = (var5.m * var26 >> 8) + var5.f;
+               int var28 = (var5.n * var26 >> 8) + var5.g;
+               int var29 = (var5.o * var26 >> 8) + var5.h;
+               int var30 = (var5.p * var26 >> 8) + var5.i;
+               if (arg0 >= var27 && arg0 <= var28 && arg2 >= var29 && arg2 <= var30) {
+                  return true;
+               }
+            }
+         }
+      }
+
+      return false;
+   }
 }

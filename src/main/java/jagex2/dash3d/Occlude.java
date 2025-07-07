@@ -2,60 +2,41 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("n")
 public class Occlude {
-
-	@ObfuscatedName("n.a")
-	public int minGridX;
-
-	@ObfuscatedName("n.b")
-	public int maxGridX;
-
-	@ObfuscatedName("n.c")
-	public int minGridZ;
-
-	@ObfuscatedName("n.d")
-	public int maxGridZ;
-
-	@ObfuscatedName("n.e")
-	public int type;
-
-	@ObfuscatedName("n.f")
-	public int minX;
-
-	@ObfuscatedName("n.g")
-	public int maxX;
-
-	@ObfuscatedName("n.h")
-	public int minZ;
-
-	@ObfuscatedName("n.i")
-	public int maxZ;
-
-	@ObfuscatedName("n.j")
-	public int minY;
-
-	@ObfuscatedName("n.k")
-	public int maxY;
-
-	@ObfuscatedName("n.l")
-	public int mode;
-
-	@ObfuscatedName("n.m")
-	public int minDeltaX;
-
-	@ObfuscatedName("n.n")
-	public int maxDeltaX;
-
-	@ObfuscatedName("n.o")
-	public int minDeltaZ;
-
-	@ObfuscatedName("n.p")
-	public int maxDeltaZ;
-
-	@ObfuscatedName("n.q")
-	public int minDeltaY;
-
-	@ObfuscatedName("n.r")
-	public int maxDeltaY;
+   @ObfuscatedName("VEDUNTJR.a")
+   public int a;
+   @ObfuscatedName("VEDUNTJR.b")
+   public int b;
+   @ObfuscatedName("VEDUNTJR.c")
+   public int c;
+   @ObfuscatedName("VEDUNTJR.d")
+   public int d;
+   @ObfuscatedName("VEDUNTJR.e")
+   public int e;
+   @ObfuscatedName("VEDUNTJR.f")
+   public int f;
+   @ObfuscatedName("VEDUNTJR.g")
+   public int g;
+   @ObfuscatedName("VEDUNTJR.h")
+   public int h;
+   @ObfuscatedName("VEDUNTJR.i")
+   public int i;
+   @ObfuscatedName("VEDUNTJR.j")
+   public int j;
+   @ObfuscatedName("VEDUNTJR.k")
+   public int k;
+   @ObfuscatedName("VEDUNTJR.l")
+   public int l;
+   @ObfuscatedName("VEDUNTJR.m")
+   public int m;
+   @ObfuscatedName("VEDUNTJR.n")
+   public int n;
+   @ObfuscatedName("VEDUNTJR.o")
+   public int o;
+   @ObfuscatedName("VEDUNTJR.p")
+   public int p;
+   @ObfuscatedName("VEDUNTJR.q")
+   public int q;
+   @ObfuscatedName("VEDUNTJR.r")
+   public int r;
 }

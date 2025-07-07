@@ -4,77 +4,88 @@ import deob.ObfuscatedName;
 import jagex2.config.NpcType;
 import jagex2.config.SeqType;
 import jagex2.config.SpotAnimType;
-import jagex2.graphics.Model;
 
-@ObfuscatedName("ab")
 public class ClientNpc extends ClientEntity {
+   @ObfuscatedName("RGHBDSIJ.qb")
+   public boolean qb = true;
+   @ObfuscatedName("RGHBDSIJ.rb")
+   public NpcType rb;
 
-	@ObfuscatedName("ab.sb")
-	public NpcType type;
+   @ObfuscatedName("RGHBDSIJ.b(B)LLZYQDKJV;")
+   public final Model b(byte arg0) {
+      if (super.eb >= 0 && super.hb == 0) {
+         int var2 = SeqType.d[super.eb].f[super.fb];
+         int var3 = -1;
+         if (super.u >= 0 && super.u != super.ob) {
+            var3 = SeqType.d[super.u].f[super.v];
+         }
 
-	@ObfuscatedName("ab.a(I)Lfb;")
-	public final Model getTempModel() {
-		if (this.type == null) {
-			return null;
-		}
+         return this.rb.a(var2, var3, 0, SeqType.d[super.eb].j);
+      } else {
+         int var4 = -1;
+         if (arg0 != 122) {
+            this.qb = !this.qb;
+         }
 
-		Model model = this.getAnimatedModel();
-		if (model == null) {
-			return null;
-		}
+         if (super.u >= 0) {
+            var4 = SeqType.d[super.u].f[super.v];
+         }
 
-		super.height = model.minY;
+         return this.rb.a(var4, -1, 0, (int[])null);
+      }
+   }
 
-		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
-			SpotAnimType spot = SpotAnimType.types[super.spotanimId];
-			Model spotModel = spot.getModel();
+   @ObfuscatedName("RGHBDSIJ.a(B)LLZYQDKJV;")
+   public final Model a(byte arg0) {
+      if (arg0 != 3) {
+         throw new NullPointerException();
+      } else {
+         boolean var2 = false;
+         if (this.rb == null) {
+            return null;
+         } else {
+            Model var3 = this.b((byte)122);
+            if (var3 == null) {
+               return null;
+            } else {
+               super.A = var3.k;
+               if (super.U != -1 && super.V != -1) {
+                  SpotAnimType var4 = SpotAnimType.e[super.U];
+                  Model var5 = var4.a();
+                  if (var5 != null) {
+                     int var6 = var4.i.f[super.V];
+                     Model var7 = new Model(false, false, true, var5, AnimFrame.a(this.qb, var6));
+                     var7.a(0, 0, false, -super.Y);
+                     var7.f(7);
+                     var7.a(var6, (byte)6);
+                     var7.db = null;
+                     var7.cb = null;
+                     if (var4.l != 128 || var4.m != 128) {
+                        var7.a(var4.m, var4.l, 9, var4.l);
+                     }
 
-			if (spotModel != null) {
-				Model temp = new Model(spotModel, true, false, !spot.animHasAlpha);
-				temp.translate(-super.spotanimHeight, 0, 0);
-				temp.createLabelReferences();
-				temp.applyTransform(spot.seq.frames[super.spotanimFrame]);
-				temp.labelFaces = null;
-				temp.labelVertices = null;
-				if (spot.resizeh != 128 || spot.resizev != 128) {
-					temp.scale(spot.resizev, spot.resizeh, spot.resizeh);
-				}
-				temp.calculateNormals(spot.ambient + 64, spot.contrast + 850, -30, -50, -30, true);
+                     var7.a(var4.o + 64, var4.p + 850, -30, -50, -30, true);
+                     Model[] var8 = new Model[]{var3, var7};
+                     var3 = new Model(2, true, 0, var8);
+                  }
+               }
 
-				Model[] models = new Model[] { model, temp };
-				model = new Model(true, 2, models);
-			}
-		}
+               if (this.rb.v == 1) {
+                  var3.eb = true;
+               }
 
-		if (this.type.size == 1) {
-			model.picking = true;
-		}
+               return var3;
+            }
+         }
+      }
+   }
 
-		return model;
-	}
-
-	@ObfuscatedName("ab.c(I)Lfb;")
-	public final Model getAnimatedModel() {
-		if (super.primarySeqId < 0 || super.primarySeqDelay != 0) {
-			int transform = -1;
-			if (super.secondarySeqId >= 0) {
-				transform = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
-			}
-
-			return this.type.getModel(transform, -1, null);
-		} else {
-			int primaryTransform = SeqType.types[super.primarySeqId].frames[super.primarySeqFrame];
-			int secondaryTransform = -1;
-			if (super.secondarySeqId >= 0 && super.secondarySeqId != super.readyanim) {
-				secondaryTransform = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
-			}
-
-			return this.type.getModel(primaryTransform, secondaryTransform, SeqType.types[super.primarySeqId].walkmerge);
-		}
-	}
-
-	@ObfuscatedName("ab.a(B)Z")
-	public final boolean isVisible() {
-		return this.type != null;
-	}
+   @ObfuscatedName("RGHBDSIJ.b(I)Z")
+   public final boolean b(int arg0) {
+      if (arg0 != 0) {
+         throw new NullPointerException();
+      } else {
+         return this.rb != null;
+      }
+   }
 }

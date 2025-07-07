@@ -2,22 +2,21 @@ package jagex2.datastruct;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("x")
 public class DoublyLinkable extends Linkable {
+   @ObfuscatedName("DPPNUUMQ.g")
+   public static int g;
+   @ObfuscatedName("DPPNUUMQ.e")
+   public DoublyLinkable e;
+   @ObfuscatedName("DPPNUUMQ.f")
+   public DoublyLinkable f;
 
-	@ObfuscatedName("x.f")
-	public DoublyLinkable next2;
-
-	@ObfuscatedName("x.g")
-	public DoublyLinkable prev2;
-
-	@ObfuscatedName("x.b()V")
-	public void unlink2() {
-		if (this.prev2 != null) {
-			this.prev2.next2 = this.next2;
-			this.next2.prev2 = this.prev2;
-			this.next2 = null;
-			this.prev2 = null;
-		}
-	}
+   @ObfuscatedName("DPPNUUMQ.b()V")
+   public void b() {
+      if (this.f != null) {
+         this.f.e = this.e;
+         this.e.f = this.f;
+         this.e = null;
+         this.f = null;
+      }
+   }
 }

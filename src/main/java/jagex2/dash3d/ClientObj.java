@@ -2,20 +2,22 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 import jagex2.config.ObjType;
-import jagex2.graphics.Model;
 
-@ObfuscatedName("db")
 public class ClientObj extends ModelSource {
+   @ObfuscatedName("HRIUIFAV.m")
+   public int m;
+   @ObfuscatedName("HRIUIFAV.n")
+   public int n;
+   @ObfuscatedName("HRIUIFAV.o")
+   public int o;
 
-	@ObfuscatedName("db.m")
-	public int index;
+   @ObfuscatedName("HRIUIFAV.a(B)LLZYQDKJV;")
+   public final Model a(byte arg0) {
+      if (arg0 != 3) {
+         this.n = -358;
+      }
 
-	@ObfuscatedName("db.n")
-	public int count;
-
-	@ObfuscatedName("db.a(I)Lfb;")
-	public final Model getTempModel() {
-		ObjType obj = ObjType.get(this.index);
-		return obj.getModel(this.count);
-	}
+      ObjType var2 = ObjType.a(this.m);
+      return var2.c(this.o);
+   }
 }

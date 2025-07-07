@@ -4,205 +4,225 @@ import jagex2.io.Jagfile;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
-@ObfuscatedName("kc")
 public class FloType {
+   @ObfuscatedName("FZFOSJCE.c")
+   public boolean c = true;
+   @ObfuscatedName("FZFOSJCE.h")
+   public int h = -1;
+   @ObfuscatedName("FZFOSJCE.i")
+   public boolean i = false;
+   @ObfuscatedName("FZFOSJCE.j")
+   public boolean j = true;
+   @ObfuscatedName("FZFOSJCE.a")
+   public static byte a = 6;
+   @ObfuscatedName("FZFOSJCE.b")
+   public int b;
+   @ObfuscatedName("FZFOSJCE.d")
+   public static int d;
+   @ObfuscatedName("FZFOSJCE.g")
+   public int g;
+   @ObfuscatedName("FZFOSJCE.k")
+   public int k;
+   @ObfuscatedName("FZFOSJCE.l")
+   public int l;
+   @ObfuscatedName("FZFOSJCE.m")
+   public int m;
+   @ObfuscatedName("FZFOSJCE.n")
+   public int n;
+   @ObfuscatedName("FZFOSJCE.o")
+   public int o;
+   @ObfuscatedName("FZFOSJCE.p")
+   public int p;
+   @ObfuscatedName("FZFOSJCE.f")
+   public String f;
+   @ObfuscatedName("FZFOSJCE.e")
+   public static FloType[] e;
 
-	@ObfuscatedName("kc.b")
-	public static int count;
+   @ObfuscatedName("FZFOSJCE.a(LATJMVOZR;I)V")
+   public static void a(Jagfile arg0, int arg1) {
+      if (arg1 == 36135) {
+         Packet var2 = new Packet(arg0.a("flo.dat", (byte[])null));
+         d = var2.e();
+         if (e == null) {
+            e = new FloType[d];
+         }
 
-	@ObfuscatedName("kc.c")
-	public static FloType[] types;
+         for(int var3 = 0; var3 < d; ++var3) {
+            if (e[var3] == null) {
+               e[var3] = new FloType();
+            }
 
-	@ObfuscatedName("kc.d")
-	public int rgb;
+            e[var3].a(a, var2);
+         }
 
-	@ObfuscatedName("kc.e")
-	public int texture = -1;
+      }
+   }
 
-	@ObfuscatedName("kc.f")
-	public boolean overlay = false;
+   @ObfuscatedName("FZFOSJCE.a(BLMFMVIYHT;)V")
+   public void a(byte arg0, Packet arg1) {
+      if (arg0 == 6) {
+         boolean var3 = false;
+      } else {
+         for(int var4 = 1; var4 > 0; ++var4) {
+         }
+      }
 
-	@ObfuscatedName("kc.g")
-	public boolean occlude = true;
+      while(true) {
+         int var5 = arg1.g1();
+         if (var5 == 0) {
+            return;
+         }
 
-	@ObfuscatedName("kc.h")
-	public String debugname;
+         if (var5 == 1) {
+            this.g = arg1.g3();
+            this.a(true, this.g);
+         } else if (var5 == 2) {
+            this.h = arg1.g1();
+         } else if (var5 == 3) {
+            this.i = true;
+         } else if (var5 == 5) {
+            this.j = false;
+         } else if (var5 == 6) {
+            this.f = arg1.gjstr();
+         } else if (var5 == 7) {
+            int var6 = this.k;
+            int var7 = this.l;
+            int var8 = this.m;
+            int var9 = this.n;
+            int var10 = arg1.g3();
+            this.a(true, var10);
+            this.k = var6;
+            this.l = var7;
+            this.m = var8;
+            this.n = var9;
+            this.o = var9;
+         } else {
+            System.out.println("Error unrecognised config code: " + var5);
+         }
+      }
+   }
 
-	@ObfuscatedName("kc.i")
-	public int hue;
+   @ObfuscatedName("FZFOSJCE.a(ZI)V")
+   public void a(boolean arg0, int arg1) {
+      if (arg1 == 16711935) {
+         arg1 = 0;
+      }
 
-	@ObfuscatedName("kc.j")
-	public int saturation;
+      double var3 = (double)(arg1 >> 16 & 255) / 256.0D;
+      double var5 = (double)(arg1 >> 8 & 255) / 256.0D;
+      double var7 = (double)(arg1 & 255) / 256.0D;
+      double var9 = var3;
+      if (var5 < var3) {
+         var9 = var5;
+      }
 
-	@ObfuscatedName("kc.k")
-	public int lightness;
+      if (var7 < var9) {
+         var9 = var7;
+      }
 
-	@ObfuscatedName("kc.l")
-	public int chroma;
+      double var11 = var3;
+      if (var5 > var3) {
+         var11 = var5;
+      }
 
-	@ObfuscatedName("kc.m")
-	public int luminance;
+      if (var7 > var11) {
+         var11 = var7;
+      }
 
-	@ObfuscatedName("kc.n")
-	public int hsl;
+      double var13 = 0.0D;
+      double var15 = 0.0D;
+      double var17 = (var9 + var11) / 2.0D;
+      if (var9 != var11) {
+         if (var17 < 0.5D) {
+            var15 = (var11 - var9) / (var9 + var11);
+         }
 
-	@ObfuscatedName("kc.a(Lyb;B)V")
-	public static void unpack(Jagfile config) {
-		Packet dat = new Packet(config.read("flo.dat", null));
+         if (var17 >= 0.5D) {
+            var15 = (var11 - var9) / (2.0D - var11 - var9);
+         }
 
-		count = dat.g2();
-		if (types == null) {
-			types = new FloType[count];
-		}
+         if (var3 == var11) {
+            var13 = (var5 - var7) / (var11 - var9);
+         } else if (var5 == var11) {
+            var13 = (var7 - var3) / (var11 - var9) + 2.0D;
+         } else if (var7 == var11) {
+            var13 = (var3 - var5) / (var11 - var9) + 4.0D;
+         }
+      }
 
-		for (int i = 0; i < count; i++) {
-			if (types[i] == null) {
-				types[i] = new FloType();
-			}
+      double var19 = var13 / 6.0D;
+      this.k = (int)(var19 * 256.0D);
+      this.l = (int)(var15 * 256.0D);
+      this.m = (int)(var17 * 256.0D);
+      if (!arg0) {
+         this.b = -244;
+      }
 
-			types[i].decode(dat);
-		}
-	}
+      if (this.l < 0) {
+         this.l = 0;
+      } else if (this.l > 255) {
+         this.l = 255;
+      }
 
-	@ObfuscatedName("kc.a(ILmb;)V")
-	public void decode(Packet buf) {
-		while (true) {
-			int code = buf.g1();
-			if (code == 0) {
-				return;
-			}
+      if (this.m < 0) {
+         this.m = 0;
+      } else if (this.m > 255) {
+         this.m = 255;
+      }
 
-			if (code == 1) {
-				this.rgb = buf.g3();
-				this.setColour(this.rgb);
-			} else if (code == 2) {
-				this.texture = buf.g1();
-			} else if (code == 3) {
-				this.overlay = true;
-			} else if (code == 5) {
-				this.occlude = false;
-			} else if (code == 6) {
-				this.debugname = buf.gjstr();
-			} else {
-				System.out.println("Error unrecognised config code: " + code);
-			}
-		}
-	}
+      if (var17 > 0.5D) {
+         this.o = (int)((1.0D - var17) * var15 * 512.0D);
+      } else {
+         this.o = (int)(var15 * var17 * 512.0D);
+      }
 
-	@ObfuscatedName("kc.a(II)V")
-	public void setColour(int rgb) {
-		double red = (double) (rgb >> 16 & 0xFF) / 256.0D;
-		double green = (double) (rgb >> 8 & 0xFF) / 256.0D;
-		double blue = (double) (rgb & 0xFF) / 256.0D;
+      if (this.o < 1) {
+         this.o = 1;
+      }
 
-		double min = red;
-		if (green < red) {
-			min = green;
-		}
-		if (blue < min) {
-			min = blue;
-		}
+      this.n = (int)((double)this.o * var19);
+      int var21 = this.k + (int)(Math.random() * 16.0D) - 8;
+      if (var21 < 0) {
+         var21 = 0;
+      } else if (var21 > 255) {
+         var21 = 255;
+      }
 
-		double max = red;
-		if (green > red) {
-			max = green;
-		}
-		if (blue > max) {
-			max = blue;
-		}
+      int var22 = this.l + (int)(Math.random() * 48.0D) - 24;
+      if (var22 < 0) {
+         var22 = 0;
+      } else if (var22 > 255) {
+         var22 = 255;
+      }
 
-		double h = 0.0D;
-		double s = 0.0D;
-		double l = (min + max) / 2.0D;
+      int var23 = this.m + (int)(Math.random() * 48.0D) - 24;
+      if (var23 < 0) {
+         var23 = 0;
+      } else if (var23 > 255) {
+         var23 = 255;
+      }
 
-		if (min != max) {
-			if (l < 0.5D) {
-				s = (max - min) / (min + max);
-			} else if (l >= 0.5D) {
-				s = (max - min) / (2.0D - max - min);
-			}
+      this.p = this.a(var21, var22, var23);
+   }
 
-			if (red == max) {
-				h = (green - blue) / (max - min);
-			} else if (green == max) {
-				h = (blue - red) / (max - min) + 2.0D;
-			} else if (blue == max) {
-				h = (red - green) / (max - min) + 4.0D;
-			}
-		}
+   @ObfuscatedName("FZFOSJCE.a(III)I")
+   public final int a(int arg0, int arg1, int arg2) {
+      if (arg2 > 179) {
+         arg1 /= 2;
+      }
 
-		h /= 6.0D;
+      if (arg2 > 192) {
+         arg1 /= 2;
+      }
 
-		this.hue = (int) (h * 256.0D);
-		this.saturation = (int) (s * 256.0D);
-		this.lightness = (int) (l * 256.0D);
+      if (arg2 > 217) {
+         arg1 /= 2;
+      }
 
-		if (this.saturation < 0) {
-			this.saturation = 0;
-		} else if (this.saturation > 255) {
-			this.saturation = 255;
-		}
+      if (arg2 > 243) {
+         arg1 /= 2;
+      }
 
-		if (this.lightness < 0) {
-			this.lightness = 0;
-		} else if (this.lightness > 255) {
-			this.lightness = 255;
-		}
-
-		if (l > 0.5D) {
-			this.luminance = (int) ((1.0D - l) * s * 512.0D);
-		} else {
-			this.luminance = (int) (s * l * 512.0D);
-		}
-
-		if (this.luminance < 1) {
-			this.luminance = 1;
-		}
-
-		this.chroma = (int) ((double) this.luminance * h);
-
-		int hue = this.hue + (int) (Math.random() * 16.0D) - 8;
-		if (hue < 0) {
-			hue = 0;
-		} else if (hue > 255) {
-			hue = 255;
-		}
-
-		int saturation = this.saturation + (int) (Math.random() * 48.0D) - 24;
-		if (saturation < 0) {
-			saturation = 0;
-		} else if (saturation > 255) {
-			saturation = 255;
-		}
-
-		int lightness = this.lightness + (int) (Math.random() * 48.0D) - 24;
-		if (lightness < 0) {
-			lightness = 0;
-		} else if (lightness > 255) {
-			lightness = 255;
-		}
-
-		this.hsl = this.hsl24to16(hue, saturation, lightness);
-	}
-
-	@ObfuscatedName("kc.a(III)I")
-	public final int hsl24to16(int hue, int saturation, int lightness) {
-		if (lightness > 179) {
-			saturation /= 2;
-		}
-
-		if (lightness > 192) {
-			saturation /= 2;
-		}
-
-		if (lightness > 217) {
-			saturation /= 2;
-		}
-
-		if (lightness > 243) {
-			saturation /= 2;
-		}
-
-		return lightness / 2 + (hue / 4 << 10) + (saturation / 32 << 7);
-	}
+      return arg2 / 2 + (arg0 / 4 << 10) + (arg1 / 32 << 7);
+   }
 }

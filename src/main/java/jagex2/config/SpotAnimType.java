@@ -1,135 +1,132 @@
 package jagex2.config;
 
-import deob.ObfuscatedName;
+import deob.*;
+import jagex2.dash3d.Model;
 import jagex2.datastruct.LruCache;
-import jagex2.graphics.Model;
 import jagex2.io.Jagfile;
 import jagex2.io.Packet;
 
-@ObfuscatedName("oc")
 public class SpotAnimType {
+   @ObfuscatedName("MNZYLKNY.c")
+   public int c = -214;
+   @ObfuscatedName("MNZYLKNY.h")
+   public int h = -1;
+   @ObfuscatedName("MNZYLKNY.j")
+   public int[] j = new int[6];
+   @ObfuscatedName("MNZYLKNY.k")
+   public int[] k = new int[6];
+   @ObfuscatedName("MNZYLKNY.l")
+   public int l = 128;
+   @ObfuscatedName("MNZYLKNY.m")
+   public int m = 128;
+   @ObfuscatedName("MNZYLKNY.a")
+   public static byte a = 6;
+   @ObfuscatedName("MNZYLKNY.b")
+   public static boolean b = true;
+   @ObfuscatedName("MNZYLKNY.q")
+   public static LruCache q = new LruCache(30, -572);
+   @ObfuscatedName("MNZYLKNY.d")
+   public static int d;
+   @ObfuscatedName("MNZYLKNY.f")
+   public int f;
+   @ObfuscatedName("MNZYLKNY.g")
+   public int g;
+   @ObfuscatedName("MNZYLKNY.n")
+   public int n;
+   @ObfuscatedName("MNZYLKNY.o")
+   public int o;
+   @ObfuscatedName("MNZYLKNY.p")
+   public int p;
+   @ObfuscatedName("MNZYLKNY.i")
+   public SeqType i;
+   @ObfuscatedName("MNZYLKNY.e")
+   public static SpotAnimType[] e;
 
-	@ObfuscatedName("oc.b")
-	public static int count;
+   @ObfuscatedName("MNZYLKNY.a(LATJMVOZR;I)V")
+   public static void a(Jagfile arg0, int arg1) {
+      Packet var2 = new Packet(arg0.a("spotanim.dat", (byte[])null));
+      d = var2.e();
+      if (arg1 != 36135) {
+         b = !b;
+      }
 
-	@ObfuscatedName("oc.c")
-	public static SpotAnimType[] types;
+      if (e == null) {
+         e = new SpotAnimType[d];
+      }
 
-	@ObfuscatedName("oc.d")
-	public int id;
+      for(int var3 = 0; var3 < d; ++var3) {
+         if (e[var3] == null) {
+            e[var3] = new SpotAnimType();
+         }
 
-	@ObfuscatedName("oc.e")
-	public int model;
+         e[var3].f = var3;
+         e[var3].a(a, var2);
+      }
 
-	@ObfuscatedName("oc.f")
-	public int anim = -1;
+   }
 
-	@ObfuscatedName("oc.g")
-	public SeqType seq;
+   @ObfuscatedName("MNZYLKNY.a(BLMFMVIYHT;)V")
+   public void a(byte arg0, Packet arg1) {
+      if (arg0 == 6) {
+         boolean var3 = false;
+      } else {
+         this.c = 458;
+      }
 
-	@ObfuscatedName("oc.h")
-	public boolean animHasAlpha = false;
+      while(true) {
+         while(true) {
+            int var4 = arg1.g1();
+            if (var4 == 0) {
+               return;
+            }
 
-	@ObfuscatedName("oc.i")
-	public int[] recol_s = new int[6];
+            if (var4 == 1) {
+               this.g = arg1.e();
+            } else if (var4 == 2) {
+               this.h = arg1.e();
+               if (SeqType.d != null) {
+                  this.i = SeqType.d[this.h];
+               }
+            } else if (var4 == 4) {
+               this.l = arg1.e();
+            } else if (var4 == 5) {
+               this.m = arg1.e();
+            } else if (var4 == 6) {
+               this.n = arg1.e();
+            } else if (var4 == 7) {
+               this.o = arg1.g1();
+            } else if (var4 == 8) {
+               this.p = arg1.g1();
+            } else if (var4 >= 40 && var4 < 50) {
+               this.j[var4 - 40] = arg1.e();
+            } else if (var4 >= 50 && var4 < 60) {
+               this.k[var4 - 50] = arg1.e();
+            } else {
+               System.out.println("Error unrecognised spotanim config code: " + var4);
+            }
+         }
+      }
+   }
 
-	@ObfuscatedName("oc.j")
-	public int[] recol_d = new int[6];
+   @ObfuscatedName("MNZYLKNY.a()LLZYQDKJV;")
+   public Model a() {
+      Model var1 = (Model)q.a((long)this.f);
+      if (var1 != null) {
+         return var1;
+      } else {
+         Model var2 = Model.a(this.g);
+         if (var2 == null) {
+            return null;
+         } else {
+            for(int var3 = 0; var3 < 6; ++var3) {
+               if (this.j[0] != 0) {
+                  var2.c(this.j[var3], this.k[var3]);
+               }
+            }
 
-	@ObfuscatedName("oc.k")
-	public int resizeh = 128;
-
-	@ObfuscatedName("oc.l")
-	public int resizev = 128;
-
-	@ObfuscatedName("oc.m")
-	public int angle;
-
-	@ObfuscatedName("oc.n")
-	public int ambient;
-
-	@ObfuscatedName("oc.o")
-	public int contrast;
-
-	@ObfuscatedName("oc.p")
-	public static LruCache modelCache = new LruCache(30);
-
-	@ObfuscatedName("oc.a(Lyb;B)V")
-	public static void unpack(Jagfile config) {
-		Packet var2 = new Packet(config.read("spotanim.dat", null));
-		count = var2.g2();
-
-		if (types == null) {
-			types = new SpotAnimType[count];
-		}
-
-		for (int i = 0; i < count; i++) {
-			if (types[i] == null) {
-				types[i] = new SpotAnimType();
-			}
-
-			types[i].id = i;
-			types[i].decode(var2);
-		}
-	}
-
-	@ObfuscatedName("oc.a(ILmb;)V")
-	public void decode(Packet buf) {
-		while (true) {
-			int code = buf.g1();
-			if (code == 0) {
-				return;
-			}
-
-			if (code == 1) {
-				this.model = buf.g2();
-			} else if (code == 2) {
-				this.anim = buf.g2();
-
-				if (SeqType.types != null) {
-					this.seq = SeqType.types[this.anim];
-				}
-			} else if (code == 3) {
-				this.animHasAlpha = true;
-			} else if (code == 4) {
-				this.resizeh = buf.g2();
-			} else if (code == 5) {
-				this.resizev = buf.g2();
-			} else if (code == 6) {
-				this.angle = buf.g2();
-			} else if (code == 7) {
-				this.ambient = buf.g1();
-			} else if (code == 8) {
-				this.contrast = buf.g1();
-			} else if (code >= 40 && code < 50) {
-				this.recol_s[code - 40] = buf.g2();
-			} else if (code >= 50 && code < 60) {
-				this.recol_d[code - 50] = buf.g2();
-			} else {
-				System.out.println("Error unrecognised spotanim config code: " + code);
-			}
-		}
-	}
-
-	@ObfuscatedName("oc.a()Lfb;")
-	public Model getModel() {
-		Model model = (Model) modelCache.get(this.id);
-		if (model != null) {
-			return model;
-		}
-
-		model = Model.tryGet(this.model);
-		if (model == null) {
-			return null;
-		}
-
-		for (int i = 0; i < 6; i++) {
-			if (this.recol_s[0] != 0) {
-				model.recolour(this.recol_s[i], this.recol_d[i]);
-			}
-		}
-
-		modelCache.put(model, this.id);
-		return model;
-	}
+            q.a(var2, (long)this.f, 5);
+            return var2;
+         }
+      }
+   }
 }

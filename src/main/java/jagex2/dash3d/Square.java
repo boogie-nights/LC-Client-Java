@@ -3,81 +3,59 @@ package jagex2.dash3d;
 import deob.ObfuscatedName;
 import jagex2.datastruct.Linkable;
 
-@ObfuscatedName("w")
 public class Square extends Linkable {
+   @ObfuscatedName("RIEEXHOP.e")
+   public boolean e = false;
+   @ObfuscatedName("RIEEXHOP.q")
+   public Loc[] q = new Loc[5];
+   @ObfuscatedName("RIEEXHOP.r")
+   public int[] r = new int[5];
+   @ObfuscatedName("RIEEXHOP.f")
+   public int f;
+   @ObfuscatedName("RIEEXHOP.i")
+   public int i;
+   @ObfuscatedName("RIEEXHOP.g")
+   public int g;
+   @ObfuscatedName("RIEEXHOP.h")
+   public int h;
+   @ObfuscatedName("RIEEXHOP.A")
+   public int A;
+   @ObfuscatedName("RIEEXHOP.p")
+   public int p;
+   @ObfuscatedName("RIEEXHOP.s")
+   public int s;
+   @ObfuscatedName("RIEEXHOP.t")
+   public int t;
+   @ObfuscatedName("RIEEXHOP.x")
+   public int x;
+   @ObfuscatedName("RIEEXHOP.y")
+   public int y;
+   @ObfuscatedName("RIEEXHOP.z")
+   public int z;
+   @ObfuscatedName("RIEEXHOP.j")
+   public QuickGround j;
+   @ObfuscatedName("RIEEXHOP.o")
+   public GroundObject o;
+   @ObfuscatedName("RIEEXHOP.k")
+   public Ground k;
+   @ObfuscatedName("RIEEXHOP.n")
+   public GroundDecor n;
+   @ObfuscatedName("RIEEXHOP.B")
+   public Square B;
+   @ObfuscatedName("RIEEXHOP.m")
+   public Decor m;
+   @ObfuscatedName("RIEEXHOP.l")
+   public Wall l;
+   @ObfuscatedName("RIEEXHOP.u")
+   public boolean u;
+   @ObfuscatedName("RIEEXHOP.v")
+   public boolean v;
+   @ObfuscatedName("RIEEXHOP.w")
+   public boolean w;
 
-	@ObfuscatedName("w.f")
-	public int level;
-
-	@ObfuscatedName("w.g")
-	public int x;
-
-	@ObfuscatedName("w.h")
-	public int z;
-
-	@ObfuscatedName("w.i")
-	public int originalLevel;
-
-	@ObfuscatedName("w.j")
-	public QuickGround quickGround;
-
-	@ObfuscatedName("w.k")
-	public Ground ground;
-
-	@ObfuscatedName("w.l")
-	public Wall wall;
-
-	@ObfuscatedName("w.m")
-	public Decor decor;
-
-	@ObfuscatedName("w.n")
-	public GroundDecor groundDecor;
-
-	@ObfuscatedName("w.o")
-	public GroundObject groundObject;
-
-	@ObfuscatedName("w.p")
-	public int primaryCount;
-
-	@ObfuscatedName("w.q")
-	public Sprite[] sprite = new Sprite[5];
-
-	@ObfuscatedName("w.r")
-	public int[] primaryExtendDirections = new int[5];
-
-	@ObfuscatedName("w.s")
-	public int combinedPrimaryExtendDirections;
-
-	@ObfuscatedName("w.t")
-	public int drawLevel;
-
-	@ObfuscatedName("w.u")
-	public boolean drawFront;
-
-	@ObfuscatedName("w.v")
-	public boolean drawBack;
-
-	@ObfuscatedName("w.w")
-	public boolean drawPrimaries;
-
-	@ObfuscatedName("w.x")
-	public int cornerSides;
-
-	@ObfuscatedName("w.y")
-	public int sidesBeforeCorner;
-
-	@ObfuscatedName("w.z")
-	public int sidesAfterCorner;
-
-	@ObfuscatedName("w.A")
-	public int backWallTypes;
-
-	@ObfuscatedName("w.B")
-	public Square linkedSquare;
-
-	public Square(int level, int x, int z) {
-		this.originalLevel = this.level = level;
-		this.x = x;
-		this.z = z;
-	}
+   public Square(int arg0, int arg1, int arg2) {
+      this.i = this.f = arg0;
+      this.g = arg1;
+      this.h = arg2;
+   }
 }

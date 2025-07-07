@@ -2,24 +2,17 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 
-@ObfuscatedName("k")
 public class GroundDecor {
-
-	@ObfuscatedName("k.a")
-	public int y;
-
-	@ObfuscatedName("k.b")
-	public int x;
-
-	@ObfuscatedName("k.c")
-	public int z;
-
-	@ObfuscatedName("k.d")
-	public ModelSource model;
-
-	@ObfuscatedName("k.e")
-	public int typecode;
-
-	@ObfuscatedName("k.f")
-	public byte typecode2;
+   @ObfuscatedName("MOLUZZPG.f")
+   public byte f;
+   @ObfuscatedName("MOLUZZPG.a")
+   public int a;
+   @ObfuscatedName("MOLUZZPG.b")
+   public int b;
+   @ObfuscatedName("MOLUZZPG.c")
+   public int c;
+   @ObfuscatedName("MOLUZZPG.e")
+   public int e;
+   @ObfuscatedName("MOLUZZPG.d")
+   public ModelSource d;
 }

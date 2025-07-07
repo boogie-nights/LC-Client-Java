@@ -3,183 +3,217 @@ package jagex2.sound;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
-@ObfuscatedName("cc")
 public class Wave {
+   @ObfuscatedName("UDNCEGOL.b")
+   public int b = -573;
+   @ObfuscatedName("UDNCEGOL.c")
+   public int c = -252;
+   @ObfuscatedName("UDNCEGOL.i")
+   public SoundTone[] i = new SoundTone[10];
+   @ObfuscatedName("UDNCEGOL.a")
+   public static byte a = 6;
+   @ObfuscatedName("UDNCEGOL.d")
+   public static boolean d = true;
+   @ObfuscatedName("UDNCEGOL.e")
+   public static Wave[] e = new Wave[5000];
+   @ObfuscatedName("UDNCEGOL.f")
+   public static int[] f = new int[5000];
+   @ObfuscatedName("UDNCEGOL.j")
+   public int j;
+   @ObfuscatedName("UDNCEGOL.k")
+   public int k;
+   @ObfuscatedName("UDNCEGOL.h")
+   public static Packet h;
+   @ObfuscatedName("UDNCEGOL.g")
+   public static byte[] g;
 
-	@ObfuscatedName("cc.d")
-	public static Wave[] tracks = new Wave[1000];
+   public Wave(int arg0) {
+      if (arg0 >= 0) {
+         throw new NullPointerException();
+      }
+   }
 
-	@ObfuscatedName("cc.e")
-	public static int[] delays = new int[1000];
+   @ObfuscatedName("UDNCEGOL.a(LMFMVIYHT;I)V")
+   public static final void a(Packet arg0, int arg1) {
+      if (arg1 == 36135) {
+         g = new byte[441000];
+         h = new Packet(g);
+         SoundTone.a();
 
-	@ObfuscatedName("cc.f")
-	public static byte[] waveBytes = new byte[441000];
+         while(true) {
+            int var2 = arg0.e();
+            if (var2 == 65535) {
+               return;
+            }
 
-	@ObfuscatedName("cc.g")
-	public static Packet waveBuffer = new Packet(waveBytes);
+            e[var2] = new Wave(-524);
+            e[var2].a(a, arg0);
+            f[var2] = e[var2].a(0);
+         }
+      }
+   }
 
-	@ObfuscatedName("cc.h")
-	public Tone[] tones = new Tone[10];
+   @ObfuscatedName("UDNCEGOL.a(IBI)LMFMVIYHT;")
+   public static final Packet a(int arg0, byte arg1, int arg2) {
+      if (arg1 != 6) {
+         d = !d;
+      }
 
-	@ObfuscatedName("cc.i")
-	public int loopBegin;
+      if (e[arg2] != null) {
+         Wave var3 = e[arg2];
+         return var3.a(-573, arg0);
+      } else {
+         return null;
+      }
+   }
 
-	@ObfuscatedName("cc.j")
-	public int loopEnd;
+   @ObfuscatedName("UDNCEGOL.a(BLMFMVIYHT;)V")
+   public final void a(byte arg0, Packet arg1) {
+      for(int var3 = 0; var3 < 10; ++var3) {
+         int var4 = arg1.g1();
+         if (var4 != 0) {
+            --arg1.pos;
+            this.i[var3] = new SoundTone();
+            this.i[var3].a(a, arg1);
+         }
+      }
 
-	@ObfuscatedName("cc.a(Lmb;B)V")
-	public static final void unpack(Packet buf) {
-		Tone.init();
+      this.j = arg1.e();
+      this.k = arg1.e();
+      if (arg0 == 6) {
+         boolean var5 = false;
+      } else {
+         this.c = 64;
+      }
+   }
 
-		while (true) {
-			int id = buf.g2();
-			if (id == 65535) {
-				return;
-			}
+   @ObfuscatedName("UDNCEGOL.a(I)I")
+   public final int a(int arg0) {
+      int var2 = 9999999;
 
-			tracks[id] = new Wave();
-			tracks[id].readWave(buf);
-			delays[id] = tracks[id].trim();
-		}
-	}
+      for(int var3 = 0; var3 < 10; ++var3) {
+         if (this.i[var3] != null && this.i[var3].s / 20 < var2) {
+            var2 = this.i[var3].s / 20;
+         }
+      }
 
-	@ObfuscatedName("cc.a(III)Lmb;")
-	public static final Packet generate(int loopCount, int id) {
-		if (tracks[id] == null) {
-			return null;
-		} else {
-			Wave wave = tracks[id];
-			return wave.getWave(loopCount);
-		}
-	}
+      if (this.j < this.k && this.j / 20 < var2) {
+         var2 = this.j / 20;
+      }
 
-	@ObfuscatedName("cc.a(ILmb;)V")
-	public final void readWave(Packet buf) {
-		for (int tone = 0; tone < 10; tone++) {
-			int hasTone = buf.g1();
-			if (hasTone != 0) {
-				buf.pos--;
-				this.tones[tone] = new Tone();
-				this.tones[tone].unpack(buf);
-			}
-		}
+      if (var2 != 9999999 && var2 != 0) {
+         for(int var4 = 0; var4 < 10; ++var4) {
+            if (this.i[var4] != null) {
+               this.i[var4].s -= var2 * 20;
+            }
+         }
 
-		this.loopBegin = buf.g2();
-		this.loopEnd = buf.g2();
-	}
+         if (arg0 != 0) {
+            d = !d;
+         }
 
-	@ObfuscatedName("cc.a(I)I")
-	public final int trim() {
-		int start = 9999999;
-		for (int tone = 0; tone < 10; tone++) {
-			if (this.tones[tone] != null && this.tones[tone].start / 20 < start) {
-				start = this.tones[tone].start / 20;
-			}
-		}
+         if (this.j < this.k) {
+            this.j -= var2 * 20;
+            this.k -= var2 * 20;
+         }
 
-		if (this.loopBegin < this.loopEnd && this.loopBegin / 20 < start) {
-			start = this.loopBegin / 20;
-		}
+         return var2;
+      } else {
+         return 0;
+      }
+   }
 
-		if (start == 9999999 || start == 0) {
-			return 0;
-		}
+   @ObfuscatedName("UDNCEGOL.a(II)LMFMVIYHT;")
+   public final Packet a(int arg0, int arg1) {
+      int var3 = this.b(arg1);
+      h.pos = 0;
+      h.d(1380533830);
+      h.b(var3 + 36, false);
+      h.d(1463899717);
+      h.d(1718449184);
+      if (arg0 >= 0) {
+         throw new NullPointerException();
+      } else {
+         h.b(16, false);
+         h.a(1, false);
+         h.a(1, false);
+         h.b(22050, false);
+         h.b(22050, false);
+         h.a(1, false);
+         h.a(8, false);
+         h.d(1684108385);
+         h.b(var3, false);
+         h.pos += var3;
+         return h;
+      }
+   }
 
-		for (int tone = 0; tone < 10; tone++) {
-			if (this.tones[tone] != null) {
-				this.tones[tone].start -= start * 20;
-			}
-		}
+   @ObfuscatedName("UDNCEGOL.b(I)I")
+   public final int b(int arg0) {
+      int var2 = 0;
 
-		if (this.loopBegin < this.loopEnd) {
-			this.loopBegin -= start * 20;
-			this.loopEnd -= start * 20;
-		}
+      for(int var3 = 0; var3 < 10; ++var3) {
+         if (this.i[var3] != null && this.i[var3].s + this.i[var3].r > var2) {
+            var2 = this.i[var3].s + this.i[var3].r;
+         }
+      }
 
-		return start;
-	}
+      if (var2 == 0) {
+         return 0;
+      } else {
+         int var4 = var2 * 22050 / 1000;
+         int var5 = this.j * 22050 / 1000;
+         int var6 = this.k * 22050 / 1000;
+         if (var5 < 0 || var5 > var4 || var6 < 0 || var6 > var4 || var5 >= var6) {
+            arg0 = 0;
+         }
 
-	@ObfuscatedName("cc.a(IB)Lmb;")
-	public final Packet getWave(int loopCount) {
-		int length = this.generate(loopCount);
-		waveBuffer.pos = 0;
-		waveBuffer.p4(0x52494646); // "RIFF" ChunkID
-		waveBuffer.ip4(length + 36); // ChunkSize
-		waveBuffer.p4(0x57415645); // "WAVE" format
-		waveBuffer.p4(0x666d7420); // "fmt " chunk id
-		waveBuffer.ip4(16); // chunk size
-		waveBuffer.ip2(1); // audio format
-		waveBuffer.ip2(1); // num channels
-		waveBuffer.ip4(22050); // sample rate
-		waveBuffer.ip4(22050); // byte rate
-		waveBuffer.ip2(1); // block align
-		waveBuffer.ip2(8); // bits per sample
-		waveBuffer.p4(0x64617461); // "data"
-		waveBuffer.ip4(length);
-		waveBuffer.pos += length;
-		return waveBuffer;
-	}
+         int var7 = (arg0 - 1) * (var6 - var5) + var4;
 
-	@ObfuscatedName("cc.b(I)I")
-	public final int generate(int loopCount) {
-		int duration = 0;
-		for (int tone = 0; tone < 10; tone++) {
-			if (this.tones[tone] != null && this.tones[tone].start + this.tones[tone].length > duration) {
-				duration = this.tones[tone].start + this.tones[tone].length;
-			}
-		}
+         for(int var8 = 44; var8 < var7 + 44; ++var8) {
+            g[var8] = -128;
+         }
 
-		if (duration == 0) {
-			return 0;
-		}
+         for(int var9 = 0; var9 < 10; ++var9) {
+            if (this.i[var9] != null) {
+               int var10 = this.i[var9].r * 22050 / 1000;
+               int var11 = this.i[var9].s * 22050 / 1000;
+               int[] var12 = this.i[var9].a(var10, this.i[var9].r);
 
-		int sampleCount = duration * 22050 / 1000;
-		int loopStart = this.loopBegin * 22050 / 1000;
-		int loopStop = this.loopEnd * 22050 / 1000;
+               for(int var13 = 0; var13 < var10; ++var13) {
+                  int var14 = (var12[var13] >> 8) + (g[var11 + var13 + 44] & 255);
+                  if ((var14 & -256) != 0) {
+                     var14 = ~(var14 >> 31);
+                  }
 
-		if (loopStart < 0 || loopStart > sampleCount || loopStop < 0 || loopStop > sampleCount || loopStart >= loopStop) {
-			loopCount = 0;
-		}
+                  g[var11 + var13 + 44] = (byte)var14;
+               }
+            }
+         }
 
-		int totalSampleCount = (loopCount - 1) * (loopStop - loopStart) + sampleCount;
-		for (int sample = 44; sample < totalSampleCount + 44; sample++) {
-			waveBytes[sample] = -128;
-		}
+         if (arg0 > 1) {
+            var5 += 44;
+            var6 += 44;
+            var4 += 44;
+            var7 += 44;
+            int var15 = var7 - var4;
 
-		for (int tone = 0; tone < 10; tone++) {
-			if (this.tones[tone] != null) {
-				int toneSampleCount = this.tones[tone].length * 22050 / 1000;
-				int start = this.tones[tone].start * 22050 / 1000;
-				int[] samples = this.tones[tone].generate(toneSampleCount, this.tones[tone].length);
+            for(int var16 = var4 - 1; var16 >= var6; --var16) {
+               g[var15 + var16] = g[var16];
+            }
 
-				for (int sample = 0; sample < toneSampleCount; sample++) {
-					waveBytes[start + sample + 44] += (byte) (samples[sample] >> 8);
-				}
-			}
-		}
+            for(int var17 = 1; var17 < arg0; ++var17) {
+               int var18 = (var6 - var5) * var17;
 
-		if (loopCount > 1) {
-			loopStart += 44;
-			loopStop += 44;
-			sampleCount += 44;
-			totalSampleCount += 44;
+               for(int var19 = var5; var19 < var6; ++var19) {
+                  g[var18 + var19] = g[var19];
+               }
+            }
 
-			int endOffset = totalSampleCount - sampleCount;
-			for (int sample = sampleCount - 1; sample >= loopStop; sample--) {
-				waveBytes[endOffset + sample] = waveBytes[sample];
-			}
+            var7 -= 44;
+         }
 
-			for (int loop = 1; loop < loopCount; loop++) {
-				int offset = (loopStop - loopStart) * loop;
-
-				for (int sample = loopStart; sample < loopStop; sample++) {
-					waveBytes[offset + sample] = waveBytes[sample];
-				}
-			}
-
-			totalSampleCount -= 44;
-		}
-
-		return totalSampleCount;
-	}
+         return var7;
+      }
+   }
 }

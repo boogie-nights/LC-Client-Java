@@ -3,35 +3,35 @@ package jagex2.dash3d;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
-@ObfuscatedName("g")
 public class AnimBase {
+   @ObfuscatedName("VPIFXIOD.a")
+   public int a;
+   @ObfuscatedName("VPIFXIOD.b")
+   public int[] b;
+   @ObfuscatedName("VPIFXIOD.c")
+   public int[][] c;
 
-	@ObfuscatedName("g.b")
-	public int length;
+   public AnimBase(Packet arg0, int arg1) {
+      this.a = arg0.g1();
+      if (arg1 != 0) {
+         throw new NullPointerException();
+      } else {
+         this.b = new int[this.a];
+         this.c = new int[this.a][];
 
-	@ObfuscatedName("g.c")
-	public int[] types;
+         for(int var3 = 0; var3 < this.a; ++var3) {
+            this.b[var3] = arg0.g1();
+         }
 
-	@ObfuscatedName("g.d")
-	public int[][] labels;
+         for(int var4 = 0; var4 < this.a; ++var4) {
+            int var5 = arg0.g1();
+            this.c[var4] = new int[var5];
 
-	public AnimBase(Packet buf) {
-		this.length = buf.g1();
+            for(int var6 = 0; var6 < var5; ++var6) {
+               this.c[var4][var6] = arg0.g1();
+            }
+         }
 
-		this.types = new int[this.length];
-		this.labels = new int[this.length][];
-
-		for (int i = 0; i < this.length; i++) {
-			this.types[i] = buf.g1();
-		}
-
-		for (int i = 0; i < this.length; i++) {
-			int count = buf.g1();
-			this.labels[i] = new int[count];
-
-			for (int j = 0; j < count; j++) {
-				this.labels[i][j] = buf.g1();
-			}
-		}
-	}
+      }
+   }
 }
