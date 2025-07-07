@@ -76,9 +76,6 @@ public class Pix8 extends Pix2D {
             }
          }
 
-         if (d) {
-         }
-
       }
    }
 

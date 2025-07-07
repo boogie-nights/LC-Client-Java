@@ -64,8 +64,6 @@ public class LruCache {
 
       this.g.put(arg1, arg0);
       this.h.push(arg0);
-      if (Linkable.d) {
-      }
 
    }
 

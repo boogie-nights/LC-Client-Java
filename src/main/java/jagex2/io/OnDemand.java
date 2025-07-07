@@ -454,7 +454,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 				boolean loading = false;
 
-				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next(1)) {
+				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
 					if (req.urgent) {
 						loading = true;
 						req.cycle++;
@@ -467,7 +467,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				}
 
 				if (!loading) {
-					for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next(1)) {
+					for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
 						loading = true;
 						req.cycle++;
 
@@ -564,7 +564,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		this.importantCount = 0;
 		this.requestCount = 0;
 
-		for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next(1)) {
+		for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
 			if (req.urgent) {
 				this.importantCount++;
 			} else {
@@ -680,7 +680,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 				this.current = null;
 
-				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next(1)) {
+				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
 					if (req.archive == archive && req.file == file) {
 						this.current = req;
 					}

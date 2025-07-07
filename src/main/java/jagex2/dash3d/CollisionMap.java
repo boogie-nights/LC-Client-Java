@@ -34,8 +34,6 @@ public class CollisionMap {
          this.i = arg0;
          this.j = new int[this.h][this.i];
          this.a();
-         if (Linkable.d) {
-         }
 
       }
    }

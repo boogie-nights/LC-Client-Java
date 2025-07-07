@@ -54,9 +54,6 @@ public class WordFilter {
       Packet var3 = new Packet(arg0.read("domainenc.txt", (byte[])null));
       Packet var4 = new Packet(arg0.read("tldlist.txt", (byte[])null));
       a(var1, var2, var3, var4);
-      if (Linkable.d) {
-      }
-
    }
 
    @ObfuscatedName("WXKKTWFB.a(LMFMVIYHT;LMFMVIYHT;LMFMVIYHT;LMFMVIYHT;)V")

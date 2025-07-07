@@ -285,8 +285,6 @@ public class Ground {
 
          int var48 = var46 / 14;
          int var49 = var47 / 14;
-         if (Linkable.d) {
-         }
 
       } else {
          throw new NullPointerException();

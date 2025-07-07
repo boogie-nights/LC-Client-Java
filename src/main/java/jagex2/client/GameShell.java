@@ -447,9 +447,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.I = this.I + 1 & 127;
 		}
 
-		if (Linkable.d) {
-		}
-
 	}
 
 	public final void keyReleased(KeyEvent arg0) {

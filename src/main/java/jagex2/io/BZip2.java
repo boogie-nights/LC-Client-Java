@@ -39,8 +39,6 @@ public class BZip2 {
       }
 
       try {
-         if (Linkable.d) {
-         }
 
          return var7;
       } catch (Throwable var13) {

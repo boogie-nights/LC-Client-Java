@@ -5,14 +5,14 @@ import deob.ObfuscatedName;
 public class Linkable {
    @ObfuscatedName("ZUOIJLRD.a")
    public long key;
+
    @ObfuscatedName("ZUOIJLRD.b")
    public Linkable next;
+
    @ObfuscatedName("ZUOIJLRD.c")
    public Linkable prev;
-   @ObfuscatedName("ZUOIJLRD.d")
-   public static boolean d;
 
-   @ObfuscatedName("ZUOIJLRD.a()V")
+	@ObfuscatedName("ZUOIJLRD.a()V")
    public void unlink() {
       if (this.prev != null) {
          this.prev.next = this.next;

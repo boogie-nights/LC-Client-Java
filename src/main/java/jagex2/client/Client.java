@@ -1254,7 +1254,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.d(B)V")
    public final void d(byte arg0) {
       if (arg0 == 3) {
-         for(LocChange var2 = (LocChange)this.Ti.head(); var2 != null; var2 = (LocChange)this.Ti.next(1)) {
+         for(LocChange var2 = (LocChange)this.Ti.head(); var2 != null; var2 = (LocChange)this.Ti.next()) {
             if (var2.k == -1) {
                var2.p = 0;
                this.a((byte)-61, var2);
@@ -1692,7 +1692,7 @@ public class Client extends GameShell {
          int var4 = -99999999;
          ClientObj var5 = null;
 
-         for(ClientObj var6 = (ClientObj)var3.head(); var6 != null; var6 = (ClientObj)var3.next(1)) {
+         for(ClientObj var6 = (ClientObj)var3.head(); var6 != null; var6 = (ClientObj)var3.next()) {
             ObjType var7 = ObjType.a(var6.m);
             int var8 = var7.t;
             if (var7.T) {
@@ -1705,11 +1705,11 @@ public class Client extends GameShell {
             }
          }
 
-         var3.a((byte)-57, var5);
+         var3.addHead(var5);
          ClientObj var9 = null;
          ClientObj var10 = null;
 
-         for(ClientObj var11 = (ClientObj)var3.head(); var11 != null; var11 = (ClientObj)var3.next(1)) {
+         for(ClientObj var11 = (ClientObj)var3.head(); var11 != null; var11 = (ClientObj)var3.next()) {
             if (var5.m != var11.m && var9 == null) {
                var9 = var11;
             }
@@ -3292,7 +3292,7 @@ public class Client extends GameShell {
                   }
                }
 
-               for(LocChange var89 = (LocChange)this.Ti.head(); var89 != null; var89 = (LocChange)this.Ti.next(1)) {
+               for(LocChange var89 = (LocChange)this.Ti.head(); var89 != null; var89 = (LocChange)this.Ti.next()) {
                   if (var89.n >= this.Gd && var89.n < this.Gd + 8 && var89.o >= this.Hd && var89.o < this.Hd + 8 && this.Ff == var89.l) {
                      var89.k = 0;
                   }
@@ -3744,7 +3744,7 @@ public class Client extends GameShell {
                   }
                }
 
-               for(LocChange var162 = (LocChange)this.Ti.head(); var162 != null; var162 = (LocChange)this.Ti.next(1)) {
+               for(LocChange var162 = (LocChange)this.Ti.head(); var162 != null; var162 = (LocChange)this.Ti.next()) {
                   var162.n -= var143;
                   var162.o -= var144;
                   if (var162.n < 0 || var162.o < 0 || var162.n >= 104 || var162.o >= 104) {
@@ -4325,7 +4325,7 @@ public class Client extends GameShell {
       }
 
       if (this.lf == 2) {
-         for(LocChange var2 = (LocChange)this.Ti.head(); var2 != null; var2 = (LocChange)this.Ti.next(1)) {
+         for(LocChange var2 = (LocChange)this.Ti.head(); var2 != null; var2 = (LocChange)this.Ti.next()) {
             if (var2.k > 0) {
                --var2.k;
             }
@@ -4767,7 +4767,7 @@ public class Client extends GameShell {
             if (var7 == 3) {
                LinkList var21 = this.dk[this.Ff][var5][var6];
                if (var21 != null) {
-                  for(ClientObj var22 = (ClientObj)var21.a(false); var22 != null; var22 = (ClientObj)var21.b(173)) {
+                  for(ClientObj var22 = (ClientObj)var21.tail(); var22 != null; var22 = (ClientObj)var21.prev()) {
                      ObjType var23 = ObjType.a(var22.m);
                      if (this.Ig == 1) {
                         this.uh[this.th] = "Use " + this.Mg + " with @lre@" + var23.d;
@@ -5111,7 +5111,7 @@ public class Client extends GameShell {
             var2.unlink();
          }
 
-         var2 = (ClientProj)this.oj.next(1);
+         var2 = (ClientProj)this.oj.next();
       }
 
       ++eh;
@@ -7695,7 +7695,7 @@ public class Client extends GameShell {
          this.dk = null;
       }
 
-      for(MapSpotAnim var2 = (MapSpotAnim)this.Uh.head(); var2 != null; var2 = (MapSpotAnim)this.Uh.next(1)) {
+      for(MapSpotAnim var2 = (MapSpotAnim)this.Uh.head(); var2 != null; var2 = (MapSpotAnim)this.Uh.next()) {
          if (this.Ff == var2.m && !var2.r) {
             if (fk >= var2.v) {
                var2.a((byte)1, this.Uc);
@@ -12716,7 +12716,7 @@ public class Client extends GameShell {
          if (var61 >= 0 && var62 >= 0 && var61 < 104 && var62 < 104) {
             LinkList var66 = this.dk[this.Ff][var61][var62];
             if (var66 != null) {
-               for(ClientObj var67 = (ClientObj)var66.head(); var67 != null; var67 = (ClientObj)var66.next(1)) {
+               for(ClientObj var67 = (ClientObj)var66.head(); var67 != null; var67 = (ClientObj)var66.next()) {
                   if ((var63 & 32767) == var67.m && var67.o == var64) {
                      var67.o = var65;
                      break;
@@ -12817,7 +12817,7 @@ public class Client extends GameShell {
             if (var112 >= 0 && var113 >= 0 && var112 < 104 && var113 < 104) {
                LinkList var114 = this.dk[this.Ff][var112][var113];
                if (var114 != null) {
-                  for(ClientObj var115 = (ClientObj)var114.head(); var115 != null; var115 = (ClientObj)var114.next(1)) {
+                  for(ClientObj var115 = (ClientObj)var114.head(); var115 != null; var115 = (ClientObj)var114.next()) {
                      if ((var110 & 32767) == var115.m) {
                         var115.unlink();
                         break;
@@ -13064,8 +13064,6 @@ public class Client extends GameShell {
       Object var11 = null;
       Object var12 = null;
       System.gc();
-      if (Linkable.d) {
-      }
 
    }
 
@@ -13613,7 +13611,7 @@ public class Client extends GameShell {
    public final void a(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
       LocChange var11 = null;
 
-      for(LocChange var12 = (LocChange)this.Ti.head(); var12 != null; var12 = (LocChange)this.Ti.next(1)) {
+      for(LocChange var12 = (LocChange)this.Ti.head(); var12 != null; var12 = (LocChange)this.Ti.next()) {
          if (var12.l == arg1 && var12.n == arg2 && var12.o == arg9 && var12.m == arg8) {
             var11 = var12;
             break;

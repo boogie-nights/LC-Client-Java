@@ -118,8 +118,6 @@ public class SoundFilter {
       this.c[1] = var4 & 15;
       if (var4 == 0) {
          this.f[0] = this.f[1] = 0;
-         if (Linkable.d) {
-         }
 
       } else {
          this.f[0] = arg2.g2();
