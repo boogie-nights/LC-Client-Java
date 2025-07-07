@@ -49,7 +49,7 @@ public class SeqType {
 
    @ObfuscatedName("FHWCLIAS.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
-      Packet var2 = new Packet(arg0.a("seq.dat", (byte[])null));
+      Packet var2 = new Packet(arg0.read("seq.dat", (byte[])null));
       c = var2.g2();
       if (d == null) {
          d = new SeqType[c];

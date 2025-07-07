@@ -514,7 +514,7 @@ public class Component {
       e = arg3;
       n = arg1;
       int var4 = -1;
-      Packet var5 = new Packet(arg2.a("data", (byte[])null));
+      Packet var5 = new Packet(arg2.read("data", (byte[])null));
       int var6 = var5.g2();
       g = new Component[var6];
       ub = new byte[var6][];

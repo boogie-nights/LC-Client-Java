@@ -37,8 +37,8 @@ public class Pix8 extends Pix2D {
    public int y;
 
    public Pix8(Jagfile arg0, String arg1, int arg2) {
-      Packet var4 = new Packet(arg0.a(arg1 + ".dat", (byte[])null));
-      Packet var5 = new Packet(arg0.a("index.dat", (byte[])null));
+      Packet var4 = new Packet(arg0.read(arg1 + ".dat", (byte[])null));
+      Packet var5 = new Packet(arg0.read("index.dat", (byte[])null));
       var5.pos = var4.g2();
       this.J = var5.g2();
       this.K = var5.g2();

@@ -8,7 +8,7 @@ public class BZip2 {
    public static BZip2State a = new BZip2State();
 
    @ObfuscatedName("QGXYZPKP.a([BI[BII)I")
-   public static int a(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
+   public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
       BZip2State var5 = a;
       synchronized(a){}
 

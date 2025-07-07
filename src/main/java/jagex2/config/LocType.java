@@ -172,8 +172,8 @@ public class LocType {
 
    @ObfuscatedName("YMYTDPVW.a(LATJMVOZR;)V")
    public static final void a(Jagfile arg0) {
-      j = new Packet(arg0.a("loc.dat", (byte[])null));
-      Packet var1 = new Packet(arg0.a("loc.idx", (byte[])null));
+      j = new Packet(arg0.read("loc.dat", (byte[])null));
+      Packet var1 = new Packet(arg0.read("loc.idx", (byte[])null));
       Y = var1.g2();
       a = new int[Y];
       int var2 = 2;

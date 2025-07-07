@@ -44,7 +44,7 @@ public class SpotAnimType {
 
    @ObfuscatedName("MNZYLKNY.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
-      Packet var2 = new Packet(arg0.a("spotanim.dat", (byte[])null));
+      Packet var2 = new Packet(arg0.read("spotanim.dat", (byte[])null));
       d = var2.g2();
       if (arg1 != 36135) {
          b = !b;

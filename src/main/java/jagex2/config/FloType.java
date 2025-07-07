@@ -41,7 +41,7 @@ public class FloType {
    @ObfuscatedName("FZFOSJCE.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
       if (arg1 == 36135) {
-         Packet var2 = new Packet(arg0.a("flo.dat", (byte[])null));
+         Packet var2 = new Packet(arg0.read("flo.dat", (byte[])null));
          d = var2.g2();
          if (e == null) {
             e = new FloType[d];

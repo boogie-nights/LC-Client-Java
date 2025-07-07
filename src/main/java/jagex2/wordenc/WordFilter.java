@@ -49,10 +49,10 @@ public class WordFilter {
 
    @ObfuscatedName("WXKKTWFB.a(LATJMVOZR;)V")
    public static final void a(Jagfile arg0) {
-      Packet var1 = new Packet(arg0.a("fragmentsenc.txt", (byte[])null));
-      Packet var2 = new Packet(arg0.a("badenc.txt", (byte[])null));
-      Packet var3 = new Packet(arg0.a("domainenc.txt", (byte[])null));
-      Packet var4 = new Packet(arg0.a("tldlist.txt", (byte[])null));
+      Packet var1 = new Packet(arg0.read("fragmentsenc.txt", (byte[])null));
+      Packet var2 = new Packet(arg0.read("badenc.txt", (byte[])null));
+      Packet var3 = new Packet(arg0.read("domainenc.txt", (byte[])null));
+      Packet var4 = new Packet(arg0.read("tldlist.txt", (byte[])null));
       a(var1, var2, var3, var4);
       if (Linkable.d) {
       }

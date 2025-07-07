@@ -227,8 +227,8 @@ public class ObjType {
 
    @ObfuscatedName("GSCQQEUA.a(LATJMVOZR;)V")
    public static final void a(Jagfile arg0) {
-      V = new Packet(arg0.a("obj.dat", (byte[])null));
-      Packet var1 = new Packet(arg0.a("obj.idx", (byte[])null));
+      V = new Packet(arg0.read("obj.dat", (byte[])null));
+      Packet var1 = new Packet(arg0.read("obj.idx", (byte[])null));
       j = var1.g2();
       q = new int[j];
       int var2 = 2;

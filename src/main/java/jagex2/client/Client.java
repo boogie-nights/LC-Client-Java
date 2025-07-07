@@ -5650,7 +5650,7 @@ public class Client extends GameShell {
       }
 
       if (var7 != null) {
-         return new Jagfile(var7, 3);
+         return new Jagfile(var7);
       } else {
          int var11 = 0;
          if (arg0 != 14076) {
@@ -5768,7 +5768,7 @@ public class Client extends GameShell {
             }
          }
 
-         return new Jagfile(var7, 3);
+         return new Jagfile(var7);
       }
    }
 
@@ -6476,7 +6476,7 @@ public class Client extends GameShell {
                ObjType.s = uc;
                if (!vc) {
                   this.a(90, true, (String)"Unpacking sounds");
-                  byte[] var54 = var9.a("sounds.dat", (byte[])null);
+                  byte[] var54 = var9.read("sounds.dat", (byte[])null);
                   Packet var55 = new Packet(var54);
                   Wave.a(var55, 36135);
                }
@@ -13001,7 +13001,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.r(Z)V")
    public final void r(boolean arg0) {
-      byte[] var2 = this.Jb.a("title.dat", (byte[])null);
+      byte[] var2 = this.Jb.read("title.dat", (byte[])null);
       Pix24 var3 = new Pix24(var2, this);
       this.Lh.a(false);
       var3.a(0, -192, 0);

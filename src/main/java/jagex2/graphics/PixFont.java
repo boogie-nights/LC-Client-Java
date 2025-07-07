@@ -35,8 +35,8 @@ public class PixFont extends Pix2D {
    public int G;
 
    public PixFont(boolean arg0, Jagfile arg1, int arg2, String arg3) {
-      Packet var5 = new Packet(arg1.a(arg3 + ".dat", (byte[])null));
-      Packet var6 = new Packet(arg1.a("index.dat", (byte[])null));
+      Packet var5 = new Packet(arg1.read(arg3 + ".dat", (byte[])null));
+      Packet var6 = new Packet(arg1.read("index.dat", (byte[])null));
       boolean var7 = true;
       var6.pos = var5.g2() + 4;
 

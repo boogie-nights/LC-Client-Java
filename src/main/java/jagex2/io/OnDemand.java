@@ -585,7 +585,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
       String[] var3 = new String[]{"model_version", "anim_version", "midi_version", "map_version"};
 
       for(int var4 = 0; var4 < 4; ++var4) {
-         byte[] var5 = arg0.a(var3[var4], (byte[])null);
+         byte[] var5 = arg0.read(var3[var4], (byte[])null);
          int var6 = var5.length / 2;
          Packet var7 = new Packet(var5);
          this.S[var4] = new int[var6];
@@ -599,7 +599,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
       String[] var9 = new String[]{"model_crc", "anim_crc", "midi_crc", "map_crc"};
 
       for(int var10 = 0; var10 < 4; ++var10) {
-         byte[] var11 = arg0.a(var9[var10], (byte[])null);
+         byte[] var11 = arg0.read(var9[var10], (byte[])null);
          int var12 = var11.length / 4;
          Packet var13 = new Packet(var11);
          this.l[var10] = new int[var12];
@@ -609,7 +609,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
          }
       }
 
-      byte[] var15 = arg0.a("model_index", (byte[])null);
+      byte[] var15 = arg0.read("model_index", (byte[])null);
       int var16 = this.S[0].length;
       this.c = new byte[var16];
 
@@ -621,7 +621,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
          }
       }
 
-      byte[] var18 = arg0.a("map_index", (byte[])null);
+      byte[] var18 = arg0.read("map_index", (byte[])null);
       Packet var19 = new Packet(var18);
       int var20 = var18.length / 7;
       this.n = new int[var20];
@@ -636,7 +636,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
          this.d[var21] = var19.g1();
       }
 
-      byte[] var22 = arg0.a("anim_index", (byte[])null);
+      byte[] var22 = arg0.read("anim_index", (byte[])null);
       Packet var23 = new Packet(var22);
       int var24 = var22.length / 2;
       this.R = new int[var24];
@@ -645,7 +645,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
          this.R[var25] = var23.g2();
       }
 
-      byte[] var26 = arg0.a("midi_index", (byte[])null);
+      byte[] var26 = arg0.read("midi_index", (byte[])null);
       Packet var27 = new Packet(var26);
       int var28 = var26.length;
       this.H = new int[var28];

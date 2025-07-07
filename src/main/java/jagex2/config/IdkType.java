@@ -31,7 +31,7 @@ public class IdkType {
 
    @ObfuscatedName("ZGOJZVHR.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
-      Packet var2 = new Packet(arg0.a("idk.dat", (byte[])null));
+      Packet var2 = new Packet(arg0.read("idk.dat", (byte[])null));
       d = var2.g2();
       if (e == null) {
          e = new IdkType[d];
