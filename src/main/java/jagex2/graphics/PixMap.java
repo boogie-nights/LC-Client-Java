@@ -2,8 +2,7 @@ package jagex2.graphics;
 
 import deob.ObfuscatedName;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.ColorModel;
 import java.awt.image.DirectColorModel;
 import java.awt.image.ImageConsumer;
@@ -27,7 +26,7 @@ public class PixMap implements ImageProducer, ImageObserver {
    @ObfuscatedName("ISZGOOMR.f")
    public ImageConsumer f;
 
-   public PixMap(int arg0, byte arg1, java.awt.Component arg2, int arg3) {
+   public PixMap(int arg3, int arg0, Component arg2, byte arg1) {
       this.c = arg3;
       this.d = arg0;
       this.b = new int[arg0 * arg3];

@@ -1202,7 +1202,7 @@ public class Client extends GameShell {
             sign.Signlink.storeid = Integer.parseInt(arg0[4]);
             sign.Signlink.startpriv(InetAddress.getLocalHost());
             Client var1 = new Client();
-            var1.a(qe, 503, 765);
+            var1.initApplication(503, 765);
          }
       } catch (Exception var3) {
       }
@@ -1431,7 +1431,7 @@ public class Client extends GameShell {
       SpotAnimType.e = null;
       SpotAnimType.q = null;
       VarpType.b = null;
-      super.o = null;
+      super.drawArea = null;
       ClientPlayer.Ib = null;
       Pix3D.a(false);
       World3D.a(false);
@@ -4241,7 +4241,7 @@ public class Client extends GameShell {
 
       byte var33 = 0;
       if (arg1) {
-         this.a();
+         this.load();
       }
 
       this.lg[var33] = var17;
@@ -4364,7 +4364,7 @@ public class Client extends GameShell {
       if (sign.Signlink.mainapp != null) {
          return sign.Signlink.mainapp.getDocumentBase().getHost().toLowerCase();
       } else {
-         return super.q != null ? "runescape.com" : super.getDocumentBase().getHost().toLowerCase();
+         return super.frame != null ? "runescape.com" : super.getDocumentBase().getHost().toLowerCase();
       }
    }
 
@@ -5127,7 +5127,7 @@ public class Client extends GameShell {
       this.zj = new Pix8(this.Jb, "titlebutton", 0);
       this.fg = new Pix8[12];
       if (arg0) {
-         this.a();
+         this.load();
       }
 
       for(int var2 = 0; var2 < 12; ++var2) {
@@ -5205,7 +5205,7 @@ public class Client extends GameShell {
       this.a((Pix8)null, 0);
       this.yf = new int[32768];
       this.zf = new int[32768];
-      this.a(10, true, (String)"Connecting to fileserver");
+      this.drawProgress(10, true, (String)"Connecting to fileserver");
       if (!this.Bi) {
          this.Uj = true;
          this.Bi = true;
@@ -5660,7 +5660,7 @@ public class Client extends GameShell {
 
          while(var7 == null) {
             String var12 = "Unknown error";
-            this.a(arg3, true, "Requesting " + arg5);
+            this.drawProgress(arg3, true, "Requesting " + arg5);
             Object var13 = null;
 
             try {
@@ -5693,7 +5693,7 @@ public class Client extends GameShell {
                   var19 += var22;
                   int var23 = var19 * 100 / var18;
                   if (var14 != var23) {
-                     this.a(arg3, true, "Loading " + arg5 + " - " + var23 + "%");
+                     this.drawProgress(arg3, true, "Loading " + arg5 + " - " + var23 + "%");
                   }
 
                   var14 = var23;
@@ -5748,10 +5748,10 @@ public class Client extends GameShell {
             if (var7 == null) {
                for(int var26 = var8; var26 > 0; --var26) {
                   if (var11 >= 3) {
-                     this.a(arg3, true, "Game updated - please reload page");
+                     this.drawProgress(arg3, true, "Game updated - please reload page");
                      var26 = 10;
                   } else {
-                     this.a(arg3, true, var12 + " - Retrying in " + var26);
+                     this.drawProgress(arg3, true, var12 + " - Retrying in " + var26);
                   }
 
                   try {
@@ -6049,7 +6049,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.n(I)V")
    public final void n(int arg0) {
       if (this.Ih == null) {
-         super.o = null;
+         super.drawArea = null;
          this.Vg = null;
          this.Tg = null;
          this.Sg = null;
@@ -6058,23 +6058,23 @@ public class Client extends GameShell {
          this.Xf = null;
          this.Yf = null;
          if (arg0 < 0) {
-            this.Lh = new PixMap(265, (byte)-12, this.d((int)-756), 128);
+            this.Lh = new PixMap(128, 265, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Mh = new PixMap(265, (byte)-12, this.d((int)-756), 128);
+            this.Mh = new PixMap(128, 265, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Ih = new PixMap(171, (byte)-12, this.d((int)-756), 509);
+            this.Ih = new PixMap(509, 171, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Jh = new PixMap(132, (byte)-12, this.d((int)-756), 360);
+            this.Jh = new PixMap(360, 132, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Kh = new PixMap(200, (byte)-12, this.d((int)-756), 360);
+            this.Kh = new PixMap(360, 200, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Nh = new PixMap(238, (byte)-12, this.d((int)-756), 202);
+            this.Nh = new PixMap(202, 238, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Oh = new PixMap(238, (byte)-12, this.d((int)-756), 203);
+            this.Oh = new PixMap(203, 238, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Ph = new PixMap(94, (byte)-12, this.d((int)-756), 74);
+            this.Ph = new PixMap(74, 94, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
-            this.Qh = new PixMap(94, (byte)-12, this.d((int)-756), 75);
+            this.Qh = new PixMap(75, 94, this.getBaseComponent(), (byte)-12);
             Pix2D.a((int)4);
             if (this.Jb != null) {
                this.r(Rh);
@@ -6087,10 +6087,10 @@ public class Client extends GameShell {
    }
 
    @ObfuscatedName("client.a()V")
-   public final void a() {
-      this.a(20, true, (String)"Starting up");
+   public final void load() {
+      this.drawProgress(20, true, (String)"Starting up");
       if (sign.Signlink.sunjava) {
-         super.h = 5;
+         super.mindel = 5;
       }
 
       if (Qd) {
@@ -6181,7 +6181,7 @@ public class Client extends GameShell {
 
                this.kg = new Pix24(512, 512);
                Jagfile var11 = this.a(14076, this.K[5], "versionlist", 60, 5, "update list");
-               this.a(60, true, (String)"Connecting to update server");
+               this.drawProgress(60, true, (String)"Connecting to update server");
                this.xj = new OnDemand();
                this.xj.unpack(var11, this);
                AnimFrame.a(this.xj.getAnimCount());
@@ -6206,7 +6206,7 @@ public class Client extends GameShell {
                   }
                }
 
-               this.a(65, true, (String)"Requesting animations");
+               this.drawProgress(65, true, (String)"Requesting animations");
                int var12 = this.xj.getFileCount(1);
 
                for(int var13 = 0; var13 < var12; ++var13) {
@@ -6216,7 +6216,7 @@ public class Client extends GameShell {
                while(this.xj.remaining() > 0) {
                   int var14 = var12 - this.xj.remaining();
                   if (var14 > 0) {
-                     this.a(65, true, (String)("Loading animations - " + var14 * 100 / var12 + "%"));
+                     this.drawProgress(65, true, (String)("Loading animations - " + var14 * 100 / var12 + "%"));
                   }
 
                   this.j(false);
@@ -6232,7 +6232,7 @@ public class Client extends GameShell {
                   }
                }
 
-               this.a(70, true, (String)"Requesting models");
+               this.drawProgress(70, true, (String)"Requesting models");
                int var15 = this.xj.getFileCount(0);
 
                for(int var16 = 0; var16 < var15; ++var16) {
@@ -6247,7 +6247,7 @@ public class Client extends GameShell {
                while(this.xj.remaining() > 0) {
                   int var19 = var18 - this.xj.remaining();
                   if (var19 > 0) {
-                     this.a(70, true, (String)("Loading models - " + var19 * 100 / var18 + "%"));
+                     this.drawProgress(70, true, (String)("Loading models - " + var19 * 100 / var18 + "%"));
                   }
 
                   this.j(false);
@@ -6259,7 +6259,7 @@ public class Client extends GameShell {
                }
 
                if (this.fileStreams[0] != null) {
-                  this.a(75, true, (String)"Requesting maps");
+                  this.drawProgress(75, true, (String)"Requesting maps");
                   this.xj.request(3, this.xj.getMapFile((int)48, 47, 0));
                   this.xj.request(3, this.xj.getMapFile((int)48, 47, 1));
                   this.xj.request(3, this.xj.getMapFile((int)48, 48, 0));
@@ -6277,7 +6277,7 @@ public class Client extends GameShell {
                   while(this.xj.remaining() > 0) {
                      int var21 = var20 - this.xj.remaining();
                      if (var21 > 0) {
-                        this.a(75, true, (String)("Loading maps - " + var21 * 100 / var20 + "%"));
+                        this.drawProgress(75, true, (String)("Loading maps - " + var21 * 100 / var20 + "%"));
                      }
 
                      this.j(false);
@@ -6339,7 +6339,7 @@ public class Client extends GameShell {
                   }
                }
 
-               this.a(80, true, (String)"Unpacking media");
+               this.drawProgress(80, true, (String)"Unpacking media");
                this.vh = new Pix8(var6, "invback", 0);
                this.xh = new Pix8(var6, "chatback", 0);
                this.wh = new Pix8(var6, "mapback", 0);
@@ -6419,31 +6419,31 @@ public class Client extends GameShell {
                }
 
                Pix24 var40 = new Pix24(var6, "backleft1", 0);
-               this.bc = new PixMap(var40.K, (byte)-12, this.d((int)-756), var40.J);
+               this.bc = new PixMap(var40.J, var40.K, this.getBaseComponent(), (byte)-12);
                var40.a(0, -192, 0);
                Pix24 var41 = new Pix24(var6, "backleft2", 0);
-               this.cc = new PixMap(var41.K, (byte)-12, this.d((int)-756), var41.J);
+               this.cc = new PixMap(var41.J, var41.K, this.getBaseComponent(), (byte)-12);
                var41.a(0, -192, 0);
                Pix24 var42 = new Pix24(var6, "backright1", 0);
-               this.dc = new PixMap(var42.K, (byte)-12, this.d((int)-756), var42.J);
+               this.dc = new PixMap(var42.J, var42.K, this.getBaseComponent(), (byte)-12);
                var42.a(0, -192, 0);
                Pix24 var43 = new Pix24(var6, "backright2", 0);
-               this.ec = new PixMap(var43.K, (byte)-12, this.d((int)-756), var43.J);
+               this.ec = new PixMap(var43.J, var43.K, this.getBaseComponent(), (byte)-12);
                var43.a(0, -192, 0);
                Pix24 var44 = new Pix24(var6, "backtop1", 0);
-               this.fc = new PixMap(var44.K, (byte)-12, this.d((int)-756), var44.J);
+               this.fc = new PixMap(var44.J, var44.K, this.getBaseComponent(), (byte)-12);
                var44.a(0, -192, 0);
                Pix24 var45 = new Pix24(var6, "backvmid1", 0);
-               this.gc = new PixMap(var45.K, (byte)-12, this.d((int)-756), var45.J);
+               this.gc = new PixMap(var45.J, var45.K, this.getBaseComponent(), (byte)-12);
                var45.a(0, -192, 0);
                Pix24 var46 = new Pix24(var6, "backvmid2", 0);
-               this.hc = new PixMap(var46.K, (byte)-12, this.d((int)-756), var46.J);
+               this.hc = new PixMap(var46.J, var46.K, this.getBaseComponent(), (byte)-12);
                var46.a(0, -192, 0);
                Pix24 var47 = new Pix24(var6, "backvmid3", 0);
-               this.ic = new PixMap(var47.K, (byte)-12, this.d((int)-756), var47.J);
+               this.ic = new PixMap(var47.J, var47.K, this.getBaseComponent(), (byte)-12);
                var47.a(0, -192, 0);
                Pix24 var48 = new Pix24(var6, "backhmid2", 0);
-               this.jc = new PixMap(var48.K, (byte)-12, this.d((int)-756), var48.J);
+               this.jc = new PixMap(var48.J, var48.K, this.getBaseComponent(), (byte)-12);
                var48.a(0, -192, 0);
                int var49 = (int)(Math.random() * 21.0D) - 10;
                int var50 = (int)(Math.random() * 21.0D) - 10;
@@ -6460,11 +6460,11 @@ public class Client extends GameShell {
                   }
                }
 
-               this.a(83, true, (String)"Unpacking textures");
+               this.drawProgress(83, true, (String)"Unpacking textures");
                Pix3D.a(var7, -17551);
                Pix3D.a(0.8D, (byte)6);
                Pix3D.a((byte)7, 20);
-               this.a(86, true, (String)"Unpacking config");
+               this.drawProgress(86, true, (String)"Unpacking config");
                SeqType.a(var4, 36135);
                LocType.a(var4);
                FloType.a(var4, 36135);
@@ -6476,16 +6476,16 @@ public class Client extends GameShell {
                VarbitType.a(var4, 36135);
                ObjType.s = uc;
                if (!vc) {
-                  this.a(90, true, (String)"Unpacking sounds");
+                  this.drawProgress(90, true, (String)"Unpacking sounds");
                   byte[] var54 = var9.read("sounds.dat", (byte[])null);
                   Packet var55 = new Packet(var54);
                   Wave.a(var55, 36135);
                }
 
-               this.a(95, true, (String)"Unpacking interfaces");
+               this.drawProgress(95, true, (String)"Unpacking interfaces");
                PixFont[] var56 = new PixFont[]{this.Ye, this.Ze, this.af, this.bf};
                Component.a(-845, var56, var5, var6);
-               this.a(100, true, (String)"Preparing game engine");
+               this.drawProgress(100, true, (String)"Preparing game engine");
 
                for(int var57 = 0; var57 < 33; ++var57) {
                   int var58 = 999;
@@ -7223,26 +7223,26 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.p(I)V")
    public final void p(int arg0) {
-      if (this.Se == -1 || this.lf != 2 && super.o == null) {
+      if (this.Se == -1 || this.lf != 2 && super.drawArea == null) {
          if (this.Le) {
             this.F(-906);
             this.Le = false;
-            this.bc.a(4, 0, super.n, this.of);
-            this.cc.a(357, 0, super.n, this.of);
-            this.dc.a(4, 722, super.n, this.of);
-            this.ec.a(205, 743, super.n, this.of);
-            this.fc.a(0, 0, super.n, this.of);
-            this.gc.a(4, 516, super.n, this.of);
-            this.hc.a(205, 516, super.n, this.of);
-            this.ic.a(357, 496, super.n, this.of);
-            this.jc.a(338, 0, super.n, this.of);
+            this.bc.a(4, 0, super.graphics, this.of);
+            this.cc.a(357, 0, super.graphics, this.of);
+            this.dc.a(4, 722, super.graphics, this.of);
+            this.ec.a(205, 743, super.graphics, this.of);
+            this.fc.a(0, 0, super.graphics, this.of);
+            this.gc.a(4, 516, super.graphics, this.of);
+            this.hc.a(205, 516, super.graphics, this.of);
+            this.ic.a(357, 496, super.graphics, this.of);
+            this.jc.a(338, 0, super.graphics, this.of);
             this.rh = true;
             this.yi = true;
             this.Tc = true;
             this.Wh = true;
             if (this.lf != 2) {
-               this.Ug.a(4, 4, super.n, this.of);
-               this.Tg.a(4, 550, super.n, this.of);
+               this.Ug.a(4, 4, super.graphics, this.of);
+               this.Tg.a(4, 550, super.graphics, this.of);
             }
 
             ++vi;
@@ -7353,7 +7353,7 @@ public class Client extends GameShell {
 
          if (this.lf == 2) {
             this.v(503);
-            this.Tg.a(4, 550, super.n, this.of);
+            this.Tg.a(4, 550, super.graphics, this.of);
          }
 
          if (this.Xh != -1) {
@@ -7430,7 +7430,7 @@ public class Client extends GameShell {
                }
             }
 
-            this.Yf.a(160, 516, super.n, this.of);
+            this.Yf.a(160, 516, super.graphics, this.of);
             this.Xf.a(false);
             this.jd.a(0, 0, -488);
             if (this.Df == -1) {
@@ -7489,7 +7489,7 @@ public class Client extends GameShell {
                }
             }
 
-            this.Xf.a(466, 496, super.n, this.of);
+            this.Xf.a(466, 496, super.graphics, this.of);
             this.Ug.a(false);
             Pix3D.K = this.Td;
          }
@@ -7542,7 +7542,7 @@ public class Client extends GameShell {
             }
 
             this.Ze.a(true, this.Ve, 16777215, 33, 458, "Report abuse");
-            this.Wf.a(453, 0, super.n, this.of);
+            this.Wf.a(453, 0, super.graphics, this.of);
             this.Ug.a(false);
             Pix3D.K = this.Td;
          }
@@ -7562,7 +7562,7 @@ public class Client extends GameShell {
 
             this.Uc = 0;
             this.J(this.Cg);
-            super.o.a(false);
+            super.drawArea.a(false);
             Pix3D.K = this.Ud;
             Pix2D.a((int)4);
             this.Le = true;
@@ -7591,7 +7591,7 @@ public class Client extends GameShell {
             }
          }
 
-         super.o.a(0, 0, super.n, this.of);
+         super.drawArea.a(0, 0, super.graphics, this.of);
       }
    }
 
@@ -7686,7 +7686,7 @@ public class Client extends GameShell {
          uc = true;
       }
 
-      this.b(765, 503, 2);
+      this.initApplet(765, 503);
    }
 
    @ObfuscatedName("client.r(I)V")
@@ -8550,7 +8550,7 @@ public class Client extends GameShell {
          this.p(false);
       }
 
-      this.Vg.a(357, 17, super.n, this.of);
+      this.Vg.a(357, 17, super.graphics, this.of);
       this.Ug.a(false);
       Pix3D.K = this.Td;
       if (arg0 != 0) {
@@ -8605,7 +8605,7 @@ public class Client extends GameShell {
 
       while(this.K[8] == 0) {
          String var5 = "Unknown problem";
-         this.a(20, true, (String)"Connecting to web server");
+         this.drawProgress(20, true, (String)"Connecting to web server");
 
          try {
             DataInputStream var6 = this.b("crc" + (int)(Math.random() * 9.9999999E7D) + "-" + 377);
@@ -8647,10 +8647,10 @@ public class Client extends GameShell {
 
             for(int var12 = var2; var12 > 0; --var12) {
                if (var4 >= 10) {
-                  this.a(10, true, (String)"Game updated - please reload page");
+                  this.drawProgress(10, true, (String)"Game updated - please reload page");
                   var12 = 10;
                } else {
-                  this.a(10, true, (String)(var5 + " - Will retry in " + var12 + " secs."));
+                  this.drawProgress(10, true, (String)(var5 + " - Will retry in " + var12 + " secs."));
                }
 
                try {
@@ -8801,7 +8801,7 @@ public class Client extends GameShell {
          return sign.Signlink.mainapp.getCodeBase();
       } else {
          try {
-            if (super.q != null) {
+            if (super.frame != null) {
                return new URL("http://127.0.0.1:" + (portOffset + 80));
             }
          } catch (Exception var1) {
@@ -9238,7 +9238,7 @@ public class Client extends GameShell {
       }
 
       LocType.v.a();
-      if (super.q != null) {
+      if (super.frame != null) {
          this.hd.pIsaac(78);
          this.hd.p4(1057001181);
       }
@@ -9471,7 +9471,7 @@ public class Client extends GameShell {
          var8 += var11;
       }
 
-      this.Lh.a(0, 0, super.n, this.of);
+      this.Lh.a(0, 0, super.graphics, this.of);
       int var18 = 66 / arg0;
 
       for(int var19 = 0; var19 < 33920; ++var19) {
@@ -9502,7 +9502,7 @@ public class Client extends GameShell {
          var21 = 128 - var24 - var23 + var25;
       }
 
-      this.Mh.a(0, 637, super.n, this.of);
+      this.Mh.a(0, 637, super.graphics, this.of);
    }
 
    @ObfuscatedName("client.a(ZBI)V")
@@ -10169,15 +10169,15 @@ public class Client extends GameShell {
          short var2 = 507;
          byte var3 = 20;
          int var4 = 16776960;
-         if (super.j < 30 && vc) {
+         if (super.fps < 30 && vc) {
             var4 = 16711680;
          }
 
-         if (super.j < 20 && !vc) {
+         if (super.fps < 20 && !vc) {
             var4 = 16711680;
          }
 
-         this.Ze.a(true, "Fps:" + super.j, var4, var2, var3);
+         this.Ze.a(true, "Fps:" + super.fps, var4, var2, var3);
          int var13 = var3 + 15;
          Runtime var5 = Runtime.getRuntime();
          int var6 = (int)((var5.totalMemory() - var5.freeMemory()) / 1024L);
@@ -10611,7 +10611,7 @@ public class Client extends GameShell {
       if (this.Zc == arg0) {
          boolean var3 = false;
       } else {
-         this.a();
+         this.load();
       }
 
       if (this.di < 310) {
@@ -10739,15 +10739,15 @@ public class Client extends GameShell {
    }
 
    @ObfuscatedName("client.a(Ljava/lang/Runnable;I)V")
-   public final void startThread(Runnable arg0, int arg1) {
-      if (arg1 > 10) {
-         arg1 = 10;
+   public final void startThread(Runnable thread, int priority) {
+      if (priority > 10) {
+         priority = 10;
       }
 
       if (SignLink.mainapp != null) {
-		  SignLink.startthread(arg0, arg1);
+		  SignLink.startthread(thread, priority);
       } else {
-         super.startThread(arg0, arg1);
+         super.startThread(thread, priority);
       }
    }
 
@@ -11978,7 +11978,7 @@ public class Client extends GameShell {
 
       if (this.Vg == null) {
          this.H(28614);
-         super.o = null;
+         super.drawArea = null;
          this.Ih = null;
          this.Jh = null;
          this.Kh = null;
@@ -11988,16 +11988,16 @@ public class Client extends GameShell {
          this.Oh = null;
          this.Ph = null;
          this.Qh = null;
-         this.Vg = new PixMap(96, (byte)-12, this.d((int)-756), 479);
-         this.Tg = new PixMap(156, (byte)-12, this.d((int)-756), 172);
+         this.Vg = new PixMap(479, 96, this.getBaseComponent(), (byte)-12);
+         this.Tg = new PixMap(172, 156, this.getBaseComponent(), (byte)-12);
          Pix2D.a((int)4);
          this.wh.a(0, 0, -488);
-         this.Sg = new PixMap(261, (byte)-12, this.d((int)-756), 190);
-         this.Ug = new PixMap(334, (byte)-12, this.d((int)-756), 512);
+         this.Sg = new PixMap(190, 261, this.getBaseComponent(), (byte)-12);
+         this.Ug = new PixMap(512, 334, this.getBaseComponent(), (byte)-12);
          Pix2D.a((int)4);
-         this.Wf = new PixMap(50, (byte)-12, this.d((int)-756), 496);
-         this.Xf = new PixMap(37, (byte)-12, this.d((int)-756), 269);
-         this.Yf = new PixMap(45, (byte)-12, this.d((int)-756), 249);
+         this.Wf = new PixMap(496, 50, this.getBaseComponent(), (byte)-12);
+         this.Xf = new PixMap(269, 37, this.getBaseComponent(), (byte)-12);
+         this.Yf = new PixMap(249, 45, this.getBaseComponent(), (byte)-12);
          this.Le = true;
          this.Ug.a(false);
          Pix3D.K = this.Td;
@@ -12006,7 +12006,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.G(I)V")
    public final void G(int arg0) {
-      Graphics var2 = this.d((int)-756).getGraphics();
+      Graphics var2 = this.getBaseComponent().getGraphics();
       var2.setColor(Color.black);
       int var3 = 68 / arg0;
       var2.fillRect(0, 0, 765, 503);
@@ -12109,9 +12109,9 @@ public class Client extends GameShell {
                this.Ze.a(256, 452, var4 - 1, 16777215, arg1);
             }
 
-            this.Ug.a(4, 4, super.n, this.of);
-         } else if (super.o != null) {
-            super.o.a(false);
+            this.Ug.a(4, 4, super.graphics, this.of);
+         } else if (super.drawArea != null) {
+            super.drawArea.a(false);
             Pix3D.K = this.Ud;
             int var5 = 251;
             short var6 = 300;
@@ -12130,7 +12130,7 @@ public class Client extends GameShell {
                this.Ze.a(382, 452, var5 - 1, 16777215, arg1);
             }
 
-            super.o.a(0, 0, super.n, this.of);
+            super.drawArea.a(0, 0, super.graphics, this.of);
          }
       }
    }
@@ -12484,15 +12484,15 @@ public class Client extends GameShell {
          this.af.a(true, this.Ve, 16777215, var17 + 5, var16, "Cancel");
       }
 
-      this.Kh.a(171, 202, super.n, this.of);
+      this.Kh.a(171, 202, super.graphics, this.of);
       if (this.Le) {
          this.Le = false;
-         this.Ih.a(0, 128, super.n, this.of);
-         this.Jh.a(371, 202, super.n, this.of);
-         this.Nh.a(265, 0, super.n, this.of);
-         this.Oh.a(265, 562, super.n, this.of);
-         this.Ph.a(171, 128, super.n, this.of);
-         this.Qh.a(171, 562, super.n, this.of);
+         this.Ih.a(0, 128, super.graphics, this.of);
+         this.Jh.a(371, 202, super.graphics, this.of);
+         this.Nh.a(265, 0, super.graphics, this.of);
+         this.Oh.a(265, 562, super.graphics, this.of);
+         this.Ph.a(171, 128, super.graphics, this.of);
+         this.Qh.a(171, 562, super.graphics, this.of);
       }
    }
 
@@ -12851,7 +12851,7 @@ public class Client extends GameShell {
          this.p(false);
       }
 
-      this.Sg.a(205, 553, super.n, this.of);
+      this.Sg.a(205, 553, super.graphics, this.of);
       this.Ug.a(false);
       Pix3D.K = this.Td;
       if (arg0 == 7) {
@@ -12940,11 +12940,11 @@ public class Client extends GameShell {
          this.pe.a(false);
       }
 
-      super.k = true;
+      super.debug = true;
    }
 
    @ObfuscatedName("client.d(I)Ljava/awt/Component;")
-   public final java.awt.Component d(int arg0) {
+   public final java.awt.Component getBaseComponent() {
       while(arg0 >= 0) {
          for(int var2 = 1; var2 > 0; ++var2) {
          }
@@ -12952,15 +12952,15 @@ public class Client extends GameShell {
 
       if (sign.Signlink.mainapp != null) {
          return sign.Signlink.mainapp;
-      } else if (super.q != null) {
-         return super.q;
+      } else if (super.frame != null) {
+         return super.frame;
       } else {
          return this;
       }
    }
 
    @ObfuscatedName("client.a(IZLjava/lang/String;)V")
-   public final void a(int arg0, boolean arg1, String arg2) {
+   public final void drawProgress(int arg0, boolean arg1, String arg2) {
       this.ck = arg0;
       if (!arg1) {
          this.Dc = !this.Dc;
@@ -12969,7 +12969,7 @@ public class Client extends GameShell {
       this.se = arg2;
       this.n(-188);
       if (this.Jb == null) {
-         super.a(arg0, true, arg2);
+         super.drawProgress(arg0, true, arg2);
       } else {
          this.Kh.a(false);
          short var4 = 360;
@@ -12982,20 +12982,20 @@ public class Client extends GameShell {
          Pix2D.a(30, var7 + 2, 9179409, (byte)-24, arg0 * 3, var4 / 2 - 150);
          Pix2D.a(30, var7 + 2, 0, (byte)-24, 300 - arg0 * 3, arg0 * 3 + (var4 / 2 - 150));
          this.af.a(var4 / 2, 452, var5 / 2 + 5 - var6, 16777215, arg2);
-         this.Kh.a(171, 202, super.n, this.of);
+         this.Kh.a(171, 202, super.graphics, this.of);
          if (this.Le) {
             this.Le = false;
             if (!this.Bi) {
-               this.Lh.a(0, 0, super.n, this.of);
-               this.Mh.a(0, 637, super.n, this.of);
+               this.Lh.a(0, 0, super.graphics, this.of);
+               this.Mh.a(0, 637, super.graphics, this.of);
             }
 
-            this.Ih.a(0, 128, super.n, this.of);
-            this.Jh.a(371, 202, super.n, this.of);
-            this.Nh.a(265, 0, super.n, this.of);
-            this.Oh.a(265, 562, super.n, this.of);
-            this.Ph.a(171, 128, super.n, this.of);
-            this.Qh.a(171, 562, super.n, this.of);
+            this.Ih.a(0, 128, super.graphics, this.of);
+            this.Jh.a(371, 202, super.graphics, this.of);
+            this.Nh.a(265, 0, super.graphics, this.of);
+            this.Oh.a(265, 562, super.graphics, this.of);
+            this.Ph.a(171, 128, super.graphics, this.of);
+            this.Qh.a(171, 562, super.graphics, this.of);
          }
       }
    }
@@ -13681,7 +13681,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.J(I)V")
    public final void J(int arg0) {
-      if (super.o == null) {
+      if (super.drawArea == null) {
          this.H(28614);
          this.Ih = null;
          this.Jh = null;
@@ -13703,7 +13703,7 @@ public class Client extends GameShell {
          this.Wf = null;
          this.Xf = null;
          this.Yf = null;
-         super.o = new PixMap(503, (byte)-12, this.d((int)-756), 765);
+         super.drawArea = new PixMap(765, 503, this.getBaseComponent(), (byte)-12);
          this.Le = true;
       }
    }
@@ -13734,15 +13734,15 @@ public class Client extends GameShell {
       }
 
       if (this.ji == 0) {
-         int var2 = super.l / 2 - 80;
-         int var3 = super.m / 2 + 20;
+         int var2 = super.screenWidth / 2 - 80;
+         int var3 = super.screenHeight / 2 + 20;
          int var14 = var3 + 20;
          if (super.B == 1 && super.C >= var2 - 75 && super.C <= var2 + 75 && super.D >= var14 - 20 && super.D <= var14 + 20) {
             this.ji = 3;
             this.ud = 0;
          }
 
-         int var4 = super.l / 2 + 80;
+         int var4 = super.screenWidth / 2 + 80;
          if (super.B == 1 && super.C >= var4 - 75 && super.C <= var4 + 75 && super.D >= var14 - 20 && super.D <= var14 + 20) {
             this.ad = "";
             this.bd = "Enter your username & password.";
@@ -13750,7 +13750,7 @@ public class Client extends GameShell {
             this.ud = 0;
          }
       } else if (this.ji == 2) {
-         int var5 = super.m / 2 - 40;
+         int var5 = super.screenHeight / 2 - 40;
          int var15 = var5 + 30;
          int var16 = var15 + 25;
          if (super.B == 1 && super.D >= var16 - 15 && super.D < var16) {
@@ -13763,8 +13763,8 @@ public class Client extends GameShell {
          }
 
          var5 += 15;
-         int var6 = super.l / 2 - 80;
-         int var7 = super.m / 2 + 50;
+         int var6 = super.screenWidth / 2 - 80;
+         int var7 = super.screenHeight / 2 + 50;
          int var17 = var7 + 20;
          if (super.B == 1 && super.C >= var6 - 75 && super.C <= var6 + 75 && super.D >= var17 - 20 && super.D <= var17 + 20) {
             this.X = 0;
@@ -13774,7 +13774,7 @@ public class Client extends GameShell {
             }
          }
 
-         int var8 = super.l / 2 + 80;
+         int var8 = super.screenWidth / 2 + 80;
          if (super.B == 1 && super.C >= var8 - 75 && super.C <= var8 + 75 && super.D >= var17 - 20 && super.D <= var17 + 20) {
             this.ji = 0;
             this.Gf = "";
@@ -13834,8 +13834,8 @@ public class Client extends GameShell {
          }
       } else {
          if (this.ji == 3) {
-            int var12 = super.l / 2;
-            int var13 = super.m / 2 + 50;
+            int var12 = super.screenWidth / 2;
+            int var13 = super.screenHeight / 2 + 50;
             int var18 = var13 + 20;
             if (super.B == 1 && super.C >= var12 - 75 && super.C <= var12 + 75 && super.D >= var18 - 20 && super.D <= var18 + 20) {
                this.ji = 0;
@@ -14069,7 +14069,7 @@ public class Client extends GameShell {
       this.o(true);
       this.d(var12, -927);
       this.C(30729);
-      this.Ug.a(4, 4, super.n, this.of);
+      this.Ug.a(4, 4, super.graphics, this.of);
       this.ai = var5;
       this.bi = var6;
       this.ci = var7;
@@ -14080,7 +14080,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.M(I)V")
    public final void M(int arg0) {
       if (arg0 != -23763) {
-         this.a();
+         this.load();
       }
 
       for(int var2 = 0; var2 < this.Ae; ++var2) {

@@ -11,7 +11,7 @@ public class ViewBox extends Frame {
 
 	public Insets insets;
 
-	public ViewBox(int height, GameShell shell, int width) {
+	public ViewBox(int width, int height, GameShell shell) {
 		this.shell = shell;
 		this.setTitle("Jagex");
 		this.setResizable(false);
