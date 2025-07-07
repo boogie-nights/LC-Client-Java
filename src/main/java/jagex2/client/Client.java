@@ -19,10 +19,7 @@ import java.util.zip.CRC32;
 
 import deob.*;
 import jagex2.client.sign.SignLink;
-import jagex2.config.Component;
-import jagex2.config.IdkType;
-import jagex2.config.SeqType;
-import jagex2.config.VarbitType;
+import jagex2.config.*;
 import jagex2.dash3d.*;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LinkList;
@@ -1201,8 +1198,8 @@ public class Client extends GameShell {
                uc = true;
             }
 
-            sign.Signlink.storeid = Integer.parseInt(arg0[4]);
-            sign.Signlink.startpriv(InetAddress.getLocalHost());
+           SignLink.storeid = Integer.parseInt(arg0[4]);
+           SignLink.startpriv(InetAddress.getLocalHost());
             Client var1 = new Client();
             var1.initApplication(503, 765);
          }
@@ -1616,7 +1613,7 @@ public class Client extends GameShell {
             this.vj += (var13 - this.vj) / 80;
          }
       } catch (Exception var14) {
-         sign.Signlink.reporterror("glfc_ex " + dh.Q + "," + dh.R + "," + this.Ui + "," + this.Vi + "," + this.Kb + "," + this.Lb + "," + this.Fe + "," + this.Ge);
+        SignLink.reporterror("glfc_ex " + dh.Q + "," + dh.R + "," + this.Ui + "," + this.Vi + "," + this.Kb + "," + this.Lb + "," + this.Fe + "," + this.Ge);
          throw new RuntimeException("eek");
       }
    }
@@ -1658,8 +1655,8 @@ public class Client extends GameShell {
    @ObfuscatedName("client.a(Z[BI)V")
    public final void a(boolean arg0, byte[] arg1, int arg2) {
       if (this.Yi) {
-         sign.Signlink.midifade = arg0 ? 1 : 0;
-         sign.Signlink.midisave(arg1, arg1.length);
+        SignLink.midifade = arg0 ? 1 : 0;
+        SignLink.midisave(arg1, arg1.length);
          int var4 = 71 / arg2;
       }
    }
@@ -2557,7 +2554,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.b(Ljava/lang/String;)Ljava/io/DataInputStream;")
    public final DataInputStream b(String arg0) throws IOException {
       if (!this.Vb) {
-         return sign.Signlink.mainapp != null ? sign.Signlink.openurl(arg0) : new DataInputStream((new URL(this.getCodeBase(), arg0)).openStream());
+         return SignLink.mainapp != null ?SignLink.openurl(arg0) : new DataInputStream((new URL(this.getCodeBase(), arg0)).openStream());
       } else {
          if (this.ii != null) {
             try {
@@ -2579,7 +2576,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.g(I)Ljava/net/Socket;")
    public final Socket openSocket(int arg0) throws IOException {
-      return sign.Signlink.mainapp != null ? sign.Signlink.opensocket(arg0) : new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg0);
+      return SignLink.mainapp != null ?SignLink.opensocket(arg0) : new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg0);
    }
 
    @ObfuscatedName("client.h(I)Z")
@@ -3021,7 +3018,7 @@ public class Client extends GameShell {
                this.zi = this.yh.r(935);
                this.ze = this.yh.o(-600);
                this.yh.h(0);
-               sign.Signlink.dnslookup(JString.formatIPv4(this.zi));
+              SignLink.dnslookup(JString.formatIPv4(this.zi));
                this.rb = -1;
                return true;
             }
@@ -3358,7 +3355,7 @@ public class Client extends GameShell {
                         this.a("@cr2@" + JString.toSentenceCase(JString.fromBase37(var91)), (byte)-123, var98, 7);
                      }
                   } catch (Exception var191) {
-                     sign.Signlink.reporterror("cde1");
+                    SignLink.reporterror("cde1");
                   }
                }
 
@@ -4034,7 +4031,7 @@ public class Client extends GameShell {
                return true;
             }
 
-            sign.Signlink.reporterror("T1 - " + this.rb + "," + this.qb + " - " + this.Zb + "," + this.ac);
+           SignLink.reporterror("T1 - " + this.rb + "," + this.qb + " - " + this.Zb + "," + this.ac);
             this.n(true);
          } catch (IOException var192) {
             this.m((int)1);
@@ -4045,7 +4042,7 @@ public class Client extends GameShell {
                var189 = var189 + this.yh.data[var190] + ",";
             }
 
-            sign.Signlink.reporterror(var189);
+           SignLink.reporterror(var189);
             this.n(true);
          }
 
@@ -4363,8 +4360,8 @@ public class Client extends GameShell {
          this.rb = this.yh.g1();
       }
 
-      if (sign.Signlink.mainapp != null) {
-         return sign.Signlink.mainapp.getDocumentBase().getHost().toLowerCase();
+      if (SignLink.mainapp != null) {
+         return SignLink.mainapp.getDocumentBase().getHost().toLowerCase();
       } else {
          return super.frame != null ? "runescape.com" : super.getDocumentBase().getHost().toLowerCase();
       }
@@ -4944,7 +4941,7 @@ public class Client extends GameShell {
       }
 
       if (var4 > this.vg) {
-         sign.Signlink.reporterror(this.Gf + " Too many npcs");
+        SignLink.reporterror(this.Gf + " Too many npcs");
          throw new RuntimeException("eek");
       } else {
          this.vg = 0;
@@ -5035,12 +5032,12 @@ public class Client extends GameShell {
       }
 
       if (arg0.pos != arg2) {
-         sign.Signlink.reporterror(this.Gf + " size mismatch in getnpcpos - pos:" + arg0.pos + " psize:" + arg2);
+        SignLink.reporterror(this.Gf + " size mismatch in getnpcpos - pos:" + arg0.pos + " psize:" + arg2);
          throw new RuntimeException("eek");
       } else {
          for(int var6 = 0; var6 < this.vg; ++var6) {
             if (this.ug[this.wg[var6]] == null) {
-               sign.Signlink.reporterror(this.Gf + " null entry in npc list - pos:" + var6 + " size:" + this.vg);
+              SignLink.reporterror(this.Gf + " null entry in npc list - pos:" + var6 + " size:" + this.vg);
                throw new RuntimeException("eek");
             }
          }
@@ -5050,29 +5047,29 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.k(I)V")
    public final void k(int arg0) {
-      LocType.v.a();
-      LocType.e.a();
+      LocType.v.clear();
+      LocType.e.clear();
       if (arg0 <= 0) {
          for(int var2 = 1; var2 > 0; ++var2) {
          }
       }
 
-      NpcType.o.a();
-      ObjType.l.a();
-      ObjType.u.a();
+      NpcType.o.clear();
+      ObjType.l.clear();
+      ObjType.u.clear();
       ClientPlayer.Ib.clear();
-      SpotAnimType.q.a();
+      SpotAnimType.q.clear();
    }
 
    @ObfuscatedName("client.g(Z)V")
    public final void g(boolean arg0) {
-      sign.Signlink.midiplay = false;
+     SignLink.midiplay = false;
       if (arg0) {
          this.hg = 466;
       }
 
-      sign.Signlink.midifade = 0;
-      sign.Signlink.midi = "stop";
+     SignLink.midifade = 0;
+     SignLink.midi = "stop";
    }
 
    @ObfuscatedName("client.h(Z)V")
@@ -5455,7 +5452,7 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.c(II)V")
    public final void c(int arg0, int arg1) {
-      sign.Signlink.wavevol = arg1;
+     SignLink.wavevol = arg1;
       if (arg0 <= 0) {
          this.Qe = 57;
       }
@@ -5730,19 +5727,19 @@ public class Client extends GameShell {
             } catch (NullPointerException var32) {
                var12 = "Null error";
                var7 = null;
-               if (!sign.Signlink.reporterror) {
+               if (!SignLink.reporterror) {
                   return null;
                }
             } catch (ArrayIndexOutOfBoundsException var33) {
                var12 = "Bounds error";
                var7 = null;
-               if (!sign.Signlink.reporterror) {
+               if (!SignLink.reporterror) {
                   return null;
                }
             } catch (Exception var34) {
                var12 = "Unexpected error";
                var7 = null;
-               if (!sign.Signlink.reporterror) {
+               if (!SignLink.reporterror) {
                   return null;
                }
             }
@@ -6030,7 +6027,7 @@ public class Client extends GameShell {
                      this.a("@cr2@" + arg2.yb, (byte)-123, var25, 1);
                   }
                } catch (Exception var29) {
-                  sign.Signlink.reporterror("cde2");
+                 SignLink.reporterror("cde2");
                }
             }
          }
@@ -6091,7 +6088,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.a()V")
    public final void load() {
       this.drawProgress(20, true, (String)"Starting up");
-      if (sign.Signlink.sunjava) {
+      if (SignLink.sunjava) {
          super.mindel = 5;
       }
 
@@ -6152,9 +6149,9 @@ public class Client extends GameShell {
          if (!var1) {
             this.Lf = true;
          } else {
-            if (sign.Signlink.cache_dat != null) {
+            if (SignLink.cache_dat != null) {
                for(int var3 = 0; var3 < 5; ++var3) {
-                  this.fileStreams[var3] = new FileStream(var3 + 1, 600000, sign.Signlink.cache_dat, sign.Signlink.cache_idx[var3], 4);
+                  this.fileStreams[var3] = new FileStream(var3 + 1, 600000,SignLink.cache_dat,SignLink.cache_idx[var3], 4);
                }
             }
 
@@ -6552,7 +6549,7 @@ public class Client extends GameShell {
                LocType.m = this;
                NpcType.i = this;
             } catch (Exception var75) {
-               sign.Signlink.reporterror("loaderror " + this.se + " " + this.ck);
+              SignLink.reporterror("loaderror " + this.se + " " + this.ck);
                this.pj = true;
             }
          }
@@ -7777,12 +7774,12 @@ public class Client extends GameShell {
          }
       }
 
-      return sign.Signlink.wavereplay();
+      return SignLink.wavereplay();
    }
 
    @ObfuscatedName("client.a(Ljava/lang/String;Ljava/lang/String;Z)V")
    public final void a(String arg0, String arg1, boolean arg2) {
-      sign.Signlink.errorname = arg0;
+     SignLink.errorname = arg0;
 
       try {
          if (!arg2) {
@@ -7816,7 +7813,7 @@ public class Client extends GameShell {
             this.hd.p4(var10[1]);
             this.hd.p4(var10[2]);
             this.hd.p4(var10[3]);
-            this.hd.p4(sign.Signlink.uid);
+            this.hd.p4(SignLink.uid);
             this.hd.pjstr(arg0);
             this.hd.pjstr(arg1);
             this.hd.rsaenc(Wj, N);
@@ -8639,7 +8636,7 @@ public class Client extends GameShell {
          } catch (Exception var16) {
             var5 = "logic problem";
             this.K[8] = 0;
-            if (!sign.Signlink.reporterror) {
+            if (!SignLink.reporterror) {
                return;
             }
          }
@@ -8799,8 +8796,8 @@ public class Client extends GameShell {
    }
 
    public final URL getCodeBase() {
-      if (sign.Signlink.mainapp != null) {
-         return sign.Signlink.mainapp.getCodeBase();
+      if (SignLink.mainapp != null) {
+         return SignLink.mainapp.getCodeBase();
       } else {
          try {
             if (super.frame != null) {
@@ -9239,13 +9236,13 @@ public class Client extends GameShell {
       } catch (Exception var61) {
       }
 
-      LocType.v.a();
+      LocType.v.clear();
       if (super.frame != null) {
          this.hd.pIsaac(78);
          this.hd.p4(1057001181);
       }
 
-      if (vc && sign.Signlink.cache_dat != null) {
+      if (vc &&SignLink.cache_dat != null) {
          int var49 = this.xj.getFileCount(0);
 
          for(int var50 = 0; var50 < var49; ++var50) {
@@ -9374,12 +9371,12 @@ public class Client extends GameShell {
       }
 
       if (arg2.pos != arg0) {
-         sign.Signlink.reporterror("Error packet size mismatch in getplayer pos:" + arg2.pos + " psize:" + arg0);
+        SignLink.reporterror("Error packet size mismatch in getplayer pos:" + arg2.pos + " psize:" + arg0);
          throw new RuntimeException("eek");
       } else {
          for(int var7 = 0; var7 < this.od; ++var7) {
             if (this.nd[this.pd[var7]] == null) {
-               sign.Signlink.reporterror(this.Gf + " null entry in pl list - pos:" + var7 + " size:" + this.od);
+              SignLink.reporterror(this.Gf + " null entry in pl list - pos:" + var7 + " size:" + this.od);
                throw new RuntimeException("eek");
             }
          }
@@ -9410,7 +9407,7 @@ public class Client extends GameShell {
    }
 
    public final String getParameter(String arg0) {
-      return sign.Signlink.mainapp != null ? sign.Signlink.mainapp.getParameter(arg0) : super.getParameter(arg0);
+      return SignLink.mainapp != null ?SignLink.mainapp.getParameter(arg0) : super.getParameter(arg0);
    }
 
    @ObfuscatedName("client.y(I)V")
@@ -9513,9 +9510,9 @@ public class Client extends GameShell {
          this.hd.p1((int)49);
       }
 
-      sign.Signlink.midivol = arg2;
+     SignLink.midivol = arg2;
       if (arg0) {
-         sign.Signlink.midi = "voladjust";
+        SignLink.midi = "voladjust";
       }
    }
 
@@ -9773,7 +9770,7 @@ public class Client extends GameShell {
                   var18 = var17 + " days ago";
                }
 
-               arg1.u = "You last logged in @red@" + var18 + "@bla@ from: @red@" + sign.Signlink.dns;
+               arg1.u = "You last logged in @red@" + var18 + "@bla@ from: @red@" +SignLink.dns;
             }
 
             if (var4 == 661) {
@@ -9921,7 +9918,7 @@ public class Client extends GameShell {
                Pix3D.a(0.6D, (byte)6);
             }
 
-            ObjType.u.a();
+            ObjType.u.clear();
             this.Le = true;
          }
 
@@ -10250,7 +10247,7 @@ public class Client extends GameShell {
    }
 
    public final AppletContext getAppletContext() {
-      return sign.Signlink.mainapp != null ? sign.Signlink.mainapp.getAppletContext() : super.getAppletContext();
+      return SignLink.mainapp != null ?SignLink.mainapp.getAppletContext() : super.getAppletContext();
    }
 
    @ObfuscatedName("client.D(I)V")
@@ -10444,7 +10441,7 @@ public class Client extends GameShell {
       }
 
       if (var4 > this.od) {
-         sign.Signlink.reporterror(this.Gf + " Too many players");
+        SignLink.reporterror(this.Gf + " Too many players");
          throw new RuntimeException("eek");
       } else {
          this.od = 0;
@@ -10601,7 +10598,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.a(II[B)Z")
    public final boolean a(int arg0, int arg1, byte[] arg2) {
       if (arg0 >= 3 && arg0 <= 3) {
-         return arg2 == null ? true : sign.Signlink.wavesave(arg2, arg1);
+         return arg2 == null ? true :SignLink.wavesave(arg2, arg1);
       } else {
          throw new NullPointerException();
       }
@@ -12947,13 +12944,8 @@ public class Client extends GameShell {
 
    @ObfuscatedName("client.d(I)Ljava/awt/Component;")
    public final java.awt.Component getBaseComponent() {
-      while(arg0 >= 0) {
-         for(int var2 = 1; var2 > 0; ++var2) {
-         }
-      }
-
-      if (sign.Signlink.mainapp != null) {
-         return sign.Signlink.mainapp;
+      if (SignLink.mainapp != null) {
+         return SignLink.mainapp;
       } else if (super.frame != null) {
          return super.frame;
       } else {
@@ -13554,7 +13546,7 @@ public class Client extends GameShell {
       if (this.lf == 1) {
          int var2 = this.I(5);
          if (var2 != 0 && System.currentTimeMillis() - this.ni > 360000L) {
-            sign.Signlink.reporterror(this.Gf + " glcfb " + this.zc + "," + var2 + "," + vc + "," + this.fileStreams[0] + "," + this.xj.remaining() + "," + this.Ff + "," + this.Kb + "," + this.Lb);
+           SignLink.reporterror(this.Gf + " glcfb " + this.zc + "," + var2 + "," + vc + "," + this.fileStreams[0] + "," + this.xj.remaining() + "," + this.Ff + "," + this.Kb + "," + this.Lb);
             this.ni = System.currentTimeMillis();
          }
       }
@@ -14106,7 +14098,7 @@ public class Client extends GameShell {
                   }
                }
             } catch (Exception var7) {
-               if (sign.Signlink.reporterror) {
+               if (SignLink.reporterror) {
                   this.hd.pIsaac(80);
                   this.hd.p2(this.Ef[var2] & 32767);
                } else {
