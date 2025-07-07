@@ -74,7 +74,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public int requestCount;
 
 	@ObfuscatedName("ZPGPWCCV.K")
-	public DoublyLinkList requests = new DoublyLinkList(true);
+	public DoublyLinkList requests = new DoublyLinkList();
 
 	@ObfuscatedName("ZPGPWCCV.h")
 	public LinkList queue = new LinkList();
@@ -297,7 +297,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		DoublyLinkList lock = this.requests;
 		synchronized (lock) {
-			for (OnDemandRequest req = (OnDemandRequest) this.requests.b(); req != null; req = (OnDemandRequest) this.requests.a(1)) {
+			for (OnDemandRequest req = (OnDemandRequest) this.requests.head(); req != null; req = (OnDemandRequest) this.requests.next()) {
 				if (req.archive == archive && req.file == file) {
 					return;
 				}

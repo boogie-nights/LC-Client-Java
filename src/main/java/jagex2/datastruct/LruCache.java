@@ -8,7 +8,7 @@ public class LruCache {
    @ObfuscatedName("RHNYLZZL.d")
    public DoublyLinkable d = new DoublyLinkable();
    @ObfuscatedName("RHNYLZZL.h")
-   public DoublyLinkList h = new DoublyLinkList(true);
+   public DoublyLinkList h = new DoublyLinkList();
    @ObfuscatedName("RHNYLZZL.e")
    public int e;
    @ObfuscatedName("RHNYLZZL.f")
@@ -50,11 +50,11 @@ public class LruCache {
       }
 
       if (this.f == 0) {
-         DoublyLinkable var5 = this.h.a();
+         DoublyLinkable var5 = this.h.pop();
          var5.unlink();
          var5.unlink2();
          if (this.d == var5) {
-            DoublyLinkable var6 = this.h.a();
+            DoublyLinkable var6 = this.h.pop();
             var6.unlink();
             var6.unlink2();
          }
@@ -72,7 +72,7 @@ public class LruCache {
    @ObfuscatedName("RHNYLZZL.a()V")
    public void a() {
       while(true) {
-         DoublyLinkable var1 = this.h.a();
+         DoublyLinkable var1 = this.h.pop();
          if (var1 == null) {
             this.f = this.e;
             return;

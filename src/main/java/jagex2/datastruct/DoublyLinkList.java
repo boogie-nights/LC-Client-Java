@@ -3,82 +3,73 @@ package jagex2.datastruct;
 import deob.ObfuscatedName;
 
 public class DoublyLinkList {
-   @ObfuscatedName("CZYJUOKA.a")
-   public boolean a = true;
-   @ObfuscatedName("CZYJUOKA.b")
-   public DoublyLinkable b = new DoublyLinkable();
-   @ObfuscatedName("CZYJUOKA.c")
-   public DoublyLinkable c;
+	@ObfuscatedName("CZYJUOKA.a")
+	public boolean a = true;
 
-   public DoublyLinkList(boolean arg0) {
-      this.b.e = this.b;
-      this.b.f = this.b;
-      if (!arg0) {
-         for(int var2 = 1; var2 > 0; ++var2) {
-         }
+	@ObfuscatedName("CZYJUOKA.b")
+	public DoublyLinkable sentinel = new DoublyLinkable();
 
-      }
-   }
+	@ObfuscatedName("CZYJUOKA.c")
+	public DoublyLinkable cursor;
 
-   @ObfuscatedName("CZYJUOKA.a(LDPPNUUMQ;)V")
-   public void push(DoublyLinkable arg0) {
-      if (arg0.f != null) {
-         arg0.unlink2();
-      }
+	public DoublyLinkList() {
+		this.sentinel.next2 = this.sentinel;
+		this.sentinel.prev2 = this.sentinel;
+	}
 
-      arg0.f = this.b.f;
-      arg0.e = this.b;
-      arg0.f.e = arg0;
-      arg0.e.f = arg0;
-   }
+	@ObfuscatedName("CZYJUOKA.a(LDPPNUUMQ;)V")
+	public void push(DoublyLinkable node) {
+		if (node.prev2 != null) {
+			node.unlink2();
+		}
 
-   @ObfuscatedName("CZYJUOKA.a()LDPPNUUMQ;")
-   public DoublyLinkable a() {
-      DoublyLinkable var1 = this.b.e;
-      if (this.b == var1) {
-         return null;
-      } else {
-         var1.unlink2();
-         return var1;
-      }
-   }
+		node.prev2 = this.sentinel.prev2;
+		node.next2 = this.sentinel;
+		node.prev2.next2 = node;
+		node.next2.prev2 = node;
+	}
 
-   @ObfuscatedName("CZYJUOKA.b()LDPPNUUMQ;")
-   public DoublyLinkable b() {
-      DoublyLinkable var1 = this.b.e;
-      if (this.b == var1) {
-         this.c = null;
-         return null;
-      } else {
-         this.c = var1.e;
-         return var1;
-      }
-   }
+	@ObfuscatedName("CZYJUOKA.a()LDPPNUUMQ;")
+	public DoublyLinkable pop() {
+		DoublyLinkable node = this.sentinel.next2;
+		if (this.sentinel == node) {
+			return null;
+		} else {
+			node.unlink2();
+			return node;
+		}
+	}
 
-   @ObfuscatedName("CZYJUOKA.a(I)LDPPNUUMQ;")
-   public DoublyLinkable a(int arg0) {
-      DoublyLinkable var2 = this.c;
-      if (this.b == var2) {
-         this.c = null;
-         return null;
-      } else {
-         this.c = var2.e;
-         if (arg0 < 1 || arg0 > 1) {
-            this.a = !this.a;
-         }
+	@ObfuscatedName("CZYJUOKA.b()LDPPNUUMQ;")
+	public DoublyLinkable head() {
+		DoublyLinkable node = this.sentinel.next2;
+		if (this.sentinel == node) {
+			this.cursor = null;
+			return null;
+		} else {
+			this.cursor = node.next2;
+			return node;
+		}
+	}
 
-         return var2;
-      }
-   }
+	@ObfuscatedName("CZYJUOKA.a(I)LDPPNUUMQ;")
+	public DoublyLinkable next() {
+		DoublyLinkable node = this.cursor;
+		if (this.sentinel == node) {
+			this.cursor = null;
+			return null;
+		} else {
+			this.cursor = node.next2;
+			return node;
+		}
+	}
 
-   @ObfuscatedName("CZYJUOKA.c()I")
-   public int size() {
-      int var1 = 0;
-
-      for(DoublyLinkable var2 = this.b.e; this.b != var2; var2 = var2.e) {
-         ++var1;
-      }
-
-      return var1;
-   }
+	@ObfuscatedName("CZYJUOKA.c()I")
+	public int size() {
+		int count = 0;
+		for (DoublyLinkable node = this.sentinel.next2; this.sentinel != node; node = node.next2) {
+			count++;
+		}
+		return count;
+	}
 }
