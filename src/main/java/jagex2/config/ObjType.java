@@ -590,16 +590,16 @@ public class ObjType {
          int var11 = Pix3D.E;
          int var12 = Pix3D.F;
          int[] var13 = Pix3D.K;
-         int[] var14 = Pix2D.l;
-         int var15 = Pix2D.m;
-         int var16 = Pix2D.n;
-         int var17 = Pix2D.q;
-         int var18 = Pix2D.r;
-         int var19 = Pix2D.o;
-         int var20 = Pix2D.p;
+         int[] var14 = Pix2D.data;
+         int var15 = Pix2D.width2d;
+         int var16 = Pix2D.height2d;
+         int var17 = Pix2D.left;
+         int var18 = Pix2D.right;
+         int var19 = Pix2D.top;
+         int var20 = Pix2D.bottom;
          Pix3D.C = false;
-         Pix2D.a(y, 32, 32, var10.I);
-         Pix2D.a(32, 0, 0, (byte)-24, 32, 0);
+         Pix2D.bind(32, var10.I, 32);
+         Pix2D.fillRect(0, 32, 32, 0, 0);
          Pix3D.b((int)568);
          int var21 = var5.R;
          if (arg1 == -1) {
@@ -670,8 +670,8 @@ public class ObjType {
             u.put(var10, (long)arg3);
          }
 
-         Pix2D.a(y, var15, var16, var14);
-         Pix2D.a(var19, var17, var20, var18, true);
+         Pix2D.bind(var15, var14, var16);
+         Pix2D.setBounds(var19, var17, var20, var18);
          Pix3D.E = var11;
          Pix3D.F = var12;
          Pix3D.K = var13;

@@ -125,7 +125,7 @@ public class Pix24 extends Pix2D {
    @ObfuscatedName("EPQDEJTO.a(Z)V")
    public void a(boolean arg0) {
       if (!arg0) {
-         Pix2D.a(this.G, this.J, this.K, this.I);
+         Pix2D.bind(this.J, this.I, this.K);
       }
    }
 
@@ -191,43 +191,43 @@ public class Pix24 extends Pix2D {
    public void a(int arg0, int arg1, int arg2) {
       int var4 = this.L + arg2;
       int var5 = this.M + arg0;
-      int var6 = Pix2D.m * var5 + var4;
+      int var6 = Pix2D.width2d * var5 + var4;
       int var7 = 0;
       int var8 = this.K;
       int var9 = this.J;
-      int var10 = Pix2D.m - var9;
+      int var10 = Pix2D.width2d - var9;
       int var11 = 0;
-      if (var5 < Pix2D.o) {
-         int var12 = Pix2D.o - var5;
+      if (var5 < Pix2D.top) {
+         int var12 = Pix2D.top - var5;
          var8 -= var12;
-         var5 = Pix2D.o;
+         var5 = Pix2D.top;
          var7 += var9 * var12;
-         var6 += Pix2D.m * var12;
+         var6 += Pix2D.width2d * var12;
       }
 
-      if (var5 + var8 > Pix2D.p) {
-         var8 -= var5 + var8 - Pix2D.p;
+      if (var5 + var8 > Pix2D.bottom) {
+         var8 -= var5 + var8 - Pix2D.bottom;
       }
 
-      if (var4 < Pix2D.q) {
-         int var13 = Pix2D.q - var4;
+      if (var4 < Pix2D.left) {
+         int var13 = Pix2D.left - var4;
          var9 -= var13;
-         var4 = Pix2D.q;
+         var4 = Pix2D.left;
          var7 += var13;
          var6 += var13;
          var11 += var13;
          var10 += var13;
       }
 
-      if (var4 + var9 > Pix2D.r) {
-         int var14 = var4 + var9 - Pix2D.r;
+      if (var4 + var9 > Pix2D.right) {
+         int var14 = var4 + var9 - Pix2D.right;
          var9 -= var14;
          var11 += var14;
          var10 += var14;
       }
 
       if (var9 > 0 && var8 > 0) {
-         this.a(var9, var10, var8, this.I, var7, var11, var6, (byte)-39, Pix2D.l);
+         this.a(var9, var10, var8, this.I, var7, var11, var6, (byte)-39, Pix2D.data);
          if (arg1 >= 0) {
             this.G = !this.G;
          }
@@ -266,43 +266,43 @@ public class Pix24 extends Pix2D {
       int var4 = this.L + arg1;
       if (arg2 < 0) {
          int var5 = this.M + arg0;
-         int var6 = Pix2D.m * var5 + var4;
+         int var6 = Pix2D.width2d * var5 + var4;
          int var7 = 0;
          int var8 = this.K;
          int var9 = this.J;
-         int var10 = Pix2D.m - var9;
+         int var10 = Pix2D.width2d - var9;
          int var11 = 0;
-         if (var5 < Pix2D.o) {
-            int var12 = Pix2D.o - var5;
+         if (var5 < Pix2D.top) {
+            int var12 = Pix2D.top - var5;
             var8 -= var12;
-            var5 = Pix2D.o;
+            var5 = Pix2D.top;
             var7 += var9 * var12;
-            var6 += Pix2D.m * var12;
+            var6 += Pix2D.width2d * var12;
          }
 
-         if (var5 + var8 > Pix2D.p) {
-            var8 -= var5 + var8 - Pix2D.p;
+         if (var5 + var8 > Pix2D.bottom) {
+            var8 -= var5 + var8 - Pix2D.bottom;
          }
 
-         if (var4 < Pix2D.q) {
-            int var13 = Pix2D.q - var4;
+         if (var4 < Pix2D.left) {
+            int var13 = Pix2D.left - var4;
             var9 -= var13;
-            var4 = Pix2D.q;
+            var4 = Pix2D.left;
             var7 += var13;
             var6 += var13;
             var11 += var13;
             var10 += var13;
          }
 
-         if (var4 + var9 > Pix2D.r) {
-            int var14 = var4 + var9 - Pix2D.r;
+         if (var4 + var9 > Pix2D.right) {
+            int var14 = var4 + var9 - Pix2D.right;
             var9 -= var14;
             var11 += var14;
             var10 += var14;
          }
 
          if (var9 > 0 && var8 > 0) {
-            this.a(Pix2D.l, this.I, 0, var7, var6, var9, var8, var10, var11);
+            this.a(Pix2D.data, this.I, 0, var7, var6, var9, var8, var10, var11);
          }
       }
    }
@@ -362,44 +362,44 @@ public class Pix24 extends Pix2D {
    public void b(int arg0, int arg1, int arg2, int arg3) {
       int var5 = this.L + arg1;
       int var6 = this.M + arg2;
-      int var7 = Pix2D.m * var6 + var5;
+      int var7 = Pix2D.width2d * var6 + var5;
       int var8 = 0;
       if (arg0 == 0) {
          int var9 = this.K;
          int var10 = this.J;
-         int var11 = Pix2D.m - var10;
+         int var11 = Pix2D.width2d - var10;
          int var12 = 0;
-         if (var6 < Pix2D.o) {
-            int var13 = Pix2D.o - var6;
+         if (var6 < Pix2D.top) {
+            int var13 = Pix2D.top - var6;
             var9 -= var13;
-            var6 = Pix2D.o;
+            var6 = Pix2D.top;
             var8 += var10 * var13;
-            var7 += Pix2D.m * var13;
+            var7 += Pix2D.width2d * var13;
          }
 
-         if (var6 + var9 > Pix2D.p) {
-            var9 -= var6 + var9 - Pix2D.p;
+         if (var6 + var9 > Pix2D.bottom) {
+            var9 -= var6 + var9 - Pix2D.bottom;
          }
 
-         if (var5 < Pix2D.q) {
-            int var14 = Pix2D.q - var5;
+         if (var5 < Pix2D.left) {
+            int var14 = Pix2D.left - var5;
             var10 -= var14;
-            var5 = Pix2D.q;
+            var5 = Pix2D.left;
             var8 += var14;
             var7 += var14;
             var12 += var14;
             var11 += var14;
          }
 
-         if (var5 + var10 > Pix2D.r) {
-            int var15 = var5 + var10 - Pix2D.r;
+         if (var5 + var10 > Pix2D.right) {
+            int var15 = var5 + var10 - Pix2D.right;
             var10 -= var15;
             var12 += var15;
             var11 += var15;
          }
 
          if (var10 > 0 && var9 > 0) {
-            this.a(var10, var12, 0, var11, var8, this.A, arg3, var7, var9, Pix2D.l, this.I);
+            this.a(var10, var12, 0, var11, var8, this.A, arg3, var7, var9, Pix2D.data, this.I);
          }
       }
    }
@@ -441,7 +441,7 @@ public class Pix24 extends Pix2D {
          int var18 = arg8 * var16 >> 8;
          int var19 = (arg3 << 16) + var13 * var18 + var14 * var17;
          int var20 = (arg10 << 16) + (var14 * var18 - var13 * var17);
-         int var21 = Pix2D.m * arg0 + arg6;
+         int var21 = Pix2D.width2d * arg0 + arg6;
 
          for(int var22 = 0; var22 < arg2; ++var22) {
             int var23 = arg9[var22];
@@ -450,14 +450,14 @@ public class Pix24 extends Pix2D {
             int var26 = var20 - var17 * var23;
 
             for(int var27 = -arg5[var22]; var27 < 0; ++var27) {
-               Pix2D.l[var24++] = this.I[(var25 >> 16) + (var26 >> 16) * this.J];
+               Pix2D.data[var24++] = this.I[(var25 >> 16) + (var26 >> 16) * this.J];
                var25 += var18;
                var26 -= var17;
             }
 
             var19 += var17;
             var20 += var18;
-            var21 += Pix2D.m;
+            var21 += Pix2D.width2d;
          }
 
       } catch (Exception var28) {
@@ -476,7 +476,7 @@ public class Pix24 extends Pix2D {
             int var16 = arg0 * var14 >> 8;
             int var17 = (arg1 << 16) + var11 * var16 + var12 * var15;
             int var18 = (arg3 << 16) + (var12 * var16 - var11 * var15);
-            int var19 = Pix2D.m * arg8 + arg2;
+            int var19 = Pix2D.width2d * arg8 + arg2;
 
             for(int var20 = 0; var20 < arg4; ++var20) {
                int var21 = var19;
@@ -486,7 +486,7 @@ public class Pix24 extends Pix2D {
                for(int var24 = -arg6; var24 < 0; ++var24) {
                   int var25 = this.I[(var22 >> 16) + (var23 >> 16) * this.J];
                   if (var25 != 0) {
-                     Pix2D.l[var21++] = var25;
+                     Pix2D.data[var21++] = var25;
                   } else {
                      ++var21;
                   }
@@ -497,7 +497,7 @@ public class Pix24 extends Pix2D {
 
                var17 += var15;
                var18 += var16;
-               var19 += Pix2D.m;
+               var19 += Pix2D.width2d;
             }
 
          } catch (Exception var26) {
@@ -510,43 +510,43 @@ public class Pix24 extends Pix2D {
       if (arg2 == -49993) {
          int var5 = this.L + arg3;
          int var6 = this.M + arg1;
-         int var7 = Pix2D.m * var6 + var5;
+         int var7 = Pix2D.width2d * var6 + var5;
          int var8 = 0;
          int var9 = this.K;
          int var10 = this.J;
-         int var11 = Pix2D.m - var10;
+         int var11 = Pix2D.width2d - var10;
          int var12 = 0;
-         if (var6 < Pix2D.o) {
-            int var13 = Pix2D.o - var6;
+         if (var6 < Pix2D.top) {
+            int var13 = Pix2D.top - var6;
             var9 -= var13;
-            var6 = Pix2D.o;
+            var6 = Pix2D.top;
             var8 += var10 * var13;
-            var7 += Pix2D.m * var13;
+            var7 += Pix2D.width2d * var13;
          }
 
-         if (var6 + var9 > Pix2D.p) {
-            var9 -= var6 + var9 - Pix2D.p;
+         if (var6 + var9 > Pix2D.bottom) {
+            var9 -= var6 + var9 - Pix2D.bottom;
          }
 
-         if (var5 < Pix2D.q) {
-            int var14 = Pix2D.q - var5;
+         if (var5 < Pix2D.left) {
+            int var14 = Pix2D.left - var5;
             var10 -= var14;
-            var5 = Pix2D.q;
+            var5 = Pix2D.left;
             var8 += var14;
             var7 += var14;
             var12 += var14;
             var11 += var14;
          }
 
-         if (var5 + var10 > Pix2D.r) {
-            int var15 = var5 + var10 - Pix2D.r;
+         if (var5 + var10 > Pix2D.right) {
+            int var15 = var5 + var10 - Pix2D.right;
             var10 -= var15;
             var12 += var15;
             var11 += var15;
          }
 
          if (var10 > 0 && var9 > 0) {
-            this.a(var7, var11, this.I, var10, Pix2D.l, arg0.D, 40303, var9, var8, 0, var12);
+            this.a(var7, var11, this.I, var10, Pix2D.data, arg0.D, 40303, var9, var8, 0, var12);
          }
       }
    }

@@ -52,7 +52,7 @@ public class PixMap implements ImageProducer, ImageObserver {
          }
       }
 
-      Pix2D.a(this.a, this.c, this.d, this.b);
+      Pix2D.bind(this.c, this.b, this.d);
    }
 
    @ObfuscatedName("ISZGOOMR.a(IILjava/awt/Graphics;Z)V")

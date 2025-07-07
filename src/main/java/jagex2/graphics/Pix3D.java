@@ -82,14 +82,14 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.b(I)V")
    public static final void b(int arg0) {
       int var1 = 19 / arg0;
-      K = new int[n];
+      K = new int[height2d];
 
-      for(int var2 = 0; var2 < n; ++var2) {
-         K[var2] = m * var2;
+      for(int var2 = 0; var2 < height2d; ++var2) {
+         K[var2] = width2d * var2;
       }
 
-      E = m / 2;
-      F = n / 2;
+      E = width2d / 2;
+      F = height2d / 2;
    }
 
    @ObfuscatedName("YIBHWZVJ.a(III)V")
@@ -422,13 +422,13 @@ public class Pix3D extends Pix2D {
       }
 
       if (arg0 <= arg1 && arg0 <= arg2) {
-         if (arg0 < p) {
-            if (arg1 > p) {
-               arg1 = p;
+         if (arg0 < bottom) {
+            if (arg1 > bottom) {
+               arg1 = bottom;
             }
 
-            if (arg2 > p) {
-               arg2 = p;
+            if (arg2 > bottom) {
+               arg2 = bottom;
             }
 
             if (arg1 < arg2) {
@@ -466,21 +466,21 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var23, 0, 0, var16 >> 16, var19 >> 16, var18 >> 7, var20 >> 7);
+                           a(data, var23, 0, 0, var16 >> 16, var19 >> 16, var18 >> 7, var20 >> 7);
                            var16 += var13;
                            var19 += var11;
                            var18 += var14;
                            var20 += var12;
-                           var23 += m;
+                           var23 += width2d;
                         }
                      }
 
-                     a(l, var23, 0, 0, var16 >> 16, var15 >> 16, var18 >> 7, var17 >> 7);
+                     a(data, var23, 0, 0, var16 >> 16, var15 >> 16, var18 >> 7, var17 >> 7);
                      var16 += var13;
                      var15 += var9;
                      var18 += var14;
                      var17 += var10;
-                     var23 += m;
+                     var23 += width2d;
                   }
                } else {
                   int var24 = arg2 - arg1;
@@ -496,21 +496,21 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var26, 0, 0, var19 >> 16, var16 >> 16, var20 >> 7, var18 >> 7);
+                           a(data, var26, 0, 0, var19 >> 16, var16 >> 16, var20 >> 7, var18 >> 7);
                            var16 += var13;
                            var19 += var11;
                            var18 += var14;
                            var20 += var12;
-                           var26 += m;
+                           var26 += width2d;
                         }
                      }
 
-                     a(l, var26, 0, 0, var15 >> 16, var16 >> 16, var17 >> 7, var18 >> 7);
+                     a(data, var26, 0, 0, var15 >> 16, var16 >> 16, var17 >> 7, var18 >> 7);
                      var16 += var13;
                      var15 += var9;
                      var18 += var14;
                      var17 += var10;
-                     var26 += m;
+                     var26 += width2d;
                   }
                }
             } else {
@@ -548,21 +548,21 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var35, 0, 0, var31 >> 16, var27 >> 16, var32 >> 7, var29 >> 7);
+                           a(data, var35, 0, 0, var31 >> 16, var27 >> 16, var32 >> 7, var29 >> 7);
                            var31 += var11;
                            var27 += var9;
                            var32 += var12;
                            var29 += var10;
-                           var35 += m;
+                           var35 += width2d;
                         }
                      }
 
-                     a(l, var35, 0, 0, var28 >> 16, var27 >> 16, var30 >> 7, var29 >> 7);
+                     a(data, var35, 0, 0, var28 >> 16, var27 >> 16, var30 >> 7, var29 >> 7);
                      var28 += var13;
                      var27 += var9;
                      var30 += var14;
                      var29 += var10;
-                     var35 += m;
+                     var35 += width2d;
                   }
                } else {
                   int var36 = arg1 - arg2;
@@ -578,33 +578,33 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var38, 0, 0, var27 >> 16, var31 >> 16, var29 >> 7, var32 >> 7);
+                           a(data, var38, 0, 0, var27 >> 16, var31 >> 16, var29 >> 7, var32 >> 7);
                            var31 += var11;
                            var27 += var9;
                            var32 += var12;
                            var29 += var10;
-                           var38 += m;
+                           var38 += width2d;
                         }
                      }
 
-                     a(l, var38, 0, 0, var27 >> 16, var28 >> 16, var29 >> 7, var30 >> 7);
+                     a(data, var38, 0, 0, var27 >> 16, var28 >> 16, var29 >> 7, var30 >> 7);
                      var28 += var13;
                      var27 += var9;
                      var30 += var14;
                      var29 += var10;
-                     var38 += m;
+                     var38 += width2d;
                   }
                }
             }
          }
       } else if (arg1 <= arg2) {
-         if (arg1 < p) {
-            if (arg2 > p) {
-               arg2 = p;
+         if (arg1 < bottom) {
+            if (arg2 > bottom) {
+               arg2 = bottom;
             }
 
-            if (arg0 > p) {
-               arg0 = p;
+            if (arg0 > bottom) {
+               arg0 = bottom;
             }
 
             if (arg2 < arg0) {
@@ -642,21 +642,21 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var47, 0, 0, var40 >> 16, var43 >> 16, var42 >> 7, var44 >> 7);
+                           a(data, var47, 0, 0, var40 >> 16, var43 >> 16, var42 >> 7, var44 >> 7);
                            var40 += var9;
                            var43 += var13;
                            var42 += var10;
                            var44 += var14;
-                           var47 += m;
+                           var47 += width2d;
                         }
                      }
 
-                     a(l, var47, 0, 0, var40 >> 16, var39 >> 16, var42 >> 7, var41 >> 7);
+                     a(data, var47, 0, 0, var40 >> 16, var39 >> 16, var42 >> 7, var41 >> 7);
                      var40 += var9;
                      var39 += var11;
                      var42 += var10;
                      var41 += var12;
-                     var47 += m;
+                     var47 += width2d;
                   }
                } else {
                   int var48 = arg0 - arg2;
@@ -672,21 +672,21 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var50, 0, 0, var43 >> 16, var40 >> 16, var44 >> 7, var42 >> 7);
+                           a(data, var50, 0, 0, var43 >> 16, var40 >> 16, var44 >> 7, var42 >> 7);
                            var40 += var9;
                            var43 += var13;
                            var42 += var10;
                            var44 += var14;
-                           var50 += m;
+                           var50 += width2d;
                         }
                      }
 
-                     a(l, var50, 0, 0, var39 >> 16, var40 >> 16, var41 >> 7, var42 >> 7);
+                     a(data, var50, 0, 0, var39 >> 16, var40 >> 16, var41 >> 7, var42 >> 7);
                      var40 += var9;
                      var39 += var11;
                      var42 += var10;
                      var41 += var12;
-                     var50 += m;
+                     var50 += width2d;
                   }
                }
             } else {
@@ -724,21 +724,21 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var59, 0, 0, var55 >> 16, var51 >> 16, var56 >> 7, var53 >> 7);
+                           a(data, var59, 0, 0, var55 >> 16, var51 >> 16, var56 >> 7, var53 >> 7);
                            var55 += var13;
                            var51 += var11;
                            var56 += var14;
                            var53 += var12;
-                           var59 += m;
+                           var59 += width2d;
                         }
                      }
 
-                     a(l, var59, 0, 0, var52 >> 16, var51 >> 16, var54 >> 7, var53 >> 7);
+                     a(data, var59, 0, 0, var52 >> 16, var51 >> 16, var54 >> 7, var53 >> 7);
                      var52 += var9;
                      var51 += var11;
                      var54 += var10;
                      var53 += var12;
-                     var59 += m;
+                     var59 += width2d;
                   }
                } else {
                   int var60 = arg2 - arg0;
@@ -754,32 +754,32 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var62, 0, 0, var51 >> 16, var55 >> 16, var53 >> 7, var56 >> 7);
+                           a(data, var62, 0, 0, var51 >> 16, var55 >> 16, var53 >> 7, var56 >> 7);
                            var55 += var13;
                            var51 += var11;
                            var56 += var14;
                            var53 += var12;
-                           var62 += m;
+                           var62 += width2d;
                         }
                      }
 
-                     a(l, var62, 0, 0, var51 >> 16, var52 >> 16, var53 >> 7, var54 >> 7);
+                     a(data, var62, 0, 0, var51 >> 16, var52 >> 16, var53 >> 7, var54 >> 7);
                      var52 += var9;
                      var51 += var11;
                      var54 += var10;
                      var53 += var12;
-                     var62 += m;
+                     var62 += width2d;
                   }
                }
             }
          }
-      } else if (arg2 < p) {
-         if (arg0 > p) {
-            arg0 = p;
+      } else if (arg2 < bottom) {
+         if (arg0 > bottom) {
+            arg0 = bottom;
          }
 
-         if (arg1 > p) {
-            arg1 = p;
+         if (arg1 > bottom) {
+            arg1 = bottom;
          }
 
          if (arg0 < arg1) {
@@ -817,21 +817,21 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var71, 0, 0, var64 >> 16, var67 >> 16, var66 >> 7, var68 >> 7);
+                        a(data, var71, 0, 0, var64 >> 16, var67 >> 16, var66 >> 7, var68 >> 7);
                         var64 += var11;
                         var67 += var9;
                         var66 += var12;
                         var68 += var10;
-                        var71 += m;
+                        var71 += width2d;
                      }
                   }
 
-                  a(l, var71, 0, 0, var64 >> 16, var63 >> 16, var66 >> 7, var65 >> 7);
+                  a(data, var71, 0, 0, var64 >> 16, var63 >> 16, var66 >> 7, var65 >> 7);
                   var64 += var11;
                   var63 += var13;
                   var66 += var12;
                   var65 += var14;
-                  var71 += m;
+                  var71 += width2d;
                }
             } else {
                int var72 = arg1 - arg0;
@@ -847,21 +847,21 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var74, 0, 0, var67 >> 16, var64 >> 16, var68 >> 7, var66 >> 7);
+                        a(data, var74, 0, 0, var67 >> 16, var64 >> 16, var68 >> 7, var66 >> 7);
                         var64 += var11;
                         var67 += var9;
                         var66 += var12;
                         var68 += var10;
-                        var74 += m;
+                        var74 += width2d;
                      }
                   }
 
-                  a(l, var74, 0, 0, var63 >> 16, var64 >> 16, var65 >> 7, var66 >> 7);
+                  a(data, var74, 0, 0, var63 >> 16, var64 >> 16, var65 >> 7, var66 >> 7);
                   var64 += var11;
                   var63 += var13;
                   var66 += var12;
                   var65 += var14;
-                  var74 += m;
+                  var74 += width2d;
                }
             }
          } else {
@@ -899,21 +899,21 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var83, 0, 0, var79 >> 16, var75 >> 16, var80 >> 7, var77 >> 7);
+                        a(data, var83, 0, 0, var79 >> 16, var75 >> 16, var80 >> 7, var77 >> 7);
                         var79 += var9;
                         var75 += var13;
                         var80 += var10;
                         var77 += var14;
-                        var83 += m;
+                        var83 += width2d;
                      }
                   }
 
-                  a(l, var83, 0, 0, var76 >> 16, var75 >> 16, var78 >> 7, var77 >> 7);
+                  a(data, var83, 0, 0, var76 >> 16, var75 >> 16, var78 >> 7, var77 >> 7);
                   var76 += var11;
                   var75 += var13;
                   var78 += var12;
                   var77 += var14;
-                  var83 += m;
+                  var83 += width2d;
                }
             } else {
                int var84 = arg0 - arg1;
@@ -929,21 +929,21 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var86, 0, 0, var75 >> 16, var79 >> 16, var77 >> 7, var80 >> 7);
+                        a(data, var86, 0, 0, var75 >> 16, var79 >> 16, var77 >> 7, var80 >> 7);
                         var79 += var9;
                         var75 += var13;
                         var80 += var10;
                         var77 += var14;
-                        var86 += m;
+                        var86 += width2d;
                      }
                   }
 
-                  a(l, var86, 0, 0, var75 >> 16, var76 >> 16, var77 >> 7, var78 >> 7);
+                  a(data, var86, 0, 0, var75 >> 16, var76 >> 16, var77 >> 7, var78 >> 7);
                   var76 += var11;
                   var75 += var13;
                   var78 += var12;
                   var77 += var14;
-                  var86 += m;
+                  var86 += width2d;
                }
             }
          }
@@ -964,8 +964,8 @@ public class Pix3D extends Pix2D {
                var8 = 0;
             }
 
-            if (arg5 > s) {
-               arg5 = s;
+            if (arg5 > safeWidth) {
+               arg5 = safeWidth;
             }
 
             if (arg4 < 0) {
@@ -1052,8 +1052,8 @@ public class Pix3D extends Pix2D {
       } else if (arg4 < arg5) {
          int var22 = (arg7 - arg6) / (arg5 - arg4);
          if (A) {
-            if (arg5 > s) {
-               arg5 = s;
+            if (arg5 > safeWidth) {
+               arg5 = safeWidth;
             }
 
             if (arg4 < 0) {
@@ -1109,13 +1109,13 @@ public class Pix3D extends Pix2D {
       }
 
       if (arg0 <= arg1 && arg0 <= arg2) {
-         if (arg0 < p) {
-            if (arg1 > p) {
-               arg1 = p;
+         if (arg0 < bottom) {
+            if (arg1 > bottom) {
+               arg1 = bottom;
             }
 
-            if (arg2 > p) {
-               arg2 = p;
+            if (arg2 > bottom) {
+               arg2 = bottom;
             }
 
             if (arg1 < arg2) {
@@ -1147,17 +1147,17 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var15, arg6, 0, var11 >> 16, var12 >> 16);
+                           a(data, var15, arg6, 0, var11 >> 16, var12 >> 16);
                            var11 += var9;
                            var12 += var8;
-                           var15 += m;
+                           var15 += width2d;
                         }
                      }
 
-                     a(l, var15, arg6, 0, var11 >> 16, var10 >> 16);
+                     a(data, var15, arg6, 0, var11 >> 16, var10 >> 16);
                      var11 += var9;
                      var10 += var7;
-                     var15 += m;
+                     var15 += width2d;
                   }
                } else {
                   int var16 = arg2 - arg1;
@@ -1173,17 +1173,17 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var18, arg6, 0, var12 >> 16, var11 >> 16);
+                           a(data, var18, arg6, 0, var12 >> 16, var11 >> 16);
                            var11 += var9;
                            var12 += var8;
-                           var18 += m;
+                           var18 += width2d;
                         }
                      }
 
-                     a(l, var18, arg6, 0, var10 >> 16, var11 >> 16);
+                     a(data, var18, arg6, 0, var10 >> 16, var11 >> 16);
                      var11 += var9;
                      var10 += var7;
-                     var18 += m;
+                     var18 += width2d;
                   }
                }
             } else {
@@ -1215,17 +1215,17 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var24, arg6, 0, var21 >> 16, var19 >> 16);
+                           a(data, var24, arg6, 0, var21 >> 16, var19 >> 16);
                            var21 += var8;
                            var19 += var7;
-                           var24 += m;
+                           var24 += width2d;
                         }
                      }
 
-                     a(l, var24, arg6, 0, var20 >> 16, var19 >> 16);
+                     a(data, var24, arg6, 0, var20 >> 16, var19 >> 16);
                      var20 += var9;
                      var19 += var7;
-                     var24 += m;
+                     var24 += width2d;
                   }
                } else {
                   int var25 = arg1 - arg2;
@@ -1241,29 +1241,29 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var27, arg6, 0, var19 >> 16, var21 >> 16);
+                           a(data, var27, arg6, 0, var19 >> 16, var21 >> 16);
                            var21 += var8;
                            var19 += var7;
-                           var27 += m;
+                           var27 += width2d;
                         }
                      }
 
-                     a(l, var27, arg6, 0, var19 >> 16, var20 >> 16);
+                     a(data, var27, arg6, 0, var19 >> 16, var20 >> 16);
                      var20 += var9;
                      var19 += var7;
-                     var27 += m;
+                     var27 += width2d;
                   }
                }
             }
          }
       } else if (arg1 <= arg2) {
-         if (arg1 < p) {
-            if (arg2 > p) {
-               arg2 = p;
+         if (arg1 < bottom) {
+            if (arg2 > bottom) {
+               arg2 = bottom;
             }
 
-            if (arg0 > p) {
-               arg0 = p;
+            if (arg0 > bottom) {
+               arg0 = bottom;
             }
 
             if (arg2 < arg0) {
@@ -1295,17 +1295,17 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var33, arg6, 0, var29 >> 16, var30 >> 16);
+                           a(data, var33, arg6, 0, var29 >> 16, var30 >> 16);
                            var29 += var7;
                            var30 += var9;
-                           var33 += m;
+                           var33 += width2d;
                         }
                      }
 
-                     a(l, var33, arg6, 0, var29 >> 16, var28 >> 16);
+                     a(data, var33, arg6, 0, var29 >> 16, var28 >> 16);
                      var29 += var7;
                      var28 += var8;
-                     var33 += m;
+                     var33 += width2d;
                   }
                } else {
                   int var34 = arg0 - arg2;
@@ -1321,17 +1321,17 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var36, arg6, 0, var30 >> 16, var29 >> 16);
+                           a(data, var36, arg6, 0, var30 >> 16, var29 >> 16);
                            var29 += var7;
                            var30 += var9;
-                           var36 += m;
+                           var36 += width2d;
                         }
                      }
 
-                     a(l, var36, arg6, 0, var28 >> 16, var29 >> 16);
+                     a(data, var36, arg6, 0, var28 >> 16, var29 >> 16);
                      var29 += var7;
                      var28 += var8;
-                     var36 += m;
+                     var36 += width2d;
                   }
                }
             } else {
@@ -1363,17 +1363,17 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var42, arg6, 0, var39 >> 16, var37 >> 16);
+                           a(data, var42, arg6, 0, var39 >> 16, var37 >> 16);
                            var39 += var9;
                            var37 += var8;
-                           var42 += m;
+                           var42 += width2d;
                         }
                      }
 
-                     a(l, var42, arg6, 0, var38 >> 16, var37 >> 16);
+                     a(data, var42, arg6, 0, var38 >> 16, var37 >> 16);
                      var38 += var7;
                      var37 += var8;
-                     var42 += m;
+                     var42 += width2d;
                   }
                } else {
                   int var43 = arg2 - arg0;
@@ -1389,28 +1389,28 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var45, arg6, 0, var37 >> 16, var39 >> 16);
+                           a(data, var45, arg6, 0, var37 >> 16, var39 >> 16);
                            var39 += var9;
                            var37 += var8;
-                           var45 += m;
+                           var45 += width2d;
                         }
                      }
 
-                     a(l, var45, arg6, 0, var37 >> 16, var38 >> 16);
+                     a(data, var45, arg6, 0, var37 >> 16, var38 >> 16);
                      var38 += var7;
                      var37 += var8;
-                     var45 += m;
+                     var45 += width2d;
                   }
                }
             }
          }
-      } else if (arg2 < p) {
-         if (arg0 > p) {
-            arg0 = p;
+      } else if (arg2 < bottom) {
+         if (arg0 > bottom) {
+            arg0 = bottom;
          }
 
-         if (arg1 > p) {
-            arg1 = p;
+         if (arg1 > bottom) {
+            arg1 = bottom;
          }
 
          if (arg0 < arg1) {
@@ -1442,17 +1442,17 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var51, arg6, 0, var47 >> 16, var48 >> 16);
+                        a(data, var51, arg6, 0, var47 >> 16, var48 >> 16);
                         var47 += var8;
                         var48 += var7;
-                        var51 += m;
+                        var51 += width2d;
                      }
                   }
 
-                  a(l, var51, arg6, 0, var47 >> 16, var46 >> 16);
+                  a(data, var51, arg6, 0, var47 >> 16, var46 >> 16);
                   var47 += var8;
                   var46 += var9;
-                  var51 += m;
+                  var51 += width2d;
                }
             } else {
                int var52 = arg1 - arg0;
@@ -1468,17 +1468,17 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var54, arg6, 0, var48 >> 16, var47 >> 16);
+                        a(data, var54, arg6, 0, var48 >> 16, var47 >> 16);
                         var47 += var8;
                         var48 += var7;
-                        var54 += m;
+                        var54 += width2d;
                      }
                   }
 
-                  a(l, var54, arg6, 0, var46 >> 16, var47 >> 16);
+                  a(data, var54, arg6, 0, var46 >> 16, var47 >> 16);
                   var47 += var8;
                   var46 += var9;
-                  var54 += m;
+                  var54 += width2d;
                }
             }
          } else {
@@ -1510,17 +1510,17 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var60, arg6, 0, var57 >> 16, var55 >> 16);
+                        a(data, var60, arg6, 0, var57 >> 16, var55 >> 16);
                         var57 += var7;
                         var55 += var9;
-                        var60 += m;
+                        var60 += width2d;
                      }
                   }
 
-                  a(l, var60, arg6, 0, var56 >> 16, var55 >> 16);
+                  a(data, var60, arg6, 0, var56 >> 16, var55 >> 16);
                   var56 += var8;
                   var55 += var9;
-                  var60 += m;
+                  var60 += width2d;
                }
             } else {
                int var61 = arg0 - arg1;
@@ -1536,17 +1536,17 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var63, arg6, 0, var55 >> 16, var57 >> 16);
+                        a(data, var63, arg6, 0, var55 >> 16, var57 >> 16);
                         var57 += var7;
                         var55 += var9;
-                        var63 += m;
+                        var63 += width2d;
                      }
                   }
 
-                  a(l, var63, arg6, 0, var55 >> 16, var56 >> 16);
+                  a(data, var63, arg6, 0, var55 >> 16, var56 >> 16);
                   var56 += var8;
                   var55 += var9;
-                  var63 += m;
+                  var63 += width2d;
                }
             }
          }
@@ -1556,8 +1556,8 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.a([IIIIII)V")
    public static final void a(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
       if (A) {
-         if (arg5 > s) {
-            arg5 = s;
+         if (arg5 > safeWidth) {
+            arg5 = safeWidth;
          }
 
          if (arg4 < 0) {
@@ -1659,13 +1659,13 @@ public class Pix3D extends Pix2D {
       }
 
       if (arg0 <= arg1 && arg0 <= arg2) {
-         if (arg0 < p) {
-            if (arg1 > p) {
-               arg1 = p;
+         if (arg0 < bottom) {
+            if (arg1 > bottom) {
+               arg1 = bottom;
             }
 
-            if (arg2 > p) {
-               arg2 = p;
+            if (arg2 > bottom) {
+               arg2 = bottom;
             }
 
             if (arg1 < arg2) {
@@ -1707,24 +1707,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var53, var42 >> 16, var45 >> 16, var44 >> 8, var46 >> 8, var48, var49, var50, var27, var30, var33);
+                           a(data, var19, 0, 0, var53, var42 >> 16, var45 >> 16, var44 >> 8, var46 >> 8, var48, var49, var50, var27, var30, var33);
                            var42 += var39;
                            var45 += var37;
                            var44 += var40;
                            var46 += var38;
-                           var53 += m;
+                           var53 += width2d;
                            var48 += var28;
                            var49 += var31;
                            var50 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var53, var42 >> 16, var41 >> 16, var44 >> 8, var43 >> 8, var48, var49, var50, var27, var30, var33);
+                     a(data, var19, 0, 0, var53, var42 >> 16, var41 >> 16, var44 >> 8, var43 >> 8, var48, var49, var50, var27, var30, var33);
                      var42 += var39;
                      var41 += var35;
                      var44 += var40;
                      var43 += var36;
-                     var53 += m;
+                     var53 += width2d;
                      var48 += var28;
                      var49 += var31;
                      var50 += var34;
@@ -1743,24 +1743,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var56, var45 >> 16, var42 >> 16, var46 >> 8, var44 >> 8, var48, var49, var50, var27, var30, var33);
+                           a(data, var19, 0, 0, var56, var45 >> 16, var42 >> 16, var46 >> 8, var44 >> 8, var48, var49, var50, var27, var30, var33);
                            var42 += var39;
                            var45 += var37;
                            var44 += var40;
                            var46 += var38;
-                           var56 += m;
+                           var56 += width2d;
                            var48 += var28;
                            var49 += var31;
                            var50 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var56, var41 >> 16, var42 >> 16, var43 >> 8, var44 >> 8, var48, var49, var50, var27, var30, var33);
+                     a(data, var19, 0, 0, var56, var41 >> 16, var42 >> 16, var43 >> 8, var44 >> 8, var48, var49, var50, var27, var30, var33);
                      var42 += var39;
                      var41 += var35;
                      var44 += var40;
                      var43 += var36;
-                     var56 += m;
+                     var56 += width2d;
                      var48 += var28;
                      var49 += var31;
                      var50 += var34;
@@ -1805,24 +1805,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var72, var57 >> 16, var61 >> 16, var59 >> 8, var62 >> 8, var64, var65, var66, var27, var30, var33);
+                           a(data, var19, 0, 0, var72, var57 >> 16, var61 >> 16, var59 >> 8, var62 >> 8, var64, var65, var66, var27, var30, var33);
                            var61 += var37;
                            var57 += var35;
                            var62 += var38;
                            var59 += var36;
-                           var72 += m;
+                           var72 += width2d;
                            var64 += var28;
                            var65 += var31;
                            var66 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var72, var57 >> 16, var58 >> 16, var59 >> 8, var60 >> 8, var64, var65, var66, var27, var30, var33);
+                     a(data, var19, 0, 0, var72, var57 >> 16, var58 >> 16, var59 >> 8, var60 >> 8, var64, var65, var66, var27, var30, var33);
                      var58 += var39;
                      var57 += var35;
                      var60 += var40;
                      var59 += var36;
-                     var72 += m;
+                     var72 += width2d;
                      var64 += var28;
                      var65 += var31;
                      var66 += var34;
@@ -1841,24 +1841,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var69, var61 >> 16, var57 >> 16, var62 >> 8, var59 >> 8, var64, var65, var66, var27, var30, var33);
+                           a(data, var19, 0, 0, var69, var61 >> 16, var57 >> 16, var62 >> 8, var59 >> 8, var64, var65, var66, var27, var30, var33);
                            var61 += var37;
                            var57 += var35;
                            var62 += var38;
                            var59 += var36;
-                           var69 += m;
+                           var69 += width2d;
                            var64 += var28;
                            var65 += var31;
                            var66 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var69, var58 >> 16, var57 >> 16, var60 >> 8, var59 >> 8, var64, var65, var66, var27, var30, var33);
+                     a(data, var19, 0, 0, var69, var58 >> 16, var57 >> 16, var60 >> 8, var59 >> 8, var64, var65, var66, var27, var30, var33);
                      var58 += var39;
                      var57 += var35;
                      var60 += var40;
                      var59 += var36;
-                     var69 += m;
+                     var69 += width2d;
                      var64 += var28;
                      var65 += var31;
                      var66 += var34;
@@ -1867,13 +1867,13 @@ public class Pix3D extends Pix2D {
             }
          }
       } else if (arg1 <= arg2) {
-         if (arg1 < p) {
-            if (arg2 > p) {
-               arg2 = p;
+         if (arg1 < bottom) {
+            if (arg2 > bottom) {
+               arg2 = bottom;
             }
 
-            if (arg0 > p) {
-               arg0 = p;
+            if (arg0 > bottom) {
+               arg0 = bottom;
             }
 
             if (arg2 < arg0) {
@@ -1915,24 +1915,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var85, var74 >> 16, var77 >> 16, var76 >> 8, var78 >> 8, var80, var81, var82, var27, var30, var33);
+                           a(data, var19, 0, 0, var85, var74 >> 16, var77 >> 16, var76 >> 8, var78 >> 8, var80, var81, var82, var27, var30, var33);
                            var74 += var35;
                            var77 += var39;
                            var76 += var36;
                            var78 += var40;
-                           var85 += m;
+                           var85 += width2d;
                            var80 += var28;
                            var81 += var31;
                            var82 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var85, var74 >> 16, var73 >> 16, var76 >> 8, var75 >> 8, var80, var81, var82, var27, var30, var33);
+                     a(data, var19, 0, 0, var85, var74 >> 16, var73 >> 16, var76 >> 8, var75 >> 8, var80, var81, var82, var27, var30, var33);
                      var74 += var35;
                      var73 += var37;
                      var76 += var36;
                      var75 += var38;
-                     var85 += m;
+                     var85 += width2d;
                      var80 += var28;
                      var81 += var31;
                      var82 += var34;
@@ -1951,24 +1951,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var88, var77 >> 16, var74 >> 16, var78 >> 8, var76 >> 8, var80, var81, var82, var27, var30, var33);
+                           a(data, var19, 0, 0, var88, var77 >> 16, var74 >> 16, var78 >> 8, var76 >> 8, var80, var81, var82, var27, var30, var33);
                            var74 += var35;
                            var77 += var39;
                            var76 += var36;
                            var78 += var40;
-                           var88 += m;
+                           var88 += width2d;
                            var80 += var28;
                            var81 += var31;
                            var82 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var88, var73 >> 16, var74 >> 16, var75 >> 8, var76 >> 8, var80, var81, var82, var27, var30, var33);
+                     a(data, var19, 0, 0, var88, var73 >> 16, var74 >> 16, var75 >> 8, var76 >> 8, var80, var81, var82, var27, var30, var33);
                      var74 += var35;
                      var73 += var37;
                      var76 += var36;
                      var75 += var38;
-                     var88 += m;
+                     var88 += width2d;
                      var80 += var28;
                      var81 += var31;
                      var82 += var34;
@@ -2013,24 +2013,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var101, var93 >> 16, var89 >> 16, var94 >> 8, var91 >> 8, var96, var97, var98, var27, var30, var33);
+                           a(data, var19, 0, 0, var101, var93 >> 16, var89 >> 16, var94 >> 8, var91 >> 8, var96, var97, var98, var27, var30, var33);
                            var93 += var39;
                            var89 += var37;
                            var94 += var40;
                            var91 += var38;
-                           var101 += m;
+                           var101 += width2d;
                            var96 += var28;
                            var97 += var31;
                            var98 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var101, var90 >> 16, var89 >> 16, var92 >> 8, var91 >> 8, var96, var97, var98, var27, var30, var33);
+                     a(data, var19, 0, 0, var101, var90 >> 16, var89 >> 16, var92 >> 8, var91 >> 8, var96, var97, var98, var27, var30, var33);
                      var90 += var35;
                      var89 += var37;
                      var92 += var36;
                      var91 += var38;
-                     var101 += m;
+                     var101 += width2d;
                      var96 += var28;
                      var97 += var31;
                      var98 += var34;
@@ -2049,24 +2049,24 @@ public class Pix3D extends Pix2D {
                               return;
                            }
 
-                           a(l, var19, 0, 0, var104, var89 >> 16, var93 >> 16, var91 >> 8, var94 >> 8, var96, var97, var98, var27, var30, var33);
+                           a(data, var19, 0, 0, var104, var89 >> 16, var93 >> 16, var91 >> 8, var94 >> 8, var96, var97, var98, var27, var30, var33);
                            var93 += var39;
                            var89 += var37;
                            var94 += var40;
                            var91 += var38;
-                           var104 += m;
+                           var104 += width2d;
                            var96 += var28;
                            var97 += var31;
                            var98 += var34;
                         }
                      }
 
-                     a(l, var19, 0, 0, var104, var89 >> 16, var90 >> 16, var91 >> 8, var92 >> 8, var96, var97, var98, var27, var30, var33);
+                     a(data, var19, 0, 0, var104, var89 >> 16, var90 >> 16, var91 >> 8, var92 >> 8, var96, var97, var98, var27, var30, var33);
                      var90 += var35;
                      var89 += var37;
                      var92 += var36;
                      var91 += var38;
-                     var104 += m;
+                     var104 += width2d;
                      var96 += var28;
                      var97 += var31;
                      var98 += var34;
@@ -2074,13 +2074,13 @@ public class Pix3D extends Pix2D {
                }
             }
          }
-      } else if (arg2 < p) {
-         if (arg0 > p) {
-            arg0 = p;
+      } else if (arg2 < bottom) {
+         if (arg0 > bottom) {
+            arg0 = bottom;
          }
 
-         if (arg1 > p) {
-            arg1 = p;
+         if (arg1 > bottom) {
+            arg1 = bottom;
          }
 
          if (arg0 < arg1) {
@@ -2122,24 +2122,24 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var19, 0, 0, var117, var106 >> 16, var109 >> 16, var108 >> 8, var110 >> 8, var112, var113, var114, var27, var30, var33);
+                        a(data, var19, 0, 0, var117, var106 >> 16, var109 >> 16, var108 >> 8, var110 >> 8, var112, var113, var114, var27, var30, var33);
                         var106 += var37;
                         var109 += var35;
                         var108 += var38;
                         var110 += var36;
-                        var117 += m;
+                        var117 += width2d;
                         var112 += var28;
                         var113 += var31;
                         var114 += var34;
                      }
                   }
 
-                  a(l, var19, 0, 0, var117, var106 >> 16, var105 >> 16, var108 >> 8, var107 >> 8, var112, var113, var114, var27, var30, var33);
+                  a(data, var19, 0, 0, var117, var106 >> 16, var105 >> 16, var108 >> 8, var107 >> 8, var112, var113, var114, var27, var30, var33);
                   var106 += var37;
                   var105 += var39;
                   var108 += var38;
                   var107 += var40;
-                  var117 += m;
+                  var117 += width2d;
                   var112 += var28;
                   var113 += var31;
                   var114 += var34;
@@ -2158,24 +2158,24 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var19, 0, 0, var120, var109 >> 16, var106 >> 16, var110 >> 8, var108 >> 8, var112, var113, var114, var27, var30, var33);
+                        a(data, var19, 0, 0, var120, var109 >> 16, var106 >> 16, var110 >> 8, var108 >> 8, var112, var113, var114, var27, var30, var33);
                         var106 += var37;
                         var109 += var35;
                         var108 += var38;
                         var110 += var36;
-                        var120 += m;
+                        var120 += width2d;
                         var112 += var28;
                         var113 += var31;
                         var114 += var34;
                      }
                   }
 
-                  a(l, var19, 0, 0, var120, var105 >> 16, var106 >> 16, var107 >> 8, var108 >> 8, var112, var113, var114, var27, var30, var33);
+                  a(data, var19, 0, 0, var120, var105 >> 16, var106 >> 16, var107 >> 8, var108 >> 8, var112, var113, var114, var27, var30, var33);
                   var106 += var37;
                   var105 += var39;
                   var108 += var38;
                   var107 += var40;
-                  var120 += m;
+                  var120 += width2d;
                   var112 += var28;
                   var113 += var31;
                   var114 += var34;
@@ -2220,24 +2220,24 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var19, 0, 0, var133, var125 >> 16, var121 >> 16, var126 >> 8, var123 >> 8, var128, var129, var130, var27, var30, var33);
+                        a(data, var19, 0, 0, var133, var125 >> 16, var121 >> 16, var126 >> 8, var123 >> 8, var128, var129, var130, var27, var30, var33);
                         var125 += var35;
                         var121 += var39;
                         var126 += var36;
                         var123 += var40;
-                        var133 += m;
+                        var133 += width2d;
                         var128 += var28;
                         var129 += var31;
                         var130 += var34;
                      }
                   }
 
-                  a(l, var19, 0, 0, var133, var122 >> 16, var121 >> 16, var124 >> 8, var123 >> 8, var128, var129, var130, var27, var30, var33);
+                  a(data, var19, 0, 0, var133, var122 >> 16, var121 >> 16, var124 >> 8, var123 >> 8, var128, var129, var130, var27, var30, var33);
                   var122 += var37;
                   var121 += var39;
                   var124 += var38;
                   var123 += var40;
-                  var133 += m;
+                  var133 += width2d;
                   var128 += var28;
                   var129 += var31;
                   var130 += var34;
@@ -2256,24 +2256,24 @@ public class Pix3D extends Pix2D {
                            return;
                         }
 
-                        a(l, var19, 0, 0, var136, var121 >> 16, var125 >> 16, var123 >> 8, var126 >> 8, var128, var129, var130, var27, var30, var33);
+                        a(data, var19, 0, 0, var136, var121 >> 16, var125 >> 16, var123 >> 8, var126 >> 8, var128, var129, var130, var27, var30, var33);
                         var125 += var35;
                         var121 += var39;
                         var126 += var36;
                         var123 += var40;
-                        var136 += m;
+                        var136 += width2d;
                         var128 += var28;
                         var129 += var31;
                         var130 += var34;
                      }
                   }
 
-                  a(l, var19, 0, 0, var136, var121 >> 16, var122 >> 16, var123 >> 8, var124 >> 8, var128, var129, var130, var27, var30, var33);
+                  a(data, var19, 0, 0, var136, var121 >> 16, var122 >> 16, var123 >> 8, var124 >> 8, var128, var129, var130, var27, var30, var33);
                   var122 += var37;
                   var121 += var39;
                   var124 += var38;
                   var123 += var40;
-                  var136 += m;
+                  var136 += width2d;
                   var128 += var28;
                   var129 += var31;
                   var130 += var34;
@@ -2291,8 +2291,8 @@ public class Pix3D extends Pix2D {
          int var18;
          if (A) {
             int var15 = (arg8 - arg7) / (arg6 - arg5);
-            if (arg6 > s) {
-               arg6 = s;
+            if (arg6 > safeWidth) {
+               arg6 = safeWidth;
             }
 
             if (arg5 < 0) {

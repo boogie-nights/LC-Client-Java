@@ -4,322 +4,280 @@ import deob.ObfuscatedName;
 import jagex2.datastruct.DoublyLinkable;
 
 public class Pix2D extends DoublyLinkable {
-   @ObfuscatedName("LFYNQWSZ.j")
-   public static boolean j = true;
-   @ObfuscatedName("LFYNQWSZ.k")
-   public static int k = -291;
-   @ObfuscatedName("LFYNQWSZ.h")
-   public static int h;
-   @ObfuscatedName("LFYNQWSZ.m")
-   public static int m;
-   @ObfuscatedName("LFYNQWSZ.n")
-   public static int n;
-   @ObfuscatedName("LFYNQWSZ.o")
-   public static int o;
-   @ObfuscatedName("LFYNQWSZ.p")
-   public static int p;
-   @ObfuscatedName("LFYNQWSZ.q")
-   public static int q;
-   @ObfuscatedName("LFYNQWSZ.r")
-   public static int r;
-   @ObfuscatedName("LFYNQWSZ.s")
-   public static int s;
-   @ObfuscatedName("LFYNQWSZ.t")
-   public static int t;
-   @ObfuscatedName("LFYNQWSZ.u")
-   public static int u;
-   @ObfuscatedName("LFYNQWSZ.i")
-   public static boolean i;
-   @ObfuscatedName("LFYNQWSZ.v")
-   public static boolean v;
-   @ObfuscatedName("LFYNQWSZ.l")
-   public static int[] l;
 
-   @ObfuscatedName("LFYNQWSZ.a(ZII[I)V")
-   public static void a(boolean arg0, int arg1, int arg2, int[] arg3) {
-      if (!arg0) {
-         k = -394;
-      }
+	@ObfuscatedName("LFYNQWSZ.l")
+	public static int[] data;
 
-      l = arg3;
-      m = arg1;
-      n = arg2;
-      a(0, 0, arg2, arg1, true);
-   }
+	@ObfuscatedName("LFYNQWSZ.m")
+	public static int width2d;
 
-   @ObfuscatedName("LFYNQWSZ.a(B)V")
-   public static void a(byte arg0) {
-      q = 0;
-      o = 0;
-      r = m;
-      p = n;
-      s = r - 1;
-      if (arg0 != 82) {
-         k = -258;
-      }
+	@ObfuscatedName("LFYNQWSZ.n")
+	public static int height2d;
 
-      t = r / 2;
-   }
+	@ObfuscatedName("LFYNQWSZ.o")
+	public static int top;
 
-   @ObfuscatedName("LFYNQWSZ.a(IIIIZ)V")
-   public static void a(int arg0, int arg1, int arg2, int arg3, boolean arg4) {
-      if (arg1 < 0) {
-         arg1 = 0;
-      }
+	@ObfuscatedName("LFYNQWSZ.p")
+	public static int bottom;
 
-      if (arg0 < 0) {
-         arg0 = 0;
-      }
+	@ObfuscatedName("LFYNQWSZ.q")
+	public static int left;
 
-      if (arg3 > m) {
-         arg3 = m;
-      }
+	@ObfuscatedName("LFYNQWSZ.r")
+	public static int right;
 
-      if (arg2 > n) {
-         arg2 = n;
-      }
+	@ObfuscatedName("LFYNQWSZ.s")
+	public static int safeWidth;
 
-      q = arg1;
-      o = arg0;
-      r = arg3;
-      p = arg2;
-      if (arg4) {
-         s = r - 1;
-         t = r / 2;
-         u = p / 2;
-      }
-   }
+	@ObfuscatedName("LFYNQWSZ.t")
+	public static int centerX2d;
 
-   @ObfuscatedName("LFYNQWSZ.a(I)V")
-   public static void a(int arg0) {
-      int var1 = n * m;
-      if (arg0 != 4) {
-         i = !i;
-      }
+	@ObfuscatedName("LFYNQWSZ.u")
+	public static int centerY2d;
 
-      for(int var2 = 0; var2 < var1; ++var2) {
-         l[var2] = 0;
-      }
+	@ObfuscatedName("LFYNQWSZ.a(ZII[I)V")
+	public static void bind(int width, int[] data, int height) {
+		Pix2D.data = data;
+		width2d = width;
+		height2d = height;
+		setBounds(0, 0, height, width);
+	}
 
-   }
+	@ObfuscatedName("LFYNQWSZ.a(B)V")
+	public static void resetBounds() {
+		left = 0;
+		top = 0;
+		right = width2d;
+		bottom = height2d;
+		safeWidth = right - 1;
+		centerX2d = right / 2;
+	}
 
-   @ObfuscatedName("LFYNQWSZ.a(ZIIIIII)V")
-   public static void a(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-      if (arg6 < q) {
-         arg3 -= q - arg6;
-         arg6 = q;
-      }
+	@ObfuscatedName("LFYNQWSZ.a(IIIIZ)V")
+	public static void setBounds(int top, int left, int bottom, int right) {
+		if (left < 0) {
+			left = 0;
+		}
 
-      if (arg2 < o) {
-         arg4 -= o - arg2;
-         arg2 = o;
-      }
+		if (top < 0) {
+			top = 0;
+		}
 
-      if (arg3 + arg6 > r) {
-         arg3 = r - arg6;
-      }
+		if (right > width2d) {
+			right = width2d;
+		}
 
-      if (arg2 + arg4 > p) {
-         arg4 = p - arg2;
-      }
+		if (bottom > height2d) {
+			bottom = height2d;
+		}
 
-      int var7 = 256 - arg5;
-      int var8 = (arg1 >> 16 & 255) * arg5;
-      int var9 = (arg1 >> 8 & 255) * arg5;
-      int var10 = (arg1 & 255) * arg5;
-      if (arg0) {
-         i = !i;
-      }
+		Pix2D.left = left;
+		Pix2D.top = top;
+		Pix2D.right = right;
+		Pix2D.bottom = bottom;
+		safeWidth = Pix2D.right - 1;
+		centerX2d = Pix2D.right / 2;
+		centerY2d = Pix2D.bottom / 2;
+	}
 
-      int var11 = m - arg3;
-      int var12 = m * arg2 + arg6;
+	@ObfuscatedName("LFYNQWSZ.a(I)V")
+	public static void clear() {
+		int length = height2d * width2d;
+		for (int i = 0; i < length; ++i) {
+			data[i] = 0;
+		}
+	}
 
-      for(int var13 = 0; var13 < arg4; ++var13) {
-         for(int var14 = -arg3; var14 < 0; ++var14) {
-            int var15 = (l[var12] >> 16 & 255) * var7;
-            int var16 = (l[var12] >> 8 & 255) * var7;
-            int var17 = (l[var12] & 255) * var7;
-            int var18 = (var10 + var17 >> 8) + (var8 + var15 >> 8 << 16) + (var9 + var16 >> 8 << 8);
-            l[var12++] = var18;
-         }
+	@ObfuscatedName("LFYNQWSZ.a(ZIIIIII)V")
+	public static void fillRectTrans(int y, int alpha, int height, int width, int colour, int x) {
+		if (x < left) {
+			width -= left - x;
+			x = left;
+		}
 
-         var12 += var11;
-      }
+		if (y < top) {
+			height -= top - y;
+			y = top;
+		}
 
-   }
+		if (width + x > right) {
+			width = right - x;
+		}
 
-   @ObfuscatedName("LFYNQWSZ.a(IIIBII)V")
-   public static void a(int arg0, int arg1, int arg2, byte arg3, int arg4, int arg5) {
-      if (arg5 < q) {
-         arg4 -= q - arg5;
-         arg5 = q;
-      }
+		if (y + height > bottom) {
+			height = bottom - y;
+		}
 
-      if (arg1 < o) {
-         arg0 -= o - arg1;
-         arg1 = o;
-      }
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+		int step = width2d - width;
+		int offset = width2d * y + x;
 
-      if (arg4 + arg5 > r) {
-         arg4 = r - arg5;
-      }
+		for (int i = 0; i < height; ++i) {
+			for (int j = -width; j < 0; ++j) {
+				int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+				int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+				int b1 = (data[offset] & 0xFF) * invAlpha;
 
-      if (arg0 + arg1 > p) {
-         arg0 = p - arg1;
-      }
+				int rgb = (b0 + b1 >> 8) + (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8);
+				data[offset++] = rgb;
+			}
 
-      int var6 = m - arg4;
-      int var7 = m * arg1 + arg5;
+			offset += step;
+		}
+	}
 
-      for(int var8 = -arg0; var8 < 0; ++var8) {
-         for(int var9 = -arg4; var9 < 0; ++var9) {
-            l[var7++] = arg2;
-         }
+	@ObfuscatedName("LFYNQWSZ.a(IIIBII)V")
+	public static void fillRect(int color, int width, int height, int x, int y) {
+		if (x < left) {
+			width -= left - x;
+			x = left;
+		}
 
-         var7 += var6;
-      }
+		if (y < top) {
+			height -= top - y;
+			y = top;
+		}
 
-      if (arg3 == -24) {
-         ;
-      }
-   }
+		if (width + x > right) {
+			width = right - x;
+		}
 
-   @ObfuscatedName("LFYNQWSZ.a(IIIIII)V")
-   public static void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-      b(arg4, arg3, arg1, arg5, true);
-      b(arg4, arg3, arg1 + arg2 - 1, arg5, true);
-      if (arg0 != 0) {
-         h = -278;
-      }
+		if (height + y > bottom) {
+			height = bottom - y;
+		}
 
-      a(arg4, arg3, arg2, false, arg1);
-      a(arg4 + arg5 - 1, arg3, arg2, false, arg1);
-   }
+		int step = width2d - width;
+		int offset = width2d * y + x;
 
-   @ObfuscatedName("LFYNQWSZ.a(IIIIIIB)V")
-   public static void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6) {
-      if (arg6 == -113) {
-         b(arg4, arg0, arg1, 1388, arg5, arg2);
-         b(arg3 + arg4 - 1, arg0, arg1, 1388, arg5, arg2);
-         if (arg3 >= 3) {
-            c(0, arg4 + 1, arg0, arg2, arg3 - 2, arg5);
-            c(0, arg4 + 1, arg0 + arg1 - 1, arg2, arg3 - 2, arg5);
-         }
-      }
-   }
+		for (int i = -height; i < 0; i++) {
+			for (int j = -width; j < 0; j++) {
+				data[offset++] = color;
+			}
 
-   @ObfuscatedName("LFYNQWSZ.b(IIIIZ)V")
-   public static void b(int arg0, int arg1, int arg2, int arg3, boolean arg4) {
-      if (arg2 >= o && arg2 < p) {
-         if (arg0 < q) {
-            arg3 -= q - arg0;
-            arg0 = q;
-         }
+			offset += step;
+		}
+	}
 
-         if (arg0 + arg3 > r) {
-            arg3 = r - arg0;
-         }
+	@ObfuscatedName("LFYNQWSZ.a(IIIIII)V")
+	public static void drawRect(int x, int y, int width, int height, int colour) {
+		drawHorizontalLine(x, y, width, colour);
+		drawHorizontalLine(x, y + height - 1, width, colour);
+		drawVerticalLine(x, y, height, colour);
+		drawVerticalLine(x + width - 1, y, height, colour);
+	}
 
-         int var5 = m * arg2 + arg0;
-         if (!arg4) {
-            for(int var6 = 1; var6 > 0; ++var6) {
-            }
-         }
+	@ObfuscatedName("LFYNQWSZ.a(IIIIIIB)V")
+	public static void drawRectTrans(int x, int y, int width, int height, int color, int alpha) {
+		drawHorizontalLineTrans(x, y, width, color, alpha);
+		drawHorizontalLineTrans(x, height + y - 1, width, color, alpha);
+		if (height >= 3) {
+			drawVerticalLineTrans(x, y + 1, height - 2, color, alpha);
+			drawVerticalLineTrans(x + width - 1, y + 1, height - 2, color, alpha);
+		}
+	}
 
-         for(int var7 = 0; var7 < arg3; ++var7) {
-            l[var5 + var7] = arg1;
-         }
+	@ObfuscatedName("LFYNQWSZ.b(IIIIZ)V")
+	public static void drawHorizontalLine(int x, int y, int width, int color) {
+		if (y >= top && y < bottom) {
+			if (x < left) {
+				width -= left - x;
+				x = left;
+			}
 
-      }
-   }
+			if (x + width > right) {
+				width = right - x;
+			}
 
-   @ObfuscatedName("LFYNQWSZ.b(IIIIII)V")
-   public static void b(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-      if (arg0 >= o && arg0 < p) {
-         if (arg1 < q) {
-            arg2 -= q - arg1;
-            arg1 = q;
-         }
+			int offset = width2d * y + x;
 
-         if (arg1 + arg2 > r) {
-            arg2 = r - arg1;
-         }
+			for (int i = 0; i < width; ++i) {
+				data[offset + i] = color;
+			}
 
-         int var6 = 256 - arg4;
-         int var7 = (arg5 >> 16 & 255) * arg4;
-         int var8 = (arg5 >> 8 & 255) * arg4;
-         int var9 = (arg5 & 255) * arg4;
-         int var10 = m * arg0 + arg1;
+		}
+	}
 
-         for(int var11 = 0; var11 < arg2; ++var11) {
-            int var12 = (l[var10] >> 16 & 255) * var6;
-            int var13 = (l[var10] >> 8 & 255) * var6;
-            int var14 = (l[var10] & 255) * var6;
-            int var15 = (var9 + var14 >> 8) + (var7 + var12 >> 8 << 16) + (var8 + var13 >> 8 << 8);
-            l[var10++] = var15;
-         }
+	@ObfuscatedName("LFYNQWSZ.b(IIIIII)V")
+	public static void drawHorizontalLineTrans(int x, int y, int width, int colour, int alpha) {
+		if (y >= top && y < bottom) {
+			if (x < left) {
+				width -= left - x;
+				x = left;
+			}
 
-         if (arg3 != 1388) {
-            h = -36;
-         }
-      }
-   }
+			if (x + width > right) {
+				width = right - x;
+			}
 
-   @ObfuscatedName("LFYNQWSZ.a(IIIZI)V")
-   public static void a(int arg0, int arg1, int arg2, boolean arg3, int arg4) {
-      if (!arg3) {
-         if (arg0 >= q && arg0 < r) {
-            if (arg4 < o) {
-               arg2 -= o - arg4;
-               arg4 = o;
-            }
+			int invAlpha = 256 - alpha;
+			int r0 = (colour >> 16 & 0xFF) * alpha;
+			int g0 = (colour >> 8 & 0xFF) * alpha;
+			int b0 = (colour & 0xFF) * alpha;
+			int offset = width2d * y + x;
 
-            if (arg2 + arg4 > p) {
-               arg2 = p - arg4;
-            }
+			for (int i = 0; i < width; ++i) {
+				int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+				int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+				int b1 = (data[offset] & 0xFF) * invAlpha;
 
-            int var5 = m * arg4 + arg0;
+				int rgb = (b0 + b1 >> 8) + (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8);
+				data[offset++] = rgb;
+			}
+		}
+	}
 
-            for(int var6 = 0; var6 < arg2; ++var6) {
-               l[m * var6 + var5] = arg1;
-            }
+	@ObfuscatedName("LFYNQWSZ.a(IIIZI)V")
+	public static void drawVerticalLine(int x, int y, int height, int color) {
+		if (x >= left && x < right) {
+			if (y < top) {
+				height -= top - y;
+				y = top;
+			}
 
-         }
-      }
-   }
+			if (height + y > bottom) {
+				height = bottom - y;
+			}
 
-   @ObfuscatedName("LFYNQWSZ.c(IIIIII)V")
-   public static void c(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-      if (arg2 >= q && arg2 < r) {
-         if (arg1 < o) {
-            arg4 -= o - arg1;
-            arg1 = o;
-         }
+			int offset = width2d * y + x;
 
-         if (arg1 + arg4 > p) {
-            arg4 = p - arg1;
-         }
+			for (int i = 0; i < height; ++i) {
+				data[width2d * i + offset] = color;
+			}
 
-         int var6 = 256 - arg5;
-         int var7 = (arg3 >> 16 & 255) * arg5;
-         int var8 = (arg3 >> 8 & 255) * arg5;
-         int var9 = (arg3 & 255) * arg5;
-         if (arg0 != 0) {
-            for(int var10 = 1; var10 > 0; ++var10) {
-            }
-         }
+		}
+	}
 
-         int var11 = m * arg1 + arg2;
+	@ObfuscatedName("LFYNQWSZ.c(IIIIII)V")
+	public static void drawVerticalLineTrans(int x, int y, int height, int color, int alpha) {
+		if (x >= left && x < right) {
+			if (y < top) {
+				height -= top - y;
+				y = top;
+			}
 
-         for(int var12 = 0; var12 < arg4; ++var12) {
-            int var13 = (l[var11] >> 16 & 255) * var6;
-            int var14 = (l[var11] >> 8 & 255) * var6;
-            int var15 = (l[var11] & 255) * var6;
-            int var16 = (var9 + var15 >> 8) + (var7 + var13 >> 8 << 16) + (var8 + var14 >> 8 << 8);
-            l[var11] = var16;
-            var11 += m;
-         }
+			if (y + height > bottom) {
+				height = bottom - y;
+			}
 
-      }
-   }
+			int invAlpha = 256 - alpha;
+			int r0 = (color >> 16 & 255) * alpha;
+			int g0 = (color >> 8 & 255) * alpha;
+			int b0 = (color & 255) * alpha;
+			int offset = width2d * y + x;
+
+			for (int i = 0; i < height; i++) {
+				int r1 = (data[offset] >> 16 & 255) * invAlpha;
+				int g1 = (data[offset] >> 8 & 255) * invAlpha;
+				int b1 = (data[offset] & 255) * invAlpha;
+
+				int rgb = (b0 + b1 >> 8) + (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8);
+				data[offset] = rgb;
+
+				offset += width2d;
+			}
+		}
+	}
 }

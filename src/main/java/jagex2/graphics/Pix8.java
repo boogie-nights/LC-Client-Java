@@ -202,43 +202,43 @@ public class Pix8 extends Pix2D {
          }
       }
 
-      int var7 = Pix2D.m * var5 + var4;
+      int var7 = Pix2D.width2d * var5 + var4;
       int var8 = 0;
       int var9 = this.G;
       int var10 = this.F;
-      int var11 = Pix2D.m - var10;
+      int var11 = Pix2D.width2d - var10;
       int var12 = 0;
-      if (var5 < Pix2D.o) {
-         int var13 = Pix2D.o - var5;
+      if (var5 < Pix2D.top) {
+         int var13 = Pix2D.top - var5;
          var9 -= var13;
-         var5 = Pix2D.o;
+         var5 = Pix2D.top;
          var8 += var10 * var13;
-         var7 += Pix2D.m * var13;
+         var7 += Pix2D.width2d * var13;
       }
 
-      if (var5 + var9 > Pix2D.p) {
-         var9 -= var5 + var9 - Pix2D.p;
+      if (var5 + var9 > Pix2D.bottom) {
+         var9 -= var5 + var9 - Pix2D.bottom;
       }
 
-      if (var4 < Pix2D.q) {
-         int var14 = Pix2D.q - var4;
+      if (var4 < Pix2D.left) {
+         int var14 = Pix2D.left - var4;
          var10 -= var14;
-         var4 = Pix2D.q;
+         var4 = Pix2D.left;
          var8 += var14;
          var7 += var14;
          var12 += var14;
          var11 += var14;
       }
 
-      if (var4 + var10 > Pix2D.r) {
-         int var15 = var4 + var10 - Pix2D.r;
+      if (var4 + var10 > Pix2D.right) {
+         int var15 = var4 + var10 - Pix2D.right;
          var10 -= var15;
          var12 += var15;
          var11 += var15;
       }
 
       if (var10 > 0 && var9 > 0) {
-         this.a(var8, Pix2D.l, this.D, var12, this.E, var9, var10, var7, false, var11);
+         this.a(var8, Pix2D.data, this.D, var12, this.E, var9, var10, var7, false, var11);
       }
    }
 

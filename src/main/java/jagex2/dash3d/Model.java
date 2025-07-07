@@ -1706,16 +1706,16 @@ public class Model extends ModelSource {
       if (var13 > 50 && var11 < 3500) {
          int var14 = arg3 * arg7 + arg4 * arg5 >> 16;
          int var15 = var14 - this.V << 9;
-         if (var15 / var13 < Pix2D.t) {
+         if (var15 / var13 < Pix2D.centerX2d) {
             int var16 = this.V + var14 << 9;
-            if (var16 / var13 > -Pix2D.t) {
+            if (var16 / var13 > -Pix2D.centerX2d) {
                int var17 = arg2 * arg6 - arg1 * var10 >> 16;
                int var18 = this.V * arg1 >> 16;
                int var19 = var17 + var18 << 9;
-               if (var19 / var13 > -Pix2D.u) {
+               if (var19 / var13 > -Pix2D.centerY2d) {
                   int var20 = (super.k * arg2 >> 16) + var18;
                   int var21 = var17 - var20 << 9;
-                  if (var21 / var13 < Pix2D.u) {
+                  if (var21 / var13 < Pix2D.centerY2d) {
                      int var22 = (super.k * arg1 >> 16) + var12;
                      boolean var23 = false;
                      if (var11 - var22 <= 50) {
@@ -1839,7 +1839,7 @@ public class Model extends ModelSource {
 
                if ((lb[var8] - lb[var7]) * (var9 - var10) - (lb[var6] - lb[var7]) * (var11 - var10) > 0) {
                   jb[var5] = false;
-                  if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix2D.s && var10 <= Pix2D.s && var11 <= Pix2D.s) {
+                  if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix2D.safeWidth && var10 <= Pix2D.safeWidth && var11 <= Pix2D.safeWidth) {
                      ib[var5] = false;
                   } else {
                      ib[var5] = true;
@@ -2134,7 +2134,7 @@ public class Model extends ModelSource {
       if ((var26 - var27) * (var31 - var30) - (var28 - var27) * (var29 - var30) > 0) {
          Pix3D.A = false;
          if (var4 == 3) {
-            if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.s || var27 > Pix2D.s || var28 > Pix2D.s) {
+            if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth) {
                Pix3D.A = true;
             }
 
@@ -2165,7 +2165,7 @@ public class Model extends ModelSource {
          }
 
          if (var4 == 4) {
-            if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.s || var27 > Pix2D.s || var28 > Pix2D.s || xb[3] < 0 || xb[3] > Pix2D.s) {
+            if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth || xb[3] < 0 || xb[3] > Pix2D.safeWidth) {
                Pix3D.A = true;
             }
 

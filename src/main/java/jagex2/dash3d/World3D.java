@@ -1928,7 +1928,7 @@ public class World3D {
                   Pix3D.D = 0;
                   if ((var48 - var52) * (var49 - var51) - (var47 - var51) * (var50 - var52) > 0) {
                      Pix3D.A = false;
-                     if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.s || var51 > Pix2D.s || var47 > Pix2D.s) {
+                     if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.safeWidth || var51 > Pix2D.safeWidth || var47 > Pix2D.safeWidth) {
                         Pix3D.A = true;
                      }
 
@@ -1955,7 +1955,7 @@ public class World3D {
 
                   if ((var45 - var47) * (var52 - var48) - (var46 - var48) * (var51 - var47) > 0) {
                      Pix3D.A = false;
-                     if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.s || var47 > Pix2D.s || var51 > Pix2D.s) {
+                     if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.safeWidth || var47 > Pix2D.safeWidth || var51 > Pix2D.safeWidth) {
                         Pix3D.A = true;
                      }
 
@@ -2027,7 +2027,7 @@ public class World3D {
             int var30 = Ground.r[var24];
             if ((var25 - var26) * (var30 - var29) - (var27 - var26) * (var28 - var29) > 0) {
                Pix3D.A = false;
-               if (var25 < 0 || var26 < 0 || var27 < 0 || var25 > Pix2D.s || var26 > Pix2D.s || var27 > Pix2D.s) {
+               if (var25 < 0 || var26 < 0 || var27 < 0 || var25 > Pix2D.safeWidth || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth) {
                   Pix3D.A = true;
                }
 

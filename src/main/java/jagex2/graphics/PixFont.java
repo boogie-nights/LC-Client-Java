@@ -298,7 +298,7 @@ public class PixFont extends Pix2D {
             }
 
             if (this.I) {
-               Pix2D.b(var7, 8388608, (int)((double)this.G * 0.7D) + var8, arg1 - var7, true);
+               Pix2D.drawHorizontalLine(var7, (int)((double)this.G * 0.7D) + var8, arg1 - var7, 8388608);
             }
          }
       }
@@ -398,41 +398,41 @@ public class PixFont extends Pix2D {
 
    @ObfuscatedName("JDPYRDAS.a([BIIIII)V")
    public void a(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-      int var7 = Pix2D.m * arg2 + arg1;
-      int var8 = Pix2D.m - arg3;
+      int var7 = Pix2D.width2d * arg2 + arg1;
+      int var8 = Pix2D.width2d - arg3;
       int var9 = 0;
       int var10 = 0;
-      if (arg2 < Pix2D.o) {
-         int var11 = Pix2D.o - arg2;
+      if (arg2 < Pix2D.top) {
+         int var11 = Pix2D.top - arg2;
          arg4 -= var11;
-         arg2 = Pix2D.o;
+         arg2 = Pix2D.top;
          var10 += arg3 * var11;
-         var7 += Pix2D.m * var11;
+         var7 += Pix2D.width2d * var11;
       }
 
-      if (arg2 + arg4 >= Pix2D.p) {
-         arg4 -= arg2 + arg4 - Pix2D.p + 1;
+      if (arg2 + arg4 >= Pix2D.bottom) {
+         arg4 -= arg2 + arg4 - Pix2D.bottom + 1;
       }
 
-      if (arg1 < Pix2D.q) {
-         int var12 = Pix2D.q - arg1;
+      if (arg1 < Pix2D.left) {
+         int var12 = Pix2D.left - arg1;
          arg3 -= var12;
-         arg1 = Pix2D.q;
+         arg1 = Pix2D.left;
          var10 += var12;
          var7 += var12;
          var9 += var12;
          var8 += var12;
       }
 
-      if (arg1 + arg3 >= Pix2D.r) {
-         int var13 = arg1 + arg3 - Pix2D.r + 1;
+      if (arg1 + arg3 >= Pix2D.right) {
+         int var13 = arg1 + arg3 - Pix2D.right + 1;
          arg3 -= var13;
          var9 += var13;
          var8 += var13;
       }
 
       if (arg3 > 0 && arg4 > 0) {
-         this.a(Pix2D.l, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
+         this.a(Pix2D.data, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
       }
    }
 
@@ -484,42 +484,42 @@ public class PixFont extends Pix2D {
 
    @ObfuscatedName("JDPYRDAS.a(IZI[BIIII)V")
    public void a(int arg0, boolean arg1, int arg2, byte[] arg3, int arg4, int arg5, int arg6, int arg7) {
-      int var9 = Pix2D.m * arg4 + arg0;
-      int var10 = Pix2D.m - arg6;
+      int var9 = Pix2D.width2d * arg4 + arg0;
+      int var10 = Pix2D.width2d - arg6;
       int var11 = 0;
       int var12 = 0;
       if (arg1) {
-         if (arg4 < Pix2D.o) {
-            int var13 = Pix2D.o - arg4;
+         if (arg4 < Pix2D.top) {
+            int var13 = Pix2D.top - arg4;
             arg5 -= var13;
-            arg4 = Pix2D.o;
+            arg4 = Pix2D.top;
             var12 += arg6 * var13;
-            var9 += Pix2D.m * var13;
+            var9 += Pix2D.width2d * var13;
          }
 
-         if (arg4 + arg5 >= Pix2D.p) {
-            arg5 -= arg4 + arg5 - Pix2D.p + 1;
+         if (arg4 + arg5 >= Pix2D.bottom) {
+            arg5 -= arg4 + arg5 - Pix2D.bottom + 1;
          }
 
-         if (arg0 < Pix2D.q) {
-            int var14 = Pix2D.q - arg0;
+         if (arg0 < Pix2D.left) {
+            int var14 = Pix2D.left - arg0;
             arg6 -= var14;
-            arg0 = Pix2D.q;
+            arg0 = Pix2D.left;
             var12 += var14;
             var9 += var14;
             var11 += var14;
             var10 += var14;
          }
 
-         if (arg0 + arg6 >= Pix2D.r) {
-            int var15 = arg0 + arg6 - Pix2D.r + 1;
+         if (arg0 + arg6 >= Pix2D.right) {
+            int var15 = arg0 + arg6 - Pix2D.right + 1;
             arg6 -= var15;
             var11 += var15;
             var10 += var15;
          }
 
          if (arg6 > 0 && arg5 > 0) {
-            this.a(var12, var10, var11, var9, arg7, Pix2D.l, arg2, 2, arg5, arg6, arg3);
+            this.a(var12, var10, var11, var9, arg7, Pix2D.data, arg2, 2, arg5, arg6, arg3);
          }
       }
    }
