@@ -98,7 +98,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
    public final void a(int arg0, int arg1, int arg2) {
       this.l = arg2;
       this.m = arg1;
-      this.q = new ViewBox(this.d, this.m, this, this.l);
+      this.q = new ViewBox(this.m, this, this.l);
       if (arg0 < 0) {
          this.n = this.d(-756).getGraphics();
          this.o = new PixMap(this.m, (byte)-12, this.d(-756), this.l);
