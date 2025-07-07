@@ -27,12 +27,12 @@ public class LruCache {
       }
 
       this.f = arg0;
-      this.g = new HashTable((byte)0, 1024);
+      this.g = new HashTable(1024);
    }
 
    @ObfuscatedName("RHNYLZZL.a(J)LDPPNUUMQ;")
    public DoublyLinkable a(long arg0) {
-      DoublyLinkable var3 = (DoublyLinkable)this.g.a(arg0);
+      DoublyLinkable var3 = (DoublyLinkable)this.g.get(arg0);
       if (var3 != null) {
          this.h.push(var3);
          ++this.c;
@@ -62,7 +62,7 @@ public class LruCache {
          --this.f;
       }
 
-      this.g.a(6, arg0, arg1);
+      this.g.put(arg1, arg0);
       this.h.push(arg0);
       if (Linkable.d) {
       }

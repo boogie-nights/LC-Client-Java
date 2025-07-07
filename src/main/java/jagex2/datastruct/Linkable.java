@@ -4,21 +4,21 @@ import deob.ObfuscatedName;
 
 public class Linkable {
    @ObfuscatedName("ZUOIJLRD.a")
-   public long a;
+   public long key;
    @ObfuscatedName("ZUOIJLRD.b")
-   public Linkable b;
+   public Linkable next;
    @ObfuscatedName("ZUOIJLRD.c")
-   public Linkable c;
+   public Linkable prev;
    @ObfuscatedName("ZUOIJLRD.d")
    public static boolean d;
 
    @ObfuscatedName("ZUOIJLRD.a()V")
    public void unlink() {
-      if (this.c != null) {
-         this.c.b = this.b;
-         this.b.c = this.c;
-         this.b = null;
-         this.c = null;
+      if (this.prev != null) {
+         this.prev.next = this.next;
+         this.next.prev = this.prev;
+         this.next = null;
+         this.prev = null;
       }
    }
 }
