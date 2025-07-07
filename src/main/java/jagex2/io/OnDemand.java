@@ -140,7 +140,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public final void unpack(Jagfile versionlist, Client c) {
 		String[] version = new String[]{"model_version", "anim_version", "midi_version", "map_version"};
 
-		for (int i = 0; i < 4; ++i) {
+		for (int i = 0; i < 4; i++) {
 			byte[] data = versionlist.read(version[i], null);
 			int count = data.length / 2;
 			Packet buf = new Packet(data);
@@ -155,14 +155,14 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		String[] crc = new String[]{"model_crc", "anim_crc", "midi_crc", "map_crc"};
 
-		for (int i = 0; i < 4; ++i) {
+		for (int i = 0; i < 4; i++) {
 			byte[] data = versionlist.read(crc[i], null);
 			int count = data.length / 4;
 			Packet buf = new Packet(data);
 
 			this.crcs[i] = new int[count];
 
-			for (int j = 0; j < count; ++j) {
+			for (int j = 0; j < count; j++) {
 				this.crcs[i][j] = buf.g4();
 			}
 		}
@@ -172,7 +172,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		this.models = new byte[count];
 
-		for (int i = 0; i < count; ++i) {
+		for (int i = 0; i < count; i++) {
 			if (i < data.length) {
 				this.models[i] = data[i];
 			} else {
@@ -212,7 +212,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		this.midiIndex = new int[count];
 
-		for (int i = 0; i < count; ++i) {
+		for (int i = 0; i < count; i++) {
 			this.midiIndex[i] = buf.g1();
 		}
 
@@ -368,7 +368,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		}
 
 		req.data = new byte[pos];
-		for (int i = 0; i < pos; ++i) {
+		for (int i = 0; i < pos; i++) {
 			req.data[i] = this.data[i];
 		}
 		return req;
@@ -435,7 +435,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 				this.active = true;
 
-				for (int i = 0; i < 100 && this.active; ++i) {
+				for (int i = 0; i < 100 && this.active; i++) {
 					this.active = false;
 
 					this.handleQueue();
@@ -479,7 +479,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				}
 
 				if (loading) {
-					++this.waitCycles;
+					this.waitCycles++;
 					if (this.waitCycles > 750) {
 						try {
 							this.socket.close();
@@ -808,7 +808,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				this.out = this.socket.getOutputStream();
 				this.out.write(15);
 
-				for (int i = 0; i < 8; ++i) {
+				for (int i = 0; i < 8; i++) {
 					this.in.read();
 				}
 
