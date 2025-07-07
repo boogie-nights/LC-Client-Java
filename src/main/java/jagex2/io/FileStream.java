@@ -35,7 +35,7 @@ public class FileStream {
    }
 
    @ObfuscatedName("KNWRHOKF.a(BI)[B")
-   public synchronized byte[] a(byte arg0, int arg1) {
+   public synchronized byte[] read(byte arg0, int arg1) {
       if (arg0 == 6) {
          boolean var3 = false;
       } else {

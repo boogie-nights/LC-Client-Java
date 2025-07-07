@@ -72,7 +72,7 @@ public class DoublyLinkList {
    }
 
    @ObfuscatedName("CZYJUOKA.c()I")
-   public int c() {
+   public int size() {
       int var1 = 0;
 
       for(DoublyLinkable var2 = this.b.e; this.b != var2; var2 = var2.e) {

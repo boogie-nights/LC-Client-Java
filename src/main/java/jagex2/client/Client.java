@@ -773,7 +773,7 @@ public class Client extends GameShell {
    @ObfuscatedName("client.tb")
    public int tb;
    @ObfuscatedName("client.tc")
-   public static int tc;
+   public static int portOffset;
    @ObfuscatedName("client.th")
    public int th;
    @ObfuscatedName("client.ti")
@@ -1175,7 +1175,7 @@ public class Client extends GameShell {
             System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
          } else {
             sc = Integer.parseInt(arg0[0]);
-            tc = Integer.parseInt(arg0[1]);
+            portOffset = Integer.parseInt(arg0[1]);
             if (arg0[2].equals("lowmem")) {
                l(true);
             } else {
@@ -2417,7 +2417,7 @@ public class Client extends GameShell {
 
                            if (this.Sf.equals("::prefetchmusic")) {
                               for(int var14 = 0; var14 < this.xj.getFileCount(2); ++var14) {
-                                 this.xj.a(-44, 2, (byte)1, var14);
+                                 this.xj.prefetchPriority(2, var14, (byte)1);
                               }
                            }
 
@@ -2565,7 +2565,7 @@ public class Client extends GameShell {
             this.ii = null;
          }
 
-         this.ii = this.g(43595);
+         this.ii = this.openSocket(43595);
          this.ii.setSoTimeout(10000);
          InputStream var2 = this.ii.getInputStream();
          OutputStream var3 = this.ii.getOutputStream();
@@ -2575,7 +2575,7 @@ public class Client extends GameShell {
    }
 
    @ObfuscatedName("client.g(I)Ljava/net/Socket;")
-   public final Socket g(int arg0) throws IOException {
+   public final Socket openSocket(int arg0) throws IOException {
       return sign.Signlink.mainapp != null ? sign.Signlink.opensocket(arg0) : new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg0);
    }
 
@@ -3589,12 +3589,12 @@ public class Client extends GameShell {
                                  this.fb[var122] = -1;
                                  ++var122;
                               } else {
-                                 int var125 = this.eb[var122] = this.xj.getMapFile(0, var123, (int)var124, 0);
+                                 int var125 = this.eb[var122] = this.xj.getMapFile((int)var124, var123, 0);
                                  if (var125 != -1) {
                                     this.xj.request(3, var125);
                                  }
 
-                                 int var126 = this.fb[var122] = this.xj.getMapFile(0, var123, (int)var124, 1);
+                                 int var126 = this.fb[var122] = this.xj.getMapFile((int)var124, var123, 1);
                                  if (var126 != -1) {
                                     this.xj.request(3, var126);
                                  }
@@ -3638,12 +3638,12 @@ public class Client extends GameShell {
                            int var138 = this.db[var137] = var128[var137];
                            int var139 = var138 >> 8 & 255;
                            int var140 = var138 & 255;
-                           int var141 = this.eb[var137] = this.xj.getMapFile(0, var139, (int)var140, 0);
+                           int var141 = this.eb[var137] = this.xj.getMapFile((int)var140, var139, 0);
                            if (var141 != -1) {
                               this.xj.request(3, var141);
                            }
 
-                           int var142 = this.fb[var137] = this.xj.getMapFile(0, var139, (int)var140, 1);
+                           int var142 = this.fb[var137] = this.xj.getMapFile((int)var140, var139, 1);
                            if (var142 != -1) {
                               this.xj.request(3, var142);
                            }
@@ -5635,7 +5635,7 @@ public class Client extends GameShell {
 
       try {
          if (this.fileStreams[0] != null) {
-            var7 = this.fileStreams[0].a(this.Tb, arg4);
+            var7 = this.fileStreams[0].read(this.Tb, arg4);
          }
       } catch (Exception var30) {
       }
@@ -6183,14 +6183,14 @@ public class Client extends GameShell {
                this.a(60, true, (String)"Connecting to update server");
                this.xj = new OnDemand();
                this.xj.unpack(var11, this);
-               AnimFrame.a(this.xj.d(553));
+               AnimFrame.a(this.xj.getAnimCount());
                Model.a(this.xj.getFileCount(0), this.xj);
                if (!vc) {
                   this.cj = 0;
                   this.dj = true;
                   this.xj.request(2, this.cj);
 
-                  while(this.xj.b() > 0) {
+                  while(this.xj.remaining() > 0) {
                      this.j(false);
 
                      try {
@@ -6212,8 +6212,8 @@ public class Client extends GameShell {
                   this.xj.request(1, var13);
                }
 
-               while(this.xj.b() > 0) {
-                  int var14 = var12 - this.xj.b();
+               while(this.xj.remaining() > 0) {
+                  int var14 = var12 - this.xj.remaining();
                   if (var14 > 0) {
                      this.a(65, true, (String)("Loading animations - " + var14 * 100 / var12 + "%"));
                   }
@@ -6235,16 +6235,16 @@ public class Client extends GameShell {
                int var15 = this.xj.getFileCount(0);
 
                for(int var16 = 0; var16 < var15; ++var16) {
-                  int var17 = this.xj.a(var16, -493);
+                  int var17 = this.xj.getModelFlags(var16);
                   if ((var17 & 1) != 0) {
                      this.xj.request(0, var16);
                   }
                }
 
-               int var18 = this.xj.b();
+               int var18 = this.xj.remaining();
 
-               while(this.xj.b() > 0) {
-                  int var19 = var18 - this.xj.b();
+               while(this.xj.remaining() > 0) {
+                  int var19 = var18 - this.xj.remaining();
                   if (var19 > 0) {
                      this.a(70, true, (String)("Loading models - " + var19 * 100 / var18 + "%"));
                   }
@@ -6259,22 +6259,22 @@ public class Client extends GameShell {
 
                if (this.fileStreams[0] != null) {
                   this.a(75, true, (String)"Requesting maps");
-                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)48, 0));
-                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)48, 1));
-                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)48, 0));
-                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)48, 1));
-                  this.xj.request(3, this.xj.getMapFile(0, 49, (int)48, 0));
-                  this.xj.request(3, this.xj.getMapFile(0, 49, (int)48, 1));
-                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)47, 0));
-                  this.xj.request(3, this.xj.getMapFile(0, 47, (int)47, 1));
-                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)47, 0));
-                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)47, 1));
-                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)148, 0));
-                  this.xj.request(3, this.xj.getMapFile(0, 48, (int)148, 1));
-                  int var20 = this.xj.b();
+                  this.xj.request(3, this.xj.getMapFile((int)48, 47, 0));
+                  this.xj.request(3, this.xj.getMapFile((int)48, 47, 1));
+                  this.xj.request(3, this.xj.getMapFile((int)48, 48, 0));
+                  this.xj.request(3, this.xj.getMapFile((int)48, 48, 1));
+                  this.xj.request(3, this.xj.getMapFile((int)48, 49, 0));
+                  this.xj.request(3, this.xj.getMapFile((int)48, 49, 1));
+                  this.xj.request(3, this.xj.getMapFile((int)47, 47, 0));
+                  this.xj.request(3, this.xj.getMapFile((int)47, 47, 1));
+                  this.xj.request(3, this.xj.getMapFile((int)47, 48, 0));
+                  this.xj.request(3, this.xj.getMapFile((int)47, 48, 1));
+                  this.xj.request(3, this.xj.getMapFile((int)148, 48, 0));
+                  this.xj.request(3, this.xj.getMapFile((int)148, 48, 1));
+                  int var20 = this.xj.remaining();
 
-                  while(this.xj.b() > 0) {
-                     int var21 = var20 - this.xj.b();
+                  while(this.xj.remaining() > 0) {
+                     int var21 = var20 - this.xj.remaining();
                      if (var21 > 0) {
                         this.a(75, true, (String)("Loading maps - " + var21 * 100 / var20 + "%"));
                      }
@@ -6291,7 +6291,7 @@ public class Client extends GameShell {
                int var22 = this.xj.getFileCount(0);
 
                for(int var23 = 0; var23 < var22; ++var23) {
-                  int var24 = this.xj.a(var23, -493);
+                  int var24 = this.xj.getModelFlags(var23);
                   byte var25 = 0;
                   if ((var24 & 8) != 0) {
                      var25 = 10;
@@ -6314,17 +6314,17 @@ public class Client extends GameShell {
                   }
 
                   if (var25 != 0) {
-                     this.xj.a(-44, 0, (byte)var25, var23);
+                     this.xj.prefetchPriority(0, var23, (byte)var25);
                   }
                }
 
-               this.xj.a(uc, (byte)109);
+               this.xj.prefetchMaps(uc);
                if (!vc) {
                   int var26 = this.xj.getFileCount(2);
 
                   for(int var27 = 1; var27 < var26; ++var27) {
                      if (this.xj.shouldPrefectMidi(var27)) {
-                        this.xj.a(-44, 2, (byte)1, var27);
+                        this.xj.prefetchPriority(2, var27, (byte)1);
                      }
                   }
                }
@@ -6332,9 +6332,9 @@ public class Client extends GameShell {
                int var28 = this.xj.getFileCount(0);
 
                for(int var29 = 0; var29 < var28; ++var29) {
-                  int var30 = this.xj.a(var29, -493);
-                  if (var30 == 0 && this.xj.r < 200) {
-                     this.xj.a(-44, 0, (byte)1, var29);
+                  int var30 = this.xj.getModelFlags(var29);
+                  if (var30 == 0 && this.xj.totalPrefetchFiles < 200) {
+                     this.xj.prefetchPriority(0, var29, (byte)1);
                   }
                }
 
@@ -7670,7 +7670,7 @@ public class Client extends GameShell {
 
    public final void init() {
       sc = Integer.parseInt(this.getParameter("nodeid"));
-      tc = Integer.parseInt(this.getParameter("portoff"));
+      portOffset = Integer.parseInt(this.getParameter("portoff"));
       String var1 = this.getParameter("lowmem");
       if (var1 != null && var1.equals("1")) {
          l(true);
@@ -7725,7 +7725,7 @@ public class Client extends GameShell {
 
          if (var2.archive == 0) {
             Model.a(var2.data, var2.file, (byte)7);
-            if ((this.xj.a(var2.file, -493) & 98) != 0) {
+            if ((this.xj.getModelFlags(var2.file) & 98) != 0) {
                this.rh = true;
                if (this.Fd != -1 || this.Bh != -1) {
                   this.yi = true;
@@ -7761,7 +7761,7 @@ public class Client extends GameShell {
             }
          }
 
-         if (var2.archive == 93 && this.xj.b(var2.file, false)) {
+         if (var2.archive == 93 && this.xj.hasMapLocFile(var2.file)) {
             World.a(this.xj, new Packet(var2.data), (byte)-3);
          }
       }
@@ -7788,7 +7788,7 @@ public class Client extends GameShell {
             this.a((byte)-50, true);
          }
 
-         this.pe = new ClientStream((byte)2, this.g(tc + 43594), this);
+         this.pe = new ClientStream((byte)2, this.openSocket(portOffset + 43594), this);
          long var4 = JString.a(arg0);
          int var6 = (int)(var4 >> 16 & 31L);
          this.hd.pos = 0;
@@ -7907,8 +7907,8 @@ public class Client extends GameShell {
             }
 
             dh = this.nd[this.md] = new ClientPlayer();
-            this.oj.c();
-            this.Uh.c();
+            this.oj.clear();
+            this.Uh.clear();
 
             for(int var16 = 0; var16 < 4; ++var16) {
                for(int var17 = 0; var17 < 104; ++var17) {
@@ -8801,7 +8801,7 @@ public class Client extends GameShell {
       } else {
          try {
             if (super.q != null) {
-               return new URL("http://127.0.0.1:" + (tc + 80));
+               return new URL("http://127.0.0.1:" + (portOffset + 80));
             }
          } catch (Exception var1) {
          }
@@ -9073,8 +9073,8 @@ public class Client extends GameShell {
    public final void x(int arg0) {
       try {
          this.ij = -1;
-         this.Uh.c();
-         this.oj.c();
+         this.Uh.clear();
+         this.oj.clear();
          Pix3D.b((byte)71);
          this.k((int)383);
          this.ah.a((byte)7);
@@ -9246,7 +9246,7 @@ public class Client extends GameShell {
          int var49 = this.xj.getFileCount(0);
 
          for(int var50 = 0; var50 < var49; ++var50) {
-            int var51 = this.xj.a(var50, -493);
+            int var51 = this.xj.getModelFlags(var50);
             if ((var51 & 121) == 0) {
                Model.a(var50, (int)1);
             }
@@ -9255,7 +9255,7 @@ public class Client extends GameShell {
 
       System.gc();
       Pix3D.a((byte)7, 20);
-      this.xj.a((byte)-125);
+      this.xj.clearPrefetches();
       int var52 = (this.Kb - 6) / 8 - 1;
       int var53 = (this.Kb + 6) / 8 + 1;
       int var54 = (this.Lb - 6) / 8 - 1;
@@ -9271,14 +9271,14 @@ public class Client extends GameShell {
       for(int var57 = var52; var57 <= var53; ++var57) {
          for(int var58 = var54; var58 <= var55; ++var58) {
             if (var52 == var57 || var53 == var57 || var54 == var58 || var55 == var58) {
-               int var59 = this.xj.getMapFile(0, var57, (int)var58, 0);
+               int var59 = this.xj.getMapFile((int)var58, var57, 0);
                if (var59 != -1) {
-                  this.xj.a(var59, 3, this.Fc);
+                  this.xj.prefetch(3, var59);
                }
 
-               int var60 = this.xj.getMapFile(0, var57, (int)var58, 1);
+               int var60 = this.xj.getMapFile((int)var58, var57, 1);
                if (var60 != -1) {
-                  this.xj.a(var60, 3, this.Fc);
+                  this.xj.prefetch(3, var60);
                }
             }
          }
@@ -13553,7 +13553,7 @@ public class Client extends GameShell {
       if (this.lf == 1) {
          int var2 = this.I(5);
          if (var2 != 0 && System.currentTimeMillis() - this.ni > 360000L) {
-            sign.Signlink.reporterror(this.Gf + " glcfb " + this.zc + "," + var2 + "," + vc + "," + this.fileStreams[0] + "," + this.xj.b() + "," + this.Ff + "," + this.Kb + "," + this.Lb);
+            sign.Signlink.reporterror(this.Gf + " glcfb " + this.zc + "," + var2 + "," + vc + "," + this.fileStreams[0] + "," + this.xj.remaining() + "," + this.Ff + "," + this.Kb + "," + this.Lb);
             this.ni = System.currentTimeMillis();
          }
       }

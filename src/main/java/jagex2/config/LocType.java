@@ -159,7 +159,7 @@ public class LocType {
    public final void a(OnDemand arg0, int arg1) {
       if (this.f != null) {
          for(int var3 = 0; var3 < this.f.length; ++var3) {
-            arg0.a(this.f[var3] & 65535, 0, this.J);
+            arg0.prefetch(0, this.f[var3] & 65535);
          }
 
          if (arg1 >= 0) {

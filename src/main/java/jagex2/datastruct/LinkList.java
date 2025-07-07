@@ -116,7 +116,7 @@ public class LinkList {
    }
 
    @ObfuscatedName("BOHLFXVX.c()V")
-   public void c() {
+   public void clear() {
       if (this.c.b != this.c) {
          while(true) {
             Linkable var1 = this.c.b;
