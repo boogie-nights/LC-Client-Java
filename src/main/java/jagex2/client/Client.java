@@ -1795,19 +1795,19 @@ public class Client extends GameShell {
                      if (this.Fj < 8 && var10 >= -32 && var10 <= 31 && var11 >= -32 && var11 <= 31) {
                         var10 += 32;
                         var11 += 32;
-                        this.hd.b((this.Fj << 12) + (var10 << 6) + var11);
+                        this.hd.p2((this.Fj << 12) + (var10 << 6) + var11);
                         this.Fj = 0;
                      } else if (this.Fj < 8) {
-                        this.hd.c((this.Fj << 19) + 8388608 + var9);
+                        this.hd.p3((this.Fj << 19) + 8388608 + var9);
                         this.Fj = 0;
                      } else {
-                        this.hd.d((this.Fj << 19) + -1073741824 + var9);
+                        this.hd.p4((this.Fj << 19) + -1073741824 + var9);
                         this.Fj = 0;
                      }
                   }
                }
 
-               this.hd.a((int)(this.hd.pos - var4), 0);
+               this.hd.psize1((int)(this.hd.pos - var4));
                if (var5 >= this.Gi.f) {
                   this.Gi.f = 0;
                } else {
@@ -1850,7 +1850,7 @@ public class Client extends GameShell {
 
             int var19 = (int)var13;
             this.hd.pIsaac(19);
-            this.hd.d((var18 << 19) + (var19 << 20) + var17);
+            this.hd.p4((var18 << 19) + (var19 << 20) + var17);
          }
 
          if (this.Wi > 0) {
@@ -2311,9 +2311,9 @@ public class Client extends GameShell {
                            this.hd.pIsaac(227);
                            this.hd.p1((int)0);
                            int var8 = this.hd.pos;
-                           this.hd.a(this.Dg);
+                           this.hd.p8(this.Dg);
                            WordPack.a(this.re, 569, this.hd);
-                           this.hd.a((int)(this.hd.pos - var8), 0);
+                           this.hd.psize1((int)(this.hd.pos - var8));
                            this.re = WordPack.a((byte)0, this.re);
                            this.re = WordFilter.a((byte)0, (String)this.re);
                            this.a(JString.a(JString.a(this.Dg, 0), (byte)7), (byte)-123, this.re, 6);
@@ -2358,7 +2358,7 @@ public class Client extends GameShell {
                            }
 
                            this.hd.pIsaac(75);
-                           this.hd.d(var13);
+                           this.hd.p4(var13);
                         }
 
                         this.Ci = 0;
@@ -2378,7 +2378,7 @@ public class Client extends GameShell {
                      if (var3 == 13 || var3 == 10) {
                         if (this.Sc.length() > 0) {
                            this.hd.pIsaac(206);
-                           this.hd.a(JString.a(this.Sc));
+                           this.hd.p8(JString.a(this.Sc));
                         }
 
                         this.Ci = 0;
@@ -2512,7 +2512,7 @@ public class Client extends GameShell {
                            this.tg.pos = 0;
                            WordPack.a(this.Sf, 569, this.tg);
                            this.hd.pdata(this.tg.data, 0, this.tg.pos, 0);
-                           this.hd.a((int)(this.hd.pos - var22), 0);
+                           this.hd.psize1((int)(this.hd.pos - var22));
                            this.Sf = WordPack.a((byte)0, this.Sf);
                            this.Sf = WordFilter.a((byte)0, (String)this.Sf);
                            dh.m = this.Sf;
@@ -2623,7 +2623,7 @@ public class Client extends GameShell {
 
                this.pe.a(this.yh.data, 0, 2);
                this.yh.pos = 0;
-               this.qb = this.yh.e();
+               this.qb = this.yh.g2();
                var3 -= 2;
             }
 
@@ -2640,7 +2640,7 @@ public class Client extends GameShell {
             if (this.rb == 166) {
                int var4 = this.yh.p(-63);
                int var5 = this.yh.p(-63);
-               int var6 = this.yh.e();
+               int var6 = this.yh.g2();
                Component var7 = Component.a(var6);
                var7.s = var5;
                var7.X = var4;
@@ -2670,9 +2670,9 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 26) {
-               int var14 = this.yh.e();
+               int var14 = this.yh.g2();
                int var15 = this.yh.g1();
-               int var16 = this.yh.e();
+               int var16 = this.yh.g2();
                if (var16 == 65535) {
                   if (this.Ae < 50) {
                      this.Ef[this.Ae] = (short)var14;
@@ -2741,7 +2741,7 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 109) {
-               int var23 = this.yh.e();
+               int var23 = this.yh.g2();
                this.b((byte)36, (int)var23);
                if (this.Df != -1) {
                   this.a(Ah, this.Df);
@@ -2821,7 +2821,7 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 218) {
-               int var28 = this.yh.e();
+               int var28 = this.yh.g2();
                int var29 = this.yh.b((byte)9);
                int var30 = var29 >> 10 & 31;
                int var31 = var29 >> 5 & 31;
@@ -2870,7 +2870,7 @@ public class Client extends GameShell {
             if (this.rb == 199) {
                this.Hh = this.yh.g1();
                if (this.Hh == 1) {
-                  this.ki = this.yh.e();
+                  this.ki = this.yh.g2();
                }
 
                if (this.Hh >= 2 && this.Hh <= 6) {
@@ -2900,13 +2900,13 @@ public class Client extends GameShell {
                   }
 
                   this.Hh = 2;
-                  this.R = this.yh.e();
-                  this.S = this.yh.e();
+                  this.R = this.yh.g2();
+                  this.S = this.yh.g2();
                   this.T = this.yh.g1();
                }
 
                if (this.Hh == 10) {
-                  this.Ng = this.yh.e();
+                  this.Ng = this.yh.g2();
                }
 
                this.rb = -1;
@@ -2917,7 +2917,7 @@ public class Client extends GameShell {
                this.Vh = true;
                this.Kd = this.yh.g1();
                this.Ld = this.yh.g1();
-               this.Md = this.yh.e();
+               this.Md = this.yh.g2();
                this.Nd = this.yh.g1();
                this.Od = this.yh.g1();
                if (this.Od >= 100) {
@@ -3009,12 +3009,12 @@ public class Client extends GameShell {
             if (this.rb == 76) {
                this.xf = this.yh.n(-125);
                this.pf = this.yh.o(-600);
-               this.yh.e();
-               this.Sh = this.yh.e();
+               this.yh.g2();
+               this.Sh = this.yh.g2();
                this.gh = this.yh.n(-125);
                this.fj = this.yh.b((byte)9);
                this.Zh = this.yh.b((byte)9);
-               this.Jd = this.yh.e();
+               this.Jd = this.yh.g2();
                this.zi = this.yh.r(935);
                this.ze = this.yh.o(-600);
                this.yh.h(0);
@@ -3080,7 +3080,7 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 50) {
-               int var62 = this.yh.f();
+               int var62 = this.yh.gb2();
                if (var62 >= 0) {
                   this.b((byte)36, (int)var62);
                }
@@ -3096,7 +3096,7 @@ public class Client extends GameShell {
 
             if (this.rb == 82) {
                boolean var63 = this.yh.g1() == 1;
-               int var64 = this.yh.e();
+               int var64 = this.yh.g2();
                Component.a(var64).j = var63;
                this.rb = -1;
                return true;
@@ -3107,7 +3107,7 @@ public class Client extends GameShell {
                   this.rh = true;
                }
 
-               this.ve = this.yh.f();
+               this.ve = this.yh.gb2();
                this.rb = -1;
                return true;
             }
@@ -3182,12 +3182,12 @@ public class Client extends GameShell {
 
             if (this.rb == 134) {
                this.rh = true;
-               int var71 = this.yh.e();
+               int var71 = this.yh.g2();
                Component var72 = Component.a(var71);
 
                while(this.yh.pos < this.qb) {
                   int var73 = this.yh.gsmarts();
-                  int var74 = this.yh.e();
+                  int var74 = this.yh.g2();
                   int var75 = this.yh.g1();
                   if (var75 == 255) {
                      var75 = this.yh.g4();
@@ -3481,9 +3481,9 @@ public class Client extends GameShell {
 
             if (this.rb == 206) {
                this.rh = true;
-               int var107 = this.yh.e();
+               int var107 = this.yh.g2();
                Component var108 = Component.a(var107);
-               int var109 = this.yh.e();
+               int var109 = this.yh.g2();
 
                for(int var110 = 0; var110 < var109; ++var110) {
                   var108.hb[var110] = this.yh.o(-600);
@@ -3508,7 +3508,7 @@ public class Client extends GameShell {
                int var113 = this.Kb;
                int var114 = this.Lb;
                if (this.rb == 222) {
-                  var114 = this.yh.e();
+                  var114 = this.yh.g2();
                   var113 = this.yh.o(-600);
                   this.Zg = false;
                }
@@ -3784,7 +3784,7 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 21) {
-               int var163 = this.yh.e();
+               int var163 = this.yh.g2();
                int var164 = this.yh.n(-125);
                int var165 = this.yh.o(-600);
                if (var164 == 65535) {
@@ -3807,7 +3807,7 @@ public class Client extends GameShell {
                this.Vh = true;
                this.vb = this.yh.g1();
                this.wb = this.yh.g1();
-               this.xb = this.yh.e();
+               this.xb = this.yh.g2();
                this.yb = this.yh.g1();
                this.zb = this.yh.g1();
                if (this.zb >= 100) {
@@ -3970,7 +3970,7 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 18) {
-               int var179 = this.yh.e();
+               int var179 = this.yh.g2();
                int var180 = this.yh.b((byte)9);
                int var181 = this.yh.n(-125);
                Component.a(var180).i = (var179 << 16) + var181;
@@ -4012,7 +4012,7 @@ public class Client extends GameShell {
             }
 
             if (this.rb == 200) {
-               int var185 = this.yh.e();
+               int var185 = this.yh.g2();
                int var186 = this.yh.o(-600);
                Component var187 = Component.a(var185);
                if (var187 != null && var187.A == 0) {
@@ -4510,7 +4510,7 @@ public class Client extends GameShell {
          if (Wg > 161) {
             Wg = 0;
             this.hd.pIsaac(22);
-            this.hd.b(38304);
+            this.hd.p2(38304);
             return;
          }
       }
@@ -5227,7 +5227,7 @@ public class Client extends GameShell {
                }
 
                this.hd.pIsaac(141);
-               this.hd.a(arg0);
+               this.hd.p8(arg0);
                break;
             }
          }
@@ -5604,7 +5604,7 @@ public class Client extends GameShell {
                this.b(false);
                if (this.M.length() > 0) {
                   this.hd.pIsaac(184);
-                  this.hd.a(JString.a(this.M));
+                  this.hd.p8(JString.a(this.M));
                   this.hd.p1(var3 - 601);
                   this.hd.p1(this.Mf ? 1 : 0);
                }
@@ -5816,7 +5816,7 @@ public class Client extends GameShell {
          }
 
          if ((var8 & 4) != 0) {
-            var7.U = arg0.e();
+            var7.U = arg0.g2();
             int var11 = arg0.s(3);
             var7.Y = var11 >> 16;
             var7.X = (var11 & 65535) + fk;
@@ -5842,7 +5842,7 @@ public class Client extends GameShell {
          }
 
          if ((var8 & 2) != 0) {
-            int var12 = arg0.e();
+            int var12 = arg0.g2();
             if (var12 == 65535) {
                var12 = -1;
             }
@@ -5890,7 +5890,7 @@ public class Client extends GameShell {
       }
 
       if ((arg3 & 8) != 0) {
-         int var7 = arg4.e();
+         int var7 = arg4.g2();
          if (var7 == 65535) {
             var7 = -1;
          }
@@ -5937,7 +5937,7 @@ public class Client extends GameShell {
          arg2.K = arg4.i(-34545);
          arg2.J = arg4.j(this.ui);
          arg2.L = arg4.g1();
-         arg2.M = arg4.e() + fk;
+         arg2.M = arg4.g2() + fk;
          arg2.N = arg4.b((byte)9) + fk;
          arg2.O = arg4.g1();
          arg2.a(-56);
@@ -5951,8 +5951,8 @@ public class Client extends GameShell {
       }
 
       if ((arg3 & 2) != 0) {
-         arg2.E = arg4.e();
-         arg2.F = arg4.e();
+         arg2.E = arg4.g2();
+         arg2.F = arg4.g2();
       }
 
       if ((arg3 & 512) != 0) {
@@ -5990,7 +5990,7 @@ public class Client extends GameShell {
       }
 
       if ((arg3 & 64) != 0) {
-         int var16 = arg4.e();
+         int var16 = arg4.g2();
          int var17 = arg4.i(-34545);
          int var18 = arg4.h(0);
          int var19 = arg4.pos;
@@ -7809,11 +7809,11 @@ public class Client extends GameShell {
             int[] var10 = new int[]{(int)(Math.random() * 9.9999999E7D), (int)(Math.random() * 9.9999999E7D), (int)(this.zc >> 32), (int)this.zc};
             this.hd.pos = 0;
             this.hd.p1((int)10);
-            this.hd.d(var10[0]);
-            this.hd.d(var10[1]);
-            this.hd.d(var10[2]);
-            this.hd.d(var10[3]);
-            this.hd.d(sign.Signlink.uid);
+            this.hd.p4(var10[0]);
+            this.hd.p4(var10[1]);
+            this.hd.p4(var10[2]);
+            this.hd.p4(var10[3]);
+            this.hd.p4(sign.Signlink.uid);
             this.hd.pjstr(arg0);
             this.hd.pjstr(arg1);
             this.hd.rsaenc(Wj, N);
@@ -7826,11 +7826,11 @@ public class Client extends GameShell {
 
             this.yc.p1(this.hd.pos + 36 + 1 + 1 + 2);
             this.yc.p1((int)255);
-            this.yc.b((int)377);
+            this.yc.p2((int)377);
             this.yc.p1(vc ? 1 : 0);
 
             for(int var11 = 0; var11 < 9; ++var11) {
-               this.yc.d(this.K[var11]);
+               this.yc.p4(this.K[var11]);
             }
 
             this.yc.pdata(this.hd.data, 0, this.hd.pos, 0);
@@ -8907,7 +8907,7 @@ public class Client extends GameShell {
             this.nf[this.cb++] = arg1;
             this.rh = true;
             this.hd.pIsaac(217);
-            this.hd.a(arg1);
+            this.hd.p8(arg1);
          }
       }
    }
@@ -9239,7 +9239,7 @@ public class Client extends GameShell {
       LocType.v.a();
       if (super.q != null) {
          this.hd.pIsaac(78);
-         this.hd.d(1057001181);
+         this.hd.p4(1057001181);
       }
 
       if (vc && sign.Signlink.cache_dat != null) {
@@ -9397,7 +9397,7 @@ public class Client extends GameShell {
                }
 
                this.hd.pIsaac(160);
-               this.hd.a(arg1);
+               this.hd.p8(arg1);
                break;
             }
          }
@@ -9587,7 +9587,7 @@ public class Client extends GameShell {
                ++this.gb;
                this.rh = true;
                this.hd.pIsaac(120);
-               this.hd.a(arg0);
+               this.hd.p8(arg0);
             }
          }
       }
@@ -10207,7 +10207,7 @@ public class Client extends GameShell {
          if (Qb > 112) {
             Qb = 0;
             this.hd.pIsaac(197);
-            this.hd.d(0);
+            this.hd.p4(0);
             return;
          }
       }
@@ -10545,7 +10545,7 @@ public class Client extends GameShell {
       if (wf > 177) {
          wf = 0;
          this.hd.pIsaac(173);
-         this.hd.c(2657152);
+         this.hd.p3(2657152);
       }
 
       this.qf = 0;
@@ -10621,19 +10621,19 @@ public class Client extends GameShell {
             this.hd.p1((int)0);
             int var4 = this.hd.pos;
             this.hd.p1((int)219);
-            this.hd.b(37745);
+            this.hd.p2(37745);
             this.hd.p1((int)61);
-            this.hd.b(43756);
-            this.hd.b((int)(Math.random() * 65536.0D));
+            this.hd.p2(43756);
+            this.hd.p2((int)(Math.random() * 65536.0D));
             this.hd.p1((int)(Math.random() * 256.0D));
-            this.hd.b(51171);
+            this.hd.p2(51171);
             if ((int)(Math.random() * 2.0D) == 0) {
-               this.hd.b((int)15808);
+               this.hd.p2((int)15808);
             }
 
             this.hd.p1((int)97);
             this.hd.p1((int)(Math.random() * 256.0D));
-            this.hd.a((int)(this.hd.pos - var4), 0);
+            this.hd.psize1((int)(this.hd.pos - var4));
          }
 
          int var5 = this.ai >> 7;
@@ -10850,7 +10850,7 @@ public class Client extends GameShell {
             this.hd.pIsaac(228);
             this.hd.d(0, var3);
             this.hd.e(var6, 0);
-            this.hd.b(var4);
+            this.hd.p2(var4);
             this.jk = 0;
             this.kk = var4;
             this.lk = var3;
@@ -10921,15 +10921,15 @@ public class Client extends GameShell {
             this.hd.d(0, this.Kg);
             this.hd.d(0, this.Lg);
             this.hd.d(0, this.Ge + var4);
-            this.hd.b(this.Jg);
+            this.hd.p2(this.Jg);
             this.hd.f(3, this.Fe + var3);
          }
 
          if (var5 == 9) {
             this.hd.pIsaac(3);
             this.hd.e(var6, 0);
-            this.hd.b(var4);
-            this.hd.b(var3);
+            this.hd.p2(var4);
+            this.hd.p2(var3);
             this.jk = 0;
             this.kk = var4;
             this.lk = var3;
@@ -11005,7 +11005,7 @@ public class Client extends GameShell {
             this.hd.pIsaac(54);
             this.hd.e(var6, 0);
             this.hd.d(0, this.Ge + var4);
-            this.hd.b(this.Fe + var3);
+            this.hd.p2(this.Fe + var3);
          }
 
          if (var5 == 399) {
@@ -11035,16 +11035,16 @@ public class Client extends GameShell {
                this.oe = 2;
                this.ne = 0;
                this.hd.pIsaac(57);
-               this.hd.b(var6);
+               this.hd.p2(var6);
                this.hd.d(0, this.Lg);
                this.hd.f(3, this.Kg);
-               this.hd.b(this.Jg);
+               this.hd.p2(this.Jg);
             }
          }
 
          if (var5 == 890) {
             this.hd.pIsaac(79);
-            this.hd.b(var4);
+            this.hd.p2(var4);
             Component var19 = Component.a(var4);
             if (var19.y != null && var19.y[0][0] == 5) {
                int var20 = var19.y[0][1];
@@ -11077,7 +11077,7 @@ public class Client extends GameShell {
 
          if (var5 == 903) {
             this.hd.pIsaac(1);
-            this.hd.b(var6);
+            this.hd.p2(var6);
             this.hd.d(0, this.Jg);
             this.hd.d(0, this.Lg);
             this.hd.f(3, this.Kg);
@@ -11098,7 +11098,7 @@ public class Client extends GameShell {
 
          if (var5 == 361) {
             this.hd.pIsaac(36);
-            this.hd.b(this.ih);
+            this.hd.p2(this.ih);
             this.hd.e(var4, 0);
             this.hd.e(var3, 0);
             this.hd.e(var6, 0);
@@ -11126,7 +11126,7 @@ public class Client extends GameShell {
                ti += var6;
                if (ti >= 143) {
                   this.hd.pIsaac(157);
-                  this.hd.d(0);
+                  this.hd.p4(0);
                   ti = 0;
                }
 
@@ -11137,7 +11137,7 @@ public class Client extends GameShell {
 
          if (var5 == 376 && this.a(var4, 0, (int)var3, var6)) {
             this.hd.pIsaac(210);
-            this.hd.b(this.ih);
+            this.hd.p2(this.ih);
             this.hd.d(0, var6 >> 14 & 32767);
             this.hd.e(this.Fe + var3, 0);
             this.hd.d(0, this.Ge + var4);
@@ -11169,7 +11169,7 @@ public class Client extends GameShell {
                this.oe = 2;
                this.ne = 0;
                this.hd.pIsaac(31);
-               this.hd.b(var6);
+               this.hd.p2(var6);
                this.hd.d(0, this.ih);
             }
          }
@@ -11200,7 +11200,7 @@ public class Client extends GameShell {
             this.ne = 0;
             this.hd.pIsaac(77);
             this.hd.e(this.Fe + var3, 0);
-            this.hd.b(this.Ge + var4);
+            this.hd.p2(this.Ge + var4);
             this.hd.f(3, var6);
          }
 
@@ -11220,7 +11220,7 @@ public class Client extends GameShell {
 
             if (Re >= 84) {
                this.hd.pIsaac(222);
-               this.hd.c(11257922);
+               this.hd.p3(11257922);
                Re = 0;
             }
 
@@ -11347,7 +11347,7 @@ public class Client extends GameShell {
                this.hd.pIsaac(55);
                this.hd.d(0, var6 >> 14 & 32767);
                this.hd.d(0, this.Ge + var4);
-               this.hd.b(this.Fe + var3);
+               this.hd.p2(this.Fe + var3);
             }
 
             if (var5 == 35) {
@@ -11408,7 +11408,7 @@ public class Client extends GameShell {
 
                if (var44) {
                   this.hd.pIsaac(79);
-                  this.hd.b(var4);
+                  this.hd.p2(var4);
                }
             }
 
@@ -11427,16 +11427,16 @@ public class Client extends GameShell {
 
             if (var5 == 575 && !this.xi) {
                this.hd.pIsaac(226);
-               this.hd.b(var4);
+               this.hd.p2(var4);
                this.xi = true;
             }
 
             if (var5 == 892) {
                this.a(var4, 0, (int)var3, var6);
                this.hd.pIsaac(136);
-               this.hd.b(this.Fe + var3);
+               this.hd.p2(this.Fe + var3);
                this.hd.d(0, this.Ge + var4);
-               this.hd.b(var6 >> 14 & 32767);
+               this.hd.p2(var6 >> 14 & 32767);
             }
 
             if (var5 == 270) {
@@ -11452,7 +11452,7 @@ public class Client extends GameShell {
                this.hd.pIsaac(230);
                this.hd.d(0, var6);
                this.hd.e(this.Fe + var3, 0);
-               this.hd.b(this.Ge + var4);
+               this.hd.p2(this.Ge + var4);
             }
 
             if (var5 == 596) {
@@ -11466,7 +11466,7 @@ public class Client extends GameShell {
                   this.hd.pIsaac(143);
                   this.hd.d(0, this.Lg);
                   this.hd.f(3, this.Jg);
-                  this.hd.b(this.Kg);
+                  this.hd.p2(this.Kg);
                   this.hd.e(var6, 0);
                }
             }
@@ -11524,12 +11524,12 @@ public class Client extends GameShell {
                ++Of;
                if (Of >= 120) {
                   this.hd.pIsaac(95);
-                  this.hd.d(0);
+                  this.hd.p4(0);
                   Of = 0;
                }
 
                this.hd.pIsaac(100);
-               this.hd.b(this.Fe + var3);
+               this.hd.p2(this.Fe + var3);
                this.hd.e(this.Ge + var4, 0);
                this.hd.f(3, var6);
             }
@@ -11538,7 +11538,7 @@ public class Client extends GameShell {
                this.hd.pIsaac(91);
                this.hd.d(0, var6);
                this.hd.f(3, var3);
-               this.hd.b(var4);
+               this.hd.p2(var4);
                this.jk = 0;
                this.kk = var4;
                this.lk = var3;
@@ -11570,8 +11570,8 @@ public class Client extends GameShell {
             if (var5 == 389) {
                this.a(var4, 0, (int)var3, var6);
                this.hd.pIsaac(241);
-               this.hd.b(var6 >> 14 & 32767);
-               this.hd.b(this.Fe + var3);
+               this.hd.p2(var6 >> 14 & 32767);
+               this.hd.p2(this.Fe + var3);
                this.hd.e(this.Ge + var4, 0);
             }
 
@@ -11579,7 +11579,7 @@ public class Client extends GameShell {
                this.hd.pIsaac(231);
                this.hd.f(3, var4);
                this.hd.d(0, var3);
-               this.hd.b(var6);
+               this.hd.p2(var6);
                this.jk = 0;
                this.kk = var4;
                this.lk = var3;
@@ -11621,7 +11621,7 @@ public class Client extends GameShell {
 
             if (var5 == 518) {
                this.hd.pIsaac(79);
-               this.hd.b(var4);
+               this.hd.p2(var4);
                Component var66 = Component.a(var4);
                if (var66.y != null && var66.y[0][0] == 5) {
                   int var67 = var66.y[0][1];
@@ -11658,7 +11658,7 @@ public class Client extends GameShell {
                this.ne = 0;
                this.hd.pIsaac(83);
                this.hd.d(0, var6);
-               this.hd.b(this.Ge + var4);
+               this.hd.p2(this.Ge + var4);
                this.hd.d(0, this.ih);
                this.hd.f(3, this.Fe + var3);
             }
@@ -12551,7 +12551,7 @@ public class Client extends GameShell {
       }
 
       if (arg2 == 203) {
-         int var4 = arg0.e();
+         int var4 = arg0.g2();
          int var5 = arg0.g1();
          int var6 = var5 >> 2;
          int var7 = var5 & 3;
@@ -12563,9 +12563,9 @@ public class Client extends GameShell {
          byte var13 = arg0.k(this.Bf);
          int var14 = arg0.b((byte)9);
          int var15 = arg0.n(-125);
-         byte var16 = arg0.d();
+         byte var16 = arg0.g1b();
          byte var17 = arg0.k(this.Bf);
-         int var18 = arg0.e();
+         int var18 = arg0.g2();
          ClientPlayer var19;
          if (this.ed == var15) {
             var19 = dh;
@@ -12635,7 +12635,7 @@ public class Client extends GameShell {
          }
 
       } else if (arg2 == 142) {
-         int var37 = arg0.e();
+         int var37 = arg0.g2();
          int var38 = arg0.h(0);
          int var39 = var38 >> 2;
          int var40 = var38 & 3;
@@ -12688,7 +12688,7 @@ public class Client extends GameShell {
          }
 
       } else if (arg2 == 107) {
-         int var54 = arg0.e();
+         int var54 = arg0.g2();
          int var55 = arg0.i(-34545);
          int var56 = (var55 >> 4 & 7) + this.Gd;
          int var57 = (var55 & 7) + this.Hd;
@@ -12709,9 +12709,9 @@ public class Client extends GameShell {
          int var60 = arg0.g1();
          int var61 = (var60 >> 4 & 7) + this.Gd;
          int var62 = (var60 & 7) + this.Hd;
-         int var63 = arg0.e();
-         int var64 = arg0.e();
-         int var65 = arg0.e();
+         int var63 = arg0.g2();
+         int var64 = arg0.g2();
+         int var65 = arg0.g2();
          if (var61 >= 0 && var62 >= 0 && var61 < 104 && var62 < 104) {
             LinkList var66 = this.dk[this.Ff][var61][var62];
             if (var66 != null) {
@@ -12730,14 +12730,14 @@ public class Client extends GameShell {
          int var68 = arg0.g1();
          int var69 = (var68 >> 4 & 7) + this.Gd;
          int var70 = (var68 & 7) + this.Hd;
-         int var71 = var69 + arg0.d();
-         int var72 = var70 + arg0.d();
-         int var73 = arg0.f();
-         int var74 = arg0.e();
+         int var71 = var69 + arg0.g1b();
+         int var72 = var70 + arg0.g1b();
+         int var73 = arg0.gb2();
+         int var74 = arg0.g2();
          int var75 = arg0.g1() * 4;
          int var76 = arg0.g1() * 4;
-         int var77 = arg0.e();
-         int var78 = arg0.e();
+         int var77 = arg0.g2();
+         int var78 = arg0.g2();
          int var79 = arg0.g1();
          int var80 = arg0.g1();
          if (var69 >= 0 && var70 >= 0 && var69 < 104 && var70 < 104 && var71 >= 0 && var72 >= 0 && var71 < 104 && var72 < 104 && var74 != 65535) {
@@ -12755,7 +12755,7 @@ public class Client extends GameShell {
             int var86 = arg0.g1();
             int var87 = (var86 >> 4 & 7) + this.Gd;
             int var88 = (var86 & 7) + this.Hd;
-            int var89 = arg0.e();
+            int var89 = arg0.g2();
             int var90 = arg0.g1();
             int var91 = var90 >> 4 & 15;
             int var92 = var90 & 7;
@@ -12771,9 +12771,9 @@ public class Client extends GameShell {
             int var93 = arg0.g1();
             int var94 = (var93 >> 4 & 7) + this.Gd;
             int var95 = (var93 & 7) + this.Hd;
-            int var96 = arg0.e();
+            int var96 = arg0.g2();
             int var97 = arg0.g1();
-            int var98 = arg0.e();
+            int var98 = arg0.g2();
             if (var94 >= 0 && var95 >= 0 && var94 < 104 && var95 < 104) {
                int var99 = var94 * 128 + 64;
                int var100 = var95 * 128 + 64;
@@ -13660,13 +13660,13 @@ public class Client extends GameShell {
                   if (var13) {
                      this.hd.p1(var2);
                      this.hd.p1(var3);
-                     this.hd.b(this.Ki);
+                     this.hd.p2(this.Ki);
                      this.hd.p1((int)57);
                      this.hd.p1(this.lc);
                      this.hd.p1(this.ri);
                      this.hd.p1((int)89);
-                     this.hd.b(dh.Q);
-                     this.hd.b(dh.R);
+                     this.hd.p2(dh.Q);
+                     this.hd.p2(dh.R);
                      this.hd.p1(this.og);
                      this.hd.p1((int)63);
                      return;
@@ -14107,10 +14107,10 @@ public class Client extends GameShell {
             } catch (Exception var7) {
                if (sign.Signlink.reporterror) {
                   this.hd.pIsaac(80);
-                  this.hd.b(this.Ef[var2] & 32767);
+                  this.hd.p2(this.Ef[var2] & 32767);
                } else {
                   this.hd.pIsaac(80);
-                  this.hd.b((int)-1);
+                  this.hd.p2((int)-1);
                }
             }
 

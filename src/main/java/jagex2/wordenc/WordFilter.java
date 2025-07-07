@@ -115,7 +115,7 @@ public class WordFilter {
          m = new int[arg0.g4()];
 
          for(int var2 = 0; var2 < m.length; ++var2) {
-            m[var2] = arg0.e();
+            m[var2] = arg0.g2();
          }
 
       }

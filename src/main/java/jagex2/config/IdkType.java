@@ -32,7 +32,7 @@ public class IdkType {
    @ObfuscatedName("ZGOJZVHR.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.a("idk.dat", (byte[])null));
-      d = var2.e();
+      d = var2.g2();
       if (e == null) {
          e = new IdkType[d];
       }
@@ -71,16 +71,16 @@ public class IdkType {
                   this.g = new int[var5];
 
                   for(int var6 = 0; var6 < var5; ++var6) {
-                     this.g[var6] = arg1.e();
+                     this.g[var6] = arg1.g2();
                   }
                } else if (var4 == 3) {
                   this.k = true;
                } else if (var4 >= 40 && var4 < 50) {
-                  this.h[var4 - 40] = arg1.e();
+                  this.h[var4 - 40] = arg1.g2();
                } else if (var4 >= 50 && var4 < 60) {
-                  this.i[var4 - 50] = arg1.e();
+                  this.i[var4 - 50] = arg1.g2();
                } else if (var4 >= 60 && var4 < 70) {
-                  this.j[var4 - 60] = arg1.e();
+                  this.j[var4 - 60] = arg1.g2();
                } else {
                   System.out.println("Error unrecognised config code: " + var4);
                }

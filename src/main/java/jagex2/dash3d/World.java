@@ -1536,7 +1536,7 @@ public class World {
             }
 
             if (var9 <= 49) {
-               this.r[arg6][arg5][arg7] = arg3.d();
+               this.r[arg6][arg5][arg7] = arg3.g1b();
                this.p[arg6][arg5][arg7] = (byte)((var9 - 2) / 4);
                this.e[arg6][arg5][arg7] = (byte)(var9 - 2 + arg4 & 3);
             } else if (var9 <= 81) {

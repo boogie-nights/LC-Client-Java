@@ -368,8 +368,8 @@ public class ClientPlayer extends ClientEntity {
    public final void a(Packet arg0, int arg1) {
       arg0.pos = 0;
       this.Cb = arg0.g1();
-      this.Db = arg0.d();
-      this.vb = arg0.d();
+      this.Db = arg0.g1b();
+      this.vb = arg0.g1b();
       this.Eb = null;
       this.Nb = 0;
 
@@ -381,7 +381,7 @@ public class ClientPlayer extends ClientEntity {
             int var5 = arg0.g1();
             this.zb[var3] = (var4 << 8) + var5;
             if (var3 == 0 && this.zb[0] == 65535) {
-               this.Eb = NpcType.c(arg0.e());
+               this.Eb = NpcType.c(arg0.g2());
                break;
             }
 
@@ -403,44 +403,44 @@ public class ClientPlayer extends ClientEntity {
          this.Hb[var7] = var8;
       }
 
-      super.ob = arg0.e();
+      super.ob = arg0.g2();
       if (super.ob == 65535) {
          super.ob = -1;
       }
 
-      super.pb = arg0.e();
+      super.pb = arg0.g2();
       if (super.pb == 65535) {
          super.pb = -1;
       }
 
-      super.Z = arg0.e();
+      super.Z = arg0.g2();
       if (super.Z == 65535) {
          super.Z = -1;
       }
 
-      super.ab = arg0.e();
+      super.ab = arg0.g2();
       if (super.ab == 65535) {
          super.ab = -1;
       }
 
-      super.bb = arg0.e();
+      super.bb = arg0.g2();
       if (super.bb == 65535) {
          super.bb = -1;
       }
 
-      super.cb = arg0.e();
+      super.cb = arg0.g2();
       if (super.cb == 65535) {
          super.cb = -1;
       }
 
-      super.jb = arg0.e();
+      super.jb = arg0.g2();
       if (super.jb == 65535) {
          super.jb = -1;
       }
 
       this.yb = JString.a(JString.a(arg0.g8(), 0), (byte)7);
       this.Ab = arg0.g1();
-      this.Gb = arg0.e();
+      this.Gb = arg0.g2();
       this.Fb = true;
       this.Bb = 0L;
       int var9 = this.zb[5];

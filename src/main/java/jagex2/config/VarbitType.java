@@ -32,7 +32,7 @@ public class VarbitType {
    public static void a(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.a("varbit.dat", (byte[])null));
       if (arg1 == 36135) {
-         b = var2.e();
+         b = var2.g2();
          if (c == null) {
             c = new VarbitType[b];
          }
@@ -67,7 +67,7 @@ public class VarbitType {
          }
 
          if (var4 == 1) {
-            this.e = arg2.e();
+            this.e = arg2.g2();
             this.f = arg2.g1();
             this.g = arg2.g1();
          } else if (var4 == 10) {

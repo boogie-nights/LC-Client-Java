@@ -41,7 +41,7 @@ public class Wave {
          SoundTone.a();
 
          while(true) {
-            int var2 = arg0.e();
+            int var2 = arg0.g2();
             if (var2 == 65535) {
                return;
             }
@@ -78,8 +78,8 @@ public class Wave {
          }
       }
 
-      this.j = arg1.e();
-      this.k = arg1.e();
+      this.j = arg1.g2();
+      this.k = arg1.g2();
       if (arg0 == 6) {
          boolean var5 = false;
       } else {
@@ -127,22 +127,22 @@ public class Wave {
    public final Packet a(int arg0, int arg1) {
       int var3 = this.b(arg1);
       h.pos = 0;
-      h.d(1380533830);
-      h.b(var3 + 36, false);
-      h.d(1463899717);
-      h.d(1718449184);
+      h.p4(1380533830);
+      h.ip4(var3 + 36);
+      h.p4(1463899717);
+      h.p4(1718449184);
       if (arg0 >= 0) {
          throw new NullPointerException();
       } else {
-         h.b(16, false);
-         h.a(1, false);
-         h.a(1, false);
-         h.b(22050, false);
-         h.b(22050, false);
-         h.a(1, false);
-         h.a(8, false);
-         h.d(1684108385);
-         h.b(var3, false);
+         h.ip4(16);
+         h.ip2(1);
+         h.ip2(1);
+         h.ip4(22050);
+         h.ip4(22050);
+         h.ip2(1);
+         h.ip2(8);
+         h.p4(1684108385);
+         h.ip4(var3);
          h.pos += var3;
          return h;
       }

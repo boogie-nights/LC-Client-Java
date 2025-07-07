@@ -51,8 +51,8 @@ public class SoundEnvelope {
       this.d = new int[this.b];
       if (arg1 == 0) {
          for(int var3 = 0; var3 < this.b; ++var3) {
-            this.c[var3] = arg0.e();
-            this.d[var3] = arg0.e();
+            this.c[var3] = arg0.g2();
+            this.d[var3] = arg0.g2();
          }
 
       }

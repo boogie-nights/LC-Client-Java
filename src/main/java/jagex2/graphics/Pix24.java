@@ -79,9 +79,9 @@ public class Pix24 extends Pix2D {
    public Pix24(Jagfile arg0, String arg1, int arg2) {
       Packet var4 = new Packet(arg0.a(arg1 + ".dat", (byte[])null));
       Packet var5 = new Packet(arg0.a("index.dat", (byte[])null));
-      var5.pos = var4.e();
-      this.N = var5.e();
-      this.O = var5.e();
+      var5.pos = var4.g2();
+      this.N = var5.g2();
+      this.O = var5.g2();
       int var6 = var5.g1();
       int[] var7 = new int[var6];
 
@@ -94,14 +94,14 @@ public class Pix24 extends Pix2D {
 
       for(int var9 = 0; var9 < arg2; ++var9) {
          var5.pos += 2;
-         var4.pos += var5.e() * var5.e();
+         var4.pos += var5.g2() * var5.g2();
          ++var5.pos;
       }
 
       this.L = var5.g1();
       this.M = var5.g1();
-      this.J = var5.e();
-      this.K = var5.e();
+      this.J = var5.g2();
+      this.K = var5.g2();
       int var10 = var5.g1();
       int var11 = this.K * this.J;
       this.I = new int[var11];

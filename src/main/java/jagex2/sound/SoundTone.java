@@ -353,8 +353,8 @@ public class SoundTone {
 
       this.n = arg1.gsmarts();
       this.o = arg1.gsmarts();
-      this.r = arg1.e();
-      this.s = arg1.e();
+      this.r = arg1.g2();
+      this.s = arg1.g2();
       this.p = new SoundFilter();
       this.q = new SoundEnvelope();
       this.p.a(-954, this.q, arg1);

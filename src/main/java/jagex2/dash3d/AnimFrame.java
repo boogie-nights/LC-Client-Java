@@ -42,11 +42,11 @@ public class AnimFrame {
    public static void a(byte[] arg0, boolean arg1) {
       Packet var2 = new Packet(arg0);
       var2.pos = arg0.length - 8;
-      int var3 = var2.e();
-      int var4 = var2.e();
-      int var5 = var2.e();
+      int var3 = var2.g2();
+      int var4 = var2.g2();
+      int var5 = var2.g2();
       if (arg1) {
-         int var6 = var2.e();
+         int var6 = var2.g2();
          byte var7 = 0;
          Packet var8 = new Packet(arg0);
          var8.pos = var7;
@@ -63,14 +63,14 @@ public class AnimFrame {
          Packet var16 = new Packet(arg0);
          var16.pos = var15;
          AnimBase var17 = new AnimBase(var16, 0);
-         int var18 = var8.e();
+         int var18 = var8.g2();
          int[] var19 = new int[500];
          int[] var20 = new int[500];
          int[] var21 = new int[500];
          int[] var22 = new int[500];
 
          for(int var23 = 0; var23 < var18; ++var23) {
-            int var24 = var8.e();
+            int var24 = var8.g2();
             AnimFrame var25 = c[var24] = new AnimFrame();
             var25.d = var14.g1();
             var25.e = var17;

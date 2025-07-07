@@ -39,9 +39,9 @@ public class Pix8 extends Pix2D {
    public Pix8(Jagfile arg0, String arg1, int arg2) {
       Packet var4 = new Packet(arg0.a(arg1 + ".dat", (byte[])null));
       Packet var5 = new Packet(arg0.a("index.dat", (byte[])null));
-      var5.pos = var4.e();
-      this.J = var5.e();
-      this.K = var5.e();
+      var5.pos = var4.g2();
+      this.J = var5.g2();
+      this.K = var5.g2();
       int var6 = var5.g1();
       this.E = new int[var6];
 
@@ -51,27 +51,27 @@ public class Pix8 extends Pix2D {
 
       for(int var8 = 0; var8 < arg2; ++var8) {
          var5.pos += 2;
-         var4.pos += var5.e() * var5.e();
+         var4.pos += var5.g2() * var5.g2();
          ++var5.pos;
       }
 
       this.H = var5.g1();
       this.I = var5.g1();
-      this.F = var5.e();
-      this.G = var5.e();
+      this.F = var5.g2();
+      this.G = var5.g2();
       int var9 = var5.g1();
       int var10 = this.G * this.F;
       this.D = new byte[var10];
       if (var9 == 0) {
          for(int var11 = 0; var11 < var10; ++var11) {
-            this.D[var11] = var4.d();
+            this.D[var11] = var4.g1b();
          }
 
       } else {
          if (var9 == 1) {
             for(int var12 = 0; var12 < this.F; ++var12) {
                for(int var13 = 0; var13 < this.G; ++var13) {
-                  this.D[this.F * var13 + var12] = var4.d();
+                  this.D[this.F * var13 + var12] = var4.g1b();
                }
             }
          }

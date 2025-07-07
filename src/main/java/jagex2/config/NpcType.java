@@ -115,23 +115,23 @@ public class NpcType {
                   this.f = new int[var5];
 
                   for(int var6 = 0; var6 < var5; ++var6) {
-                     this.f[var6] = arg1.e();
+                     this.f[var6] = arg1.g2();
                   }
                } else if (var4 == 2) {
                   this.F = arg1.gjstr();
                } else if (var4 == 3) {
                   this.N = arg1.gjstrraw();
                } else if (var4 == 12) {
-                  this.v = arg1.d();
+                  this.v = arg1.g1b();
                } else if (var4 == 13) {
-                  this.a = arg1.e();
+                  this.a = arg1.g2();
                } else if (var4 == 14) {
-                  this.y = arg1.e();
+                  this.y = arg1.g2();
                } else if (var4 == 17) {
-                  this.y = arg1.e();
-                  this.w = arg1.e();
-                  this.u = arg1.e();
-                  this.m = arg1.e();
+                  this.y = arg1.g2();
+                  this.w = arg1.g2();
+                  this.u = arg1.g2();
+                  this.m = arg1.g2();
                } else if (var4 >= 30 && var4 < 40) {
                   if (this.z == null) {
                      this.z = new String[5];
@@ -147,47 +147,47 @@ public class NpcType {
                   this.J = new int[var7];
 
                   for(int var8 = 0; var8 < var7; ++var8) {
-                     this.n[var8] = arg1.e();
-                     this.J[var8] = arg1.e();
+                     this.n[var8] = arg1.g2();
+                     this.J[var8] = arg1.g2();
                   }
                } else if (var4 == 60) {
                   int var9 = arg1.g1();
                   this.e = new int[var9];
 
                   for(int var10 = 0; var10 < var9; ++var10) {
-                     this.e[var10] = arg1.e();
+                     this.e[var10] = arg1.g2();
                   }
                } else if (var4 == 90) {
-                  this.B = arg1.e();
+                  this.B = arg1.g2();
                } else if (var4 == 91) {
-                  this.g = arg1.e();
+                  this.g = arg1.g2();
                } else if (var4 == 92) {
-                  this.q = arg1.e();
+                  this.q = arg1.g2();
                } else if (var4 == 93) {
                   this.p = false;
                } else if (var4 == 95) {
-                  this.s = arg1.e();
+                  this.s = arg1.g2();
                } else if (var4 == 97) {
-                  this.l = arg1.e();
+                  this.l = arg1.g2();
                } else if (var4 == 98) {
-                  this.j = arg1.e();
+                  this.j = arg1.g2();
                } else if (var4 == 99) {
                   this.x = true;
                } else if (var4 == 100) {
-                  this.Q = arg1.d();
+                  this.Q = arg1.g1b();
                } else if (var4 == 101) {
-                  this.L = arg1.d() * 5;
+                  this.L = arg1.g1b() * 5;
                } else if (var4 == 102) {
-                  this.r = arg1.e();
+                  this.r = arg1.g2();
                } else if (var4 == 103) {
-                  this.E = arg1.e();
+                  this.E = arg1.g2();
                } else if (var4 == 106) {
-                  this.H = arg1.e();
+                  this.H = arg1.g2();
                   if (this.H == 65535) {
                      this.H = -1;
                   }
 
-                  this.M = arg1.e();
+                  this.M = arg1.g2();
                   if (this.M == 65535) {
                      this.M = -1;
                   }
@@ -196,7 +196,7 @@ public class NpcType {
                   this.b = new int[var11 + 1];
 
                   for(int var12 = 0; var12 <= var11; ++var12) {
-                     this.b[var12] = arg1.e();
+                     this.b[var12] = arg1.g2();
                      if (this.b[var12] == 65535) {
                         this.b[var12] = -1;
                      }
@@ -303,13 +303,13 @@ public class NpcType {
    public static final void a(Jagfile arg0) {
       K = new Packet(arg0.a("npc.dat", (byte[])null));
       Packet var1 = new Packet(arg0.a("npc.idx", (byte[])null));
-      C = var1.e();
+      C = var1.g2();
       D = new int[C];
       int var2 = 2;
 
       for(int var3 = 0; var3 < C; ++var3) {
          D[var3] = var2;
-         var2 += var1.e();
+         var2 += var1.g2();
       }
 
       I = new NpcType[20];

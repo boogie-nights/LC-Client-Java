@@ -122,22 +122,22 @@ public class SoundFilter {
          }
 
       } else {
-         this.f[0] = arg2.e();
-         this.f[1] = arg2.e();
+         this.f[0] = arg2.g2();
+         this.f[1] = arg2.g2();
          int var6 = arg2.g1();
 
          for(int var7 = 0; var7 < 2; ++var7) {
             for(int var8 = 0; var8 < this.c[var7]; ++var8) {
-               this.d[var7][0][var8] = arg2.e();
-               this.e[var7][0][var8] = arg2.e();
+               this.d[var7][0][var8] = arg2.g2();
+               this.e[var7][0][var8] = arg2.g2();
             }
          }
 
          for(int var9 = 0; var9 < 2; ++var9) {
             for(int var10 = 0; var10 < this.c[var9]; ++var10) {
                if ((var6 & 1 << var9 * 4 << var10) != 0) {
-                  this.d[var9][1][var10] = arg2.e();
-                  this.e[var9][1][var10] = arg2.e();
+                  this.d[var9][1][var10] = arg2.g2();
+                  this.e[var9][1][var10] = arg2.g2();
                } else {
                   this.d[var9][1][var10] = this.d[var9][0][var10];
                   this.e[var9][1][var10] = this.e[var9][0][var10];

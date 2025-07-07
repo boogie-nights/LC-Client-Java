@@ -229,13 +229,13 @@ public class ObjType {
    public static final void a(Jagfile arg0) {
       V = new Packet(arg0.a("obj.dat", (byte[])null));
       Packet var1 = new Packet(arg0.a("obj.idx", (byte[])null));
-      j = var1.e();
+      j = var1.g2();
       q = new int[j];
       int var2 = 2;
 
       for(int var3 = 0; var3 < j; ++var3) {
          q[var3] = var2;
-         var2 += var1.e();
+         var2 += var1.g2();
       }
 
       k = new ObjType[10];
@@ -360,29 +360,29 @@ public class ObjType {
             }
 
             if (var3 == 1) {
-               this.I = arg1.e();
+               this.I = arg1.g2();
             } else if (var3 == 2) {
                this.d = arg1.gjstr();
             } else if (var3 == 3) {
                this.c = arg1.gjstrraw();
             } else if (var3 == 4) {
-               this.R = arg1.e();
+               this.R = arg1.g2();
             } else if (var3 == 5) {
-               this.H = arg1.e();
+               this.H = arg1.g2();
             } else if (var3 == 6) {
-               this.E = arg1.e();
+               this.E = arg1.g2();
             } else if (var3 == 7) {
-               this.b = arg1.e();
+               this.b = arg1.g2();
                if (this.b > 32767) {
                   this.b -= 65536;
                }
             } else if (var3 == 8) {
-               this.o = arg1.e();
+               this.o = arg1.g2();
                if (this.o > 32767) {
                   this.o -= 65536;
                }
             } else if (var3 == 10) {
-               this.U = arg1.e();
+               this.U = arg1.g2();
             } else if (var3 == 11) {
                this.T = true;
             } else if (var3 == 12) {
@@ -390,15 +390,15 @@ public class ObjType {
             } else if (var3 == 16) {
                this.Z = true;
             } else if (var3 == 23) {
-               this.B = arg1.e();
-               this.ab = arg1.d();
+               this.B = arg1.g2();
+               this.ab = arg1.g1b();
             } else if (var3 == 24) {
-               this.f = arg1.e();
+               this.f = arg1.g2();
             } else if (var3 == 25) {
-               this.a = arg1.e();
-               this.e = arg1.d();
+               this.a = arg1.g2();
+               this.e = arg1.g1b();
             } else if (var3 == 26) {
-               this.D = arg1.e();
+               this.D = arg1.g2();
             } else if (var3 >= 30 && var3 < 35) {
                if (this.m == null) {
                   this.m = new String[5];
@@ -420,45 +420,45 @@ public class ObjType {
                this.p = new int[var4];
 
                for(int var5 = 0; var5 < var4; ++var5) {
-                  this.M[var5] = arg1.e();
-                  this.p[var5] = arg1.e();
+                  this.M[var5] = arg1.g2();
+                  this.p[var5] = arg1.g2();
                }
             } else if (var3 == 78) {
-               this.S = arg1.e();
+               this.S = arg1.g2();
             } else if (var3 == 79) {
-               this.P = arg1.e();
+               this.P = arg1.g2();
             } else if (var3 == 90) {
-               this.i = arg1.e();
+               this.i = arg1.g2();
             } else if (var3 == 91) {
-               this.X = arg1.e();
+               this.X = arg1.g2();
             } else if (var3 == 92) {
-               this.J = arg1.e();
+               this.J = arg1.g2();
             } else if (var3 == 93) {
-               this.K = arg1.e();
+               this.K = arg1.g2();
             } else if (var3 == 95) {
-               this.n = arg1.e();
+               this.n = arg1.g2();
             } else if (var3 == 97) {
-               this.h = arg1.e();
+               this.h = arg1.g2();
             } else if (var3 == 98) {
-               this.r = arg1.e();
+               this.r = arg1.g2();
             } else if (var3 >= 100 && var3 < 110) {
                if (this.N == null) {
                   this.N = new int[10];
                   this.Y = new int[10];
                }
 
-               this.N[var3 - 100] = arg1.e();
-               this.Y[var3 - 100] = arg1.e();
+               this.N[var3 - 100] = arg1.g2();
+               this.Y[var3 - 100] = arg1.g2();
             } else if (var3 == 110) {
-               this.O = arg1.e();
+               this.O = arg1.g2();
             } else if (var3 == 111) {
-               this.F = arg1.e();
+               this.F = arg1.g2();
             } else if (var3 == 112) {
-               this.Q = arg1.e();
+               this.Q = arg1.g2();
             } else if (var3 == 113) {
-               this.C = arg1.d();
+               this.C = arg1.g1b();
             } else if (var3 == 114) {
-               this.G = arg1.d() * 5;
+               this.G = arg1.g1b() * 5;
             } else if (var3 == 115) {
                this.g = arg1.g1();
             }

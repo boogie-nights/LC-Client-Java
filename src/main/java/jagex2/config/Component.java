@@ -200,7 +200,7 @@ public class Component {
    public static Component a(int arg0) {
       if (g[arg0] == null) {
          Packet var1 = new Packet(ub[arg0]);
-         int var2 = var1.e();
+         int var2 = var1.g2();
          g[arg0] = a(var2, (Packet)var1, 10896, arg0);
       }
 
@@ -267,9 +267,9 @@ public class Component {
       var4.M = arg0;
       var4.A = arg1.g1();
       var4.Bb = arg1.g1();
-      var4.G = arg1.e();
-      var4.F = arg1.e();
-      var4.C = arg1.e();
+      var4.G = arg1.g2();
+      var4.F = arg1.g2();
+      var4.C = arg1.g2();
       if (arg2 != 10896) {
          qb = !qb;
       }
@@ -301,7 +301,7 @@ public class Component {
 
          for(int var6 = 0; var6 < var5; ++var6) {
             var4.lb[var6] = arg1.g1();
-            var4.U[var6] = arg1.e();
+            var4.U[var6] = arg1.g2();
          }
       }
 
@@ -310,32 +310,32 @@ public class Component {
          var4.y = new int[var7][];
 
          for(int var8 = 0; var8 < var7; ++var8) {
-            int var9 = arg1.e();
+            int var9 = arg1.g2();
             var4.y[var8] = new int[var9];
 
             for(int var10 = 0; var10 < var9; ++var10) {
-               var4.y[var8][var10] = arg1.e();
+               var4.y[var8][var10] = arg1.g2();
             }
          }
       }
 
       if (var4.A == 0) {
-         var4.xb = arg1.e();
+         var4.xb = arg1.g2();
          var4.j = arg1.g1() == 1;
-         int var11 = arg1.e();
+         int var11 = arg1.g2();
          var4.W = new int[var11];
          var4.w = new int[var11];
          var4.ob = new int[var11];
 
          for(int var12 = 0; var12 < var11; ++var12) {
-            var4.W[var12] = arg1.e();
-            var4.w[var12] = arg1.f();
-            var4.ob[var12] = arg1.f();
+            var4.W[var12] = arg1.g2();
+            var4.w[var12] = arg1.gb2();
+            var4.ob[var12] = arg1.gb2();
          }
       }
 
       if (var4.A == 1) {
-         var4.p = arg1.e();
+         var4.p = arg1.g2();
          var4.x = arg1.g1() == 1;
       }
 
@@ -355,8 +355,8 @@ public class Component {
          for(int var13 = 0; var13 < 20; ++var13) {
             int var14 = arg1.g1();
             if (var14 == 1) {
-               var4.l[var13] = arg1.f();
-               var4.d[var13] = arg1.f();
+               var4.l[var13] = arg1.gb2();
+               var4.d[var13] = arg1.gb2();
                String var15 = arg1.gjstr();
                if (var15.length() > 0) {
                   int var16 = var15.lastIndexOf(",");
@@ -445,9 +445,9 @@ public class Component {
             var4.zb = -1;
          }
 
-         var4.P = arg1.e();
-         var4.Q = arg1.e();
-         var4.R = arg1.e();
+         var4.P = arg1.g2();
+         var4.Q = arg1.g2();
+         var4.R = arg1.g2();
       }
 
       if (var4.A == 7) {
@@ -461,8 +461,8 @@ public class Component {
 
          var4.L = arg1.g1() == 1;
          var4.E = arg1.g4();
-         var4.bb = arg1.f();
-         var4.I = arg1.f();
+         var4.bb = arg1.gb2();
+         var4.I = arg1.gb2();
          var4.t = arg1.g1() == 1;
          var4.ab = new String[5];
 
@@ -481,7 +481,7 @@ public class Component {
       if (var4.Bb == 2 || var4.A == 2) {
          var4.tb = arg1.gjstr();
          var4.b = arg1.gjstr();
-         var4.m = arg1.e();
+         var4.m = arg1.g2();
       }
 
       if (var4.Bb == 1 || var4.Bb == 4 || var4.Bb == 5 || var4.Bb == 6) {
@@ -515,15 +515,15 @@ public class Component {
       n = arg1;
       int var4 = -1;
       Packet var5 = new Packet(arg2.a("data", (byte[])null));
-      int var6 = var5.e();
+      int var6 = var5.g2();
       g = new Component[var6];
       ub = new byte[var6][];
 
       while(var5.pos < var5.data.length) {
-         int var7 = var5.e();
+         int var7 = var5.g2();
          if (var7 == 65535) {
-            var4 = var5.e();
-            var7 = var5.e();
+            var4 = var5.g2();
+            var7 = var5.g2();
          }
 
          int var8 = var5.pos;

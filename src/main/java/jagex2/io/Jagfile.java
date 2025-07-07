@@ -47,7 +47,7 @@ public class Jagfile {
          this.i = false;
       }
 
-      this.d = var3.e();
+      this.d = var3.g2();
       this.e = new int[this.d];
       this.f = new int[this.d];
       this.g = new int[this.d];

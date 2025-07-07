@@ -209,18 +209,18 @@ public class Model extends ModelSource {
             var4.pos = arg0.length - 18;
             Metadata var5 = gb[arg1] = new Metadata();
             var5.a = arg0;
-            var5.b = var4.e();
-            var5.c = var4.e();
+            var5.b = var4.g2();
+            var5.c = var4.g2();
             var5.d = var4.g1();
             int var6 = var4.g1();
             int var7 = var4.g1();
             int var8 = var4.g1();
             int var9 = var4.g1();
             int var10 = var4.g1();
-            int var11 = var4.e();
-            int var12 = var4.e();
-            int var13 = var4.e();
-            int var14 = var4.e();
+            int var11 = var4.g2();
+            int var12 = var4.g2();
+            int var13 = var4.g2();
+            int var14 = var4.g2();
             byte var15 = 0;
             var5.e = var15;
             int var16 = var5.b + var15;
@@ -411,7 +411,7 @@ public class Model extends ModelSource {
       var8.pos = var3.p;
 
       for(int var17 = 0; var17 < this.C; ++var17) {
-         this.M[var17] = var4.e();
+         this.M[var17] = var4.g2();
          if (this.J != null) {
             this.J[var17] = var5.g1();
          }
@@ -483,9 +483,9 @@ public class Model extends ModelSource {
       var4.pos = var3.q;
 
       for(int var27 = 0; var27 < this.O; ++var27) {
-         this.P[var27] = var4.e();
-         this.Q[var27] = var4.e();
-         this.R[var27] = var4.e();
+         this.P[var27] = var4.g2();
+         this.Q[var27] = var4.g2();
+         this.R[var27] = var4.g2();
       }
 
    }

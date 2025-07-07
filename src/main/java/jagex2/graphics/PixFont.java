@@ -38,7 +38,7 @@ public class PixFont extends Pix2D {
       Packet var5 = new Packet(arg1.a(arg3 + ".dat", (byte[])null));
       Packet var6 = new Packet(arg1.a("index.dat", (byte[])null));
       boolean var7 = true;
-      var6.pos = var5.e() + 4;
+      var6.pos = var5.g2() + 4;
 
       while(arg2 >= 0) {
          this.w = !this.w;
@@ -52,19 +52,19 @@ public class PixFont extends Pix2D {
       for(int var9 = 0; var9 < 256; ++var9) {
          this.D[var9] = var6.g1();
          this.E[var9] = var6.g1();
-         int var11 = this.B[var9] = var6.e();
-         int var12 = this.C[var9] = var6.e();
+         int var11 = this.B[var9] = var6.g2();
+         int var12 = this.C[var9] = var6.g2();
          int var13 = var6.g1();
          int var14 = var11 * var12;
          this.A[var9] = new byte[var14];
          if (var13 == 0) {
             for(int var15 = 0; var15 < var14; ++var15) {
-               this.A[var9][var15] = var5.d();
+               this.A[var9][var15] = var5.g1b();
             }
          } else if (var13 == 1) {
             for(int var16 = 0; var16 < var11; ++var16) {
                for(int var17 = 0; var17 < var12; ++var17) {
-                  this.A[var9][var11 * var17 + var16] = var5.d();
+                  this.A[var9][var11 * var17 + var16] = var5.g1b();
                }
             }
          }

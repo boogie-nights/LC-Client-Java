@@ -592,7 +592,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
          this.e[var4] = new byte[var6];
 
          for(int var8 = 0; var8 < var6; ++var8) {
-            this.S[var4][var8] = var7.e();
+            this.S[var4][var8] = var7.g2();
          }
       }
 
@@ -630,9 +630,9 @@ public class OnDemand extends OnDemandProvider implements Runnable {
       this.d = new int[var20];
 
       for(int var21 = 0; var21 < var20; ++var21) {
-         this.n[var21] = var19.e();
-         this.B[var21] = var19.e();
-         this.G[var21] = var19.e();
+         this.n[var21] = var19.g2();
+         this.B[var21] = var19.g2();
+         this.G[var21] = var19.g2();
          this.d[var21] = var19.g1();
       }
 
@@ -642,7 +642,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
       this.R = new int[var24];
 
       for(int var25 = 0; var25 < var24; ++var25) {
-         this.R[var25] = var23.e();
+         this.R[var25] = var23.g2();
       }
 
       byte[] var26 = arg0.a("midi_index", (byte[])null);

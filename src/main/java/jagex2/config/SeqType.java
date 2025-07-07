@@ -50,7 +50,7 @@ public class SeqType {
    @ObfuscatedName("FHWCLIAS.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.a("seq.dat", (byte[])null));
-      c = var2.e();
+      c = var2.g2();
       if (d == null) {
          d = new SeqType[c];
       }
@@ -139,25 +139,25 @@ public class SeqType {
                this.h = new int[this.e];
 
                for(int var5 = 0; var5 < this.e; ++var5) {
-                  this.f[var5] = arg1.e();
-                  this.g[var5] = arg1.e();
+                  this.f[var5] = arg1.g2();
+                  this.g[var5] = arg1.g2();
                   if (this.g[var5] == 65535) {
                      this.g[var5] = -1;
                   }
 
-                  this.h[var5] = arg1.e();
+                  this.h[var5] = arg1.g2();
                }
             } else if (var4 == 2) {
-               this.i = arg1.e();
+               this.i = arg1.g2();
             } else if (var4 != 3) {
                if (var4 == 4) {
                   this.k = true;
                } else if (var4 == 5) {
                   this.l = arg1.g1();
                } else if (var4 == 6) {
-                  this.m = arg1.e();
+                  this.m = arg1.g2();
                } else if (var4 == 7) {
-                  this.n = arg1.e();
+                  this.n = arg1.g2();
                } else if (var4 == 8) {
                   this.o = arg1.g1();
                } else if (var4 == 9) {

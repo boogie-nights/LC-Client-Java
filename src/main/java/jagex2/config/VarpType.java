@@ -43,7 +43,7 @@ public class VarpType {
       Packet var2 = new Packet(arg0.a("varp.dat", (byte[])null));
       if (arg1 == 36135) {
          c = 0;
-         a = var2.e();
+         a = var2.g2();
          if (b == null) {
             b = new VarpType[a];
          }
@@ -85,7 +85,7 @@ public class VarpType {
             } else if (var4 == 4) {
                this.i = false;
             } else if (var4 == 5) {
-               this.j = arg2.e();
+               this.j = arg2.g2();
             } else if (var4 == 6) {
                this.k = true;
             } else if (var4 == 7) {

@@ -174,13 +174,13 @@ public class LocType {
    public static final void a(Jagfile arg0) {
       j = new Packet(arg0.a("loc.dat", (byte[])null));
       Packet var1 = new Packet(arg0.a("loc.idx", (byte[])null));
-      Y = var1.e();
+      Y = var1.g2();
       a = new int[Y];
       int var2 = 2;
 
       for(int var3 = 0; var3 < Y; ++var3) {
          a[var3] = var2;
-         var2 += var1.e();
+         var2 += var1.g2();
       }
 
       y = new LocType[20];
@@ -450,7 +450,7 @@ public class LocType {
                               this.f = new int[var7];
 
                               for(int var8 = 0; var8 < var7; ++var8) {
-                                 this.f[var8] = arg1.e();
+                                 this.f[var8] = arg1.g2();
                               }
                            }
                         }
@@ -474,16 +474,16 @@ public class LocType {
                      } else if (var4 == 23) {
                         this.N = true;
                      } else if (var4 == 24) {
-                        this.T = arg1.e();
+                        this.T = arg1.g2();
                         if (this.T == 65535) {
                            this.T = -1;
                         }
                      } else if (var4 == 28) {
                         this.S = arg1.g1();
                      } else if (var4 == 29) {
-                        this.A = arg1.d();
+                        this.A = arg1.g1b();
                      } else if (var4 == 39) {
-                        this.D = arg1.d();
+                        this.D = arg1.g1b();
                      } else if (var4 >= 30 && var4 < 39) {
                         if (this.G == null) {
                            this.G = new String[5];
@@ -499,31 +499,31 @@ public class LocType {
                         this.I = new int[var9];
 
                         for(int var10 = 0; var10 < var9; ++var10) {
-                           this.P[var10] = arg1.e();
-                           this.I[var10] = arg1.e();
+                           this.P[var10] = arg1.g2();
+                           this.I[var10] = arg1.g2();
                         }
                      } else if (var4 == 60) {
-                        this.W = arg1.e();
+                        this.W = arg1.g2();
                      } else if (var4 == 62) {
                         this.O = true;
                      } else if (var4 == 64) {
                         this.X = false;
                      } else if (var4 == 65) {
-                        this.w = arg1.e();
+                        this.w = arg1.g2();
                      } else if (var4 == 66) {
-                        this.c = arg1.e();
+                        this.c = arg1.g2();
                      } else if (var4 == 67) {
-                        this.M = arg1.e();
+                        this.M = arg1.g2();
                      } else if (var4 == 68) {
-                        this.L = arg1.e();
+                        this.L = arg1.g2();
                      } else if (var4 == 69) {
                         this.g = arg1.g1();
                      } else if (var4 == 70) {
-                        this.d = arg1.f();
+                        this.d = arg1.gb2();
                      } else if (var4 == 71) {
-                        this.B = arg1.f();
+                        this.B = arg1.gb2();
                      } else if (var4 == 72) {
-                        this.i = arg1.f();
+                        this.i = arg1.gb2();
                      } else if (var4 == 73) {
                         this.h = true;
                      } else if (var4 == 74) {
@@ -531,12 +531,12 @@ public class LocType {
                      } else if (var4 == 75) {
                         this.K = arg1.g1();
                      } else if (var4 == 77) {
-                        this.u = arg1.e();
+                        this.u = arg1.g2();
                         if (this.u == 65535) {
                            this.u = -1;
                         }
 
-                        this.x = arg1.e();
+                        this.x = arg1.g2();
                         if (this.x == 65535) {
                            this.x = -1;
                         }
@@ -545,7 +545,7 @@ public class LocType {
                         this.V = new int[var11 + 1];
 
                         for(int var12 = 0; var12 <= var11; ++var12) {
-                           this.V[var12] = arg1.e();
+                           this.V[var12] = arg1.g2();
                            if (this.V[var12] == 65535) {
                               this.V[var12] = -1;
                            }
@@ -561,7 +561,7 @@ public class LocType {
                   this.f = new int[var5];
 
                   for(int var6 = 0; var6 < var5; ++var6) {
-                     this.f[var6] = arg1.e();
+                     this.f[var6] = arg1.g2();
                      this.F[var6] = arg1.g1();
                   }
                }

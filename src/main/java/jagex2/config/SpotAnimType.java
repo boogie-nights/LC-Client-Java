@@ -45,7 +45,7 @@ public class SpotAnimType {
    @ObfuscatedName("MNZYLKNY.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.a("spotanim.dat", (byte[])null));
-      d = var2.e();
+      d = var2.g2();
       if (arg1 != 36135) {
          b = !b;
       }
@@ -81,26 +81,26 @@ public class SpotAnimType {
             }
 
             if (var4 == 1) {
-               this.g = arg1.e();
+               this.g = arg1.g2();
             } else if (var4 == 2) {
-               this.h = arg1.e();
+               this.h = arg1.g2();
                if (SeqType.d != null) {
                   this.i = SeqType.d[this.h];
                }
             } else if (var4 == 4) {
-               this.l = arg1.e();
+               this.l = arg1.g2();
             } else if (var4 == 5) {
-               this.m = arg1.e();
+               this.m = arg1.g2();
             } else if (var4 == 6) {
-               this.n = arg1.e();
+               this.n = arg1.g2();
             } else if (var4 == 7) {
                this.o = arg1.g1();
             } else if (var4 == 8) {
                this.p = arg1.g1();
             } else if (var4 >= 40 && var4 < 50) {
-               this.j[var4 - 40] = arg1.e();
+               this.j[var4 - 40] = arg1.g2();
             } else if (var4 >= 50 && var4 < 60) {
-               this.k[var4 - 50] = arg1.e();
+               this.k[var4 - 50] = arg1.g2();
             } else {
                System.out.println("Error unrecognised spotanim config code: " + var4);
             }

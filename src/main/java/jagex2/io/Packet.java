@@ -34,15 +34,29 @@ public class Packet extends DoublyLinkable {
 
 			crcTable[b] = remainder;
 		}
-
-		cacheMin = new LinkList();
-		cacheMid = new LinkList();
-		cacheMax = new LinkList();
 		L = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'};
 	}
 
 	@ObfuscatedName("MFMVIYHT.D")
 	public static final int[] bitmask = new int[] { 0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1 };
+
+	@ObfuscatedName("MFMVIYHT.E")
+	public Isaac random;
+
+	@ObfuscatedName("MFMVIYHT.F")
+	public static int cacheMinCount;
+
+	@ObfuscatedName("MFMVIYHT.H")
+	public static int cacheMaxCount;
+
+	@ObfuscatedName("MFMVIYHT.I")
+	public static LinkList cacheMin = new LinkList();
+
+	@ObfuscatedName("MFMVIYHT.J")
+	public static LinkList cacheMid = new LinkList();
+
+	@ObfuscatedName("MFMVIYHT.K")
+	public static LinkList cacheMax = new LinkList();
 
 	@ObfuscatedName("MFMVIYHT.h")
 	public boolean h = false;
@@ -89,45 +103,20 @@ public class Packet extends DoublyLinkable {
 	@ObfuscatedName("MFMVIYHT.y")
 	public int y = 1;
 
-
 	@ObfuscatedName("MFMVIYHT.x")
 	public static boolean x = true;
-
-
-
-
-
-	@ObfuscatedName("MFMVIYHT.I")
-	public static LinkList cacheMin;
-
-	@ObfuscatedName("MFMVIYHT.J")
-	public static LinkList cacheMid;
-
-	@ObfuscatedName("MFMVIYHT.K")
-	public static LinkList cacheMax;
 
 	@ObfuscatedName("MFMVIYHT.L")
 	public static char[] L;
 
-
-
-	@ObfuscatedName("MFMVIYHT.F")
-	public static int cacheMinCount;
-
 	@ObfuscatedName("MFMVIYHT.G")
 	public static int G;
-
-	@ObfuscatedName("MFMVIYHT.H")
-	public static int cacheMaxCount;
 
 	@ObfuscatedName("MFMVIYHT.r")
 	public int r;
 
 	@ObfuscatedName("MFMVIYHT.s")
 	public int s;
-
-	@ObfuscatedName("MFMVIYHT.E")
-	public Isaac random;
 
 	@ObfuscatedName("MFMVIYHT.M")
 	public static boolean M;
@@ -184,53 +173,47 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(I)V")
-	public void p1(int arg0) {
-		this.data[this.pos++] = (byte) arg0;
+	public void p1(int n) {
+		this.data[this.pos++] = (byte) n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.b(I)V")
-	public void b(int arg0) {
-		this.data[this.pos++] = (byte) (arg0 >> 8);
-		this.data[this.pos++] = (byte) arg0;
+	public void p2(int n) {
+		this.data[this.pos++] = (byte) (n >> 8);
+		this.data[this.pos++] = (byte) n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(IZ)V")
-	public void a(int arg0, boolean arg1) {
-		this.data[this.pos++] = (byte) arg0;
-		if (!arg1) {
-			this.data[this.pos++] = (byte) (arg0 >> 8);
-		}
+	public void ip2(int n) {
+		this.data[this.pos++] = (byte) n;
+		this.data[this.pos++] = (byte) (n >> 8);
 	}
 
 	@ObfuscatedName("MFMVIYHT.c(I)V")
-	public void c(int arg0) {
-		this.data[this.pos++] = (byte) (arg0 >> 16);
-		this.data[this.pos++] = (byte) (arg0 >> 8);
-		this.data[this.pos++] = (byte) arg0;
+	public void p3(int n) {
+		this.data[this.pos++] = (byte) (n >> 16);
+		this.data[this.pos++] = (byte) (n >> 8);
+		this.data[this.pos++] = (byte) n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.d(I)V")
-	public void d(int arg0) {
-		this.data[this.pos++] = (byte) (arg0 >> 24);
-		this.data[this.pos++] = (byte) (arg0 >> 16);
-		this.data[this.pos++] = (byte) (arg0 >> 8);
-		this.data[this.pos++] = (byte) arg0;
+	public void p4(int n) {
+		this.data[this.pos++] = (byte) (n >> 24);
+		this.data[this.pos++] = (byte) (n >> 16);
+		this.data[this.pos++] = (byte) (n >> 8);
+		this.data[this.pos++] = (byte) n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.b(IZ)V")
-	public void b(int arg0, boolean arg1) {
-		this.data[this.pos++] = (byte) arg0;
-		this.data[this.pos++] = (byte) (arg0 >> 8);
-		if (arg1) {
-			this.i = 306;
-		}
-
-		this.data[this.pos++] = (byte) (arg0 >> 16);
-		this.data[this.pos++] = (byte) (arg0 >> 24);
+	public void ip4(int n) {
+		this.data[this.pos++] = (byte) n;
+		this.data[this.pos++] = (byte) (n >> 8);
+		this.data[this.pos++] = (byte) (n >> 16);
+		this.data[this.pos++] = (byte) (n >> 24);
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(JZ)V")
-	public void a(long n) {
+	public void p8(long n) {
 		this.data[this.pos++] = (byte) ((int) (n >> 56));
 		this.data[this.pos++] = (byte) ((int) (n >> 48));
 		this.data[this.pos++] = (byte) ((int) (n >> 40));
@@ -261,11 +244,8 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(II)V")
-	public void a(int arg0, int arg1) {
-		this.data[this.pos - arg0 - 1] = (byte) arg0;
-		if (arg1 == 0) {
-			;
-		}
+	public void psize1(int start) {
+		this.data[this.pos - start - 1] = (byte) start;
 	}
 
 	@ObfuscatedName("MFMVIYHT.c()I")
@@ -274,25 +254,25 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("MFMVIYHT.d()B")
-	public byte d() {
+	public byte g1b() {
 		return this.data[this.pos++];
 	}
 
 	@ObfuscatedName("MFMVIYHT.e()I")
-	public int e() {
+	public int g2() {
 		this.pos += 2;
-		return ((this.data[this.pos - 2] & 255) << 8) + (this.data[this.pos - 1] & 255);
+		return ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] & 0xFF);
 	}
 
 	@ObfuscatedName("MFMVIYHT.f()I")
-	public int f() {
+	public int gb2() {
 		this.pos += 2;
-		int var1 = ((this.data[this.pos - 2] & 255) << 8) + (this.data[this.pos - 1] & 255);
-		if (var1 > 32767) {
-			var1 -= 65536;
+		int n = ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] & 0xFF);
+		if (n > 32767) {
+			n -= 65536;
 		}
 
-		return var1;
+		return n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.g()I")
@@ -382,13 +362,13 @@ public class Packet extends DoublyLinkable {
 	@ObfuscatedName("MFMVIYHT.j()I")
 	public int gsmart() {
 		int n = this.data[this.pos] & 0xFF;
-		return n < 128 ? this.g1() - 64 : this.e() - 49152;
+		return n < 128 ? this.g1() - 64 : this.g2() - 49152;
 	}
 
 	@ObfuscatedName("MFMVIYHT.k()I")
 	public int gsmarts() {
 		int n = this.data[this.pos] & 0xFF;
-		return n < 128 ? this.g1() : this.e() - 32768;
+		return n < 128 ? this.g1() : this.g2() - 32768;
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(ILjava/math/BigInteger;Ljava/math/BigInteger;)V")
@@ -621,6 +601,4 @@ public class Packet extends DoublyLinkable {
 		}
 
 	}
-
-
 }
