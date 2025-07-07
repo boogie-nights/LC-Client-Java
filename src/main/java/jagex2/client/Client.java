@@ -2602,7 +2602,7 @@ public class Client extends GameShell {
                   this.rb = this.rb - this.Ub.nextInt() & 255;
                }
 
-               this.qb = Protocol.b[this.rb];
+               this.qb = Protocol.SERVERPROT_LENGTH[this.rb];
                --var3;
             }
 
