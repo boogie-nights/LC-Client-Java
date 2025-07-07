@@ -8392,7 +8392,7 @@ public class Client extends GameShell {
          }
 
          PixFont var2 = this.Ze;
-         Pix2D.setBounds(0, 0, 77, 463);
+         Pix2D.setBounds(463, 77, 0, 0);
 
          for(int var3 = 0; var3 < this.jb; ++var3) {
             int var4 = var3 * 14 + 18 - this.mb;
@@ -8424,7 +8424,7 @@ public class Client extends GameShell {
       } else {
          PixFont var5 = this.Ze;
          int var6 = 0;
-         Pix2D.setBounds(0, 0, 77, 463);
+         Pix2D.setBounds(463, 77, 0, 0);
 
          for(int var7 = 0; var7 < 100; ++var7) {
             if (this.Ej[var7] != null) {
@@ -11942,7 +11942,7 @@ public class Client extends GameShell {
             if (this.Pc[var10] == 4) {
                int var22 = this.af.a(var17, (byte)-53);
                int var23 = (150 - this.Qc[var10]) * (var22 + 100) / 150;
-               Pix2D.setBounds(0, this.Bc - 50, 334, this.Bc + 50);
+               Pix2D.setBounds(this.Bc + 50, 334, 0, this.Bc - 50);
                this.af.b(2245, this.Bc + 50 - var23, 0, this.Cc + 1, var17);
                this.af.b(2245, this.Bc + 50 - var23, var18, this.Cc, var17);
                Pix2D.resetBounds();
@@ -11957,7 +11957,7 @@ public class Client extends GameShell {
                   var25 = var24 - 125;
                }
 
-               Pix2D.setBounds(this.Cc - this.af.G - 1, 0, this.Cc + 5, 512);
+               Pix2D.setBounds(512, this.Cc + 5, this.Cc - this.af.G - 1, 0);
                this.af.a(this.Bc, 452, this.Cc + 1 + var25, 0, var17);
                this.af.a(this.Bc, 452, this.Cc + var25, var18, var17);
                Pix2D.resetBounds();
@@ -13147,7 +13147,7 @@ public class Client extends GameShell {
             int var7 = Pix2D.top;
             int var8 = Pix2D.right;
             int var9 = Pix2D.bottom;
-            Pix2D.setBounds(arg0, arg1, arg2.C + arg0, arg2.F + arg1);
+            Pix2D.setBounds(arg2.F + arg1, arg2.C + arg0, arg0, arg1);
             int var10 = arg2.W.length;
             if (arg4 != 8) {
                this.rb = -1;
@@ -13534,7 +13534,7 @@ public class Client extends GameShell {
                }
             }
 
-            Pix2D.setBounds(var7, var6, var9, var8);
+            Pix2D.setBounds(var8, var9, var7, var6);
          }
       }
    }

@@ -671,7 +671,7 @@ public class ObjType {
          }
 
          Pix2D.bind(var15, var14, var16);
-         Pix2D.setBounds(var19, var17, var20, var18);
+         Pix2D.setBounds(var18, var20, var19, var17);
          Pix3D.E = var11;
          Pix3D.F = var12;
          Pix3D.K = var13;

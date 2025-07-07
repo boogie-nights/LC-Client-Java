@@ -40,7 +40,7 @@ public class Pix2D extends DoublyLinkable {
 		Pix2D.data = data;
 		width2d = width;
 		height2d = height;
-		setBounds(0, 0, height, width);
+		setBounds(width, height, 0, 0);
 	}
 
 	@ObfuscatedName("LFYNQWSZ.a(B)V")
@@ -54,7 +54,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("LFYNQWSZ.a(IIIIZ)V")
-	public static void setBounds(int top, int left, int bottom, int right) {
+	public static void setBounds(int right, int bottom, int top, int left) {
 		if (left < 0) {
 			left = 0;
 		}
