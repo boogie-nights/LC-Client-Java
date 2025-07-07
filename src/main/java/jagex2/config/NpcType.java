@@ -326,7 +326,7 @@ public class NpcType {
          NpcType var5 = this.b(false);
          return var5 == null ? null : var5.a(arg0, arg1, 0, arg3);
       } else {
-         Model var6 = (Model)o.a(this.h);
+         Model var6 = (Model)o.get(this.h);
          if (var6 == null) {
             boolean var7 = false;
 
@@ -360,7 +360,7 @@ public class NpcType {
 
             var6.f(7);
             var6.a(this.Q + 64, this.L + 850, -30, -50, -30, true);
-            o.a(var6, this.h, 5);
+            o.put(var6, this.h);
          }
 
          Model var12 = Model.t;

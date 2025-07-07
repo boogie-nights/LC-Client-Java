@@ -110,7 +110,7 @@ public class SpotAnimType {
 
    @ObfuscatedName("MNZYLKNY.a()LLZYQDKJV;")
    public Model a() {
-      Model var1 = (Model)q.a((long)this.f);
+      Model var1 = (Model)q.get((long)this.f);
       if (var1 != null) {
          return var1;
       } else {
@@ -124,7 +124,7 @@ public class SpotAnimType {
                }
             }
 
-            q.a(var2, (long)this.f, 5);
+            q.put(var2, (long)this.f);
             return var2;
          }
       }

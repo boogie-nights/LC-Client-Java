@@ -201,7 +201,7 @@ public class LocType {
          }
 
          var6 = ((long)(arg1 + 1) << 32) + (long)((this.p << 6) + arg0);
-         Model var8 = (Model)e.a(var6);
+         Model var8 = (Model)e.get(var6);
          if (var8 != null) {
             return var8;
          }
@@ -219,7 +219,7 @@ public class LocType {
                var12 += 65536;
             }
 
-            var5 = (Model)v.a((long)var12);
+            var5 = (Model)v.get((long)var12);
             if (var5 == null) {
                var5 = Model.a(var12 & 65535);
                if (var5 == null) {
@@ -230,7 +230,7 @@ public class LocType {
                   var5.g(0);
                }
 
-               v.a(var5, (long)var12, 5);
+               v.put(var5, (long)var12);
             }
 
             if (var10 > 1) {
@@ -256,7 +256,7 @@ public class LocType {
          }
 
          var6 = ((long)(arg1 + 1) << 32) + (long)((this.p << 6) + (var13 << 3) + arg0);
-         Model var15 = (Model)e.a(var6);
+         Model var15 = (Model)e.get(var6);
          if (var15 != null) {
             return var15;
          }
@@ -267,7 +267,7 @@ public class LocType {
             var16 += 65536;
          }
 
-         var5 = (Model)v.a((long)var16);
+         var5 = (Model)v.get((long)var16);
          if (var5 == null) {
             var5 = Model.a(var16 & 65535);
             if (var5 == null) {
@@ -278,7 +278,7 @@ public class LocType {
                var5.g(0);
             }
 
-            v.a(var5, (long)var16, 5);
+            v.put(var5, (long)var16);
          }
       }
 
@@ -331,7 +331,7 @@ public class LocType {
          var20.Z = var20.k;
       }
 
-      e.a(var20, var6, 5);
+      e.put(var20, var6);
       return var20;
    }
 

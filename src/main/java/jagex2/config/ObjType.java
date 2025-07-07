@@ -515,7 +515,7 @@ public class ObjType {
          }
       }
 
-      Model var4 = (Model)l.a((long)this.L);
+      Model var4 = (Model)l.get((long)this.L);
       if (var4 != null) {
          return var4;
       } else {
@@ -535,7 +535,7 @@ public class ObjType {
 
             var5.a(this.C + 64, this.G + 768, -50, -10, -50, true);
             var5.eb = true;
-            l.a(var5, (long)this.L, 5);
+            l.put(var5, (long)this.L);
             return var5;
          }
       }
@@ -544,7 +544,7 @@ public class ObjType {
    @ObfuscatedName("GSCQQEUA.a(BIII)LEPQDEJTO;")
    public static final Pix24 a(byte arg0, int arg1, int arg2, int arg3) {
       if (arg1 == 0) {
-         Pix24 var4 = (Pix24)u.a((long)arg3);
+         Pix24 var4 = (Pix24)u.get((long)arg3);
          if (var4 != null && var4.O != arg2 && var4.O != -1) {
             var4.unlink();
             var4 = null;
@@ -667,7 +667,7 @@ public class ObjType {
          }
 
          if (arg1 == 0) {
-            u.a(var10, (long)arg3, 5);
+            u.put(var10, (long)arg3);
          }
 
          Pix2D.a(y, var15, var16, var14);

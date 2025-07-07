@@ -23,7 +23,6 @@ import jagex2.config.VarbitType;
 import jagex2.dash3d.*;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LinkList;
-import jagex2.datastruct.Linkable;
 import jagex2.graphics.*;
 import jagex2.io.*;
 import jagex2.sound.Wave;
@@ -5058,7 +5057,7 @@ public class Client extends GameShell {
       NpcType.o.a();
       ObjType.l.a();
       ObjType.u.a();
-      ClientPlayer.Ib.a();
+      ClientPlayer.Ib.clear();
       SpotAnimType.q.a();
    }
 

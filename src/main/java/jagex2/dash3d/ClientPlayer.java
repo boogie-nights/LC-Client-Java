@@ -172,7 +172,7 @@ public class ClientPlayer extends ClientEntity {
             var6 = SeqType.d[super.u].f[super.v];
          }
 
-         Model var11 = (Model)Ib.a(var4);
+         Model var11 = (Model)Ib.get(var4);
          if (var11 == null) {
             boolean var12 = false;
 
@@ -197,7 +197,7 @@ public class ClientPlayer extends ClientEntity {
 
             if (var12) {
                if (this.wb != -1L) {
-                  var11 = (Model)Ib.a(this.wb);
+                  var11 = (Model)Ib.get(this.wb);
                }
 
                if (var11 == null) {
@@ -248,7 +248,7 @@ public class ClientPlayer extends ClientEntity {
 
             var11.f(7);
             var11.a(64, 850, -30, -50, -30, true);
-            Ib.a(var11, var4, 5);
+            Ib.put(var11, var4);
             this.wb = var4;
          }
 

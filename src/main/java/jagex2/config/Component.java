@@ -180,7 +180,7 @@ public class Component {
          nb = -317;
       }
 
-      Pix24 var5 = (Pix24)O.a(var3);
+      Pix24 var5 = (Pix24)O.get(var3);
       if (var5 != null) {
          return var5;
       } else if (e == null) {
@@ -188,7 +188,7 @@ public class Component {
       } else {
          try {
             Pix24 var6 = new Pix24(e, arg1, arg0);
-            O.a(var6, var3, 5);
+            O.put(var6, var3);
             return var6;
          } catch (Exception var7) {
             return null;
@@ -228,7 +228,7 @@ public class Component {
          H += var3.G;
       }
 
-      Model var4 = (Model)cb.a((long)((arg0 << 16) + arg1));
+      Model var4 = (Model)cb.get((long)((arg0 << 16) + arg1));
       if (var4 != null) {
          return var4;
       } else {
@@ -253,7 +253,7 @@ public class Component {
          }
 
          if (var4 != null) {
-            cb.a(var4, (long)((arg0 << 16) + arg1), 5);
+            cb.put(var4, (long)((arg0 << 16) + arg1));
          }
 
          return var4;
@@ -562,14 +562,14 @@ public class Component {
 
    @ObfuscatedName("EWIXBTLV.a(ILLZYQDKJV;II)V")
    public static void a(int arg0, Model arg1, int arg2, int arg3) {
-      cb.a();
+      cb.clear();
       if (arg3 != 6) {
          for(int var4 = 1; var4 > 0; ++var4) {
          }
       }
 
       if (arg1 != null && arg0 != 4) {
-         cb.a(arg1, (long)((arg0 << 16) + arg2), 5);
+         cb.put(arg1, (long)((arg0 << 16) + arg2));
       }
    }
 

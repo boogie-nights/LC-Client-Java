@@ -3,81 +3,76 @@ package jagex2.datastruct;
 import deob.ObfuscatedName;
 
 public class LruCache {
-   @ObfuscatedName("RHNYLZZL.a")
-   public int a = 256;
-   @ObfuscatedName("RHNYLZZL.d")
-   public DoublyLinkable d = new DoublyLinkable();
-   @ObfuscatedName("RHNYLZZL.h")
-   public DoublyLinkList h = new DoublyLinkList();
-   @ObfuscatedName("RHNYLZZL.e")
-   public int e;
-   @ObfuscatedName("RHNYLZZL.f")
-   public int f;
-   @ObfuscatedName("RHNYLZZL.g")
-   public HashTable g;
-   @ObfuscatedName("RHNYLZZL.b")
-   public int b;
-   @ObfuscatedName("RHNYLZZL.c")
-   public int c;
 
-   public LruCache(int arg0, int arg1) {
-      this.e = arg0;
-      if (arg1 >= 0) {
-         this.a = 433;
-      }
+	@ObfuscatedName("RHNYLZZL.b")
+	public int notFound;
 
-      this.f = arg0;
-      this.g = new HashTable(1024);
-   }
+	@ObfuscatedName("RHNYLZZL.c")
+	public int found;
 
-   @ObfuscatedName("RHNYLZZL.a(J)LDPPNUUMQ;")
-   public DoublyLinkable a(long arg0) {
-      DoublyLinkable var3 = (DoublyLinkable)this.g.get(arg0);
-      if (var3 != null) {
-         this.h.push(var3);
-         ++this.c;
-      } else {
-         ++this.b;
-      }
+	@ObfuscatedName("RHNYLZZL.d")
+	public DoublyLinkable search = new DoublyLinkable();
 
-      return var3;
-   }
+	@ObfuscatedName("RHNYLZZL.e")
+	public int capacity;
 
-   @ObfuscatedName("RHNYLZZL.a(LDPPNUUMQ;JI)V")
-   public void a(DoublyLinkable arg0, long arg1, int arg2) {
-      if (arg2 != 5) {
-         this.a = 150;
-      }
+	@ObfuscatedName("RHNYLZZL.f")
+	public int available;
 
-      if (this.f == 0) {
-         DoublyLinkable var5 = this.h.pop();
-         var5.unlink();
-         var5.unlink2();
-         if (this.d == var5) {
-            DoublyLinkable var6 = this.h.pop();
-            var6.unlink();
-            var6.unlink2();
-         }
-      } else {
-         --this.f;
-      }
+	@ObfuscatedName("RHNYLZZL.g")
+	public HashTable table = new HashTable(1024);
 
-      this.g.put(arg1, arg0);
-      this.h.push(arg0);
+	@ObfuscatedName("RHNYLZZL.h")
+	public DoublyLinkList history = new DoublyLinkList();
 
-   }
+	public LruCache(int size, int arg1) {
+		this.capacity = size;
+		this.available = size;
+	}
 
-   @ObfuscatedName("RHNYLZZL.a()V")
-   public void a() {
-      while(true) {
-         DoublyLinkable var1 = this.h.pop();
-         if (var1 == null) {
-            this.f = this.e;
-            return;
-         }
+	@ObfuscatedName("RHNYLZZL.a(J)LDPPNUUMQ;")
+	public DoublyLinkable get(long key) {
+		DoublyLinkable node = (DoublyLinkable) this.table.get(key);
+		if (node == null) {
+			this.notFound++;
+		} else {
+			this.history.push(node);
+			this.found++;
+		}
+		return node;
+	}
 
-         var1.unlink();
-         var1.unlink2();
-      }
-   }
+	@ObfuscatedName("RHNYLZZL.a(LDPPNUUMQ;JI)V")
+	public void put(DoublyLinkable node, long key) {
+		if (this.available == 0) {
+			DoublyLinkable sentinel = this.history.pop();
+			sentinel.unlink();
+			sentinel.unlink2();
+			if (this.search == sentinel) {
+				DoublyLinkable next = this.history.pop();
+				next.unlink();
+				next.unlink2();
+			}
+		} else {
+			this.available--;
+		}
+
+		this.table.put(key, node);
+		this.history.push(node);
+
+	}
+
+	@ObfuscatedName("RHNYLZZL.a()V")
+	public void clear() {
+		while (true) {
+			DoublyLinkable node = this.history.pop();
+			if (node == null) {
+				this.available = this.capacity;
+				return;
+			}
+
+			node.unlink();
+			node.unlink2();
+		}
+	}
 }
