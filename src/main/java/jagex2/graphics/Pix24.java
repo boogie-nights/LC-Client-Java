@@ -546,7 +546,7 @@ public class Pix24 extends Pix2D {
          }
 
          if (var10 > 0 && var9 > 0) {
-            this.a(var7, var11, this.I, var10, Pix2D.data, arg0.D, 40303, var9, var8, 0, var12);
+            this.a(var7, var11, this.I, var10, Pix2D.data, arg0.pixels, 40303, var9, var8, 0, var12);
          }
       }
    }

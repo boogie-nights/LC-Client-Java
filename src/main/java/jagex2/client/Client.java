@@ -6494,7 +6494,7 @@ public class Client extends GameShell {
                   int var59 = 0;
 
                   for(int var60 = 0; var60 < 34; ++var60) {
-                     if (this.wh.D[this.wh.F * var57 + var60] == 0) {
+                     if (this.wh.pixels[this.wh.width * var57 + var60] == 0) {
                         if (var58 == 999) {
                            var58 = var60;
                         }
@@ -6513,7 +6513,7 @@ public class Client extends GameShell {
                   int var63 = 0;
 
                   for(int var64 = 25; var64 < 172; ++var64) {
-                     if (this.wh.D[this.wh.F * var61 + var64] == 0 && (var64 > 34 || var61 > 34)) {
+                     if (this.wh.pixels[this.wh.width * var61 + var64] == 0 && (var64 > 34 || var61 > 34)) {
                         if (var62 == 999) {
                            var62 = var64;
                         }
@@ -6567,16 +6567,16 @@ public class Client extends GameShell {
                int var4 = this.wj[var3];
                if (Pix3D.S[var4] >= arg0) {
                   Pix8 var5 = Pix3D.M[var4];
-                  int var6 = var5.G * var5.F - 1;
-                  int var7 = this.Uc * var5.F * 2;
-                  byte[] var8 = var5.D;
+                  int var6 = var5.height * var5.width - 1;
+                  int var7 = this.Uc * var5.width * 2;
+                  byte[] var8 = var5.pixels;
                   byte[] var9 = this.Di;
 
                   for(int var10 = 0; var10 <= var6; ++var10) {
                      var9[var10] = var8[var10 - var7 & var6];
                   }
 
-                  var5.D = var9;
+                  var5.pixels = var9;
                   this.Di = var8;
                   Pix3D.b(var4, 9);
                }
@@ -8357,11 +8357,11 @@ public class Client extends GameShell {
       if (arg0 != null) {
          int var12 = 0;
 
-         for(int var13 = 0; var13 < arg0.G; ++var13) {
-            for(int var14 = 0; var14 < arg0.F; ++var14) {
-               if (arg0.D[var12++] != 0) {
-                  int var15 = var14 + 16 + arg0.H;
-                  int var16 = var13 + 16 + arg0.I;
+         for(int var13 = 0; var13 < arg0.height; ++var13) {
+            for(int var14 = 0; var14 < arg0.width; ++var14) {
+               if (arg0.pixels[var12++] != 0) {
+                  int var15 = var14 + 16 + arg0.cropX;
+                  int var16 = var13 + 16 + arg0.cropY;
                   int var17 = (var16 << 7) + var15;
                   this.mh[var17] = 0;
                }
@@ -8676,7 +8676,7 @@ public class Client extends GameShell {
    public final void v(int arg0) {
       this.Tg.a(false);
       if (this.Pe == 2) {
-         byte[] var2 = this.wh.D;
+         byte[] var2 = this.wh.pixels;
          int[] var3 = Pix2D.data;
          int var4 = var2.length;
 
@@ -13866,8 +13866,8 @@ public class Client extends GameShell {
          if (var16.L != -1) {
             Pix8 var17 = this.Pg[var16.L];
             if (var17 != null) {
-               int var18 = (var16.R * 4 - var17.F) / 2;
-               int var19 = (var16.r * 4 - var17.G) / 2;
+               int var18 = (var16.R * 4 - var17.width) / 2;
+               int var19 = (var16.r * 4 - var17.height) / 2;
                var17.a((104 - arg0 - var16.r) * 4 + 48 + var19, arg2 * 4 + 48 + var18, -488);
             }
          } else {
@@ -13943,8 +13943,8 @@ public class Client extends GameShell {
          if (var25.L != -1) {
             Pix8 var26 = this.Pg[var25.L];
             if (var26 != null) {
-               int var27 = (var25.R * 4 - var26.F) / 2;
-               int var28 = (var25.r * 4 - var26.G) / 2;
+               int var27 = (var25.R * 4 - var26.width) / 2;
+               int var28 = (var25.r * 4 - var26.height) / 2;
                var26.a((104 - arg0 - var25.r) * 4 + 48 + var28, arg2 * 4 + 48 + var27, -488);
             }
          } else if (var23 == 9) {
@@ -13976,8 +13976,8 @@ public class Client extends GameShell {
          if (var34.L != -1) {
             Pix8 var35 = this.Pg[var34.L];
             if (var35 != null) {
-               int var36 = (var34.R * 4 - var35.F) / 2;
-               int var37 = (var34.r * 4 - var35.G) / 2;
+               int var36 = (var34.R * 4 - var35.width) / 2;
+               int var37 = (var34.r * 4 - var35.height) / 2;
                var35.a((104 - arg0 - var34.r) * 4 + 48 + var37, arg2 * 4 + 48 + var36, -488);
                return;
             }

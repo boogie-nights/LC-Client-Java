@@ -154,8 +154,8 @@ public class Pix3D extends Pix2D {
       for(int var3 = 0; var3 < 50; ++var3) {
          try {
             M[var3] = new Pix8(arg0, String.valueOf(var3), 0);
-            if (z && M[var3].J == 128) {
-               M[var3].b((int)0);
+            if (z && M[var3].cropW == 128) {
+               M[var3].shrink();
             } else {
                M[var3].a(true);
             }
@@ -242,7 +242,7 @@ public class Pix3D extends Pix2D {
             N[arg0] = false;
 
             for(int var7 = 0; var7 < 4096; ++var7) {
-               int var8 = var1[var7] = var6[var5.D[var7]] & 16316671;
+               int var8 = var1[var7] = var6[var5.pixels[var7]] & 16316671;
                if (var8 == 0) {
                   N[arg0] = true;
                }
@@ -252,14 +252,14 @@ public class Pix3D extends Pix2D {
                var1[var7 + 12288] = var8 - (var8 >>> 2) - (var8 >>> 3) & 16316671;
             }
          } else {
-            if (var5.F != 64) {
+            if (var5.width != 64) {
                for(int var11 = 0; var11 < 16384; ++var11) {
-                  var1[var11] = var6[var5.D[var11]];
+                  var1[var11] = var6[var5.pixels[var11]];
                }
             } else {
                for(int var9 = 0; var9 < 128; ++var9) {
                   for(int var10 = 0; var10 < 128; ++var10) {
-                     var1[(var9 << 7) + var10] = var6[var5.D[(var9 >> 1 << 6) + (var10 >> 1)]];
+                     var1[(var9 << 7) + var10] = var6[var5.pixels[(var9 >> 1 << 6) + (var10 >> 1)]];
                   }
                }
             }
@@ -362,7 +362,7 @@ public class Pix3D extends Pix2D {
 
       for(int var35 = 0; var35 < 50; ++var35) {
          if (M[var35] != null) {
-            int[] var36 = M[var35].E;
+            int[] var36 = M[var35].palette;
             V[var35] = new int[var36.length];
 
             for(int var37 = 0; var37 < var36.length; ++var37) {
