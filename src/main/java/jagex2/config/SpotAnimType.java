@@ -24,7 +24,7 @@ public class SpotAnimType {
    @ObfuscatedName("MNZYLKNY.b")
    public static boolean b = true;
    @ObfuscatedName("MNZYLKNY.q")
-   public static LruCache q = new LruCache(30, -572);
+   public static LruCache q = new LruCache(30);
    @ObfuscatedName("MNZYLKNY.d")
    public static int d;
    @ObfuscatedName("MNZYLKNY.f")

@@ -34,7 +34,7 @@ public class NpcType {
    @ObfuscatedName("SLDUQHOR.r")
    public int r = -1;
    @ObfuscatedName("SLDUQHOR.s")
-   public int s = -1;
+   public int visLevel = -1;
    @ObfuscatedName("SLDUQHOR.t")
    public int t = 7;
    @ObfuscatedName("SLDUQHOR.u")
@@ -62,7 +62,7 @@ public class NpcType {
    @ObfuscatedName("SLDUQHOR.P")
    public boolean P = false;
    @ObfuscatedName("SLDUQHOR.o")
-   public static LruCache o = new LruCache(30, -572);
+   public static LruCache o = new LruCache(30);
    @ObfuscatedName("SLDUQHOR.G")
    public static byte G = 6;
    @ObfuscatedName("SLDUQHOR.C")
@@ -166,7 +166,7 @@ public class NpcType {
                } else if (var4 == 93) {
                   this.p = false;
                } else if (var4 == 95) {
-                  this.s = arg1.g2();
+                  this.visLevel = arg1.g2();
                } else if (var4 == 97) {
                   this.l = arg1.g2();
                } else if (var4 == 98) {
@@ -223,7 +223,7 @@ public class NpcType {
    }
 
    @ObfuscatedName("SLDUQHOR.a(I)LLZYQDKJV;")
-   public final Model a(int arg0) {
+   public final Model getHeadModel(int arg0) {
       if (arg0 <= 0) {
          for(int var2 = 1; var2 > 0; ++var2) {
          }
@@ -231,7 +231,7 @@ public class NpcType {
 
       if (this.b != null) {
          NpcType var3 = this.b(false);
-         return var3 == null ? null : var3.a(858);
+         return var3 == null ? null : var3.getHeadModel(858);
       } else if (this.e == null) {
          return null;
       } else {
@@ -358,8 +358,8 @@ public class NpcType {
                }
             }
 
-            var6.f(7);
-            var6.a(this.Q + 64, this.L + 850, -30, -50, -30, true);
+            var6.createLabelReferences(7);
+            var6.calculateNormals(this.Q + 64, this.L + 850, -30, -50, -30, true);
             o.put(var6, this.h);
          }
 
@@ -372,7 +372,7 @@ public class NpcType {
          if (arg0 != -1 && arg1 != -1) {
             var12.a(arg1, 0, arg0, arg3);
          } else if (arg0 != -1) {
-            var12.a(arg0, (byte)6);
+            var12.applyTransform(arg0, (byte)6);
          }
 
          if (this.l != 128 || this.j != 128) {
@@ -408,11 +408,11 @@ public class NpcType {
          var2 = i.Ee[this.M];
       }
 
-      return var2 >= 0 && var2 < this.b.length && this.b[var2] != -1 ? c(this.b[var2]) : null;
+      return var2 >= 0 && var2 < this.b.length && this.b[var2] != -1 ? get(this.b[var2]) : null;
    }
 
    @ObfuscatedName("SLDUQHOR.c(I)LSLDUQHOR;")
-   public static final NpcType c(int arg0) {
+   public static final NpcType get(int arg0) {
       for(int var1 = 0; var1 < 20; ++var1) {
          if ((long)arg0 == I[var1].h) {
             return I[var1];

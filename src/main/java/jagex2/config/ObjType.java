@@ -19,11 +19,11 @@ public class ObjType {
    @ObfuscatedName("GSCQQEUA.W")
    public boolean W = true;
    @ObfuscatedName("GSCQQEUA.l")
-   public static LruCache l = new LruCache(50, -572);
+   public static LruCache l = new LruCache(50);
    @ObfuscatedName("GSCQQEUA.s")
    public static boolean s = true;
    @ObfuscatedName("GSCQQEUA.u")
-   public static LruCache u = new LruCache(100, -572);
+   public static LruCache u = new LruCache(100);
    @ObfuscatedName("GSCQQEUA.v")
    public static byte v = 6;
    @ObfuscatedName("GSCQQEUA.y")
@@ -147,7 +147,7 @@ public class ObjType {
    }
 
    @ObfuscatedName("GSCQQEUA.a(I)LGSCQQEUA;")
-   public static final ObjType a(int arg0) {
+   public static final ObjType get(int arg0) {
       for(int var1 = 0; var1 < 10; ++var1) {
          if (k[var1].L == arg0) {
             return k[var1];
@@ -248,7 +248,7 @@ public class ObjType {
 
    @ObfuscatedName("GSCQQEUA.b(I)V")
    public void b(int arg0) {
-      ObjType var2 = a(this.r);
+      ObjType var2 = get(this.r);
       this.I = var2.I;
       this.R = var2.R;
       if (arg0 != 0) {
@@ -263,7 +263,7 @@ public class ObjType {
       this.o = var2.o;
       this.M = var2.M;
       this.p = var2.p;
-      ObjType var4 = a(this.h);
+      ObjType var4 = get(this.h);
       this.d = var4.d;
       this.Z = var4.Z;
       this.t = var4.t;
@@ -312,7 +312,7 @@ public class ObjType {
    }
 
    @ObfuscatedName("GSCQQEUA.c(II)LLZYQDKJV;")
-   public final Model c(int arg0, int arg1) {
+   public final Model getInvModel(int arg0, int arg1) {
       if (this.N != null && arg1 > 1) {
          int var3 = -1;
 
@@ -323,7 +323,7 @@ public class ObjType {
          }
 
          if (var3 != -1) {
-            return a(var3).c(this.z, 1);
+            return get(var3).getInvModel(this.z, 1);
          }
       }
 
@@ -511,7 +511,7 @@ public class ObjType {
          }
 
          if (var2 != -1) {
-            return a(var2).c(1);
+            return get(var2).c(1);
          }
       }
 
@@ -533,7 +533,7 @@ public class ObjType {
                }
             }
 
-            var5.a(this.C + 64, this.G + 768, -50, -10, -50, true);
+            var5.calculateNormals(this.C + 64, this.G + 768, -50, -10, -50, true);
             var5.eb = true;
             l.put(var5, (long)this.L);
             return var5;
@@ -555,7 +555,7 @@ public class ObjType {
          }
       }
 
-      ObjType var5 = a(arg3);
+      ObjType var5 = get(arg3);
       if (var5.N == null) {
          arg2 = -1;
       }
@@ -570,7 +570,7 @@ public class ObjType {
          }
 
          if (var6 != -1) {
-            var5 = a(var6);
+            var5 = get(var6);
          }
       }
 

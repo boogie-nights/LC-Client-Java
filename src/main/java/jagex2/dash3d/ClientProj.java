@@ -124,8 +124,8 @@ public class ClientProj extends ModelSource {
 
          Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.G, var3));
          if (var3 != -1) {
-            var4.f(7);
-            var4.a(var3, (byte)6);
+            var4.createLabelReferences(7);
+            var4.applyTransform(var3, (byte)6);
             var4.db = null;
             var4.cb = null;
          }
@@ -135,7 +135,7 @@ public class ClientProj extends ModelSource {
          }
 
          var4.b(this.w, 341);
-         var4.a(this.m.o + 64, this.m.p + 850, -30, -50, -30, true);
+         var4.calculateNormals(this.m.o + 64, this.m.p + 850, -30, -50, -30, true);
          if (arg0 == 3) {
             boolean var5 = false;
          } else {

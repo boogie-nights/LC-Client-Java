@@ -76,8 +76,8 @@ public class MapSpotAnim extends ModelSource {
             int var3 = this.u.i.f[this.s];
             Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.q, var3));
             if (!this.r) {
-               var4.f(7);
-               var4.a(var3, (byte)6);
+               var4.createLabelReferences(7);
+               var4.applyTransform(var3, (byte)6);
                var4.db = null;
                var4.cb = null;
             }
@@ -103,7 +103,7 @@ public class MapSpotAnim extends ModelSource {
                }
             }
 
-            var4.a(this.u.o + 64, this.u.p + 850, -30, -50, -30, true);
+            var4.calculateNormals(this.u.o + 64, this.u.p + 850, -30, -50, -30, true);
             return var4;
          }
       }

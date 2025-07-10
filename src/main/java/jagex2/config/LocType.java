@@ -23,11 +23,11 @@ public class LocType {
    @ObfuscatedName("YMYTDPVW.J")
    public byte J = -113;
    @ObfuscatedName("YMYTDPVW.e")
-   public static LruCache e = new LruCache(40, -572);
+   public static LruCache e = new LruCache(40);
    @ObfuscatedName("YMYTDPVW.n")
    public static Model[] n = new Model[4];
    @ObfuscatedName("YMYTDPVW.v")
-   public static LruCache v = new LruCache(500, -572);
+   public static LruCache v = new LruCache(500);
    @ObfuscatedName("YMYTDPVW.Q")
    public static byte Q = 6;
    @ObfuscatedName("YMYTDPVW.A")
@@ -302,8 +302,8 @@ public class LocType {
       }
 
       if (arg1 != -1) {
-         var20.f(7);
-         var20.a(arg1, (byte)6);
+         var20.createLabelReferences(7);
+         var20.applyTransform(arg1, (byte)6);
          var20.db = null;
          var20.cb = null;
       }
@@ -326,7 +326,7 @@ public class LocType {
          var20.a(this.d, this.i, false, this.B);
       }
 
-      var20.a(this.A + 64, this.D * 5 + 768, -50, -10, -50, !this.U);
+      var20.calculateNormals(this.A + 64, this.D * 5 + 768, -50, -10, -50, !this.U);
       if (this.K == 1) {
          var20.Z = var20.k;
       }

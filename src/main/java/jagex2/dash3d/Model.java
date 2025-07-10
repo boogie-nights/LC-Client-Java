@@ -58,7 +58,7 @@ public class Model extends ModelSource {
    @ObfuscatedName("LZYQDKJV.bb")
    public int[] bb;
    @ObfuscatedName("LZYQDKJV.M")
-   public int[] M;
+   public int[] faceColour;
    @ObfuscatedName("LZYQDKJV.G")
    public int[] G;
    @ObfuscatedName("LZYQDKJV.H")
@@ -357,7 +357,7 @@ public class Model extends ModelSource {
          this.bb = new int[this.C];
       }
 
-      this.M = new int[this.C];
+      this.faceColour = new int[this.C];
       Packet var4 = new Packet(var3.a);
       var4.pos = var3.e;
       Packet var5 = new Packet(var3.a);
@@ -411,7 +411,7 @@ public class Model extends ModelSource {
       var8.pos = var3.p;
 
       for(int var17 = 0; var17 < this.C; ++var17) {
-         this.M[var17] = var4.g2();
+         this.faceColour[var17] = var4.g2();
          if (this.J != null) {
             this.J[var17] = var5.g1();
          }
@@ -554,7 +554,7 @@ public class Model extends ModelSource {
             this.bb = new int[this.C];
          }
 
-         this.M = new int[this.C];
+         this.faceColour = new int[this.C];
          this.y = 0;
          this.C = 0;
          this.O = 0;
@@ -597,7 +597,7 @@ public class Model extends ModelSource {
                      this.bb[this.C] = var12.bb[var13];
                   }
 
-                  this.M[this.C] = var12.M[var13];
+                  this.faceColour[this.C] = var12.faceColour[var13];
                   this.D[this.C] = this.a(var12, var12.D[var13]);
                   this.E[this.C] = this.a(var12, var12.E[var13]);
                   this.F[this.C] = this.a(var12, var12.F[var13]);
@@ -649,7 +649,7 @@ public class Model extends ModelSource {
             }
 
             var7 |= var10.L != null;
-            var8 |= var10.M != null;
+            var8 |= var10.faceColour != null;
          }
       }
 
@@ -678,7 +678,7 @@ public class Model extends ModelSource {
       }
 
       if (var8) {
-         this.M = new int[this.C];
+         this.faceColour = new int[this.C];
       }
 
       this.y = 0;
@@ -737,8 +737,8 @@ public class Model extends ModelSource {
                      }
                   }
 
-                  if (var8 && var13.M != null) {
-                     this.M[this.C] = var13.M[var16];
+                  if (var8 && var13.faceColour != null) {
+                     this.faceColour[this.C] = var13.faceColour[var16];
                   }
 
                   ++this.C;
@@ -785,12 +785,12 @@ public class Model extends ModelSource {
       }
 
       if (arg2) {
-         this.M = arg3.M;
+         this.faceColour = arg3.faceColour;
       } else {
-         this.M = new int[this.C];
+         this.faceColour = new int[this.C];
 
          for(int var7 = 0; var7 < this.C; ++var7) {
-            this.M[var7] = arg3.M[var7];
+            this.faceColour[var7] = arg3.faceColour[var7];
          }
       }
 
@@ -884,7 +884,7 @@ public class Model extends ModelSource {
          this.o = !this.o;
       }
 
-      this.M = arg3.M;
+      this.faceColour = arg3.faceColour;
       this.L = arg3.L;
       this.K = arg3.K;
       this.N = arg3.N;
@@ -946,7 +946,7 @@ public class Model extends ModelSource {
          }
 
          this.J = arg1.J;
-         this.M = arg1.M;
+         this.faceColour = arg1.faceColour;
          this.K = arg1.K;
          this.N = arg1.N;
          this.db = arg1.db;
@@ -1099,7 +1099,7 @@ public class Model extends ModelSource {
    }
 
    @ObfuscatedName("LZYQDKJV.f(I)V")
-   public void f(int arg0) {
+   public void createLabelReferences(int arg0) {
       if (arg0 == 7) {
          int var10002;
          if (this.ab != null) {
@@ -1163,7 +1163,7 @@ public class Model extends ModelSource {
    }
 
    @ObfuscatedName("LZYQDKJV.a(IB)V")
-   public void a(int arg0, byte arg1) {
+   public void applyTransform(int arg0, byte arg1) {
       if (this.cb != null) {
          if (arg0 != -1) {
             AnimFrame var3 = AnimFrame.b(arg0);
@@ -1194,7 +1194,7 @@ public class Model extends ModelSource {
             if (var5 != null) {
                AnimFrame var6 = AnimFrame.b(arg0);
                if (var6 == null) {
-                  this.a(arg2, (byte)6);
+                  this.applyTransform(arg2, (byte)6);
                } else {
                   AnimBase var7 = var5.e;
                   Ab = 0;
@@ -1242,7 +1242,7 @@ public class Model extends ModelSource {
                }
             }
          } else {
-            this.a(arg2, (byte)6);
+            this.applyTransform(arg2, (byte)6);
          }
       }
    }
@@ -1429,8 +1429,8 @@ public class Model extends ModelSource {
    @ObfuscatedName("LZYQDKJV.c(II)V")
    public void c(int arg0, int arg1) {
       for(int var3 = 0; var3 < this.C; ++var3) {
-         if (this.M[var3] == arg0) {
-            this.M[var3] = arg1;
+         if (this.faceColour[var3] == arg0) {
+            this.faceColour[var3] = arg1;
          }
       }
 
@@ -1469,7 +1469,7 @@ public class Model extends ModelSource {
    }
 
    @ObfuscatedName("LZYQDKJV.a(IIIIIZ)V")
-   public final void a(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
+   public final void calculateNormals(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
       int var7 = (int)Math.sqrt((double)(arg4 * arg4 + arg2 * arg2 + arg3 * arg3));
       int var8 = arg1 * var7 >> 8;
       if (this.G == null) {
@@ -1515,7 +1515,7 @@ public class Model extends ModelSource {
          int var26 = var22 * 256 / var23;
          if (this.J != null && (this.J[var10] & 1) != 0) {
             int var30 = (arg4 * var26 + arg2 * var24 + arg3 * var25) / (var8 / 2 + var8) + arg0;
-            this.G[var10] = a(this.M[var10], var30, this.J[var10]);
+            this.G[var10] = a(this.faceColour[var10], var30, this.J[var10]);
          } else {
             VertexNormal var27 = super.j[var11];
             var27.a += var24;
@@ -1578,7 +1578,7 @@ public class Model extends ModelSource {
          int var8 = this.E[var6];
          int var9 = this.F[var6];
          if (this.J == null) {
-            int var10 = this.M[var6];
+            int var10 = this.faceColour[var6];
             VertexNormal var11 = super.j[var7];
             int var12 = (var11.c * arg4 + var11.b * arg3 + var11.a * arg2) / (var11.d * arg1) + arg0;
             this.G[var6] = a(var10, var12, 0);
@@ -1589,7 +1589,7 @@ public class Model extends ModelSource {
             int var16 = (var15.c * arg4 + var15.b * arg3 + var15.a * arg2) / (var15.d * arg1) + arg0;
             this.I[var6] = a(var10, var16, 0);
          } else if ((this.J[var6] & 1) == 0) {
-            int var17 = this.M[var6];
+            int var17 = this.faceColour[var6];
             int var18 = this.J[var6];
             VertexNormal var19 = super.j[var7];
             int var20 = (var19.c * arg4 + var19.b * arg3 + var19.a * arg2) / (var19.d * arg1) + arg0;
@@ -1615,7 +1615,7 @@ public class Model extends ModelSource {
          }
       }
 
-      this.M = null;
+      this.faceColour = null;
    }
 
    @ObfuscatedName("LZYQDKJV.a(III)I")
@@ -2031,14 +2031,14 @@ public class Model extends ModelSource {
             int var7 = this.P[var6];
             int var8 = this.Q[var6];
             int var9 = this.R[var6];
-            Pix3D.a(lb[var2], lb[var3], lb[var4], kb[var2], kb[var3], kb[var4], this.G[arg0], this.H[arg0], this.I[arg0], nb[var7], nb[var8], nb[var9], ob[var7], ob[var8], ob[var9], pb[var7], pb[var8], pb[var9], this.M[arg0]);
+            Pix3D.a(lb[var2], lb[var3], lb[var4], kb[var2], kb[var3], kb[var4], this.G[arg0], this.H[arg0], this.I[arg0], nb[var7], nb[var8], nb[var9], ob[var7], ob[var8], ob[var9], pb[var7], pb[var8], pb[var9], this.faceColour[arg0]);
          } else {
             if (var5 == 3) {
                int var10 = this.J[arg0] >> 2;
                int var11 = this.P[var10];
                int var12 = this.Q[var10];
                int var13 = this.R[var10];
-               Pix3D.a(lb[var2], lb[var3], lb[var4], kb[var2], kb[var3], kb[var4], this.G[arg0], this.G[arg0], this.G[arg0], nb[var11], nb[var12], nb[var13], ob[var11], ob[var12], ob[var13], pb[var11], pb[var12], pb[var13], this.M[arg0]);
+               Pix3D.a(lb[var2], lb[var3], lb[var4], kb[var2], kb[var3], kb[var4], this.G[arg0], this.G[arg0], this.G[arg0], nb[var11], nb[var12], nb[var13], ob[var11], ob[var12], ob[var13], pb[var11], pb[var12], pb[var13], this.faceColour[arg0]);
             }
 
          }
@@ -2154,13 +2154,13 @@ public class Model extends ModelSource {
                int var34 = this.P[var33];
                int var35 = this.Q[var33];
                int var36 = this.R[var33];
-               Pix3D.a(var29, var30, var31, var26, var27, var28, zb[0], zb[1], zb[2], nb[var34], nb[var35], nb[var36], ob[var34], ob[var35], ob[var36], pb[var34], pb[var35], pb[var36], this.M[arg0]);
+               Pix3D.a(var29, var30, var31, var26, var27, var28, zb[0], zb[1], zb[2], nb[var34], nb[var35], nb[var36], ob[var34], ob[var35], ob[var36], pb[var34], pb[var35], pb[var36], this.faceColour[arg0]);
             } else if (var32 == 3) {
                int var37 = this.J[arg0] >> 2;
                int var38 = this.P[var37];
                int var39 = this.Q[var37];
                int var40 = this.R[var37];
-               Pix3D.a(var29, var30, var31, var26, var27, var28, this.G[arg0], this.G[arg0], this.G[arg0], nb[var38], nb[var39], nb[var40], ob[var38], ob[var39], ob[var40], pb[var38], pb[var39], pb[var40], this.M[arg0]);
+               Pix3D.a(var29, var30, var31, var26, var27, var28, this.G[arg0], this.G[arg0], this.G[arg0], nb[var38], nb[var39], nb[var40], ob[var38], ob[var39], ob[var40], pb[var38], pb[var39], pb[var40], this.faceColour[arg0]);
             }
          }
 
@@ -2194,8 +2194,8 @@ public class Model extends ModelSource {
                int var44 = this.P[var43];
                int var45 = this.Q[var43];
                int var46 = this.R[var43];
-               Pix3D.a(var29, var30, var31, var26, var27, var28, zb[0], zb[1], zb[2], nb[var44], nb[var45], nb[var46], ob[var44], ob[var45], ob[var46], pb[var44], pb[var45], pb[var46], this.M[arg0]);
-               Pix3D.a(var29, var31, yb[3], var26, var28, xb[3], zb[0], zb[2], zb[3], nb[var44], nb[var45], nb[var46], ob[var44], ob[var45], ob[var46], pb[var44], pb[var45], pb[var46], this.M[arg0]);
+               Pix3D.a(var29, var30, var31, var26, var27, var28, zb[0], zb[1], zb[2], nb[var44], nb[var45], nb[var46], ob[var44], ob[var45], ob[var46], pb[var44], pb[var45], pb[var46], this.faceColour[arg0]);
+               Pix3D.a(var29, var31, yb[3], var26, var28, xb[3], zb[0], zb[2], zb[3], nb[var44], nb[var45], nb[var46], ob[var44], ob[var45], ob[var46], pb[var44], pb[var45], pb[var46], this.faceColour[arg0]);
                return;
             }
 
@@ -2204,8 +2204,8 @@ public class Model extends ModelSource {
                int var48 = this.P[var47];
                int var49 = this.Q[var47];
                int var50 = this.R[var47];
-               Pix3D.a(var29, var30, var31, var26, var27, var28, this.G[arg0], this.G[arg0], this.G[arg0], nb[var48], nb[var49], nb[var50], ob[var48], ob[var49], ob[var50], pb[var48], pb[var49], pb[var50], this.M[arg0]);
-               Pix3D.a(var29, var31, yb[3], var26, var28, xb[3], this.G[arg0], this.G[arg0], this.G[arg0], nb[var48], nb[var49], nb[var50], ob[var48], ob[var49], ob[var50], pb[var48], pb[var49], pb[var50], this.M[arg0]);
+               Pix3D.a(var29, var30, var31, var26, var27, var28, this.G[arg0], this.G[arg0], this.G[arg0], nb[var48], nb[var49], nb[var50], ob[var48], ob[var49], ob[var50], pb[var48], pb[var49], pb[var50], this.faceColour[arg0]);
+               Pix3D.a(var29, var31, yb[3], var26, var28, xb[3], this.G[arg0], this.G[arg0], this.G[arg0], nb[var48], nb[var49], nb[var50], ob[var48], ob[var49], ob[var50], pb[var48], pb[var49], pb[var50], this.faceColour[arg0]);
             }
          }
       }

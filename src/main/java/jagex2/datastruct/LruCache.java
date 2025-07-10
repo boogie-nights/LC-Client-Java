@@ -25,7 +25,7 @@ public class LruCache {
 	@ObfuscatedName("RHNYLZZL.h")
 	public DoublyLinkList history = new DoublyLinkList();
 
-	public LruCache(int size, int arg1) {
+	public LruCache(int size) {
 		this.capacity = size;
 		this.available = size;
 	}

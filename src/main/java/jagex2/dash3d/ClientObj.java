@@ -17,7 +17,7 @@ public class ClientObj extends ModelSource {
          this.n = -358;
       }
 
-      ObjType var2 = ObjType.a(this.m);
+      ObjType var2 = ObjType.get(this.m);
       return var2.c(this.o);
    }
 }

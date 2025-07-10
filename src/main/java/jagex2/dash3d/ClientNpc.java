@@ -56,15 +56,15 @@ public class ClientNpc extends ClientEntity {
                      int var6 = var4.i.f[super.V];
                      Model var7 = new Model(false, false, true, var5, AnimFrame.a(this.qb, var6));
                      var7.a(0, 0, false, -super.Y);
-                     var7.f(7);
-                     var7.a(var6, (byte)6);
+                     var7.createLabelReferences(7);
+                     var7.applyTransform(var6, (byte)6);
                      var7.db = null;
                      var7.cb = null;
                      if (var4.l != 128 || var4.m != 128) {
                         var7.a(var4.m, var4.l, 9, var4.l);
                      }
 
-                     var7.a(var4.o + 64, var4.p + 850, -30, -50, -30, true);
+                     var7.calculateNormals(var4.o + 64, var4.p + 850, -30, -50, -30, true);
                      Model[] var8 = new Model[]{var3, var7};
                      var3 = new Model(2, true, 0, var8);
                   }

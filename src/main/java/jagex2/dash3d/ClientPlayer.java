@@ -31,7 +31,7 @@ public class ClientPlayer extends ClientEntity {
    @ObfuscatedName("ZGNGQRPJ.Tb")
    public int Tb = 932;
    @ObfuscatedName("ZGNGQRPJ.Ib")
-   public static LruCache Ib = new LruCache(260, -572);
+   public static LruCache Ib = new LruCache(260);
    @ObfuscatedName("ZGNGQRPJ.Ab")
    public int Ab;
    @ObfuscatedName("ZGNGQRPJ.Cb")
@@ -70,11 +70,11 @@ public class ClientPlayer extends ClientEntity {
    public String yb;
 
    @ObfuscatedName("ZGNGQRPJ.a(Z)LLZYQDKJV;")
-   public final Model a(boolean arg0) {
+   public final Model getHeadModel(boolean arg0) {
       if (!this.Fb) {
          return null;
       } else if (this.Eb != null) {
-         return this.Eb.a(858);
+         return this.Eb.getHeadModel(858);
       } else {
          boolean var2 = false;
 
@@ -84,7 +84,7 @@ public class ClientPlayer extends ClientEntity {
                var2 = true;
             }
 
-            if (var4 >= 512 && !ObjType.a(var4 - 512).a((int)this.Cb, 0)) {
+            if (var4 >= 512 && !ObjType.get(var4 - 512).a((int)this.Cb, 0)) {
                var2 = true;
             }
          }
@@ -105,7 +105,7 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (var8 >= 512) {
-                  Model var10 = ObjType.a(var8 - 512).a(true, this.Cb);
+                  Model var10 = ObjType.get(var8 - 512).a(true, this.Cb);
                   if (var10 != null) {
                      var5[var6++] = var10;
                   }
@@ -190,7 +190,7 @@ public class ClientPlayer extends ClientEntity {
                   var12 = true;
                }
 
-               if (var14 >= 512 && !ObjType.a(var14 - 512).b(-861, this.Cb)) {
+               if (var14 >= 512 && !ObjType.get(var14 - 512).b(-861, this.Cb)) {
                   var12 = true;
                }
             }
@@ -228,7 +228,7 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (var18 >= 512) {
-                  Model var20 = ObjType.a(var18 - 512).a((byte)-98, this.Cb);
+                  Model var20 = ObjType.get(var18 - 512).a((byte)-98, this.Cb);
                   if (var20 != null) {
                      var15[var16++] = var20;
                   }
@@ -246,8 +246,8 @@ public class ClientPlayer extends ClientEntity {
                }
             }
 
-            var11.f(7);
-            var11.a(64, 850, -30, -50, -30, true);
+            var11.createLabelReferences(7);
+            var11.calculateNormals(64, 850, -30, -50, -30, true);
             Ib.put(var11, var4);
             this.wb = var4;
          }
@@ -260,7 +260,7 @@ public class ClientPlayer extends ClientEntity {
             if (var6 != -1 && var7 != -1) {
                var22.a(var7, 0, var6, SeqType.d[super.eb].j);
             } else if (var6 != -1) {
-               var22.a(var6, (byte)6);
+               var22.applyTransform(var6, (byte)6);
             }
 
             var22.c(this.Tb);
@@ -301,15 +301,15 @@ public class ClientPlayer extends ClientEntity {
                   if (var4 != null) {
                      Model var5 = new Model(false, false, true, var4, AnimFrame.a(this.Jb, super.V));
                      var5.a(0, 0, false, -super.Y);
-                     var5.f(7);
-                     var5.a(var3.i.f[super.V], (byte)6);
+                     var5.createLabelReferences(7);
+                     var5.applyTransform(var3.i.f[super.V], (byte)6);
                      var5.db = null;
                      var5.cb = null;
                      if (var3.l != 128 || var3.m != 128) {
                         var5.a(var3.m, var3.l, 9, var3.l);
                      }
 
-                     var5.a(var3.o + 64, var3.p + 850, -30, -50, -30, true);
+                     var5.calculateNormals(var3.o + 64, var3.p + 850, -30, -50, -30, true);
                      Model[] var6 = new Model[]{var2, var5};
                      var2 = new Model(2, true, 0, var6);
                   }
@@ -365,7 +365,7 @@ public class ClientPlayer extends ClientEntity {
    }
 
    @ObfuscatedName("ZGNGQRPJ.a(LMFMVIYHT;I)V")
-   public final void a(Packet arg0, int arg1) {
+   public final void getHeadModel(Packet arg0, int arg1) {
       arg0.pos = 0;
       this.Cb = arg0.g1();
       this.Db = arg0.g1b();
@@ -381,12 +381,12 @@ public class ClientPlayer extends ClientEntity {
             int var5 = arg0.g1();
             this.zb[var3] = (var4 << 8) + var5;
             if (var3 == 0 && this.zb[0] == 65535) {
-               this.Eb = NpcType.c(arg0.g2());
+               this.Eb = NpcType.get(arg0.g2());
                break;
             }
 
             if (this.zb[var3] >= 512 && this.zb[var3] - 512 < ObjType.j) {
-               int var6 = ObjType.a(this.zb[var3] - 512).g;
+               int var6 = ObjType.get(this.zb[var3] - 512).g;
                if (var6 != 0) {
                   this.Nb = var6;
                }
