@@ -1,7 +1,6 @@
 package jagex2.client;
 
 import deob.*;
-import jagex2.datastruct.Linkable;
 import jagex2.graphics.Pix24;
 import jagex2.graphics.PixMap;
 
@@ -70,7 +69,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	@ObfuscatedName("JWWAIQPI.m")
 	public int screenHeight;
 	@ObfuscatedName("JWWAIQPI.t")
-	public int t;
+	public int idleCycles;
 	@ObfuscatedName("JWWAIQPI.u")
 	public int u;
 	@ObfuscatedName("JWWAIQPI.v")
@@ -256,7 +255,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("JWWAIQPI.a(BI)V")
-	public final void a(byte arg0, int arg1) {
+	public final void setFramerate(byte arg0, int arg1) {
 		if (arg0 != 103) {
 			this.a = 388;
 		}
@@ -318,7 +317,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			var3 -= 22;
 		}
 
-		this.t = 0;
+		this.idleCycles = 0;
 		this.y = var2;
 		this.z = var3;
 		this.A = System.currentTimeMillis();
@@ -332,7 +331,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	public final void mouseReleased(MouseEvent arg0) {
-		this.t = 0;
+		this.idleCycles = 0;
 		this.u = 0;
 	}
 
@@ -343,7 +342,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	public final void mouseExited(MouseEvent arg0) {
-		this.t = 0;
+		this.idleCycles = 0;
 		this.v = -1;
 		this.w = -1;
 	}
@@ -356,7 +355,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			var3 -= 22;
 		}
 
-		this.t = 0;
+		this.idleCycles = 0;
 		this.v = var2;
 		this.w = var3;
 	}
@@ -369,13 +368,13 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			var3 -= 22;
 		}
 
-		this.t = 0;
+		this.idleCycles = 0;
 		this.v = var2;
 		this.w = var3;
 	}
 
 	public final void keyPressed(KeyEvent arg0) {
-		this.t = 0;
+		this.idleCycles = 0;
 		int var2 = arg0.getKeyCode();
 		int var3 = arg0.getKeyChar();
 		if (var3 < 30) {
@@ -450,7 +449,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	public final void keyReleased(KeyEvent arg0) {
-		this.t = 0;
+		this.idleCycles = 0;
 		int var2 = arg0.getKeyCode();
 		char var3 = arg0.getKeyChar();
 		if (var3 < 30) {

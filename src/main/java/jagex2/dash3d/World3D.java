@@ -170,7 +170,7 @@ public class World3D {
          this.h = 272;
       }
 
-      this.a((byte)7);
+      this.reset((byte)7);
    }
 
    @ObfuscatedName("KJCMXHNO.a(Z)V")
@@ -186,7 +186,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.a(B)V")
-   public void a(byte arg0) {
+   public void reset(byte arg0) {
       for(int var2 = 0; var2 < this.n; ++var2) {
          for(int var3 = 0; var3 < this.o; ++var3) {
             for(int var4 = 0; var4 < this.p; ++var4) {

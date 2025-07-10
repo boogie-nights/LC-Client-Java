@@ -34,15 +34,11 @@ public class PixFont extends Pix2D {
    @ObfuscatedName("JDPYRDAS.G")
    public int G;
 
-   public PixFont(boolean arg0, Jagfile arg1, int arg2, String arg3) {
-      Packet var5 = new Packet(arg1.read(arg3 + ".dat", (byte[])null));
-      Packet var6 = new Packet(arg1.read("index.dat", (byte[])null));
+   public PixFont(Jagfile jagFile, String font, boolean arg0) {
+      Packet var5 = new Packet(jagFile.read(font + ".dat", (byte[])null));
+      Packet var6 = new Packet(jagFile.read("index.dat", (byte[])null));
       boolean var7 = true;
       var6.pos = var5.g2() + 4;
-
-      while(arg2 >= 0) {
-         this.w = !this.w;
-      }
 
       int var8 = var6.g1();
       if (var8 > 0) {

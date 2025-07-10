@@ -197,7 +197,7 @@ public class Model extends ModelSource {
    }
 
    @ObfuscatedName("LZYQDKJV.a([BIB)V")
-   public static void a(byte[] arg0, int arg1, byte arg2) {
+   public static void unpack(byte[] arg0, int arg1, byte arg2) {
       if (arg2 == 7) {
          if (arg0 == null) {
             Metadata var3 = gb[arg1] = new Metadata();

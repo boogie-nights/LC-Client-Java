@@ -39,7 +39,7 @@ public class AnimFrame {
    }
 
    @ObfuscatedName("JULFQTYK.a([BZ)V")
-   public static void a(byte[] arg0, boolean arg1) {
+   public static void unpack(byte[] arg0, boolean arg1) {
       Packet var2 = new Packet(arg0);
       var2.pos = arg0.length - 8;
       int var3 = var2.g2();

@@ -786,7 +786,7 @@ public class World {
    }
 
    @ObfuscatedName("CHEOPWNH.a(LZPGPWCCV;LMFMVIYHT;B)V")
-   public static final void a(OnDemand arg0, Packet arg1, byte arg2) {
+   public static final void prefetchLocs(OnDemand arg0, Packet arg1, byte arg2) {
       if (arg2 == -3) {
          int var3 = -1;
 

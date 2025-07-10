@@ -50,7 +50,7 @@ public class ClientStream implements Runnable {
    }
 
    @ObfuscatedName("GXWEWMHV.a()V")
-   public void a() {
+   public void close() {
       this.f = true;
 
       try {
@@ -78,7 +78,7 @@ public class ClientStream implements Runnable {
    }
 
    @ObfuscatedName("GXWEWMHV.b()I")
-   public int b() throws IOException {
+   public int read() throws IOException {
       return this.f ? 0 : this.c.read();
    }
 
@@ -104,7 +104,7 @@ public class ClientStream implements Runnable {
    }
 
    @ObfuscatedName("GXWEWMHV.a(III[B)V")
-   public void a(int arg0, int arg1, int arg2, byte[] arg3) throws IOException {
+   public void write(int arg0, int arg1, int arg2, byte[] arg3) throws IOException {
       if (!this.f) {
          if (this.l) {
             this.l = false;

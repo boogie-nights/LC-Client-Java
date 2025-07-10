@@ -1,7 +1,6 @@
 package jagex2.dash3d;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.Linkable;
 
 public class CollisionMap {
    @ObfuscatedName("XRENONSA.a")
@@ -33,13 +32,13 @@ public class CollisionMap {
          this.h = arg2;
          this.i = arg0;
          this.j = new int[this.h][this.i];
-         this.a();
+         this.reset();
 
       }
    }
 
    @ObfuscatedName("XRENONSA.a()V")
-   public void a() {
+   public void reset() {
       for(int var1 = 0; var1 < this.h; ++var1) {
          for(int var2 = 0; var2 < this.i; ++var2) {
             if (var1 != 0 && var2 != 0 && this.h - 1 != var1 && this.i - 1 != var2) {
