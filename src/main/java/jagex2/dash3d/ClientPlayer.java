@@ -67,7 +67,7 @@ public class ClientPlayer extends ClientEntity {
    @ObfuscatedName("ZGNGQRPJ.Eb")
    public NpcType Eb;
    @ObfuscatedName("ZGNGQRPJ.yb")
-   public String yb;
+   public String name;
 
    @ObfuscatedName("ZGNGQRPJ.a(Z)LLZYQDKJV;")
    public final Model getHeadModel(boolean arg0) {
@@ -80,7 +80,7 @@ public class ClientPlayer extends ClientEntity {
 
          for(int var3 = 0; var3 < 12; ++var3) {
             int var4 = this.zb[var3];
-            if (var4 >= 256 && var4 < 512 && !IdkType.e[var4 - 256].b(-10584)) {
+            if (var4 >= 256 && var4 < 512 && !IdkType.types[var4 - 256].b(-10584)) {
                var2 = true;
             }
 
@@ -98,7 +98,7 @@ public class ClientPlayer extends ClientEntity {
             for(int var7 = 0; var7 < 12; ++var7) {
                int var8 = this.zb[var7];
                if (var8 >= 256 && var8 < 512) {
-                  Model var9 = IdkType.e[var8 - 256].a(this.ub);
+                  Model var9 = IdkType.types[var8 - 256].a(this.ub);
                   if (var9 != null) {
                      var5[var6++] = var9;
                   }
@@ -118,9 +118,9 @@ public class ClientPlayer extends ClientEntity {
             } else {
                for(int var12 = 0; var12 < 5; ++var12) {
                   if (this.Hb[var12] != 0) {
-                     var11.c(Client.Zd[var12][0], Client.Zd[var12][this.Hb[var12]]);
+                     var11.recolour(Client.DESIGN_BODY_COLOUR[var12][0], Client.DESIGN_BODY_COLOUR[var12][this.Hb[var12]]);
                      if (var12 == 1) {
-                        var11.c(Client.aj[0], Client.aj[this.Hb[var12]]);
+                        var11.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.Hb[var12]]);
                      }
                   }
                }
@@ -136,9 +136,9 @@ public class ClientPlayer extends ClientEntity {
       if (this.Eb != null) {
          int var2 = -1;
          if (super.eb >= 0 && super.hb == 0) {
-            var2 = SeqType.d[super.eb].f[super.fb];
+            var2 = SeqType.types[super.eb].frames[super.fb];
          } else if (super.u >= 0) {
-            var2 = SeqType.d[super.u].f[super.v];
+            var2 = SeqType.types[super.u].frames[super.v];
          }
 
          return this.Eb.a(var2, -1, 0, (int[])null);
@@ -153,10 +153,10 @@ public class ClientPlayer extends ClientEntity {
          }
 
          if (super.eb >= 0 && super.hb == 0) {
-            SeqType var10 = SeqType.d[super.eb];
-            var6 = var10.f[super.fb];
-            if (super.u >= 0 && super.u != super.ob) {
-               var7 = SeqType.d[super.u].f[super.v];
+            SeqType var10 = SeqType.types[super.eb];
+            var6 = var10.frames[super.fb];
+            if (super.u >= 0 && super.u != super.readyanim) {
+               var7 = SeqType.types[super.u].frames[super.v];
             }
 
             if (var10.m >= 0) {
@@ -169,7 +169,7 @@ public class ClientPlayer extends ClientEntity {
                var4 += (long)(var9 - this.zb[3] << 16);
             }
          } else if (super.u >= 0) {
-            var6 = SeqType.d[super.u].f[super.v];
+            var6 = SeqType.types[super.u].frames[super.v];
          }
 
          Model var11 = (Model)Ib.get(var4);
@@ -186,7 +186,7 @@ public class ClientPlayer extends ClientEntity {
                   var14 = var8;
                }
 
-               if (var14 >= 256 && var14 < 512 && !IdkType.e[var14 - 256].a((int)256)) {
+               if (var14 >= 256 && var14 < 512 && !IdkType.types[var14 - 256].modelIsReady((int)256)) {
                   var12 = true;
                }
 
@@ -221,7 +221,7 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (var18 >= 256 && var18 < 512) {
-                  Model var19 = IdkType.e[var18 - 256].a((byte)2);
+                  Model var19 = IdkType.types[var18 - 256].getModel((byte)2);
                   if (var19 != null) {
                      var15[var16++] = var19;
                   }
@@ -239,9 +239,9 @@ public class ClientPlayer extends ClientEntity {
 
             for(int var21 = 0; var21 < 5; ++var21) {
                if (this.Hb[var21] != 0) {
-                  var11.c(Client.Zd[var21][0], Client.Zd[var21][this.Hb[var21]]);
+                  var11.recolour(Client.DESIGN_BODY_COLOUR[var21][0], Client.DESIGN_BODY_COLOUR[var21][this.Hb[var21]]);
                   if (var21 == 1) {
-                     var11.c(Client.aj[0], Client.aj[this.Hb[var21]]);
+                     var11.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.Hb[var21]]);
                   }
                }
             }
@@ -258,7 +258,7 @@ public class ClientPlayer extends ClientEntity {
             Model var22 = Model.t;
             var22.a(AnimFrame.a(this.Jb, var6) & AnimFrame.a(this.Jb, var7), var11, 1244);
             if (var6 != -1 && var7 != -1) {
-               var22.a(var7, 0, var6, SeqType.d[super.eb].j);
+               var22.a(var7, 0, var6, SeqType.types[super.eb].j);
             } else if (var6 != -1) {
                var22.applyTransform(var6, (byte)6);
             }
@@ -302,7 +302,7 @@ public class ClientPlayer extends ClientEntity {
                      Model var5 = new Model(false, false, true, var4, AnimFrame.a(this.Jb, super.V));
                      var5.a(0, 0, false, -super.Y);
                      var5.createLabelReferences(7);
-                     var5.applyTransform(var3.i.f[super.V], (byte)6);
+                     var5.applyTransform(var3.i.frames[super.V], (byte)6);
                      var5.db = null;
                      var5.cb = null;
                      if (var3.l != 128 || var3.m != 128) {
@@ -316,11 +316,11 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (this.tb != null) {
-                  if (Client.fk >= this.Mb) {
+                  if (Client.loopCycle >= this.Mb) {
                      this.tb = null;
                   }
 
-                  if (Client.fk >= this.Lb && Client.fk < this.Mb) {
+                  if (Client.loopCycle >= this.Lb && Client.loopCycle < this.Mb) {
                      Model var7 = this.tb;
                      var7.a(this.qb - super.Q, this.sb - super.R, false, this.rb - this.xb);
                      if (super.q == 512) {
@@ -396,16 +396,16 @@ public class ClientPlayer extends ClientEntity {
 
       for(int var7 = 0; var7 < 5; ++var7) {
          int var8 = arg0.g1();
-         if (var8 < 0 || var8 >= Client.Zd[var7].length) {
+         if (var8 < 0 || var8 >= Client.DESIGN_BODY_COLOUR[var7].length) {
             var8 = 0;
          }
 
          this.Hb[var7] = var8;
       }
 
-      super.ob = arg0.g2();
-      if (super.ob == 65535) {
-         super.ob = -1;
+      super.readyanim = arg0.g2();
+      if (super.readyanim == 65535) {
+         super.readyanim = -1;
       }
 
       super.pb = arg0.g2();
@@ -438,7 +438,7 @@ public class ClientPlayer extends ClientEntity {
          super.jb = -1;
       }
 
-      this.yb = JString.toSentenceCase(JString.fromBase37(arg0.g8()));
+      this.name = JString.formatDisplayName(JString.fromBase37(arg0.g8()));
       this.Ab = arg0.g1();
       this.Gb = arg0.g2();
       this.Fb = true;

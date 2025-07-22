@@ -47,7 +47,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	@ObfuscatedName("JWWAIQPI.G")
 	public int[] G = new int[128];
 	@ObfuscatedName("JWWAIQPI.B")
-	public int B;
+	public int mouseClickButton;
 	@ObfuscatedName("JWWAIQPI.C")
 	public int C;
 	@ObfuscatedName("JWWAIQPI.D")
@@ -202,7 +202,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				}
 
 				while (count < 256) {
-					this.B = this.x;
+					this.mouseClickButton = this.x;
 					this.C = this.y;
 					this.D = this.z;
 					this.E = this.A;

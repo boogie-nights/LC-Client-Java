@@ -47,7 +47,7 @@ public class World3D {
    @ObfuscatedName("KJCMXHNO.q")
    public int[][][] q;
    @ObfuscatedName("KJCMXHNO.m")
-   public static boolean m = true;
+   public static boolean lowMemory = true;
    @ObfuscatedName("KJCMXHNO.M")
    public static Loc[] M = new Loc[100];
    @ObfuscatedName("KJCMXHNO.N")
@@ -1941,7 +1941,7 @@ public class World3D {
                         if (arg0.c != 12345678) {
                            Pix3D.a(var50, var52, var48, var49, var51, var47, arg0.c, arg0.d, arg0.b);
                         }
-                     } else if (!m) {
+                     } else if (!lowMemory) {
                         if (arg0.f) {
                            Pix3D.a(var50, var52, var48, var49, var51, var47, arg0.c, arg0.d, arg0.b, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.e);
                         } else {
@@ -1970,7 +1970,7 @@ public class World3D {
                            return;
                         }
                      } else {
-                        if (!m) {
+                        if (!lowMemory) {
                            Pix3D.a(var46, var48, var52, var45, var47, var51, arg0.a, arg0.b, arg0.d, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.e);
                            return;
                         }
@@ -2037,7 +2037,7 @@ public class World3D {
                }
 
                if (arg2.k != null && arg2.k[var21] != -1) {
-                  if (!m) {
+                  if (!lowMemory) {
                      if (arg2.l) {
                         Pix3D.a(var28, var29, var30, var25, var26, var27, arg2.e[var21], arg2.f[var21], arg2.g[var21], Ground.s[0], Ground.s[1], Ground.s[3], Ground.t[0], Ground.t[1], Ground.t[3], Ground.u[0], Ground.u[1], Ground.u[3], arg2.k[var21]);
                      } else {

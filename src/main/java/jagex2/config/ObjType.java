@@ -216,7 +216,7 @@ public class ObjType {
 
             if (this.M != null) {
                for(int var12 = 0; var12 < this.M.length; ++var12) {
-                  var6.c(this.M[var12], this.p[var12]);
+                  var6.recolour(this.M[var12], this.p[var12]);
                }
             }
 
@@ -338,7 +338,7 @@ public class ObjType {
       } else {
          if (this.M != null) {
             for(int var6 = 0; var6 < this.M.length; ++var6) {
-               var5.c(this.M[var6], this.p[var6]);
+               var5.recolour(this.M[var6], this.p[var6]);
             }
          }
 
@@ -491,7 +491,7 @@ public class ObjType {
 
          if (this.M != null) {
             for(int var8 = 0; var8 < this.M.length; ++var8) {
-               var5.c(this.M[var8], this.p[var8]);
+               var5.recolour(this.M[var8], this.p[var8]);
             }
          }
 
@@ -529,7 +529,7 @@ public class ObjType {
 
             if (this.M != null) {
                for(int var6 = 0; var6 < this.M.length; ++var6) {
-                  var5.c(this.M[var6], this.p[var6]);
+                  var5.recolour(this.M[var6], this.p[var6]);
                }
             }
 

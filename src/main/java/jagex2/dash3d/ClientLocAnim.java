@@ -72,9 +72,9 @@ public class ClientLocAnim extends ModelSource {
       this.p = arg1;
       this.q = arg2;
       if (arg0 != -1) {
-         this.w = SeqType.d[arg0];
+         this.w = SeqType.types[arg0];
          this.C = 0;
-         this.B = Client.fk - 1;
+         this.B = Client.loopCycle - 1;
          if (arg7 && this.w.i != -1) {
             this.C = (int)(Math.random() * (double)this.w.e);
             this.B -= (int)(Math.random() * (double)this.w.a(0, this.C));
@@ -98,7 +98,7 @@ public class ClientLocAnim extends ModelSource {
 
       int var2 = -1;
       if (this.w != null) {
-         int var3 = Client.fk - this.B;
+         int var3 = Client.loopCycle - this.B;
          if (var3 > 100 && this.w.i > 0) {
             var3 = 100;
          }
@@ -120,9 +120,9 @@ public class ClientLocAnim extends ModelSource {
             this.w = null;
          }
 
-         this.B = Client.fk - var3;
+         this.B = Client.loopCycle - var3;
          if (this.w != null) {
-            var2 = this.w.f[this.C];
+            var2 = this.w.frames[this.C];
          }
       }
 

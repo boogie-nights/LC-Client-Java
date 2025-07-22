@@ -261,7 +261,7 @@ public class NpcType {
 
             if (this.n != null) {
                for(int var9 = 0; var9 < this.n.length; ++var9) {
-                  var8.c(this.n[var9], this.J[var9]);
+                  var8.recolour(this.n[var9], this.J[var9]);
                }
             }
 
@@ -354,7 +354,7 @@ public class NpcType {
 
             if (this.n != null) {
                for(int var11 = 0; var11 < this.n.length; ++var11) {
-                  var6.c(this.n[var11], this.J[var11]);
+                  var6.recolour(this.n[var11], this.J[var11]);
                }
             }
 

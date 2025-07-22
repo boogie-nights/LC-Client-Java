@@ -119,7 +119,7 @@ public class ClientProj extends ModelSource {
       } else {
          int var3 = -1;
          if (this.m.i != null) {
-            var3 = this.m.i.f[this.A];
+            var3 = this.m.i.frames[this.A];
          }
 
          Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.G, var3));

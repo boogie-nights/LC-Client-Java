@@ -14,13 +14,13 @@ public class ClientNpc extends ClientEntity {
    @ObfuscatedName("RGHBDSIJ.b(B)LLZYQDKJV;")
    public final Model b(byte arg0) {
       if (super.eb >= 0 && super.hb == 0) {
-         int var2 = SeqType.d[super.eb].f[super.fb];
+         int var2 = SeqType.types[super.eb].frames[super.fb];
          int var3 = -1;
-         if (super.u >= 0 && super.u != super.ob) {
-            var3 = SeqType.d[super.u].f[super.v];
+         if (super.u >= 0 && super.u != super.readyanim) {
+            var3 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.rb.a(var2, var3, 0, SeqType.d[super.eb].j);
+         return this.rb.a(var2, var3, 0, SeqType.types[super.eb].j);
       } else {
          int var4 = -1;
          if (arg0 != 122) {
@@ -28,7 +28,7 @@ public class ClientNpc extends ClientEntity {
          }
 
          if (super.u >= 0) {
-            var4 = SeqType.d[super.u].f[super.v];
+            var4 = SeqType.types[super.u].frames[super.v];
          }
 
          return this.rb.a(var4, -1, 0, (int[])null);
@@ -53,7 +53,7 @@ public class ClientNpc extends ClientEntity {
                   SpotAnimType var4 = SpotAnimType.e[super.U];
                   Model var5 = var4.a();
                   if (var5 != null) {
-                     int var6 = var4.i.f[super.V];
+                     int var6 = var4.i.frames[super.V];
                      Model var7 = new Model(false, false, true, var5, AnimFrame.a(this.qb, var6));
                      var7.a(0, 0, false, -super.Y);
                      var7.createLabelReferences(7);

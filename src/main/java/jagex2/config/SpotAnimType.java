@@ -84,8 +84,8 @@ public class SpotAnimType {
                this.g = arg1.g2();
             } else if (var4 == 2) {
                this.h = arg1.g2();
-               if (SeqType.d != null) {
-                  this.i = SeqType.d[this.h];
+               if (SeqType.types != null) {
+                  this.i = SeqType.types[this.h];
                }
             } else if (var4 == 4) {
                this.l = arg1.g2();
@@ -120,7 +120,7 @@ public class SpotAnimType {
          } else {
             for(int var3 = 0; var3 < 6; ++var3) {
                if (this.j[0] != 0) {
-                  var2.c(this.j[var3], this.k[var3]);
+                  var2.recolour(this.j[var3], this.k[var3]);
                }
             }
 

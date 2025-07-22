@@ -1427,7 +1427,7 @@ public class Model extends ModelSource {
    }
 
    @ObfuscatedName("LZYQDKJV.c(II)V")
-   public void c(int arg0, int arg1) {
+   public void recolour(int arg0, int arg1) {
       for(int var3 = 0; var3 < this.C; ++var3) {
          if (this.faceColour[var3] == arg0) {
             this.faceColour[var3] = arg1;

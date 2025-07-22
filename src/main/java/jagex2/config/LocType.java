@@ -97,7 +97,7 @@ public class LocType {
    @ObfuscatedName("YMYTDPVW.l")
    public boolean l;
    @ObfuscatedName("YMYTDPVW.o")
-   public static boolean o;
+   public static boolean lowMemory;
    @ObfuscatedName("YMYTDPVW.z")
    public byte[] z;
    @ObfuscatedName("YMYTDPVW.F")
@@ -314,7 +314,7 @@ public class LocType {
 
       if (this.P != null) {
          for(int var21 = 0; var21 < this.P.length; ++var21) {
-            var20.c(this.P[var21], this.I[var21]);
+            var20.recolour(this.P[var21], this.I[var21]);
          }
       }
 
@@ -443,7 +443,7 @@ public class LocType {
                      } else if (var4 == 5) {
                         int var7 = arg1.g1();
                         if (var7 > 0) {
-                           if (this.f != null && !o) {
+                           if (this.f != null && !lowMemory) {
                               arg1.pos += var7 * 2;
                            } else {
                               this.F = null;
@@ -554,7 +554,7 @@ public class LocType {
                   }
                } while(var5 <= 0);
 
-               if (this.f != null && !o) {
+               if (this.f != null && !lowMemory) {
                   arg1.pos += var5 * 3;
                } else {
                   this.F = new int[var5];

@@ -77,7 +77,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("LJWIWXSK.a(Ljava/lang/String;B)Ljava/lang/String;")
-	public static String toSentenceCase(String s) { // ok this may not be that anymore.
+	public static String formatDisplayName(String s) { // ok this may not be that anymore.
 		if (s.length() > 0) {
 			char[] chars = s.toCharArray();
 

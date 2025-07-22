@@ -37,7 +37,7 @@ public class SeqType {
    @ObfuscatedName("FHWCLIAS.t")
    public static int t;
    @ObfuscatedName("FHWCLIAS.f")
-   public int[] f;
+   public int[] frames;
    @ObfuscatedName("FHWCLIAS.g")
    public int[] g;
    @ObfuscatedName("FHWCLIAS.h")
@@ -45,22 +45,22 @@ public class SeqType {
    @ObfuscatedName("FHWCLIAS.j")
    public int[] j;
    @ObfuscatedName("FHWCLIAS.d")
-   public static SeqType[] d;
+   public static SeqType[] types;
 
    @ObfuscatedName("FHWCLIAS.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.read("seq.dat", (byte[])null));
       c = var2.g2();
-      if (d == null) {
-         d = new SeqType[c];
+      if (types == null) {
+         types = new SeqType[c];
       }
 
       for(int var3 = 0; var3 < c; ++var3) {
-         if (d[var3] == null) {
-            d[var3] = new SeqType();
+         if (types[var3] == null) {
+            types[var3] = new SeqType();
          }
 
-         d[var3].a(a, var2);
+         types[var3].a(a, var2);
       }
 
       if (arg1 == 36135) {
@@ -75,7 +75,7 @@ public class SeqType {
          return 1;
       } else {
          if (var3 == 0) {
-            AnimFrame var4 = AnimFrame.b(this.f[arg1]);
+            AnimFrame var4 = AnimFrame.b(this.frames[arg1]);
             if (var4 != null) {
                var3 = this.h[arg1] = var4.d;
             }
@@ -103,8 +103,8 @@ public class SeqType {
             if (var4 == 0) {
                if (this.e == 0) {
                   this.e = 1;
-                  this.f = new int[1];
-                  this.f[0] = -1;
+                  this.frames = new int[1];
+                  this.frames[0] = -1;
                   this.g = new int[1];
                   this.g[0] = -1;
                   this.h = new int[1];
@@ -134,12 +134,12 @@ public class SeqType {
 
             if (var4 == 1) {
                this.e = arg1.g1();
-               this.f = new int[this.e];
+               this.frames = new int[this.e];
                this.g = new int[this.e];
                this.h = new int[this.e];
 
                for(int var5 = 0; var5 < this.e; ++var5) {
-                  this.f[var5] = arg1.g2();
+                  this.frames[var5] = arg1.g2();
                   this.g[var5] = arg1.g2();
                   if (this.g[var5] == 65535) {
                      this.g[var5] = -1;

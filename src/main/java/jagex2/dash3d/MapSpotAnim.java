@@ -73,7 +73,7 @@ public class MapSpotAnim extends ModelSource {
          if (var2 == null) {
             return null;
          } else {
-            int var3 = this.u.i.f[this.s];
+            int var3 = this.u.i.frames[this.s];
             Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.q, var3));
             if (!this.r) {
                var4.createLabelReferences(7);

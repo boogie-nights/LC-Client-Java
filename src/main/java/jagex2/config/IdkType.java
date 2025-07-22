@@ -27,22 +27,22 @@ public class IdkType {
    @ObfuscatedName("ZGOJZVHR.g")
    public int[] g;
    @ObfuscatedName("ZGOJZVHR.e")
-   public static IdkType[] e;
+   public static IdkType[] types;
 
    @ObfuscatedName("ZGOJZVHR.a(LATJMVOZR;I)V")
    public static void a(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.read("idk.dat", (byte[])null));
       d = var2.g2();
-      if (e == null) {
-         e = new IdkType[d];
+      if (types == null) {
+         types = new IdkType[d];
       }
 
       for(int var3 = 0; var3 < d; ++var3) {
-         if (e[var3] == null) {
-            e[var3] = new IdkType();
+         if (types[var3] == null) {
+            types[var3] = new IdkType();
          }
 
-         e[var3].a(a, var2);
+         types[var3].a(a, var2);
       }
 
       if (arg1 == 36135) {
@@ -90,7 +90,7 @@ public class IdkType {
    }
 
    @ObfuscatedName("ZGOJZVHR.a(I)Z")
-   public boolean a(int arg0) {
+   public boolean modelIsReady(int arg0) {
       if (this.g == null) {
          return true;
       } else {
@@ -108,7 +108,7 @@ public class IdkType {
    }
 
    @ObfuscatedName("ZGOJZVHR.a(B)LLZYQDKJV;")
-   public Model a(byte arg0) {
+   public Model getModel(byte arg0) {
       if (this.g == null) {
          return null;
       } else {
@@ -126,7 +126,7 @@ public class IdkType {
          }
 
          for(int var5 = 0; var5 < 6 && this.h[var5] != 0; ++var5) {
-            var4.c(this.h[var5], this.i[var5]);
+            var4.recolour(this.h[var5], this.i[var5]);
          }
 
          if (arg0 != 2) {
@@ -172,7 +172,7 @@ public class IdkType {
       Model var5 = new Model(var3, var2, (byte)-89);
 
       for(int var6 = 0; var6 < 6 && this.h[var6] != 0; ++var6) {
-         var5.c(this.h[var6], this.i[var6]);
+         var5.recolour(this.h[var6], this.i[var6]);
       }
 
       return var5;

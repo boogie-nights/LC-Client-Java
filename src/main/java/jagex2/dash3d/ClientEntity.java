@@ -48,7 +48,7 @@ public abstract class ClientEntity extends ModelSource {
    @ObfuscatedName("LRUWCBNN.mb")
    public int[] mb = new int[4];
    @ObfuscatedName("LRUWCBNN.ob")
-   public int ob = -1;
+   public int readyanim = -1;
    @ObfuscatedName("LRUWCBNN.pb")
    public int pb = -1;
    @ObfuscatedName("LRUWCBNN.C")

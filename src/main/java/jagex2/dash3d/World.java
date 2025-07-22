@@ -69,7 +69,7 @@ public class World {
    @ObfuscatedName("CHEOPWNH.D")
    public static final int[] D = new int[]{16, 32, 64, 128};
    @ObfuscatedName("CHEOPWNH.F")
-   public static boolean F = true;
+   public static boolean lowMemory = true;
    @ObfuscatedName("CHEOPWNH.y")
    public static int y;
 
@@ -481,7 +481,7 @@ public class World {
                      var40 -= this.k[var43];
                   }
 
-                  if (var41 >= 1 && var41 < this.o - 1 && (!F || (this.a[0][var28][var41] & 2) != 0 || (this.a[var8][var28][var41] & 16) == 0 && this.a(var41, var8, var28, (byte)0) == y)) {
+                  if (var41 >= 1 && var41 < this.o - 1 && (!lowMemory || (this.a[0][var28][var41] & 2) != 0 || (this.a[var8][var28][var41] & 16) == 0 && this.a(var41, var8, var28, (byte)0) == y)) {
                      if (var8 < m) {
                         m = var8;
                      }
@@ -900,7 +900,7 @@ public class World {
 
    @ObfuscatedName("CHEOPWNH.a(LKJCMXHNO;LXRENONSA;IIIBIII)V")
    public final void a(World3D arg0, CollisionMap arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, int arg7, int arg8) {
-      if (F && (this.a[0][arg4][arg2] & 2) == 0) {
+      if (lowMemory && (this.a[0][arg4][arg2] & 2) == 0) {
          if ((this.a[arg3][arg4][arg2] & 16) != 0) {
             return;
          }
@@ -931,7 +931,7 @@ public class World {
 
       byte var17 = (byte)((arg6 << 6) + arg7);
       if (arg7 == 22) {
-         if (!F || var15.b || var15.h) {
+         if (!lowMemory || var15.b || var15.h) {
             ModelSource var18;
             if (var15.T == -1 && var15.V == null) {
                var18 = var15.a(22, arg6, var10, var11, var12, var13, -1);
@@ -1457,7 +1457,7 @@ public class World {
                   int var16 = arg1 + var12;
                   if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
                      LocType var17 = LocType.a(var6);
-                     if (var14 != 22 || !F || var17.b || var17.h) {
+                     if (var14 != 22 || !lowMemory || var17.b || var17.h) {
                         var4 &= var17.c(-321);
                         var9 = true;
                      }

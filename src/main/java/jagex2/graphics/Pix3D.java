@@ -7,7 +7,7 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.w")
    public static int w = -20714;
    @ObfuscatedName("YIBHWZVJ.z")
-   public static boolean z = true;
+   public static boolean lowMemory = true;
    @ObfuscatedName("YIBHWZVJ.C")
    public static boolean C = true;
    @ObfuscatedName("YIBHWZVJ.G")
@@ -129,7 +129,7 @@ public class Pix3D extends Pix2D {
 
       if (Q == null) {
          P = arg1;
-         if (z) {
+         if (lowMemory) {
             Q = new int[P][16384];
          } else {
             Q = new int[P][65536];
@@ -154,7 +154,7 @@ public class Pix3D extends Pix2D {
       for(int var3 = 0; var3 < 50; ++var3) {
          try {
             M[var3] = new Pix8(arg0, String.valueOf(var3), 0);
-            if (z && M[var3].cropW == 128) {
+            if (lowMemory && M[var3].cropW == 128) {
                M[var3].shrink();
             } else {
                M[var3].a(true);
@@ -238,7 +238,7 @@ public class Pix3D extends Pix2D {
          R[arg0] = var1;
          Pix8 var5 = M[arg0];
          int[] var6 = V[arg0];
-         if (z) {
+         if (lowMemory) {
             N[arg0] = false;
 
             for(int var7 = 0; var7 < 4096; ++var7) {
@@ -2320,7 +2320,7 @@ public class Pix3D extends Pix2D {
          }
 
          int var19 = arg4 + arg5;
-         if (z) {
+         if (lowMemory) {
             int var20 = 0;
             int var21 = 0;
             int var22 = arg5 - E;
