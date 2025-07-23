@@ -3,6 +3,7 @@ package jagex2.io;
 import deob.ObfuscatedName;
 
 public class BZip2 {
+
 	@ObfuscatedName("QGXYZPKP.a")
 	public static BZip2State state = new BZip2State();
 
