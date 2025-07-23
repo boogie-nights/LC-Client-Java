@@ -300,7 +300,7 @@ public class NpcType {
    }
 
    @ObfuscatedName("SLDUQHOR.a(LATJMVOZR;)V")
-   public static final void a(Jagfile arg0) {
+   public static final void unpack(Jagfile arg0) {
       K = new Packet(arg0.read("npc.dat", (byte[])null));
       Packet var1 = new Packet(arg0.read("npc.idx", (byte[])null));
       C = var1.g2();

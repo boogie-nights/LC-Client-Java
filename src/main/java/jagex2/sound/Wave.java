@@ -34,7 +34,7 @@ public class Wave {
    }
 
    @ObfuscatedName("UDNCEGOL.a(LMFMVIYHT;I)V")
-   public static final void a(Packet arg0, int arg1) {
+   public static final void unpack(Packet arg0, int arg1) {
       if (arg1 == 36135) {
          g = new byte[441000];
          h = new Packet(g);

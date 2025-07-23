@@ -29,7 +29,7 @@ public class VarbitType {
    public static VarbitType[] c;
 
    @ObfuscatedName("ZQTIEXZH.a(LATJMVOZR;I)V")
-   public static void a(Jagfile arg0, int arg1) {
+   public static void unpack(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.read("varbit.dat", (byte[])null));
       if (arg1 == 36135) {
          b = var2.g2();

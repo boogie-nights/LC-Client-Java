@@ -39,7 +39,7 @@ public class VarpType {
    public static VarpType[] b;
 
    @ObfuscatedName("WEUDDWZB.a(LATJMVOZR;I)V")
-   public static void a(Jagfile arg0, int arg1) {
+   public static void unpack(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.read("varp.dat", (byte[])null));
       if (arg1 == 36135) {
          c = 0;

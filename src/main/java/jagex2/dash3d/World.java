@@ -71,7 +71,7 @@ public class World {
    @ObfuscatedName("CHEOPWNH.F")
    public static boolean lowMemory = true;
    @ObfuscatedName("CHEOPWNH.y")
-   public static int y;
+   public static int levelBuilt;
 
    @ObfuscatedName("CHEOPWNH.a(III)I")
    public static final int a(int arg0, int arg1, int arg2) {
@@ -481,7 +481,7 @@ public class World {
                      var40 -= this.k[var43];
                   }
 
-                  if (var41 >= 1 && var41 < this.o - 1 && (!lowMemory || (this.a[0][var28][var41] & 2) != 0 || (this.a[var8][var28][var41] & 16) == 0 && this.a(var41, var8, var28, (byte)0) == y)) {
+                  if (var41 >= 1 && var41 < this.o - 1 && (!lowMemory || (this.a[0][var28][var41] & 2) != 0 || (this.a[var8][var28][var41] & 16) == 0 && this.a(var41, var8, var28, (byte)0) == levelBuilt)) {
                      if (var8 < m) {
                         m = var8;
                      }
@@ -905,7 +905,7 @@ public class World {
             return;
          }
 
-         if (this.a(arg2, arg3, arg4, (byte)0) != y) {
+         if (this.a(arg2, arg3, arg4, (byte)0) != levelBuilt) {
             return;
          }
       }
@@ -1423,7 +1423,7 @@ public class World {
    }
 
    @ObfuscatedName("CHEOPWNH.a(II[BI)Z")
-   public static final boolean a(int arg0, int arg1, byte[] arg2, int arg3) {
+   public static final boolean locsAreReady(int arg0, int arg1, byte[] arg2, int arg3) {
       boolean var4 = true;
       Packet var5 = new Packet(arg2);
       if (arg3 != 24515) {

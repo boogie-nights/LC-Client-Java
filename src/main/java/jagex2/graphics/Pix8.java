@@ -124,7 +124,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("WRRBQEHV.c(I)V")
-	public void c(int arg0) {
+	public void flipHorizontally() {
 		byte[] var2 = new byte[this.height * this.width];
 		int var3 = 0;
 
@@ -135,18 +135,13 @@ public class Pix8 extends Pix2D {
 		}
 
 		this.pixels = var2;
-		if (arg0 == 0) {
-			this.cropX = this.cropW - this.width - this.cropX;
-		}
+		this.cropX = this.cropW - this.width - this.cropX;
 	}
 
 	@ObfuscatedName("WRRBQEHV.b(B)V")
-	public void b(byte arg0) {
+	public void flipVertically() {
 		byte[] var2 = new byte[this.height * this.width];
 		int var3 = 0;
-		if (arg0 != 7) {
-			this.C = !this.C;
-		}
 
 		for (int var4 = this.height - 1; var4 >= 0; --var4) {
 			for (int var5 = 0; var5 < this.width; ++var5) {
@@ -159,7 +154,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("WRRBQEHV.a(IIII)V")
-	public void a(int arg0, int arg1, int arg2, int arg3) {
+	public void translate(int arg0, int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.palette.length; ++var5) {
 			int var6 = this.palette[var5] >> 16 & 255;
 			int var7 = arg2 + var6;

@@ -110,9 +110,8 @@ public class PixFont extends Pix2D {
    }
 
    @ObfuscatedName("JDPYRDAS.a(IIIILjava/lang/String;)V")
-   public void a(int arg0, int arg1, int arg2, int arg3, String arg4) {
-      this.b(2245, arg0 - this.a(arg4, (byte)-53) / 2, arg3, arg2, arg4);
-      int var6 = 21 / arg1;
+   public void drawStringCenter(int x, int y, String text, int color) {
+      this.b(2245, x - this.a(text, (byte)-53) / 2, color, y, text);
    }
 
    @ObfuscatedName("JDPYRDAS.a(ZIIIILjava/lang/String;)V")

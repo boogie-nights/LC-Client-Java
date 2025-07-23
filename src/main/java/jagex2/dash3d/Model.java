@@ -130,7 +130,7 @@ public class Model extends ModelSource {
    @ObfuscatedName("LZYQDKJV.Hb")
    public static int[] Hb = new int[1000];
    @ObfuscatedName("LZYQDKJV.Ib")
-   public static int[] Ib = Pix3D.I;
+   public static int[] Ib = Pix3D.sinTable;
    @ObfuscatedName("LZYQDKJV.Jb")
    public static int[] Jb = Pix3D.J;
    @ObfuscatedName("LZYQDKJV.Kb")

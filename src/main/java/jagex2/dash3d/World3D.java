@@ -1063,7 +1063,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.a(II[IIII)V")
-   public static void a(int arg0, int arg1, int[] arg2, int arg3, int arg4, int arg5) {
+   public static void init(int arg0, int arg1, int[] arg2, int arg3, int arg4, int arg5) {
       tb = 0;
       ub = 0;
       vb = arg5;

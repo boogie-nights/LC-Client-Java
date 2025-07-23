@@ -1,7 +1,6 @@
 package jagex2.wordenc;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.Linkable;
 import jagex2.io.Jagfile;
 import jagex2.io.Packet;
 
@@ -48,7 +47,7 @@ public class WordFilter {
    public static byte[][][] o;
 
    @ObfuscatedName("WXKKTWFB.a(LATJMVOZR;)V")
-   public static final void a(Jagfile arg0) {
+   public static final void unpack(Jagfile arg0) {
       Packet var1 = new Packet(arg0.read("fragmentsenc.txt", (byte[])null));
       Packet var2 = new Packet(arg0.read("badenc.txt", (byte[])null));
       Packet var3 = new Packet(arg0.read("domainenc.txt", (byte[])null));

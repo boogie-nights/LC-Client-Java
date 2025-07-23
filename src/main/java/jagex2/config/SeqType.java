@@ -48,7 +48,7 @@ public class SeqType {
    public static SeqType[] types;
 
    @ObfuscatedName("FHWCLIAS.a(LATJMVOZR;I)V")
-   public static void a(Jagfile arg0, int arg1) {
+   public static void unpack(Jagfile arg0, int arg1) {
       Packet var2 = new Packet(arg0.read("seq.dat", (byte[])null));
       c = var2.g2();
       if (types == null) {

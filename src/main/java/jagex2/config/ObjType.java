@@ -21,7 +21,7 @@ public class ObjType {
    @ObfuscatedName("GSCQQEUA.l")
    public static LruCache l = new LruCache(50);
    @ObfuscatedName("GSCQQEUA.s")
-   public static boolean s = true;
+   public static boolean membersWorld = true;
    @ObfuscatedName("GSCQQEUA.u")
    public static LruCache u = new LruCache(100);
    @ObfuscatedName("GSCQQEUA.v")
@@ -164,7 +164,7 @@ public class ObjType {
          var2.b(0);
       }
 
-      if (!s && var2.Z) {
+      if (!membersWorld && var2.Z) {
          var2.d = "Members Object";
          var2.c = "Login to a members' server to use this object.".getBytes();
          var2.m = null;
@@ -226,7 +226,7 @@ public class ObjType {
    }
 
    @ObfuscatedName("GSCQQEUA.a(LATJMVOZR;)V")
-   public static final void a(Jagfile arg0) {
+   public static final void unpack(Jagfile arg0) {
       V = new Packet(arg0.read("obj.dat", (byte[])null));
       Packet var1 = new Packet(arg0.read("obj.idx", (byte[])null));
       j = var1.g2();
@@ -589,7 +589,7 @@ public class ObjType {
          Pix24 var10 = new Pix24(32, 32);
          int var11 = Pix3D.E;
          int var12 = Pix3D.F;
-         int[] var13 = Pix3D.K;
+         int[] var13 = Pix3D.lineOffset;
          int[] var14 = Pix2D.data;
          int var15 = Pix2D.width2d;
          int var16 = Pix2D.height2d;
@@ -610,7 +610,7 @@ public class ObjType {
             var21 = (int)((double)var21 * 1.04D);
          }
 
-         int var22 = Pix3D.I[var5.H] * var21 >> 16;
+         int var22 = Pix3D.sinTable[var5.H] * var21 >> 16;
          int var23 = Pix3D.J[var5.H] * var21 >> 16;
          var8.a(0, var5.E, var5.n, var5.H, var5.b, var8.k / 2 + var22 + var5.o, var5.o + var23);
 
@@ -674,7 +674,7 @@ public class ObjType {
          Pix2D.setBounds(var18, var20, var19, var17);
          Pix3D.E = var11;
          Pix3D.F = var12;
-         Pix3D.K = var13;
+         Pix3D.lineOffset = var13;
          Pix3D.C = true;
          if (var5.T) {
             var10.N = 33;

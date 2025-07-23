@@ -130,7 +130,7 @@ public class Pix24 extends Pix2D {
    }
 
    @ObfuscatedName("EPQDEJTO.a(IIII)V")
-   public void a(int arg0, int arg1, int arg2, int arg3) {
+   public void tranlsate(int arg0, int arg1, int arg2, int arg3) {
       for(int var5 = 0; var5 < this.I.length; ++var5) {
          int var6 = this.I[var5];
          if (var6 != 0) {
@@ -188,7 +188,7 @@ public class Pix24 extends Pix2D {
    }
 
    @ObfuscatedName("EPQDEJTO.a(III)V")
-   public void a(int arg0, int arg1, int arg2) {
+   public void blitOpaque(int arg0, int arg2) {
       int var4 = this.L + arg2;
       int var5 = this.M + arg0;
       int var6 = Pix2D.width2d * var5 + var4;
@@ -228,9 +228,6 @@ public class Pix24 extends Pix2D {
 
       if (var9 > 0 && var8 > 0) {
          this.a(var9, var10, var8, this.I, var7, var11, var6, (byte)-39, Pix2D.data);
-         if (arg1 >= 0) {
-            this.G = !this.G;
-         }
       }
    }
 
