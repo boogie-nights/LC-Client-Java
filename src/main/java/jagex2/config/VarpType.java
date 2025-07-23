@@ -5,109 +5,107 @@ import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
 public class VarpType {
-   @ObfuscatedName("WEUDDWZB.h")
-   public boolean h = false;
-   @ObfuscatedName("WEUDDWZB.i")
-   public boolean i = true;
-   @ObfuscatedName("WEUDDWZB.k")
-   public boolean k = false;
-   @ObfuscatedName("WEUDDWZB.n")
-   public boolean n = false;
-   @ObfuscatedName("WEUDDWZB.o")
-   public int o = -1;
-   @ObfuscatedName("WEUDDWZB.p")
-   public boolean p = true;
-   @ObfuscatedName("WEUDDWZB.a")
-   public static int a;
-   @ObfuscatedName("WEUDDWZB.c")
-   public static int c;
-   @ObfuscatedName("WEUDDWZB.f")
-   public int f;
-   @ObfuscatedName("WEUDDWZB.g")
-   public int g;
-   @ObfuscatedName("WEUDDWZB.j")
-   public int j;
-   @ObfuscatedName("WEUDDWZB.l")
-   public int l;
-   @ObfuscatedName("WEUDDWZB.m")
-   public int m;
-   @ObfuscatedName("WEUDDWZB.e")
-   public String e;
-   @ObfuscatedName("WEUDDWZB.d")
-   public static int[] d;
-   @ObfuscatedName("WEUDDWZB.b")
-   public static VarpType[] b;
+	@ObfuscatedName("WEUDDWZB.h")
+	public boolean code3 = false;
+	@ObfuscatedName("WEUDDWZB.i")
+	public boolean code4 = true;
+	@ObfuscatedName("WEUDDWZB.k")
+	public boolean code6 = false;
+	@ObfuscatedName("WEUDDWZB.n")
+	public boolean code11 = false;
+	@ObfuscatedName("WEUDDWZB.o")
+	public int code12 = -1;
+	@ObfuscatedName("WEUDDWZB.p")
+	public boolean code14 = true;
+	@ObfuscatedName("WEUDDWZB.a")
+	public static int count;
+	@ObfuscatedName("WEUDDWZB.c")
+	public static int code3count;
+	@ObfuscatedName("WEUDDWZB.f")
+	public int code1;
+	@ObfuscatedName("WEUDDWZB.g")
+	public int code2;
+	@ObfuscatedName("WEUDDWZB.j")
+	public int clientcode;
+	@ObfuscatedName("WEUDDWZB.l")
+	public int code7;
+	@ObfuscatedName("WEUDDWZB.m")
+	public int code8;
+	@ObfuscatedName("WEUDDWZB.e")
+	public String e;
+	@ObfuscatedName("WEUDDWZB.d")
+	public static int[] code3s;
+	@ObfuscatedName("WEUDDWZB.b")
+	public static VarpType[] types;
 
-   @ObfuscatedName("WEUDDWZB.a(LATJMVOZR;I)V")
-   public static void unpack(Jagfile arg0, int arg1) {
-      Packet var2 = new Packet(arg0.read("varp.dat", (byte[])null));
-      if (arg1 == 36135) {
-         c = 0;
-         a = var2.g2();
-         if (b == null) {
-            b = new VarpType[a];
-         }
+	@ObfuscatedName("WEUDDWZB.a(LATJMVOZR;I)V")
+	public static void unpack(Jagfile config) {
+		Packet dat = new Packet(config.read("varp.dat", null));
 
-         if (d == null) {
-            d = new int[a];
-         }
+		code3count = 0;
+		count = dat.g2();
 
-         for(int var3 = 0; var3 < a; ++var3) {
-            if (b[var3] == null) {
-               b[var3] = new VarpType();
-            }
+		if (types == null) {
+			types = new VarpType[count];
+		}
 
-            b[var3].a(-954, var3, var2);
-         }
+		if (code3s == null) {
+			code3s = new int[count];
+		}
 
-         if (var2.data.length != var2.pos) {
-            System.out.println("varptype load mismatch");
-         }
-      }
-   }
+		for (int i = 0; i < count; ++i) {
+			if (types[i] == null) {
+				types[i] = new VarpType();
+			}
 
-   @ObfuscatedName("WEUDDWZB.a(IILMFMVIYHT;)V")
-   public void a(int arg0, int arg1, Packet arg2) {
-      if (arg0 < 0) {
-         while(true) {
-            int var4 = arg2.g1();
-            if (var4 == 0) {
-               return;
-            }
+			types[i].decode(dat, i);
+		}
 
-            if (var4 == 1) {
-               this.f = arg2.g1();
-            } else if (var4 == 2) {
-               this.g = arg2.g1();
-            } else if (var4 == 3) {
-               this.h = true;
-               d[c++] = arg1;
-            } else if (var4 == 4) {
-               this.i = false;
-            } else if (var4 == 5) {
-               this.j = arg2.g2();
-            } else if (var4 == 6) {
-               this.k = true;
-            } else if (var4 == 7) {
-               this.l = arg2.g4();
-            } else if (var4 == 8) {
-               this.m = 1;
-               this.n = true;
-            } else if (var4 == 10) {
-               this.e = arg2.gjstr();
-            } else if (var4 == 11) {
-               this.n = true;
-            } else if (var4 == 12) {
-               this.o = arg2.g4();
-            } else if (var4 == 13) {
-               this.m = 2;
-               this.n = true;
-            } else if (var4 == 14) {
-               this.p = false;
-            } else {
-               System.out.println("Error unrecognised config code: " + var4);
-            }
-         }
-      }
-   }
+		if (dat.data.length != dat.pos) {
+			System.out.println("varptype load mismatch");
+		}
+	}
+
+	@ObfuscatedName("WEUDDWZB.a(IILMFMVIYHT;)V")
+	public void decode(Packet buf, int id) {
+		while (true) {
+			int code = buf.g1();
+			if (code == 0) {
+				return;
+			}
+
+			if (code == 1) {
+				this.code1 = buf.g1();
+			} else if (code == 2) {
+				this.code2 = buf.g1();
+			} else if (code == 3) {
+				this.code3 = true;
+				code3s[code3count++] = id;
+			} else if (code == 4) {
+				this.code4 = false;
+			} else if (code == 5) {
+				this.clientcode = buf.g2();
+			} else if (code == 6) {
+				this.code6 = true;
+			} else if (code == 7) {
+				this.code7 = buf.g4();
+			} else if (code == 8) {
+				this.code8 = 1;
+				this.code11 = true;
+			} else if (code == 10) {
+				this.e = buf.gjstr();
+			} else if (code == 11) {
+				this.code11 = true;
+			} else if (code == 12) {
+				this.code12 = buf.g4();
+			} else if (code == 13) {
+				this.code8 = 2;
+				this.code11 = true;
+			} else if (code == 14) {
+				this.code14 = false;
+			} else {
+				System.out.println("Error unrecognised config code: " + code);
+			}
+		}
+	}
 }

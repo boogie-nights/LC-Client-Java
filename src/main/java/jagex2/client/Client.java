@@ -1427,7 +1427,7 @@ public class Client extends GameShell {
 		SeqType.types = null;
 		SpotAnimType.e = null;
 		SpotAnimType.q = null;
-		VarpType.b = null;
+		VarpType.types = null;
 		super.drawArea = null;
 		ClientPlayer.Ib = null;
 		Pix3D.a(false);
@@ -6488,8 +6488,8 @@ public class Client extends GameShell {
 					NpcType.unpack(jagConfig);
 					IdkType.unpack(jagConfig, 36135);
 					SpotAnimType.unpack(jagConfig, 36135);
-					VarpType.unpack(jagConfig, 36135);
-					VarbitType.unpack(jagConfig, 36135);
+					VarpType.unpack(jagConfig);
+					VarbitType.unpack(jagConfig);
 					ObjType.membersWorld = membersWorld;
 
 					if (!lowMemory) {
@@ -9912,7 +9912,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.f(II)V")
 	public final void f(int arg0, int arg1) {
 		this.qb += arg0;
-		int var3 = VarpType.b[arg1].j;
+		int var3 = VarpType.types[arg1].clientcode;
 		if (var3 != 0) {
 			int var4 = this.varps[arg1];
 			if (var3 == 1) {
