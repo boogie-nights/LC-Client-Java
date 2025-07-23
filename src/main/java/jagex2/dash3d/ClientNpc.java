@@ -13,14 +13,14 @@ public class ClientNpc extends ClientEntity {
 
    @ObfuscatedName("RGHBDSIJ.b(B)LLZYQDKJV;")
    public final Model b(byte arg0) {
-      if (super.eb >= 0 && super.hb == 0) {
-         int var2 = SeqType.types[super.eb].frames[super.fb];
+      if (super.primarySeqId >= 0 && super.hb == 0) {
+         int var2 = SeqType.types[super.primarySeqId].frames[super.fb];
          int var3 = -1;
          if (super.u >= 0 && super.u != super.readyanim) {
             var3 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.rb.a(var2, var3, 0, SeqType.types[super.eb].j);
+         return this.rb.a(var2, var3, 0, SeqType.types[super.primarySeqId].j);
       } else {
          int var4 = -1;
          if (arg0 != 122) {
@@ -81,11 +81,7 @@ public class ClientNpc extends ClientEntity {
    }
 
    @ObfuscatedName("RGHBDSIJ.b(I)Z")
-   public final boolean b(int arg0) {
-      if (arg0 != 0) {
-         throw new NullPointerException();
-      } else {
+   public final boolean isVisible() {
          return this.rb != null;
-      }
    }
 }

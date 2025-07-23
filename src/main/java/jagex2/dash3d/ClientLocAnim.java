@@ -55,9 +55,9 @@ public class ClientLocAnim extends ModelSource {
          int var5 = var3.f;
          int var6 = var3.g;
          int var7 = Client.Yh[var6 - var5];
-         var2 = v.Ee[var4] >> var5 & var7;
+         var2 = v.varps[var4] >> var5 & var7;
       } else if (this.y != -1) {
-         var2 = v.Ee[this.y];
+         var2 = v.varps[this.y];
       }
 
       return var2 >= 0 && var2 < this.z.length && this.z[var2] != -1 ? LocType.a(this.z[var2]) : null;

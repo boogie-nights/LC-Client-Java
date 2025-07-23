@@ -33,7 +33,7 @@ public class ClientPlayer extends ClientEntity {
    @ObfuscatedName("ZGNGQRPJ.Ib")
    public static LruCache Ib = new LruCache(260);
    @ObfuscatedName("ZGNGQRPJ.Ab")
-   public int Ab;
+   public int vislevel;
    @ObfuscatedName("ZGNGQRPJ.Cb")
    public int Cb;
    @ObfuscatedName("ZGNGQRPJ.Gb")
@@ -135,8 +135,8 @@ public class ClientPlayer extends ClientEntity {
    public final Model b(byte arg0) {
       if (this.Eb != null) {
          int var2 = -1;
-         if (super.eb >= 0 && super.hb == 0) {
-            var2 = SeqType.types[super.eb].frames[super.fb];
+         if (super.primarySeqId >= 0 && super.hb == 0) {
+            var2 = SeqType.types[super.primarySeqId].frames[super.fb];
          } else if (super.u >= 0) {
             var2 = SeqType.types[super.u].frames[super.v];
          }
@@ -152,8 +152,8 @@ public class ClientPlayer extends ClientEntity {
             this.Ob = !this.Ob;
          }
 
-         if (super.eb >= 0 && super.hb == 0) {
-            SeqType var10 = SeqType.types[super.eb];
+         if (super.primarySeqId >= 0 && super.hb == 0) {
+            SeqType var10 = SeqType.types[super.primarySeqId];
             var6 = var10.frames[super.fb];
             if (super.u >= 0 && super.u != super.readyanim) {
                var7 = SeqType.types[super.u].frames[super.v];
@@ -258,7 +258,7 @@ public class ClientPlayer extends ClientEntity {
             Model var22 = Model.t;
             var22.a(AnimFrame.a(this.Jb, var6) & AnimFrame.a(this.Jb, var7), var11, 1244);
             if (var6 != -1 && var7 != -1) {
-               var22.a(var7, 0, var6, SeqType.types[super.eb].j);
+               var22.a(var7, 0, var6, SeqType.types[super.primarySeqId].j);
             } else if (var6 != -1) {
                var22.applyTransform(var6, (byte)6);
             }
@@ -272,12 +272,7 @@ public class ClientPlayer extends ClientEntity {
    }
 
    @ObfuscatedName("ZGNGQRPJ.b(I)Z")
-   public final boolean b(int arg0) {
-      if (arg0 != 0) {
-         for(int var2 = 1; var2 > 0; ++var2) {
-         }
-      }
-
+   public final boolean isVisible() {
       return this.Fb;
    }
 
@@ -322,7 +317,7 @@ public class ClientPlayer extends ClientEntity {
 
                   if (Client.loopCycle >= this.Lb && Client.loopCycle < this.Mb) {
                      Model var7 = this.tb;
-                     var7.a(this.qb - super.Q, this.sb - super.R, false, this.rb - this.xb);
+                     var7.a(this.qb - super.x, this.sb - super.z, false, this.rb - this.xb);
                      if (super.q == 512) {
                         var7.b(true);
                         var7.b(true);
@@ -347,7 +342,7 @@ public class ClientPlayer extends ClientEntity {
                         var7.b(true);
                      }
 
-                     var7.a(super.Q - this.qb, super.R - this.sb, false, this.xb - this.rb);
+                     var7.a(super.x - this.qb, super.z - this.sb, false, this.xb - this.rb);
                   }
                }
 
@@ -439,7 +434,7 @@ public class ClientPlayer extends ClientEntity {
       }
 
       this.name = JString.formatDisplayName(JString.fromBase37(arg0.g8()));
-      this.Ab = arg0.g1();
+      this.vislevel = arg0.g1();
       this.Gb = arg0.g2();
       this.Fb = true;
       this.Bb = 0L;

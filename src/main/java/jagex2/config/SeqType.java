@@ -23,7 +23,7 @@ public class SeqType {
    @ObfuscatedName("FHWCLIAS.p")
    public int p = -1;
    @ObfuscatedName("FHWCLIAS.q")
-   public int q = -1;
+   public int postanim_mode = -1;
    @ObfuscatedName("FHWCLIAS.r")
    public int r = 2;
    @ObfuscatedName("FHWCLIAS.a")
@@ -119,13 +119,13 @@ public class SeqType {
                   }
                }
 
-               if (this.q == -1) {
+               if (this.postanim_mode == -1) {
                   if (this.j != null) {
-                     this.q = 2;
+                     this.postanim_mode = 2;
                      return;
                   }
 
-                  this.q = 0;
+                  this.postanim_mode = 0;
                   return;
                }
 
@@ -163,7 +163,7 @@ public class SeqType {
                } else if (var4 == 9) {
                   this.p = arg1.g1();
                } else if (var4 == 10) {
-                  this.q = arg1.g1();
+                  this.postanim_mode = arg1.g1();
                } else if (var4 == 11) {
                   this.r = arg1.g1();
                } else if (var4 == 12) {

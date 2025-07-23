@@ -147,9 +147,9 @@ public class LocType {
          int var5 = var3.f;
          int var6 = var3.g;
          int var7 = Client.Yh[var6 - var5];
-         var2 = m.Ee[var4] >> var5 & var7;
+         var2 = m.varps[var4] >> var5 & var7;
       } else if (this.x != -1) {
-         var2 = m.Ee[this.x];
+         var2 = m.varps[this.x];
       }
 
       return var2 >= 0 && var2 < this.V.length && this.V[var2] != -1 ? a(this.V[var2]) : null;

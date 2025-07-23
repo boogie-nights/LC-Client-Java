@@ -286,9 +286,9 @@ public class NpcType {
             int var5 = var3.f;
             int var6 = var3.g;
             int var7 = Client.Yh[var6 - var5];
-            var2 = i.Ee[var4] >> var5 & var7;
+            var2 = i.varps[var4] >> var5 & var7;
          } else if (this.M != -1) {
-            var2 = i.Ee[this.M];
+            var2 = i.varps[this.M];
          }
 
          if (var2 >= 0 && var2 < this.b.length && this.b[var2] != -1) {
@@ -403,9 +403,9 @@ public class NpcType {
          int var5 = var3.f;
          int var6 = var3.g;
          int var7 = Client.Yh[var6 - var5];
-         var2 = i.Ee[var4] >> var5 & var7;
+         var2 = i.varps[var4] >> var5 & var7;
       } else if (this.M != -1) {
-         var2 = i.Ee[this.M];
+         var2 = i.varps[this.M];
       }
 
       return var2 >= 0 && var2 < this.b.length && this.b[var2] != -1 ? get(this.b[var2]) : null;
