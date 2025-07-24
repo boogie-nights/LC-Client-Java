@@ -107,7 +107,7 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("LRUWCBNN.q")
 	public int q;
 	@ObfuscatedName("LRUWCBNN.r")
-	public int r;
+	public int cycle;
 	@ObfuscatedName("LRUWCBNN.v")
 	public int v;
 	@ObfuscatedName("LRUWCBNN.w")

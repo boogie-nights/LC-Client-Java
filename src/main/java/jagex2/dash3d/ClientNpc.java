@@ -9,7 +9,7 @@ public class ClientNpc extends ClientEntity {
    @ObfuscatedName("RGHBDSIJ.qb")
    public boolean qb = true;
    @ObfuscatedName("RGHBDSIJ.rb")
-   public NpcType rb;
+   public NpcType type;
 
    @ObfuscatedName("RGHBDSIJ.b(B)LLZYQDKJV;")
    public final Model b(byte arg0) {
@@ -20,7 +20,7 @@ public class ClientNpc extends ClientEntity {
             var3 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.rb.a(var2, var3, 0, SeqType.types[super.primarySeqId].j);
+         return this.type.a(var2, var3, 0, SeqType.types[super.primarySeqId].j);
       } else {
          int var4 = -1;
          if (arg0 != 122) {
@@ -31,7 +31,7 @@ public class ClientNpc extends ClientEntity {
             var4 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.rb.a(var4, -1, 0, (int[])null);
+         return this.type.a(var4, -1, 0, (int[])null);
       }
    }
 
@@ -41,7 +41,7 @@ public class ClientNpc extends ClientEntity {
          throw new NullPointerException();
       } else {
          boolean var2 = false;
-         if (this.rb == null) {
+         if (this.type == null) {
             return null;
          } else {
             Model var3 = this.b((byte)122);
@@ -70,7 +70,7 @@ public class ClientNpc extends ClientEntity {
                   }
                }
 
-               if (this.rb.v == 1) {
+               if (this.type.v == 1) {
                   var3.eb = true;
                }
 
@@ -82,6 +82,6 @@ public class ClientNpc extends ClientEntity {
 
    @ObfuscatedName("RGHBDSIJ.b(I)Z")
    public final boolean isVisible() {
-         return this.rb != null;
+         return this.type != null;
    }
 }

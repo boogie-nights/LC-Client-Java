@@ -17,7 +17,7 @@ public class Wave {
    @ObfuscatedName("UDNCEGOL.e")
    public static Wave[] e = new Wave[5000];
    @ObfuscatedName("UDNCEGOL.f")
-   public static int[] f = new int[5000];
+   public static int[] delays = new int[5000];
    @ObfuscatedName("UDNCEGOL.j")
    public int j;
    @ObfuscatedName("UDNCEGOL.k")
@@ -48,7 +48,7 @@ public class Wave {
 
             e[var2] = new Wave(-524);
             e[var2].a(a, arg0);
-            f[var2] = e[var2].a(0);
+            delays[var2] = e[var2].a(0);
          }
       }
    }
