@@ -18,6 +18,6 @@ public class ClientObj extends ModelSource {
       }
 
       ObjType var2 = ObjType.get(this.m);
-      return var2.c(this.o);
+      return var2.getModel(this.o);
    }
 }

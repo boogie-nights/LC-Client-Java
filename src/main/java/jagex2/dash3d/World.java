@@ -1312,7 +1312,7 @@ public class World {
 
    @ObfuscatedName("CHEOPWNH.b(IIII)I")
    public static final int b(int arg0, int arg1, int arg2, int arg3) {
-      int var4 = 65536 - Pix3D.J[arg2 * 1024 / arg3] >> 1;
+      int var4 = 65536 - Pix3D.cosTable[arg2 * 1024 / arg3] >> 1;
       return ((65536 - var4) * arg0 >> 16) + (arg1 * var4 >> 16);
    }
 

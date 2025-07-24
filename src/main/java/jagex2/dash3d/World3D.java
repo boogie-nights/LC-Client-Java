@@ -1917,14 +1917,14 @@ public class World3D {
                int var42 = arg3 * var20 - arg2 * var40 >> 16;
                int var43 = arg2 * var20 + arg3 * var40 >> 16;
                if (var43 >= 50) {
-                  int var45 = (var21 << 9) / var25 + Pix3D.E;
-                  int var46 = (var24 << 9) / var25 + Pix3D.F;
-                  int var47 = (var27 << 9) / var31 + Pix3D.E;
-                  int var48 = (var30 << 9) / var31 + Pix3D.F;
-                  int var49 = (var33 << 9) / var37 + Pix3D.E;
-                  int var50 = (var36 << 9) / var37 + Pix3D.F;
-                  int var51 = (var39 << 9) / var43 + Pix3D.E;
-                  int var52 = (var42 << 9) / var43 + Pix3D.F;
+                  int var45 = (var21 << 9) / var25 + Pix3D.centerX;
+                  int var46 = (var24 << 9) / var25 + Pix3D.centerY;
+                  int var47 = (var27 << 9) / var31 + Pix3D.centerX;
+                  int var48 = (var30 << 9) / var31 + Pix3D.centerY;
+                  int var49 = (var33 << 9) / var37 + Pix3D.centerX;
+                  int var50 = (var36 << 9) / var37 + Pix3D.centerY;
+                  int var51 = (var39 << 9) / var43 + Pix3D.centerX;
+                  int var52 = (var42 << 9) / var43 + Pix3D.centerY;
                   Pix3D.D = 0;
                   if ((var48 - var52) * (var49 - var51) - (var47 - var51) * (var50 - var52) > 0) {
                      Pix3D.A = false;
@@ -2008,8 +2008,8 @@ public class World3D {
             Ground.u[var10] = var18;
          }
 
-         Ground.q[var10] = (var14 << 9) / var18 + Pix3D.E;
-         Ground.r[var10] = (var17 << 9) / var18 + Pix3D.F;
+         Ground.q[var10] = (var14 << 9) / var18 + Pix3D.centerX;
+         Ground.r[var10] = (var17 << 9) / var18 + Pix3D.centerY;
       }
 
       Pix3D.D = 0;

@@ -9,7 +9,7 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.z")
    public static boolean lowMemory = true;
    @ObfuscatedName("YIBHWZVJ.C")
-   public static boolean C = true;
+   public static boolean jagged = true;
    @ObfuscatedName("YIBHWZVJ.G")
    public static int[] G = new int[512];
    @ObfuscatedName("YIBHWZVJ.H")
@@ -17,7 +17,7 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.I")
    public static int[] sinTable = new int[2048];
    @ObfuscatedName("YIBHWZVJ.J")
-   public static int[] J = new int[2048];
+   public static int[] cosTable = new int[2048];
    @ObfuscatedName("YIBHWZVJ.M")
    public static Pix8[] M;
    @ObfuscatedName("YIBHWZVJ.N")
@@ -35,9 +35,9 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.D")
    public static int D;
    @ObfuscatedName("YIBHWZVJ.E")
-   public static int E;
+   public static int centerX;
    @ObfuscatedName("YIBHWZVJ.F")
-   public static int F;
+   public static int centerY;
    @ObfuscatedName("YIBHWZVJ.L")
    public static int L;
    @ObfuscatedName("YIBHWZVJ.P")
@@ -62,7 +62,7 @@ public class Pix3D extends Pix2D {
       G = null;
       G = null;
       sinTable = null;
-      J = null;
+      cosTable = null;
       lineOffset = null;
       M = null;
       N = null;
@@ -80,7 +80,7 @@ public class Pix3D extends Pix2D {
    }
 
    @ObfuscatedName("YIBHWZVJ.b(I)V")
-   public static final void b(int arg0) {
+   public static final void init2D(int arg0) {
       int var1 = 19 / arg0;
       lineOffset = new int[height2d];
 
@@ -88,8 +88,8 @@ public class Pix3D extends Pix2D {
          lineOffset[var2] = width2d * var2;
       }
 
-      E = width2d / 2;
-      F = height2d / 2;
+      centerX = width2d / 2;
+      centerY = height2d / 2;
    }
 
    @ObfuscatedName("YIBHWZVJ.a(III)V")
@@ -104,8 +104,8 @@ public class Pix3D extends Pix2D {
          lineOffset[var3] = arg2 * var3;
       }
 
-      E = arg2 / 2;
-      F = arg0 / 2;
+      centerX = arg2 / 2;
+      centerY = arg0 / 2;
    }
 
    @ObfuscatedName("YIBHWZVJ.b(B)V")
@@ -952,7 +952,7 @@ public class Pix3D extends Pix2D {
 
    @ObfuscatedName("YIBHWZVJ.a([IIIIIIII)V")
    public static final void a(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
-      if (C) {
+      if (jagged) {
          int var9;
          int var10;
          int var11;
@@ -1689,7 +1689,7 @@ public class Pix3D extends Pix2D {
                   arg1 = 0;
                }
 
-               int var47 = arg0 - F;
+               int var47 = arg0 - centerY;
                int var48 = var28 * var47 + var26;
                int var49 = var31 * var47 + var29;
                int var50 = var34 * var47 + var32;
@@ -1787,7 +1787,7 @@ public class Pix3D extends Pix2D {
                   arg2 = 0;
                }
 
-               int var63 = arg0 - F;
+               int var63 = arg0 - centerY;
                int var64 = var28 * var63 + var26;
                int var65 = var31 * var63 + var29;
                int var66 = var34 * var63 + var32;
@@ -1897,7 +1897,7 @@ public class Pix3D extends Pix2D {
                   arg2 = 0;
                }
 
-               int var79 = arg1 - F;
+               int var79 = arg1 - centerY;
                int var80 = var28 * var79 + var26;
                int var81 = var31 * var79 + var29;
                int var82 = var34 * var79 + var32;
@@ -1995,7 +1995,7 @@ public class Pix3D extends Pix2D {
                   arg0 = 0;
                }
 
-               int var95 = arg1 - F;
+               int var95 = arg1 - centerY;
                int var96 = var28 * var95 + var26;
                int var97 = var31 * var95 + var29;
                int var98 = var34 * var95 + var32;
@@ -2104,7 +2104,7 @@ public class Pix3D extends Pix2D {
                arg0 = 0;
             }
 
-            int var111 = arg2 - F;
+            int var111 = arg2 - centerY;
             int var112 = var28 * var111 + var26;
             int var113 = var31 * var111 + var29;
             int var114 = var34 * var111 + var32;
@@ -2202,7 +2202,7 @@ public class Pix3D extends Pix2D {
                arg1 = 0;
             }
 
-            int var127 = arg2 - F;
+            int var127 = arg2 - centerY;
             int var128 = var28 * var127 + var26;
             int var129 = var31 * var127 + var29;
             int var130 = var34 * var127 + var32;
@@ -2323,7 +2323,7 @@ public class Pix3D extends Pix2D {
          if (lowMemory) {
             int var20 = 0;
             int var21 = 0;
-            int var22 = arg5 - E;
+            int var22 = arg5 - centerX;
             int var23 = (arg12 >> 3) * var22 + arg9;
             int var24 = (arg13 >> 3) * var22 + arg10;
             int var25 = (arg14 >> 3) * var22 + arg11;
@@ -2515,7 +2515,7 @@ public class Pix3D extends Pix2D {
          } else {
             int var78 = 0;
             int var79 = 0;
-            int var80 = arg5 - E;
+            int var80 = arg5 - centerX;
             int var81 = (arg12 >> 3) * var80 + arg9;
             int var82 = (arg13 >> 3) * var80 + arg10;
             int var83 = (arg14 >> 3) * var80 + arg11;
@@ -2719,7 +2719,7 @@ public class Pix3D extends Pix2D {
 
       for(int var2 = 0; var2 < 2048; ++var2) {
          sinTable[var2] = (int)(65536.0D * Math.sin((double)var2 * 0.0030679615D));
-         J[var2] = (int)(65536.0D * Math.cos((double)var2 * 0.0030679615D));
+         cosTable[var2] = (int)(65536.0D * Math.cos((double)var2 * 0.0030679615D));
       }
 
       M = new Pix8[50];

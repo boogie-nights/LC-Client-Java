@@ -35,13 +35,13 @@ public class Pix24 extends Pix2D {
    @ObfuscatedName("EPQDEJTO.H")
    public int H = 3600;
    @ObfuscatedName("EPQDEJTO.I")
-   public int[] I;
+   public int[] pixels;
    @ObfuscatedName("EPQDEJTO.N")
-   public int N;
+   public int width;
    @ObfuscatedName("EPQDEJTO.J")
    public int J;
    @ObfuscatedName("EPQDEJTO.O")
-   public int O;
+   public int height;
    @ObfuscatedName("EPQDEJTO.K")
    public int K;
    @ObfuscatedName("EPQDEJTO.M")
@@ -50,9 +50,9 @@ public class Pix24 extends Pix2D {
    public int L;
 
    public Pix24(int arg0, int arg1) {
-      this.I = new int[arg0 * arg1];
-      this.J = this.N = arg0;
-      this.K = this.O = arg1;
+      this.pixels = new int[arg0 * arg1];
+      this.J = this.width = arg0;
+      this.K = this.height = arg1;
       this.L = this.M = 0;
    }
 
@@ -64,12 +64,12 @@ public class Pix24 extends Pix2D {
          var4.waitForAll();
          this.J = var3.getWidth(arg1);
          this.K = var3.getHeight(arg1);
-         this.N = this.J;
-         this.O = this.K;
+         this.width = this.J;
+         this.height = this.K;
          this.L = 0;
          this.M = 0;
-         this.I = new int[this.K * this.J];
-         PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.J, this.K, this.I, 0, this.J);
+         this.pixels = new int[this.K * this.J];
+         PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.J, this.K, this.pixels, 0, this.J);
          var5.grabPixels();
       } catch (Exception var6) {
          System.out.println("Error converting jpg");
@@ -80,8 +80,8 @@ public class Pix24 extends Pix2D {
       Packet var4 = new Packet(arg0.read(arg1 + ".dat", (byte[])null));
       Packet var5 = new Packet(arg0.read("index.dat", (byte[])null));
       var5.pos = var4.g2();
-      this.N = var5.g2();
-      this.O = var5.g2();
+      this.width = var5.g2();
+      this.height = var5.g2();
       int var6 = var5.g1();
       int[] var7 = new int[var6];
 
@@ -104,17 +104,17 @@ public class Pix24 extends Pix2D {
       this.K = var5.g2();
       int var10 = var5.g1();
       int var11 = this.K * this.J;
-      this.I = new int[var11];
+      this.pixels = new int[var11];
       if (var10 == 0) {
          for(int var12 = 0; var12 < var11; ++var12) {
-            this.I[var12] = var7[var4.g1()];
+            this.pixels[var12] = var7[var4.g1()];
          }
 
       } else {
          if (var10 == 1) {
             for(int var13 = 0; var13 < this.J; ++var13) {
                for(int var14 = 0; var14 < this.K; ++var14) {
-                  this.I[this.J * var14 + var13] = var7[var4.g1()];
+                  this.pixels[this.J * var14 + var13] = var7[var4.g1()];
                }
             }
          }
@@ -125,14 +125,14 @@ public class Pix24 extends Pix2D {
    @ObfuscatedName("EPQDEJTO.a(Z)V")
    public void a(boolean arg0) {
       if (!arg0) {
-         Pix2D.bind(this.J, this.I, this.K);
+         Pix2D.bind(this.J, this.pixels, this.K);
       }
    }
 
    @ObfuscatedName("EPQDEJTO.a(IIII)V")
    public void tranlsate(int arg0, int arg1, int arg2, int arg3) {
-      for(int var5 = 0; var5 < this.I.length; ++var5) {
-         int var6 = this.I[var5];
+      for(int var5 = 0; var5 < this.pixels.length; ++var5) {
+         int var6 = this.pixels[var5];
          if (var6 != 0) {
             int var7 = var6 >> 16 & 255;
             int var8 = arg2 + var7;
@@ -158,7 +158,7 @@ public class Pix24 extends Pix2D {
                var12 = 255;
             }
 
-            this.I[var5] = (var8 << 16) + (var10 << 8) + var12;
+            this.pixels[var5] = (var8 << 16) + (var10 << 8) + var12;
          }
       }
 
@@ -169,17 +169,17 @@ public class Pix24 extends Pix2D {
 
    @ObfuscatedName("EPQDEJTO.b(I)V")
    public void b(int arg0) {
-      int[] var2 = new int[this.O * this.N];
+      int[] var2 = new int[this.height * this.width];
 
       for(int var3 = 0; var3 < this.K; ++var3) {
          for(int var4 = 0; var4 < this.J; ++var4) {
-            var2[(this.M + var3) * this.N + this.L + var4] = this.I[this.J * var3 + var4];
+            var2[(this.M + var3) * this.width + this.L + var4] = this.pixels[this.J * var3 + var4];
          }
       }
 
-      this.I = var2;
-      this.J = this.N;
-      this.K = this.O;
+      this.pixels = var2;
+      this.J = this.width;
+      this.K = this.height;
       this.L = 0;
       this.M = 0;
       if (arg0 == 1790) {
@@ -227,7 +227,7 @@ public class Pix24 extends Pix2D {
       }
 
       if (var9 > 0 && var8 > 0) {
-         this.a(var9, var10, var8, this.I, var7, var11, var6, (byte)-39, Pix2D.data);
+         this.a(var9, var10, var8, this.pixels, var7, var11, var6, (byte)-39, Pix2D.data);
       }
    }
 
@@ -299,7 +299,7 @@ public class Pix24 extends Pix2D {
          }
 
          if (var9 > 0 && var8 > 0) {
-            this.a(Pix2D.data, this.I, 0, var7, var6, var9, var8, var10, var11);
+            this.a(Pix2D.data, this.pixels, 0, var7, var6, var9, var8, var10, var11);
          }
       }
    }
@@ -396,7 +396,7 @@ public class Pix24 extends Pix2D {
          }
 
          if (var10 > 0 && var9 > 0) {
-            this.a(var10, var12, 0, var11, var8, this.A, arg3, var7, var9, Pix2D.data, this.I);
+            this.a(var10, var12, 0, var11, var8, this.A, arg3, var7, var9, Pix2D.data, this.pixels);
          }
       }
    }
@@ -447,7 +447,7 @@ public class Pix24 extends Pix2D {
             int var26 = var20 - var17 * var23;
 
             for(int var27 = -arg5[var22]; var27 < 0; ++var27) {
-               Pix2D.data[var24++] = this.I[(var25 >> 16) + (var26 >> 16) * this.J];
+               Pix2D.data[var24++] = this.pixels[(var25 >> 16) + (var26 >> 16) * this.J];
                var25 += var18;
                var26 -= var17;
             }
@@ -481,7 +481,7 @@ public class Pix24 extends Pix2D {
                int var23 = var18;
 
                for(int var24 = -arg6; var24 < 0; ++var24) {
-                  int var25 = this.I[(var22 >> 16) + (var23 >> 16) * this.J];
+                  int var25 = this.pixels[(var22 >> 16) + (var23 >> 16) * this.J];
                   if (var25 != 0) {
                      Pix2D.data[var21++] = var25;
                   } else {
@@ -543,7 +543,7 @@ public class Pix24 extends Pix2D {
          }
 
          if (var10 > 0 && var9 > 0) {
-            this.a(var7, var11, this.I, var10, Pix2D.data, arg0.pixels, 40303, var9, var8, 0, var12);
+            this.a(var7, var11, this.pixels, var10, Pix2D.data, arg0.pixels, 40303, var9, var8, 0, var12);
          }
       }
    }

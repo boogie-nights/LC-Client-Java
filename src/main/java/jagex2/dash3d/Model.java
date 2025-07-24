@@ -132,7 +132,7 @@ public class Model extends ModelSource {
    @ObfuscatedName("LZYQDKJV.Ib")
    public static int[] Ib = Pix3D.sinTable;
    @ObfuscatedName("LZYQDKJV.Jb")
-   public static int[] Jb = Pix3D.J;
+   public static int[] Jb = Pix3D.cosTable;
    @ObfuscatedName("LZYQDKJV.Kb")
    public static int[] Kb = Pix3D.U;
    @ObfuscatedName("LZYQDKJV.Lb")
@@ -1641,9 +1641,9 @@ public class Model extends ModelSource {
    }
 
    @ObfuscatedName("LZYQDKJV.a(IIIIIII)V")
-   public final void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-      int var8 = Pix3D.E;
-      int var9 = Pix3D.F;
+   public final void drawSimple(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+      int var8 = Pix3D.centerX;
+      int var9 = Pix3D.centerY;
       int var10 = Ib[arg0];
       int var11 = Jb[arg0];
       int var12 = Ib[arg1];
@@ -1749,8 +1749,8 @@ public class Model extends ModelSource {
                            var28 = var21 / var25;
                         }
 
-                        int var30 = Eb - Pix3D.E;
-                        int var31 = Fb - Pix3D.F;
+                        int var30 = Eb - Pix3D.centerX;
+                        int var31 = Fb - Pix3D.centerY;
                         if (var30 > var26 && var30 < var27 && var31 > var28 && var31 < var29) {
                            if (this.eb) {
                               Hb[Gb++] = arg8;
@@ -1760,8 +1760,8 @@ public class Model extends ModelSource {
                         }
                      }
 
-                     int var32 = Pix3D.E;
-                     int var33 = Pix3D.F;
+                     int var32 = Pix3D.centerX;
+                     int var33 = Pix3D.centerY;
                      int var34 = 0;
                      int var35 = 0;
                      if (arg0 != 0) {
@@ -2047,8 +2047,8 @@ public class Model extends ModelSource {
 
    @ObfuscatedName("LZYQDKJV.i(I)V")
    public final void i(int arg0) {
-      int var2 = Pix3D.E;
-      int var3 = Pix3D.F;
+      int var2 = Pix3D.centerX;
+      int var3 = Pix3D.centerY;
       int var4 = 0;
       int var5 = this.D[arg0];
       int var6 = this.E[arg0];
