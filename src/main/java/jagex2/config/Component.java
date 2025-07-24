@@ -197,7 +197,7 @@ public class Component {
 	}
 
 	@ObfuscatedName("EWIXBTLV.a(I)LEWIXBTLV;")
-	public static Component a(int arg0) {
+	public static Component types(int arg0) {
 		if (g[arg0] == null) {
 			Packet var1 = new Packet(ub[arg0]);
 			int var2 = var1.g2();

@@ -41,7 +41,7 @@ public class ObjType {
 	@ObfuscatedName("GSCQQEUA.D")
 	public int D;
 	@ObfuscatedName("GSCQQEUA.E")
-	public int E;
+	public int yan2d;
 	@ObfuscatedName("GSCQQEUA.F")
 	public int F;
 	@ObfuscatedName("GSCQQEUA.G")
@@ -257,7 +257,7 @@ public class ObjType {
 		}
 
 		this.xan2d = var2.xan2d;
-		this.E = var2.E;
+		this.yan2d = var2.yan2d;
 		this.n = var2.n;
 		this.b = var2.b;
 		this.o = var2.o;
@@ -370,7 +370,7 @@ public class ObjType {
 				} else if (var3 == 5) {
 					this.xan2d = arg1.g2();
 				} else if (var3 == 6) {
-					this.E = arg1.g2();
+					this.yan2d = arg1.g2();
 				} else if (var3 == 7) {
 					this.b = arg1.g2();
 					if (this.b > 32767) {
@@ -617,7 +617,7 @@ public class ObjType {
 		int sinPitch = Pix3D.sinTable[obj.xan2d] * zoom >> 16;
 		int cosPitch = Pix3D.cosTable[obj.xan2d] * zoom >> 16;
 
-		model.drawSimple(0, obj.E, obj.n, obj.xan2d, obj.b, model.k / 2 + sinPitch + obj.o, obj.o + cosPitch);
+		model.drawSimple(0, obj.yan2d, obj.n, obj.xan2d, obj.b, model.k / 2 + sinPitch + obj.o, obj.o + cosPitch);
 
 		for (int x = 31; x >= 0; --x) {
 			for (int y = 31; y >= 0; --y) {
@@ -714,7 +714,7 @@ public class ObjType {
 		this.p = null;
 		this.zoom2d = 2000;
 		this.xan2d = 0;
-		this.E = 0;
+		this.yan2d = 0;
 		this.n = 0;
 		this.b = 0;
 		this.o = 0;

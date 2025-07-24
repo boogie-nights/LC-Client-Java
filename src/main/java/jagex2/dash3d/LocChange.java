@@ -23,9 +23,9 @@ public class LocChange extends Linkable {
    @ObfuscatedName("NLLHDXXJ.m")
    public int m;
    @ObfuscatedName("NLLHDXXJ.n")
-   public int n;
+   public int x;
    @ObfuscatedName("NLLHDXXJ.o")
-   public int o;
+   public int z;
    @ObfuscatedName("NLLHDXXJ.p")
    public int p;
 }

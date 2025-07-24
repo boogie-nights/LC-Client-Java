@@ -504,10 +504,6 @@ public class Packet extends DoublyLinkable {
 	@ObfuscatedName("MFMVIYHT.o(I)I")
 	public int o(int arg0) {
 		this.pos += 2;
-		if (arg0 >= 0) {
-			this.s = 68;
-		}
-
 		return ((this.data[this.pos - 1] & 255) << 8) + (this.data[this.pos - 2] - 128 & 255);
 	}
 
