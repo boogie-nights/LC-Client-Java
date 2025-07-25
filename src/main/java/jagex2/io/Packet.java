@@ -38,7 +38,7 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("MFMVIYHT.D")
-	public static final int[] bitmask = new int[] { 0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1 };
+	public static final int[] bitmask = new int[]{0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1};
 
 	@ObfuscatedName("MFMVIYHT.E")
 	public Isaac random;
@@ -233,10 +233,6 @@ public class Packet extends DoublyLinkable {
 
 	@ObfuscatedName("MFMVIYHT.a([BIII)V")
 	public void pdata(byte[] arg0, int arg1, int arg2, int arg3) {
-		if (arg1 != 0) {
-			x = !x;
-		}
-
 		for (int var5 = arg3; var5 < arg2 + arg3; ++var5) {
 			this.data[this.pos++] = arg0[var5];
 		}
@@ -316,14 +312,9 @@ public class Packet extends DoublyLinkable {
 
 	@ObfuscatedName("MFMVIYHT.a(III[B)V")
 	public void gdata(int arg0, int arg1, int arg2, byte[] arg3) {
-		if (arg2 >= 0) {
-			this.k = !this.k;
+		for (int i = arg1; i < arg0 + arg1; ++i) {
+			arg3[i] = this.data[this.pos++];
 		}
-
-		for (int var5 = arg1; var5 < arg0 + arg1; ++var5) {
-			arg3[var5] = this.data[this.pos++];
-		}
-
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(B)V")
@@ -388,213 +379,144 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(ZI)V")
-	public void a(boolean arg0, int arg1) {
+	public void p1_alt1(int arg1) {
 		this.data[this.pos++] = (byte) (arg1 + 128);
-		if (arg0) {
-			for (int var3 = 1; var3 > 0; ++var3) {
-			}
-
-		}
 	}
 
 	@ObfuscatedName("MFMVIYHT.c(BI)V")
-	public void c(byte arg0, int arg1) {
-		if (arg0 == 0) {
-			boolean var3 = false;
-		} else {
-			for (int var4 = 1; var4 > 0; ++var4) {
-			}
-		}
-
+	public void p1_alt2(int arg1) {
 		this.data[this.pos++] = (byte) (-arg1);
 	}
 
 	@ObfuscatedName("MFMVIYHT.c(II)V")
-	public void c(int arg0, int arg1) {
-		if (arg1 == 1) {
-			this.data[this.pos++] = (byte) (128 - arg0);
-		}
+	public void p1_alt3(int value) {
+		this.data[this.pos++] = (byte) (128 - value);
 	}
 
 	@ObfuscatedName("MFMVIYHT.h(I)I")
-	public int h(int arg0) {
-		return this.r != arg0 ? this.o : this.data[this.pos++] - 128 & 255;
+	public int g1_alt1() {
+		return this.data[this.pos++] - 128 & 0xFF;
 	}
 
 	@ObfuscatedName("MFMVIYHT.i(I)I")
-	public int i(int arg0) {
-		return arg0 != -34545 ? this.i : -this.data[this.pos++] & 255;
+	public int g1_alt2() {
+		return -this.data[this.pos++] & 0xFF;
 	}
 
 	@ObfuscatedName("MFMVIYHT.j(I)I")
-	public int j(int arg0) {
-		int var2 = 77 / arg0;
-		return 128 - this.data[this.pos++] & 255;
+	public int g1_alt3() {
+		return 128 - this.data[this.pos++] & 0xFF;
 	}
 
 	@ObfuscatedName("MFMVIYHT.k(I)B")
-	public byte k(int arg0) {
-		if (arg0 != 0) {
-			for (int var2 = 1; var2 > 0; ++var2) {
-			}
-		}
-
+	public byte g1b_alt1() {
 		return (byte) (this.data[this.pos++] - 128);
 	}
 
 	@ObfuscatedName("MFMVIYHT.l(I)B")
-	public byte l(int arg0) {
-		if (arg0 != 0) {
-			this.y = 54;
-		}
-
+	public byte g1b_alt2() {
 		return (byte) (-this.data[this.pos++]);
 	}
 
 	@ObfuscatedName("MFMVIYHT.m(I)B")
-	public byte m(int arg0) {
-		if (arg0 != 43428) {
-			for (int var2 = 1; var2 > 0; ++var2) {
-			}
-		}
-
+	public byte g1b_alt3() {
 		return (byte) (128 - this.data[this.pos++]);
 	}
 
 	@ObfuscatedName("MFMVIYHT.d(II)V")
-	public void d(int arg0, int arg1) {
-		this.data[this.pos++] = (byte) arg1;
-		this.data[this.pos++] = (byte) (arg1 >> 8);
-		if (arg0 != 0) {
-			this.s = 403;
-		}
+	public void p2_alt1(int value) {
+		this.data[this.pos++] = (byte) value;
+		this.data[this.pos++] = (byte) (value >> 8);
 	}
 
 	@ObfuscatedName("MFMVIYHT.e(II)V")
-	public void e(int arg0, int arg1) {
-		this.data[this.pos++] = (byte) (arg0 >> 8);
-		this.data[this.pos++] = (byte) (arg0 + 128);
-		if (arg1 == 0) {
-			;
-		}
+	public void p2_alt2(int value) {
+		this.data[this.pos++] = (byte) (value >> 8);
+		this.data[this.pos++] = (byte) (value + 128);
 	}
 
 	@ObfuscatedName("MFMVIYHT.f(II)V")
-	public void f(int arg0, int arg1) {
-		if (arg0 < 3 || arg0 > 3) {
-			this.h = !this.h;
-		}
-
-		this.data[this.pos++] = (byte) (arg1 + 128);
-		this.data[this.pos++] = (byte) (arg1 >> 8);
+	public void p2_alt3(int value) {
+		this.data[this.pos++] = (byte) (value + 128);
+		this.data[this.pos++] = (byte) (value >> 8);
 	}
 
 	@ObfuscatedName("MFMVIYHT.n(I)I")
-	public int n(int arg0) {
+	public int g2_alt1() {
 		this.pos += 2;
-		return arg0 >= 0 ? 3 : ((this.data[this.pos - 1] & 255) << 8) + (this.data[this.pos - 2] & 255);
+		return ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] & 0xFF);
 	}
 
 	@ObfuscatedName("MFMVIYHT.b(B)I")
-	public int b(byte arg0) {
+	public int g2_alt2() {
 		this.pos += 2;
-		return arg0 != 9 ? this.s : ((this.data[this.pos - 2] & 255) << 8) + (this.data[this.pos - 1] - 128 & 255);
+		return ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] - 128 & 0xFF);
 	}
 
 	@ObfuscatedName("MFMVIYHT.o(I)I")
-	public int o(int arg0) {
+	public int g2_alt3() {
 		this.pos += 2;
-		return ((this.data[this.pos - 1] & 255) << 8) + (this.data[this.pos - 2] - 128 & 255);
+		return ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] - 128 & 0xFF);
 	}
 
 	@ObfuscatedName("MFMVIYHT.p(I)I")
-	public int p(int arg0) {
+	public int g2b_alt1() {
 		this.pos += 2;
-		int var2 = ((this.data[this.pos - 1] & 255) << 8) + (this.data[this.pos - 2] & 255);
 
-		while (arg0 >= 0) {
-			for (int var3 = 1; var3 > 0; ++var3) {
-			}
+		int n = ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] & 0xFF);
+		if (n > 32767) {
+			n -= 65536;
 		}
 
-		if (var2 > 32767) {
-			var2 -= 65536;
-		}
-
-		return var2;
+		return n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.c(B)I")
-	public int c(byte arg0) {
+	public int g2b_alt2() {
 		this.pos += 2;
-		if (this.t != arg0) {
-			this.n = !this.n;
-		}
 
-		int var2 = ((this.data[this.pos - 2] & 255) << 8) + (this.data[this.pos - 1] - 128 & 255);
-		if (var2 > 32767) {
-			var2 -= 65536;
+		int n = ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] - 128 & 0xFF);
+		if (n > 32767) {
+			n -= 65536;
 		}
-
-		return var2;
+		return n;
 	}
 
 	@ObfuscatedName("MFMVIYHT.q(I)I")
-	public int q(int arg0) {
+	public int g3_alt3() {
 		this.pos += 3;
-		return arg0 >= 0 ? 1 : (this.data[this.pos - 1] & 255) + ((this.data[this.pos - 2] & 255) << 16) + ((this.data[this.pos - 3] & 255) << 8);
+		return (this.data[this.pos - 1] & 0xFF) + ((this.data[this.pos - 2] & 0xFF) << 16) + ((this.data[this.pos - 3] & 0xFF) << 8);
 	}
 
 	@ObfuscatedName("MFMVIYHT.r(I)I")
-	public int r(int arg0) {
-		if (arg0 <= 0) {
-			this.s = -453;
-		}
-
+	public int g4_alt1() {
 		this.pos += 4;
-		return (this.data[this.pos - 4] & 255) + ((this.data[this.pos - 3] & 255) << 8) + ((this.data[this.pos - 1] & 255) << 24) + ((this.data[this.pos - 2] & 255) << 16);
+		return (this.data[this.pos - 4] & 0xFF) + ((this.data[this.pos - 3] & 0xFF) << 8) + ((this.data[this.pos - 1] & 0xFF) << 24) + ((this.data[this.pos - 2] & 0xFF) << 16);
 	}
 
 	@ObfuscatedName("MFMVIYHT.s(I)I")
-	public int s(int arg0) {
-		if (arg0 < 3 || arg0 > 3) {
-			this.s = -258;
-		}
-
+	public int g4_alt2() {
 		this.pos += 4;
-		return (this.data[this.pos - 3] & 255) + ((this.data[this.pos - 4] & 255) << 8) + ((this.data[this.pos - 2] & 255) << 24) + ((this.data[this.pos - 1] & 255) << 16);
+		return (this.data[this.pos - 3] & 0xFF) + ((this.data[this.pos - 4] & 0xFF) << 8) + ((this.data[this.pos - 2] & 0xFF) << 24) + ((this.data[this.pos - 1] & 0xFF) << 16);
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(Z)I")
-	public int a(boolean arg0) {
+	public int g4_alt3() {
 		this.pos += 4;
-		if (!arg0) {
-			for (int var2 = 1; var2 > 0; ++var2) {
-			}
-		}
-
-		return (this.data[this.pos - 2] & 255) + ((this.data[this.pos - 1] & 255) << 8) + ((this.data[this.pos - 3] & 255) << 24) + ((this.data[this.pos - 4] & 255) << 16);
+		return (this.data[this.pos - 2] & 0xFF) + ((this.data[this.pos - 1] & 0xFF) << 8) + ((this.data[this.pos - 3] & 0xFF) << 24) + ((this.data[this.pos - 4] & 0xFF) << 16);
 	}
 
 	@ObfuscatedName("MFMVIYHT.a(B[BII)V")
-	public void a(byte arg0, byte[] arg1, int arg2, int arg3) {
-		if (arg0 == -73) {
-			for (int var5 = arg2 + arg3 - 1; var5 >= arg3; --var5) {
-				arg1[var5] = this.data[this.pos++];
-			}
-
+	public void gdata_alt1(byte[] dest, int off, int len) {
+		for (int i = len + off - 1; i >= off; --i) {
+			dest[i] = this.data[this.pos++];
 		}
 	}
 
 	@ObfuscatedName("MFMVIYHT.b([BIII)V")
-	public void b(byte[] arg0, int arg1, int arg2, int arg3) {
-		if (arg2 != 0) {
-			this.k = !this.k;
+	public void gdata_alt2(byte[] dest, int off, int len) {
+		for (int i = off; i < len + off; ++i) {
+			dest[i] = (byte) (this.data[this.pos++] - 128);
 		}
-
-		for (int var5 = arg3; var5 < arg1 + arg3; ++var5) {
-			arg0[var5] = (byte) (this.data[this.pos++] - 128);
-		}
-
 	}
 }
