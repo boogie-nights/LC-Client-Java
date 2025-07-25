@@ -238,7 +238,7 @@ public class NpcType {
          boolean var4 = false;
 
          for(int var5 = 0; var5 < this.e.length; ++var5) {
-            if (!Model.b(this.e[var5])) {
+            if (!Model.isReady(this.e[var5])) {
                var4 = true;
             }
          }
@@ -249,14 +249,14 @@ public class NpcType {
             Model[] var6 = new Model[this.e.length];
 
             for(int var7 = 0; var7 < this.e.length; ++var7) {
-               var6[var7] = Model.a(this.e[var7]);
+               var6[var7] = Model.tryGet(this.e[var7]);
             }
 
             Model var8;
             if (var6.length == 1) {
                var8 = var6[0];
             } else {
-               var8 = new Model(var6.length, var6, (byte)-89);
+               var8 = new Model(var6.length, var6);
             }
 
             if (this.n != null) {
@@ -331,7 +331,7 @@ public class NpcType {
             boolean var7 = false;
 
             for(int var8 = 0; var8 < this.f.length; ++var8) {
-               if (!Model.b(this.f[var8])) {
+               if (!Model.isReady(this.f[var8])) {
                   var7 = true;
                }
             }
@@ -343,13 +343,13 @@ public class NpcType {
             Model[] var9 = new Model[this.f.length];
 
             for(int var10 = 0; var10 < this.f.length; ++var10) {
-               var9[var10] = Model.a(this.f[var10]);
+               var9[var10] = Model.tryGet(this.f[var10]);
             }
 
             if (var9.length == 1) {
                var6 = var9[0];
             } else {
-               var6 = new Model(var9.length, var9, (byte)-89);
+               var6 = new Model(var9.length, var9);
             }
 
             if (this.n != null) {
@@ -376,14 +376,14 @@ public class NpcType {
          }
 
          if (this.l != 128 || this.j != 128) {
-            var12.a(this.j, this.l, 9, this.l);
+            var12.scale(this.j, this.l, 9, this.l);
          }
 
          var12.c(this.d);
          var12.db = null;
          var12.cb = null;
          if (this.v == 1) {
-            var12.eb = true;
+            var12.picking = true;
          }
 
          return var12;

@@ -98,7 +98,7 @@ public class IdkType {
          int var3 = 89 / arg0;
 
          for(int var4 = 0; var4 < this.g.length; ++var4) {
-            if (!Model.b(this.g[var4])) {
+            if (!Model.isReady(this.g[var4])) {
                var2 = false;
             }
          }
@@ -115,14 +115,14 @@ public class IdkType {
          Model[] var2 = new Model[this.g.length];
 
          for(int var3 = 0; var3 < this.g.length; ++var3) {
-            var2[var3] = Model.a(this.g[var3]);
+            var2[var3] = Model.tryGet(this.g[var3]);
          }
 
          Model var4;
          if (var2.length == 1) {
             var4 = var2[0];
          } else {
-            var4 = new Model(var2.length, var2, (byte)-89);
+            var4 = new Model(var2.length, var2);
          }
 
          for(int var5 = 0; var5 < 6 && this.h[var5] != 0; ++var5) {
@@ -145,7 +145,7 @@ public class IdkType {
          boolean var2 = true;
 
          for(int var3 = 0; var3 < 5; ++var3) {
-            if (this.j[var3] != -1 && !Model.b(this.j[var3])) {
+            if (this.j[var3] != -1 && !Model.isReady(this.j[var3])) {
                var2 = false;
             }
          }
@@ -165,11 +165,11 @@ public class IdkType {
 
       for(int var4 = 0; var4 < 5; ++var4) {
          if (this.j[var4] != -1) {
-            var2[var3++] = Model.a(this.j[var4]);
+            var2[var3++] = Model.tryGet(this.j[var4]);
          }
       }
 
-      Model var5 = new Model(var3, var2, (byte)-89);
+      Model var5 = new Model(var3, var2);
 
       for(int var6 = 0; var6 < 6 && this.h[var6] != 0; ++var6) {
          var5.recolour(this.h[var6], this.i[var6]);

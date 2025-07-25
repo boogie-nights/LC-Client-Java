@@ -83,7 +83,7 @@ public class MapSpotAnim extends ModelSource {
             }
 
             if (this.u.l != 128 || this.u.m != 128) {
-               var4.a(this.u.m, this.u.l, 9, this.u.l);
+               var4.scale(this.u.m, this.u.l, 9, this.u.l);
             }
 
             if (this.u.n != 0) {

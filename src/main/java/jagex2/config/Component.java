@@ -223,8 +223,8 @@ public class Component {
 		ObjType obj = null;
 		if (type == 4) {
 			obj = ObjType.get(id);
-			sb += obj.C;
-			H += obj.G;
+			sb += obj.ambient;
+			H += obj.contrast;
 		}
 
 		Model model = (Model) modelCache.get((type << 16) + id);
@@ -233,7 +233,7 @@ public class Component {
 		}
 
 		if (type == 1) {
-			model = Model.a(id);
+			model = Model.tryGet(id);
 		}
 
 		if (type == 2) {

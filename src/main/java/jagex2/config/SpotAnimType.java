@@ -114,7 +114,7 @@ public class SpotAnimType {
       if (var1 != null) {
          return var1;
       } else {
-         Model var2 = Model.a(this.g);
+         Model var2 = Model.tryGet(this.g);
          if (var2 == null) {
             return null;
          } else {

@@ -221,7 +221,7 @@ public class LocType {
 
             var5 = (Model)v.get((long)var12);
             if (var5 == null) {
-               var5 = Model.a(var12 & 65535);
+               var5 = Model.tryGet(var12 & 65535);
                if (var5 == null) {
                   return null;
                }
@@ -239,7 +239,7 @@ public class LocType {
          }
 
          if (var10 > 1) {
-            var5 = new Model(var10, n, (byte)-89);
+            var5 = new Model(var10, n);
          }
       } else {
          int var13 = -1;
@@ -269,7 +269,7 @@ public class LocType {
 
          var5 = (Model)v.get((long)var16);
          if (var5 == null) {
-            var5 = Model.a(var16 & 65535);
+            var5 = Model.tryGet(var16 & 65535);
             if (var5 == null) {
                return null;
             }
@@ -319,11 +319,11 @@ public class LocType {
       }
 
       if (var18) {
-         var20.a(this.c, this.M, 9, this.w);
+         var20.scale(this.c, this.M, 9, this.w);
       }
 
       if (var19) {
-         var20.a(this.d, this.i, false, this.B);
+         var20.translate(this.d, this.i, false, this.B);
       }
 
       var20.calculateNormals(this.A + 64, this.D * 5 + 768, -50, -10, -50, !this.U);
@@ -347,7 +347,7 @@ public class LocType {
          }
 
          for(int var3 = 0; var3 < this.f.length; ++var3) {
-            var2 &= Model.b(this.f[var3] & 65535);
+            var2 &= Model.isReady(this.f[var3] & 65535);
          }
 
          return var2;
@@ -614,7 +614,7 @@ public class LocType {
             boolean var3 = true;
 
             for(int var4 = 0; var4 < this.f.length; ++var4) {
-               var3 &= Model.b(this.f[var4] & 65535);
+               var3 &= Model.isReady(this.f[var4] & 65535);
             }
 
             return var3;
@@ -622,7 +622,7 @@ public class LocType {
       } else {
          for(int var5 = 0; var5 < this.F.length; ++var5) {
             if (this.F[var5] == arg1) {
-               return Model.b(this.f[var5] & 65535);
+               return Model.isReady(this.f[var5] & 65535);
             }
          }
 

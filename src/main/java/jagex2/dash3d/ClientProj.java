@@ -131,7 +131,7 @@ public class ClientProj extends ModelSource {
          }
 
          if (this.m.l != 128 || this.m.m != 128) {
-            var4.a(this.m.m, this.m.l, 9, this.m.l);
+            var4.scale(this.m.m, this.m.l, 9, this.m.l);
          }
 
          var4.b(this.w, 341);

@@ -12,303 +12,448 @@ import jagex2.io.Packet;
 public class ObjType {
 	@ObfuscatedName("GSCQQEUA.x")
 	public boolean x = true;
+
 	@ObfuscatedName("GSCQQEUA.z")
 	public int z = -68;
+
 	@ObfuscatedName("GSCQQEUA.L")
-	public int L = -1;
+	public int id = -1;
+
 	@ObfuscatedName("GSCQQEUA.W")
 	public boolean W = true;
+
 	@ObfuscatedName("GSCQQEUA.l")
-	public static LruCache l = new LruCache(50);
+	public static LruCache modelCache = new LruCache(50);
+
 	@ObfuscatedName("GSCQQEUA.s")
 	public static boolean membersWorld = true;
+
 	@ObfuscatedName("GSCQQEUA.u")
 	public static LruCache iconCache = new LruCache(100);
+
 	@ObfuscatedName("GSCQQEUA.v")
 	public static byte v = 6;
+
 	@ObfuscatedName("GSCQQEUA.y")
 	public static boolean y = true;
+
 	@ObfuscatedName("GSCQQEUA.ab")
-	public byte ab;
+	public byte manwearOffsetY;
+
 	@ObfuscatedName("GSCQQEUA.e")
-	public byte e;
+	public byte womanwearOffsetY;
+
 	@ObfuscatedName("GSCQQEUA.A")
-	public static int A;
+	public static int cachePos;
+
 	@ObfuscatedName("GSCQQEUA.B")
-	public int B;
+	public int manwear;
+
 	@ObfuscatedName("GSCQQEUA.C")
-	public int C;
+	public int ambient;
+
 	@ObfuscatedName("GSCQQEUA.D")
-	public int D;
+	public int womanwear2;
+
 	@ObfuscatedName("GSCQQEUA.E")
 	public int yan2d;
+
 	@ObfuscatedName("GSCQQEUA.F")
-	public int F;
+	public int resizey;
+
 	@ObfuscatedName("GSCQQEUA.G")
-	public int G;
+	public int contrast;
+
 	@ObfuscatedName("GSCQQEUA.H")
 	public int xan2d;
+
 	@ObfuscatedName("GSCQQEUA.I")
-	public int I;
+	public int model;
+
 	@ObfuscatedName("GSCQQEUA.J")
-	public int J;
+	public int manhead2;
+
 	@ObfuscatedName("GSCQQEUA.K")
-	public int K;
+	public int womanhead2;
+
 	@ObfuscatedName("GSCQQEUA.O")
-	public int O;
+	public int resizex;
+
 	@ObfuscatedName("GSCQQEUA.P")
-	public int P;
+	public int womanwear3;
+
 	@ObfuscatedName("GSCQQEUA.Q")
-	public int Q;
+	public int resizez;
+
 	@ObfuscatedName("GSCQQEUA.R")
 	public int zoom2d;
+
 	@ObfuscatedName("GSCQQEUA.S")
-	public int S;
+	public int manwear3;
+
 	@ObfuscatedName("GSCQQEUA.U")
-	public int U;
+	public int code10;
+
 	@ObfuscatedName("GSCQQEUA.X")
-	public int X;
+	public int womanhead;
+
 	@ObfuscatedName("GSCQQEUA.a")
-	public int a;
+	public int womanwear;
+
 	@ObfuscatedName("GSCQQEUA.b")
-	public int b;
+	public int xof2d;
+
 	@ObfuscatedName("GSCQQEUA.f")
-	public int f;
+	public int manwear2;
+
 	@ObfuscatedName("GSCQQEUA.g")
 	public int g;
+
 	@ObfuscatedName("GSCQQEUA.h")
 	public int certlink;
+
 	@ObfuscatedName("GSCQQEUA.i")
-	public int i;
+	public int manhead;
+
 	@ObfuscatedName("GSCQQEUA.j")
-	public static int j;
+	public static int count;
+
 	@ObfuscatedName("GSCQQEUA.n")
-	public int n;
+	public int zan2d;
+
 	@ObfuscatedName("GSCQQEUA.o")
-	public int o;
+	public int yof2d;
+
 	@ObfuscatedName("GSCQQEUA.r")
 	public int certtemplate;
+
 	@ObfuscatedName("GSCQQEUA.t")
-	public int t;
+	public int cost;
+
 	@ObfuscatedName("GSCQQEUA.V")
-	public static Packet V;
+	public static Packet data;
+
 	@ObfuscatedName("GSCQQEUA.d")
-	public String d;
+	public String name;
+
 	@ObfuscatedName("GSCQQEUA.T")
 	public boolean stackable;
+
 	@ObfuscatedName("GSCQQEUA.Z")
-	public boolean Z;
+	public boolean members;
+
 	@ObfuscatedName("GSCQQEUA.c")
-	public byte[] c;
+	public byte[] desc;
+
 	@ObfuscatedName("GSCQQEUA.M")
-	public int[] M;
+	public int[] recol_s;
+
 	@ObfuscatedName("GSCQQEUA.N")
 	public int[] countobj;
+
 	@ObfuscatedName("GSCQQEUA.Y")
 	public int[] countco;
+
 	@ObfuscatedName("GSCQQEUA.p")
-	public int[] p;
+	public int[] recol_d;
+
 	@ObfuscatedName("GSCQQEUA.q")
-	public static int[] q;
+	public static int[] idx;
+
 	@ObfuscatedName("GSCQQEUA.k")
-	public static ObjType[] k;
+	public static ObjType[] cache;
+
 	@ObfuscatedName("GSCQQEUA.m")
-	public String[] m;
+	public String[] op;
+
 	@ObfuscatedName("GSCQQEUA.w")
-	public String[] w;
+	public String[] iop;
 
-	@ObfuscatedName("GSCQQEUA.a(II)Z")
-	public final boolean a(int arg0, int arg1) {
-		int var3 = this.i;
-		int var4 = this.J;
-		if (arg1 != 0) {
-			this.x = !this.x;
+	@ObfuscatedName("GSCQQEUA.a(LATJMVOZR;)V")
+	public static final void unpack(Jagfile config) {
+		data = new Packet(config.read("obj.dat", null));
+		Packet temp = new Packet(config.read("obj.idx", null));
+
+		count = temp.g2();
+		idx = new int[count];
+
+		int pos = 2;
+		for (int i = 0; i < count; ++i) {
+			idx[i] = pos;
+			pos += temp.g2();
 		}
 
-		if (arg0 == 1) {
-			var3 = this.X;
-			var4 = this.K;
+		cache = new ObjType[10];
+
+		for (int i = 0; i < 10; ++i) {
+			cache[i] = new ObjType();
 		}
+	}
 
-		if (var3 == -1) {
-			return true;
-		} else {
-			boolean var5 = true;
-			if (!Model.b(var3)) {
-				var5 = false;
-			}
-
-			if (var4 != -1 && !Model.b(var4)) {
-				var5 = false;
-			}
-
-			return var5;
-		}
+	@ObfuscatedName("GSCQQEUA.a(Z)V")
+	public static final void unload() {
+		modelCache = null;
+		iconCache = null;
+		idx = null;
+		cache = null;
+		data = null;
 	}
 
 	@ObfuscatedName("GSCQQEUA.a(I)LGSCQQEUA;")
-	public static final ObjType get(int arg0) {
-		for (int var1 = 0; var1 < 10; ++var1) {
-			if (k[var1].L == arg0) {
-				return k[var1];
+	public static final ObjType get(int id) {
+		for (int i = 0; i < 10; ++i) {
+			if (cache[i].id == id) {
+				return cache[i];
 			}
 		}
 
-		A = (A + 1) % 10;
-		ObjType var2 = k[A];
-		V.pos = q[arg0];
-		var2.L = arg0;
-		var2.a();
-		var2.a(v, V);
-		if (var2.certtemplate != -1) {
-			var2.b(0);
+		cachePos = (cachePos + 1) % 10;
+
+		ObjType obj = cache[cachePos];
+		data.pos = idx[id];
+		obj.id = id;
+		obj.reset();
+		obj.decode(data);
+
+		if (obj.certtemplate != -1) {
+			obj.toCertificate(0);
 		}
 
-		if (!membersWorld && var2.Z) {
-			var2.d = "Members Object";
-			var2.c = "Login to a members' server to use this object.".getBytes();
-			var2.m = null;
-			var2.w = null;
-			var2.g = 0;
+		if (!membersWorld && obj.members) {
+			obj.name = "Members Object";
+			obj.desc = "Login to a members' server to use this object.".getBytes();
+			obj.op = null;
+			obj.iop = null;
+			obj.g = 0;
 		}
 
-		return var2;
+		return obj;
 	}
 
-	@ObfuscatedName("GSCQQEUA.a(BI)LLZYQDKJV;")
-	public final Model a(byte arg0, int arg1) {
-		int var3 = this.B;
-		int var4 = this.f;
-		int var5 = this.S;
-		if (arg1 == 1) {
-			var3 = this.a;
-			var4 = this.D;
-			var5 = this.P;
-		}
+	@ObfuscatedName("GSCQQEUA.a()V")
+	public final void reset() {
+		this.model = 0;
+		this.name = null;
+		this.desc = null;
+		this.recol_s = null;
+		this.recol_d = null;
+		this.zoom2d = 2000;
+		this.xan2d = 0;
+		this.yan2d = 0;
+		this.zan2d = 0;
+		this.xof2d = 0;
+		this.yof2d = 0;
+		this.code10 = -1;
+		this.stackable = false;
+		this.cost = 1;
+		this.members = false;
+		this.op = null;
+		this.iop = null;
+		this.manwear = -1;
+		this.manwear2 = -1;
+		this.manwearOffsetY = 0;
+		this.womanwear = -1;
+		this.womanwear2 = -1;
+		this.womanwearOffsetY = 0;
+		this.manwear3 = -1;
+		this.womanwear3 = -1;
+		this.manhead = -1;
+		this.manhead2 = -1;
+		this.womanhead = -1;
+		this.womanhead2 = -1;
+		this.countobj = null;
+		this.countco = null;
+		this.certlink = -1;
+		this.certtemplate = -1;
+		this.resizex = 128;
+		this.resizey = 128;
+		this.resizez = 128;
+		this.ambient = 0;
+		this.contrast = 0;
+		this.g = 0;
+	}
 
-		if (var3 == -1) {
-			return null;
-		} else {
-			Model var6 = Model.a(var3);
-			if (arg0 != -98) {
-				throw new NullPointerException();
-			} else {
-				if (var4 != -1) {
-					if (var5 != -1) {
-						Model var7 = Model.a(var4);
-						Model var8 = Model.a(var5);
-						Model[] var9 = new Model[]{var6, var7, var8};
-						var6 = new Model(3, var9, (byte) -89);
-					} else {
-						Model var10 = Model.a(var4);
-						Model[] var11 = new Model[]{var6, var10};
-						var6 = new Model(2, var11, (byte) -89);
-					}
+	@ObfuscatedName("GSCQQEUA.a(BLMFMVIYHT;)V")
+	public final void decode(Packet buf) {
+		while (true) {
+			int code = buf.g1();
+			if (code == 0) {
+				return;
+			}
+
+			if (code == 1) {
+				this.model = buf.g2();
+			} else if (code == 2) {
+				this.name = buf.gjstr();
+			} else if (code == 3) {
+				this.desc = buf.gjstrraw();
+			} else if (code == 4) {
+				this.zoom2d = buf.g2();
+			} else if (code == 5) {
+				this.xan2d = buf.g2();
+			} else if (code == 6) {
+				this.yan2d = buf.g2();
+			} else if (code == 7) {
+				this.xof2d = buf.g2();
+				if (this.xof2d > 32767) {
+					this.xof2d -= 65536;
+				}
+			} else if (code == 8) {
+				this.yof2d = buf.g2();
+				if (this.yof2d > 32767) {
+					this.yof2d -= 65536;
+				}
+			} else if (code == 10) {
+				this.code10 = buf.g2();
+			} else if (code == 11) {
+				this.stackable = true;
+			} else if (code == 12) {
+				this.cost = buf.g4();
+			} else if (code == 16) {
+				this.members = true;
+			} else if (code == 23) {
+				this.manwear = buf.g2();
+				this.manwearOffsetY = buf.g1b();
+			} else if (code == 24) {
+				this.manwear2 = buf.g2();
+			} else if (code == 25) {
+				this.womanwear = buf.g2();
+				this.womanwearOffsetY = buf.g1b();
+			} else if (code == 26) {
+				this.womanwear2 = buf.g2();
+			} else if (code >= 30 && code < 35) {
+				if (this.op == null) {
+					this.op = new String[5];
 				}
 
-				if (arg1 == 0 && this.ab != 0) {
-					var6.a(0, 0, false, this.ab);
+				this.op[code - 30] = buf.gjstr();
+				if (this.op[code - 30].equalsIgnoreCase("hidden")) {
+					this.op[code - 30] = null;
+				}
+			} else if (code >= 35 && code < 40) {
+				if (this.iop == null) {
+					this.iop = new String[5];
 				}
 
-				if (arg1 == 1 && this.e != 0) {
-					var6.a(0, 0, false, this.e);
+				this.iop[code - 35] = buf.gjstr();
+			} else if (code == 40) {
+				int count = buf.g1();
+				this.recol_s = new int[count];
+				this.recol_d = new int[count];
+
+				for (int i = 0; i < count; ++i) {
+					this.recol_s[i] = buf.g2();
+					this.recol_d[i] = buf.g2();
+				}
+			} else if (code == 78) {
+				this.manwear3 = buf.g2();
+			} else if (code == 79) {
+				this.womanwear3 = buf.g2();
+			} else if (code == 90) {
+				this.manhead = buf.g2();
+			} else if (code == 91) {
+				this.womanhead = buf.g2();
+			} else if (code == 92) {
+				this.manhead2 = buf.g2();
+			} else if (code == 93) {
+				this.womanhead2 = buf.g2();
+			} else if (code == 95) {
+				this.zan2d = buf.g2();
+			} else if (code == 97) {
+				this.certlink = buf.g2();
+			} else if (code == 98) {
+				this.certtemplate = buf.g2();
+			} else if (code >= 100 && code < 110) {
+				if (this.countobj == null) {
+					this.countobj = new int[10];
+					this.countco = new int[10];
 				}
 
-				if (this.M != null) {
-					for (int var12 = 0; var12 < this.M.length; ++var12) {
-						var6.recolour(this.M[var12], this.p[var12]);
-					}
-				}
-
-				return var6;
+				this.countobj[code - 100] = buf.g2();
+				this.countco[code - 100] = buf.g2();
+			} else if (code == 110) {
+				this.resizex = buf.g2();
+			} else if (code == 111) {
+				this.resizey = buf.g2();
+			} else if (code == 112) {
+				this.resizez = buf.g2();
+			} else if (code == 113) {
+				this.ambient = buf.g1b();
+			} else if (code == 114) {
+				this.contrast = buf.g1b() * 5;
+			} else if (code == 115) {
+				this.g = buf.g1();
 			}
 		}
-	}
-
-	@ObfuscatedName("GSCQQEUA.a(LATJMVOZR;)V")
-	public static final void unpack(Jagfile arg0) {
-		V = new Packet(arg0.read("obj.dat", (byte[]) null));
-		Packet var1 = new Packet(arg0.read("obj.idx", (byte[]) null));
-		j = var1.g2();
-		q = new int[j];
-		int var2 = 2;
-
-		for (int var3 = 0; var3 < j; ++var3) {
-			q[var3] = var2;
-			var2 += var1.g2();
-		}
-
-		k = new ObjType[10];
-
-		for (int var4 = 0; var4 < 10; ++var4) {
-			k[var4] = new ObjType();
-		}
-
 	}
 
 	@ObfuscatedName("GSCQQEUA.b(I)V")
-	public void b(int arg0) {
-		ObjType var2 = get(this.certtemplate);
-		this.I = var2.I;
-		this.zoom2d = var2.zoom2d;
-		if (arg0 != 0) {
-			for (int var3 = 1; var3 > 0; ++var3) {
-			}
+	public void toCertificate(int arg0) {
+		ObjType template = get(this.certtemplate);
+		this.model = template.model;
+		this.zoom2d = template.zoom2d;
+		this.xan2d = template.xan2d;
+		this.yan2d = template.yan2d;
+		this.zan2d = template.zan2d;
+		this.xof2d = template.xof2d;
+		this.yof2d = template.yof2d;
+		this.recol_s = template.recol_s;
+		this.recol_d = template.recol_d;
+
+		ObjType link = get(this.certlink);
+		this.name = link.name;
+		this.members = link.members;
+		this.cost = link.cost;
+
+		String article = "a";
+		char c = link.name.charAt(0);
+		if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+			article = "an";
 		}
 
-		this.xan2d = var2.xan2d;
-		this.yan2d = var2.yan2d;
-		this.n = var2.n;
-		this.b = var2.b;
-		this.o = var2.o;
-		this.M = var2.M;
-		this.p = var2.p;
-		ObjType var4 = get(this.certlink);
-		this.d = var4.d;
-		this.Z = var4.Z;
-		this.t = var4.t;
-		String var5 = "a";
-		char var6 = var4.d.charAt(0);
-		if (var6 == 'A' || var6 == 'E' || var6 == 'I' || var6 == 'O' || var6 == 'U') {
-			var5 = "an";
-		}
-
-		this.c = ("Swap this note at any bank for " + var5 + " " + var4.d + ".").getBytes();
+		this.desc = ("Swap this note at any bank for " + article + " " + link.name + ".").getBytes();
 		this.stackable = true;
 	}
 
-	@ObfuscatedName("GSCQQEUA.b(II)Z")
-	public final boolean b(int arg0, int arg1) {
-		while (arg0 >= 0) {
-		}
-
-		int var3 = this.B;
-		int var4 = this.f;
-		int var5 = this.S;
-		if (arg1 == 1) {
-			var3 = this.a;
-			var4 = this.D;
-			var5 = this.P;
-		}
-
-		if (var3 == -1) {
-			return true;
-		} else {
-			boolean var6 = true;
-			if (!Model.b(var3)) {
-				var6 = false;
+	@ObfuscatedName("GSCQQEUA.c(I)LLZYQDKJV;")
+	public final Model getModel(int count) {
+		if (this.countobj != null && count > 1) {
+			int index = -1;
+			for (int i = 0; i < 10; ++i) {
+				if (count >= this.countco[i] && this.countco[i] != 0) {
+					index = this.countobj[i];
+				}
 			}
 
-			if (var4 != -1 && !Model.b(var4)) {
-				var6 = false;
+			if (index != -1) {
+				return get(index).getModel(1);
 			}
-
-			if (var5 != -1 && !Model.b(var5)) {
-				var6 = false;
-			}
-
-			return var6;
 		}
+
+		Model model = (Model) modelCache.get(this.id);
+		if (model != null) {
+			return model;
+		}
+
+		model = Model.tryGet(this.model);
+		if (model == null) {
+			return null;
+		}
+
+		if (this.resizex != 128 || this.resizey != 128 || this.resizez != 128) {
+			model.scale(this.resizey, this.resizez, 9, this.resizex);
+		}
+
+		if (this.recol_s != null) {
+			for (int i = 0; i < this.recol_s.length; ++i) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
+			}
+		}
+
+		model.calculateNormals(this.ambient + 64, this.contrast + 768, -50, -10, -50, true);
+		model.picking = true;
+		modelCache.put(model, this.id);
+		return model;
 	}
 
 	@ObfuscatedName("GSCQQEUA.c(II)LLZYQDKJV;")
@@ -327,7 +472,7 @@ public class ObjType {
 			}
 		}
 
-		Model var5 = Model.a(this.I);
+		Model var5 = Model.tryGet(this.model);
 
 		while (arg0 >= 0) {
 			this.x = !this.x;
@@ -336,208 +481,13 @@ public class ObjType {
 		if (var5 == null) {
 			return null;
 		} else {
-			if (this.M != null) {
-				for (int var6 = 0; var6 < this.M.length; ++var6) {
-					var5.recolour(this.M[var6], this.p[var6]);
+			if (this.recol_s != null) {
+				for (int var6 = 0; var6 < this.recol_s.length; ++var6) {
+					var5.recolour(this.recol_s[var6], this.recol_d[var6]);
 				}
 			}
 
 			return var5;
-		}
-	}
-
-	@ObfuscatedName("GSCQQEUA.a(BLMFMVIYHT;)V")
-	public final void a(byte arg0, Packet arg1) {
-		if (arg0 != 6) {
-			this.x = !this.x;
-		}
-
-		while (true) {
-			while (true) {
-				int var3 = arg1.g1();
-				if (var3 == 0) {
-					return;
-				}
-
-				if (var3 == 1) {
-					this.I = arg1.g2();
-				} else if (var3 == 2) {
-					this.d = arg1.gjstr();
-				} else if (var3 == 3) {
-					this.c = arg1.gjstrraw();
-				} else if (var3 == 4) {
-					this.zoom2d = arg1.g2();
-				} else if (var3 == 5) {
-					this.xan2d = arg1.g2();
-				} else if (var3 == 6) {
-					this.yan2d = arg1.g2();
-				} else if (var3 == 7) {
-					this.b = arg1.g2();
-					if (this.b > 32767) {
-						this.b -= 65536;
-					}
-				} else if (var3 == 8) {
-					this.o = arg1.g2();
-					if (this.o > 32767) {
-						this.o -= 65536;
-					}
-				} else if (var3 == 10) {
-					this.U = arg1.g2();
-				} else if (var3 == 11) {
-					this.stackable = true;
-				} else if (var3 == 12) {
-					this.t = arg1.g4();
-				} else if (var3 == 16) {
-					this.Z = true;
-				} else if (var3 == 23) {
-					this.B = arg1.g2();
-					this.ab = arg1.g1b();
-				} else if (var3 == 24) {
-					this.f = arg1.g2();
-				} else if (var3 == 25) {
-					this.a = arg1.g2();
-					this.e = arg1.g1b();
-				} else if (var3 == 26) {
-					this.D = arg1.g2();
-				} else if (var3 >= 30 && var3 < 35) {
-					if (this.m == null) {
-						this.m = new String[5];
-					}
-
-					this.m[var3 - 30] = arg1.gjstr();
-					if (this.m[var3 - 30].equalsIgnoreCase("hidden")) {
-						this.m[var3 - 30] = null;
-					}
-				} else if (var3 >= 35 && var3 < 40) {
-					if (this.w == null) {
-						this.w = new String[5];
-					}
-
-					this.w[var3 - 35] = arg1.gjstr();
-				} else if (var3 == 40) {
-					int var4 = arg1.g1();
-					this.M = new int[var4];
-					this.p = new int[var4];
-
-					for (int var5 = 0; var5 < var4; ++var5) {
-						this.M[var5] = arg1.g2();
-						this.p[var5] = arg1.g2();
-					}
-				} else if (var3 == 78) {
-					this.S = arg1.g2();
-				} else if (var3 == 79) {
-					this.P = arg1.g2();
-				} else if (var3 == 90) {
-					this.i = arg1.g2();
-				} else if (var3 == 91) {
-					this.X = arg1.g2();
-				} else if (var3 == 92) {
-					this.J = arg1.g2();
-				} else if (var3 == 93) {
-					this.K = arg1.g2();
-				} else if (var3 == 95) {
-					this.n = arg1.g2();
-				} else if (var3 == 97) {
-					this.certlink = arg1.g2();
-				} else if (var3 == 98) {
-					this.certtemplate = arg1.g2();
-				} else if (var3 >= 100 && var3 < 110) {
-					if (this.countobj == null) {
-						this.countobj = new int[10];
-						this.countco = new int[10];
-					}
-
-					this.countobj[var3 - 100] = arg1.g2();
-					this.countco[var3 - 100] = arg1.g2();
-				} else if (var3 == 110) {
-					this.O = arg1.g2();
-				} else if (var3 == 111) {
-					this.F = arg1.g2();
-				} else if (var3 == 112) {
-					this.Q = arg1.g2();
-				} else if (var3 == 113) {
-					this.C = arg1.g1b();
-				} else if (var3 == 114) {
-					this.G = arg1.g1b() * 5;
-				} else if (var3 == 115) {
-					this.g = arg1.g1();
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("GSCQQEUA.a(ZI)LLZYQDKJV;")
-	public final Model a(boolean arg0, int arg1) {
-		if (!arg0) {
-			this.W = !this.W;
-		}
-
-		int var3 = this.i;
-		int var4 = this.J;
-		if (arg1 == 1) {
-			var3 = this.X;
-			var4 = this.K;
-		}
-
-		if (var3 == -1) {
-			return null;
-		} else {
-			Model var5 = Model.a(var3);
-			if (var4 != -1) {
-				Model var6 = Model.a(var4);
-				Model[] var7 = new Model[]{var5, var6};
-				var5 = new Model(2, var7, (byte) -89);
-			}
-
-			if (this.M != null) {
-				for (int var8 = 0; var8 < this.M.length; ++var8) {
-					var5.recolour(this.M[var8], this.p[var8]);
-				}
-			}
-
-			return var5;
-		}
-	}
-
-	@ObfuscatedName("GSCQQEUA.c(I)LLZYQDKJV;")
-	public final Model getModel(int arg0) {
-		if (this.countobj != null && arg0 > 1) {
-			int var2 = -1;
-
-			for (int var3 = 0; var3 < 10; ++var3) {
-				if (arg0 >= this.countco[var3] && this.countco[var3] != 0) {
-					var2 = this.countobj[var3];
-				}
-			}
-
-			if (var2 != -1) {
-				return get(var2).getModel(1);
-			}
-		}
-
-		Model var4 = (Model) l.get((long) this.L);
-		if (var4 != null) {
-			return var4;
-		} else {
-			Model var5 = Model.a(this.I);
-			if (var5 == null) {
-				return null;
-			} else {
-				if (this.O != 128 || this.F != 128 || this.Q != 128) {
-					var5.a(this.F, this.Q, 9, this.O);
-				}
-
-				if (this.M != null) {
-					for (int var6 = 0; var6 < this.M.length; ++var6) {
-						var5.recolour(this.M[var6], this.p[var6]);
-					}
-				}
-
-				var5.calculateNormals(this.C + 64, this.G + 768, -50, -10, -50, true);
-				var5.eb = true;
-				l.put(var5, (long) this.L);
-				return var5;
-			}
 		}
 	}
 
@@ -617,7 +567,7 @@ public class ObjType {
 		int sinPitch = Pix3D.sinTable[obj.xan2d] * zoom >> 16;
 		int cosPitch = Pix3D.cosTable[obj.xan2d] * zoom >> 16;
 
-		model.drawSimple(0, obj.yan2d, obj.n, obj.xan2d, obj.b, model.k / 2 + sinPitch + obj.o, obj.o + cosPitch);
+		model.drawSimple(0, obj.yan2d, obj.zan2d, obj.xan2d, obj.xof2d, model.k / 2 + sinPitch + obj.yof2d, obj.yof2d + cosPitch);
 
 		for (int x = 31; x >= 0; --x) {
 			for (int y = 31; y >= 0; --y) {
@@ -691,60 +641,131 @@ public class ObjType {
 		return icon;
 	}
 
-	@ObfuscatedName("GSCQQEUA.a(Z)V")
-	public static final void a(boolean arg0) {
-		l = null;
-		if (arg0) {
-			for (int var1 = 1; var1 > 0; ++var1) {
+	@ObfuscatedName("GSCQQEUA.b(II)Z")
+	public final boolean wornModelIsReady(int gender) {
+		int wear = this.manwear;
+		int wear2 = this.manwear2;
+		int wear3 = this.manwear3;
+		if (gender == 1) {
+			wear = this.womanwear;
+			wear2 = this.womanwear2;
+			wear3 = this.womanwear3;
+		}
+
+		if (wear == -1) {
+			return true;
+		}
+
+		boolean ready = true;
+		if (!Model.isReady(wear)) {
+			ready = false;
+		}
+
+		if (wear2 != -1 && !Model.isReady(wear2)) {
+			ready = false;
+		}
+
+		if (wear3 != -1 && !Model.isReady(wear3)) {
+			ready = false;
+		}
+		return ready;
+	}
+
+	@ObfuscatedName("GSCQQEUA.a(BI)LLZYQDKJV;")
+	public final Model getWornModel(byte arg0, int gender) {
+		int wear = this.manwear;
+		int wear2 = this.manwear2;
+		int wear3 = this.manwear3;
+		if (gender == 1) {
+			wear = this.womanwear;
+			wear2 = this.womanwear2;
+			wear3 = this.womanwear3;
+		}
+
+		if (wear != -1) {
+			return null;
+		}
+
+		Model model = Model.tryGet(wear);
+		if (wear2 != -1) {
+			if (wear3 != -1) {
+				Model model2 = Model.tryGet(wear2);
+				Model model3 = Model.tryGet(wear3);
+				Model[] models = new Model[]{model, model2, model3};
+				model = new Model(3, models);
+			} else {
+				Model model2 = Model.tryGet(wear2);
+				Model[] models = new Model[]{model, model2};
+				model = new Model(2, models);
 			}
 		}
 
-		iconCache = null;
-		q = null;
-		k = null;
-		V = null;
+		if (gender == 0 && this.manwearOffsetY != 0) {
+			model.translate(0, 0, false, this.manwearOffsetY);
+		} else if (gender == 1 && this.womanwearOffsetY != 0) {
+			model.translate(0, 0, false, this.womanwearOffsetY);
+		}
+
+		if (this.recol_s != null) {
+			for (int i = 0; i < this.recol_s.length; ++i) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
+			}
+		}
+		return model;
 	}
 
-	@ObfuscatedName("GSCQQEUA.a()V")
-	public final void a() {
-		this.I = 0;
-		this.d = null;
-		this.c = null;
-		this.M = null;
-		this.p = null;
-		this.zoom2d = 2000;
-		this.xan2d = 0;
-		this.yan2d = 0;
-		this.n = 0;
-		this.b = 0;
-		this.o = 0;
-		this.U = -1;
-		this.stackable = false;
-		this.t = 1;
-		this.Z = false;
-		this.m = null;
-		this.w = null;
-		this.B = -1;
-		this.f = -1;
-		this.ab = 0;
-		this.a = -1;
-		this.D = -1;
-		this.e = 0;
-		this.S = -1;
-		this.P = -1;
-		this.i = -1;
-		this.J = -1;
-		this.X = -1;
-		this.K = -1;
-		this.countobj = null;
-		this.countco = null;
-		this.certlink = -1;
-		this.certtemplate = -1;
-		this.O = 128;
-		this.F = 128;
-		this.Q = 128;
-		this.C = 0;
-		this.G = 0;
-		this.g = 0;
+	@ObfuscatedName("GSCQQEUA.a(II)Z")
+	public final boolean headModelIsReady(int gender) {
+		int head = this.manhead;
+		int head2 = this.manhead2;
+
+		if (gender == 1) {
+			head = this.womanhead;
+			head2 = this.womanhead2;
+		}
+
+		if (head == -1) {
+			return true;
+		}
+
+		boolean ready = true;
+		if (!Model.isReady(head)) {
+			ready = false;
+		}
+
+		if (head2 != -1 && !Model.isReady(head2)) {
+			ready = false;
+		}
+
+		return ready;
+	}
+
+	@ObfuscatedName("GSCQQEUA.a(ZI)LLZYQDKJV;")
+	public final Model getHeadModel(int gender) {
+		int head = this.manhead;
+		int head2 = this.manhead2;
+		if (gender == 1) {
+			head = this.womanhead;
+			head2 = this.womanhead2;
+		}
+
+		if (head != -1) {
+			return null;
+		}
+
+		Model model = Model.tryGet(head);
+		if (head2 != -1) {
+			Model model2 = Model.tryGet(head2);
+			Model[] models = new Model[]{model, model2};
+			model = new Model(2, models);
+		}
+
+		if (this.recol_s != null) {
+			for (int i = 0; i < this.recol_s.length; ++i) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
+			}
+		}
+
+		return model;
 	}
 }

@@ -84,7 +84,7 @@ public class ClientPlayer extends ClientEntity {
                var2 = true;
             }
 
-            if (var4 >= 512 && !ObjType.get(var4 - 512).a((int)this.Cb, 0)) {
+            if (var4 >= 512 && !ObjType.get(var4 - 512).headModelIsReady((int)this.Cb)) {
                var2 = true;
             }
          }
@@ -105,14 +105,14 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (var8 >= 512) {
-                  Model var10 = ObjType.get(var8 - 512).a(true, this.Cb);
+                  Model var10 = ObjType.get(var8 - 512).getHeadModel(this.Cb);
                   if (var10 != null) {
                      var5[var6++] = var10;
                   }
                }
             }
 
-            Model var11 = new Model(var6, var5, (byte)-89);
+            Model var11 = new Model(var6, var5);
             if (!arg0) {
                throw new NullPointerException();
             } else {
@@ -190,7 +190,7 @@ public class ClientPlayer extends ClientEntity {
                   var12 = true;
                }
 
-               if (var14 >= 512 && !ObjType.get(var14 - 512).b(-861, this.Cb)) {
+               if (var14 >= 512 && !ObjType.get(var14 - 512).wornModelIsReady(this.Cb)) {
                   var12 = true;
                }
             }
@@ -228,14 +228,14 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (var18 >= 512) {
-                  Model var20 = ObjType.get(var18 - 512).a((byte)-98, this.Cb);
+                  Model var20 = ObjType.get(var18 - 512).getWornModel((byte)-98, this.Cb);
                   if (var20 != null) {
                      var15[var16++] = var20;
                   }
                }
             }
 
-            var11 = new Model(var16, var15, (byte)-89);
+            var11 = new Model(var16, var15);
 
             for(int var21 = 0; var21 < 5; ++var21) {
                if (this.colour[var21] != 0) {
@@ -286,7 +286,7 @@ public class ClientPlayer extends ClientEntity {
             return null;
          } else {
             super.A = var2.k;
-            var2.eb = true;
+            var2.picking = true;
             if (this.Kb) {
                return var2;
             } else {
@@ -295,13 +295,13 @@ public class ClientPlayer extends ClientEntity {
                   Model var4 = var3.a();
                   if (var4 != null) {
                      Model var5 = new Model(false, false, true, var4, AnimFrame.a(this.Jb, super.spotanimFrame));
-                     var5.a(0, 0, false, -super.spotanimHeight);
+                     var5.translate(0, 0, false, -super.spotanimHeight);
                      var5.createLabelReferences(7);
                      var5.applyTransform(var3.i.frames[super.spotanimFrame], (byte)6);
                      var5.db = null;
                      var5.cb = null;
                      if (var3.l != 128 || var3.m != 128) {
-                        var5.a(var3.m, var3.l, 9, var3.l);
+                        var5.scale(var3.m, var3.l, 9, var3.l);
                      }
 
                      var5.calculateNormals(var3.o + 64, var3.p + 850, -30, -50, -30, true);
@@ -317,7 +317,7 @@ public class ClientPlayer extends ClientEntity {
 
                   if (Client.loopCycle >= this.Lb && Client.loopCycle < this.Mb) {
                      Model var7 = this.tb;
-                     var7.a(this.qb - super.x, this.sb - super.z, false, this.rb - this.xb);
+                     var7.translate(this.qb - super.x, this.sb - super.z, false, this.rb - this.xb);
                      if (super.q == 512) {
                         var7.b(true);
                         var7.b(true);
@@ -342,11 +342,11 @@ public class ClientPlayer extends ClientEntity {
                         var7.b(true);
                      }
 
-                     var7.a(super.x - this.qb, super.z - this.sb, false, this.xb - this.rb);
+                     var7.translate(super.x - this.qb, super.z - this.sb, false, this.xb - this.rb);
                   }
                }
 
-               var2.eb = true;
+               var2.picking = true;
                if (arg0 == 3) {
                   boolean var9 = false;
                } else {
@@ -382,7 +382,7 @@ public class ClientPlayer extends ClientEntity {
                break;
             }
 
-            if (this.appearance[i] >= 512 && this.appearance[i] - 512 < ObjType.j) {
+            if (this.appearance[i] >= 512 && this.appearance[i] - 512 < ObjType.count) {
                int var6 = ObjType.get(this.appearance[i] - 512).g;
                if (var6 != 0) {
                   this.Nb = var6;

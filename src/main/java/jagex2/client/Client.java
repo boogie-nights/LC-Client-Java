@@ -1046,10 +1046,10 @@ public class Client extends GameShell {
 					}
 
 					label55:
-					for (int var9 = 0; var9 < ObjType.j; ++var9) {
+					for (int var9 = 0; var9 < ObjType.count; ++var9) {
 						ObjType var10 = ObjType.get(var9);
-						if (var10.certtemplate == -1 && var10.d != null) {
-							String var11 = var10.d.toLowerCase();
+						if (var10.certtemplate == -1 && var10.name != null) {
+							String var11 = var10.name.toLowerCase();
 
 							for (int var12 = 0; var12 < var5; ++var12) {
 								if (var11.indexOf(var4[var12]) == -1) {
@@ -1421,7 +1421,7 @@ public class Client extends GameShell {
 		this.H(28614);
 		LocType.a(false);
 		NpcType.a(false);
-		ObjType.a(false);
+		ObjType.unload();
 		Component.clear();
 		FloType.e = null;
 		IdkType.types = null;
@@ -1693,7 +1693,7 @@ public class Client extends GameShell {
 
 			for (ClientObj var6 = (ClientObj) var3.head(); var6 != null; var6 = (ClientObj) var3.next()) {
 				ObjType var7 = ObjType.get(var6.m);
-				int var8 = var7.t;
+				int var8 = var7.cost;
 				if (var7.stackable) {
 					var8 = (var6.o + 1) * var8;
 				}
@@ -4865,7 +4865,7 @@ public class Client extends GameShell {
 						for (ClientObj var22 = (ClientObj) var21.tail(); var22 != null; var22 = (ClientObj) var21.prev()) {
 							ObjType var23 = ObjType.get(var22.m);
 							if (this.objSelected == 1) {
-								this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var23.d;
+								this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var23.name;
 								this.menuAction[this.menuSize] = 100;
 								this.menuParamA[this.menuSize] = var22.m;
 								this.menuParamB[this.menuSize] = x;
@@ -4873,7 +4873,7 @@ public class Client extends GameShell {
 								this.menuSize++;
 							} else if (this.hh == 1) {
 								if ((this.jh & 1) == 1) {
-									this.menuOption[this.menuSize] = this.kh + " @lre@" + var23.d;
+									this.menuOption[this.menuSize] = this.kh + " @lre@" + var23.name;
 									this.menuAction[this.menuSize] = 199;
 									this.menuParamA[this.menuSize] = var22.m;
 									this.menuParamB[this.menuSize] = x;
@@ -4882,8 +4882,8 @@ public class Client extends GameShell {
 								}
 							} else {
 								for (int var24 = 4; var24 >= 0; --var24) {
-									if (var23.m != null && var23.m[var24] != null) {
-										this.menuOption[this.menuSize] = var23.m[var24] + " @lre@" + var23.d;
+									if (var23.op != null && var23.op[var24] != null) {
+										this.menuOption[this.menuSize] = var23.op[var24] + " @lre@" + var23.name;
 										if (var24 == 0) {
 											this.menuAction[this.menuSize] = 68;
 										}
@@ -4909,7 +4909,7 @@ public class Client extends GameShell {
 										this.menuParamC[this.menuSize] = z;
 										this.menuSize++;
 									} else if (var24 == 2) {
-										this.menuOption[this.menuSize] = "Take @lre@" + var23.d;
+										this.menuOption[this.menuSize] = "Take @lre@" + var23.name;
 										this.menuAction[this.menuSize] = 684;
 										this.menuParamA[this.menuSize] = var22.m;
 										this.menuParamB[this.menuSize] = x;
@@ -4918,7 +4918,7 @@ public class Client extends GameShell {
 									}
 								}
 
-								this.menuOption[this.menuSize] = "Examine @lre@" + var23.d;
+								this.menuOption[this.menuSize] = "Examine @lre@" + var23.name;
 								this.menuAction[this.menuSize] = 1564;
 								this.menuParamA[this.menuSize] = var22.m;
 								this.menuParamB[this.menuSize] = x;
@@ -5136,7 +5136,7 @@ public class Client extends GameShell {
 		LocType.v.clear();
 		LocType.e.clear();
 		NpcType.o.clear();
-		ObjType.l.clear();
+		ObjType.modelCache.clear();
 		ObjType.iconCache.clear();
 		ClientPlayer.Ib.clear();
 		SpotAnimType.q.clear();
@@ -6822,18 +6822,18 @@ public class Client extends GameShell {
 												ObjType var23 = ObjType.get(var13.invSlotObjId[var18] - 1);
 												if (this.objSelected == 1 && var13.interactable) {
 													if (this.Kg != var13.id || this.Jg != var18) {
-														this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var23.d;
+														this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var23.name;
 														this.menuAction[this.menuSize] = 903;
-														this.menuParamA[this.menuSize] = var23.L;
+														this.menuParamA[this.menuSize] = var23.id;
 														this.menuParamB[this.menuSize] = var18;
 														this.menuParamC[this.menuSize] = var13.id;
 														this.menuSize++;
 													}
 												} else if (this.hh == 1 && var13.interactable) {
 													if ((this.jh & 16) == 16) {
-														this.menuOption[this.menuSize] = this.kh + " @lre@" + var23.d;
+														this.menuOption[this.menuSize] = this.kh + " @lre@" + var23.name;
 														this.menuAction[this.menuSize] = 361;
-														this.menuParamA[this.menuSize] = var23.L;
+														this.menuParamA[this.menuSize] = var23.id;
 														this.menuParamB[this.menuSize] = var18;
 														this.menuParamC[this.menuSize] = var13.id;
 														this.menuSize++;
@@ -6841,8 +6841,8 @@ public class Client extends GameShell {
 												} else {
 													if (var13.interactable) {
 														for (int var24 = 4; var24 >= 3; --var24) {
-															if (var23.w != null && var23.w[var24] != null) {
-																this.menuOption[this.menuSize] = var23.w[var24] + " @lre@" + var23.d;
+															if (var23.iop != null && var23.iop[var24] != null) {
+																this.menuOption[this.menuSize] = var23.iop[var24] + " @lre@" + var23.name;
 																if (var24 == 3) {
 																	this.menuAction[this.menuSize] = 227;
 																}
@@ -6851,14 +6851,14 @@ public class Client extends GameShell {
 																	this.menuAction[this.menuSize] = 891;
 																}
 
-																this.menuParamA[this.menuSize] = var23.L;
+																this.menuParamA[this.menuSize] = var23.id;
 																this.menuParamB[this.menuSize] = var18;
 																this.menuParamC[this.menuSize] = var13.id;
 																this.menuSize++;
 															} else if (var24 == 4) {
-																this.menuOption[this.menuSize] = "Drop @lre@" + var23.d;
+																this.menuOption[this.menuSize] = "Drop @lre@" + var23.name;
 																this.menuAction[this.menuSize] = 891;
-																this.menuParamA[this.menuSize] = var23.L;
+																this.menuParamA[this.menuSize] = var23.id;
 																this.menuParamB[this.menuSize] = var18;
 																this.menuParamC[this.menuSize] = var13.id;
 																this.menuSize++;
@@ -6867,18 +6867,18 @@ public class Client extends GameShell {
 													}
 
 													if (var13.usable) {
-														this.menuOption[this.menuSize] = "Use @lre@" + var23.d;
+														this.menuOption[this.menuSize] = "Use @lre@" + var23.name;
 														this.menuAction[this.menuSize] = 52;
-														this.menuParamA[this.menuSize] = var23.L;
+														this.menuParamA[this.menuSize] = var23.id;
 														this.menuParamB[this.menuSize] = var18;
 														this.menuParamC[this.menuSize] = var13.id;
 														this.menuSize++;
 													}
 
-													if (var13.interactable && var23.w != null) {
+													if (var13.interactable && var23.iop != null) {
 														for (int var25 = 2; var25 >= 0; --var25) {
-															if (var23.w[var25] != null) {
-																this.menuOption[this.menuSize] = var23.w[var25] + " @lre@" + var23.d;
+															if (var23.iop[var25] != null) {
+																this.menuOption[this.menuSize] = var23.iop[var25] + " @lre@" + var23.name;
 																if (var25 == 0) {
 																	this.menuAction[this.menuSize] = 961;
 																}
@@ -6891,7 +6891,7 @@ public class Client extends GameShell {
 																	this.menuAction[this.menuSize] = 324;
 																}
 
-																this.menuParamA[this.menuSize] = var23.L;
+																this.menuParamA[this.menuSize] = var23.id;
 																this.menuParamB[this.menuSize] = var18;
 																this.menuParamC[this.menuSize] = var13.id;
 																this.menuSize++;
@@ -6902,7 +6902,7 @@ public class Client extends GameShell {
 													if (var13.iop != null) {
 														for (int var26 = 4; var26 >= 0; --var26) {
 															if (var13.iop[var26] != null) {
-																this.menuOption[this.menuSize] = var13.iop[var26] + " @lre@" + var23.d;
+																this.menuOption[this.menuSize] = var13.iop[var26] + " @lre@" + var23.name;
 																if (var26 == 0) {
 																	this.menuAction[this.menuSize] = 9;
 																}
@@ -6923,7 +6923,7 @@ public class Client extends GameShell {
 																	this.menuAction[this.menuSize] = 894;
 																}
 
-																this.menuParamA[this.menuSize] = var23.L;
+																this.menuParamA[this.menuSize] = var23.id;
 																this.menuParamB[this.menuSize] = var18;
 																this.menuParamC[this.menuSize] = var13.id;
 																this.menuSize++;
@@ -6931,9 +6931,9 @@ public class Client extends GameShell {
 														}
 													}
 
-													this.menuOption[this.menuSize] = "Examine @lre@" + var23.d;
+													this.menuOption[this.menuSize] = "Examine @lre@" + var23.name;
 													this.menuAction[this.menuSize] = 1094;
-													this.menuParamA[this.menuSize] = var23.L;
+													this.menuParamA[this.menuSize] = var23.id;
 													this.menuParamB[this.menuSize] = var18;
 													this.menuParamC[this.menuSize] = var13.id;
 													this.menuSize++;
@@ -9814,7 +9814,7 @@ public class Client extends GameShell {
 						}
 					}
 
-					Model model = new Model(modelCount, models, (byte) -89);
+					Model model = new Model(modelCount, models);
 					for (int i = 0; i < 5; ++i) {
 						if (this.designColours[i] != 0) {
 							model.recolour(DESIGN_BODY_COLOUR[i][0], DESIGN_BODY_COLOUR[i][this.designColours[i]]);
@@ -11505,11 +11505,11 @@ public class Client extends GameShell {
 					Component var41 = Component.types(var4);
 					String examine;
 					if (var41 != null && var41.invSlotObjCount[var3] >= 100000) {
-						examine = var41.invSlotObjCount[var3] + " x " + obj.d;
-					} else if (obj.c != null) {
-						examine = new String(obj.c);
+						examine = var41.invSlotObjCount[var3] + " x " + obj.name;
+					} else if (obj.desc != null) {
+						examine = new String(obj.desc);
 					} else {
-						examine = "It's a " + obj.d + ".";
+						examine = "It's a " + obj.name + ".";
 					}
 
 					this.addMessage(examine, "", 0);
@@ -11790,17 +11790,17 @@ public class Client extends GameShell {
 					this.Jg = var3;
 					this.Kg = var4;
 					this.Lg = var6;
-					this.objSelectedName = String.valueOf(ObjType.get(var6).d);
+					this.objSelectedName = String.valueOf(ObjType.get(var6).name);
 					this.hh = 0;
 					this.redrawSidebar = true;
 				} else {
 					if (action == 1564) {
 						ObjType var71 = ObjType.get(var6);
 						String var72;
-						if (var71.c != null) {
-							var72 = new String(var71.c);
+						if (var71.desc != null) {
+							var72 = new String(var71.desc);
 						} else {
-							var72 = "It's a " + var71.d + ".";
+							var72 = "It's a " + var71.name + ".";
 						}
 
 						this.addMessage(var72, "", 0);
@@ -12388,7 +12388,7 @@ public class Client extends GameShell {
 				} else if (opcode == 4) {
 					Component inv = Component.types(script[pc++]);
 					int obj = script[pc++];
-					if (obj >= 0 && obj < ObjType.j && (!ObjType.get(obj).Z || membersWorld)) {
+					if (obj >= 0 && obj < ObjType.count && (!ObjType.get(obj).members || membersWorld)) {
 						for (int i = 0; i < inv.invSlotObjId.length; ++i) {
 							if (obj + 1 == inv.invSlotObjId[i]) {
 								register += inv.invSlotObjCount[i];
@@ -12412,7 +12412,7 @@ public class Client extends GameShell {
 				} else if (opcode == 10) {
 					Component var15 = Component.types(script[pc++]);
 					int var16 = script[pc++] + 1;
-					if (var16 >= 0 && var16 < ObjType.j && (!ObjType.get(var16).Z || membersWorld)) {
+					if (var16 >= 0 && var16 < ObjType.count && (!ObjType.get(var16).members || membersWorld)) {
 						for (int var17 = 0; var17 < var15.invSlotObjId.length; ++var17) {
 							if (var15.invSlotObjId[var17] == var16) {
 								value = 999999999;
@@ -13531,7 +13531,7 @@ public class Client extends GameShell {
 									for (int var57 = 0; var57 < var14.height; ++var57) {
 										if (var14.invSlotObjId[var55] > 0) {
 											ObjType var58 = ObjType.get(var14.invSlotObjId[var55] - 1);
-											String var59 = String.valueOf(var58.d);
+											String var59 = String.valueOf(var58.name);
 											if (var58.stackable || var14.invSlotObjCount[var55] != 1) {
 												var59 = var59 + " x" + i(0, var14.invSlotObjCount[var55]);
 											}
