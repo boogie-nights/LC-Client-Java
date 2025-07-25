@@ -163,7 +163,7 @@ public class Component {
 	@ObfuscatedName("EWIXBTLV.db")
 	public Pix24[] invSlotGraphic;
 	@ObfuscatedName("EWIXBTLV.g")
-	public static Component[] g;
+	public static Component[] types;
 	@ObfuscatedName("EWIXBTLV.n")
 	public static PixFont[] fonts;
 	@ObfuscatedName("EWIXBTLV.ab")
@@ -176,10 +176,6 @@ public class Component {
 	@ObfuscatedName("EWIXBTLV.a(ILjava/lang/String;I)LEPQDEJTO;")
 	public static Pix24 getImage(int arg0, String arg1, int arg2) {
 		long var3 = (JString.hashCode(arg1) << 8) + (long) arg0;
-		if (arg2 <= 0) {
-			nb = -317;
-		}
-
 		Pix24 var5 = (Pix24) imageCache.get(var3);
 		if (var5 != null) {
 			return var5;
@@ -198,13 +194,13 @@ public class Component {
 
 	@ObfuscatedName("EWIXBTLV.a(I)LEWIXBTLV;")
 	public static Component types(int arg0) {
-		if (g[arg0] == null) {
+		if (types[arg0] == null) {
 			Packet var1 = new Packet(ub[arg0]);
 			int var2 = var1.g2();
-			g[arg0] = a(var2, (Packet) var1, 10896, arg0);
+			types[arg0] = decode((Packet) var1, arg0, var2);
 		}
 
-		return g[arg0];
+		return types[arg0];
 	}
 
 	@ObfuscatedName("EWIXBTLV.a(III)V")
@@ -260,7 +256,7 @@ public class Component {
 	}
 
 	@ObfuscatedName("EWIXBTLV.a(ILMFMVIYHT;II)LEWIXBTLV;")
-	public static Component a(int layer, Packet data, int arg2, int id) {
+	public static Component decode(Packet data, int id, int layer) {
 		Component com = new Component();
 		com.id = id;
 		com.layer = layer;
@@ -509,15 +505,16 @@ public class Component {
 	}
 
 	@ObfuscatedName("EWIXBTLV.a(I[LJDPYRDAS;LATJMVOZR;LATJMVOZR;)V")
-	public static void unpack(Jagfile interfaces, Jagfile arg3, PixFont[] fonts, int arg0) {
+	public static void unpack(Jagfile interfaces, Jagfile media, PixFont[] fonts, int arg0) {
 		imageCache = new LruCache(50000);
-		e = arg3;
+		e = media;
 		Component.fonts = fonts;
 		int layer = -1;
 
 		Packet data = new Packet(interfaces.read("data", null));
 		int total = data.g2();
-		g = new Component[total];
+
+		types = new Component[total];
 		ub = new byte[total][];
 
 		while (data.pos < data.data.length) {
@@ -528,7 +525,7 @@ public class Component {
 			}
 
 			int var8 = data.pos;
-			Component com = a(layer, (Packet) data, 10896, id);
+			Component com = decode((Packet) data, id, layer);
 			byte[] var10 = ub[com.id] = new byte[data.pos - var8 + 2];
 
 			for (int i = var8; i < data.pos; ++i) {
@@ -543,12 +540,14 @@ public class Component {
 	}
 
 	@ObfuscatedName("EWIXBTLV.a(ZI)V")
-	public static void a(boolean arg0, int arg1) {
-		if (arg1 != -1) {
-			for (int var2 = 0; var2 < g.length; ++var2) {
-				if (g[var2] != null && g[var2].layer == arg1 && g[var2].type != 2) {
-					g[var2] = null;
-				}
+	public static void a(int id) {
+		if (id == -1) {
+			return;
+		}
+
+		for (int i = 0; i < types.length; ++i) {
+			if (types[i] != null && types[i].layer == id && types[i].type != 2) {
+				types[i] = null;
 			}
 		}
 	}
@@ -564,7 +563,7 @@ public class Component {
 
 	@ObfuscatedName("EWIXBTLV.a(Z)V")
 	public static void clear() {
-		g = null;
+		types = null;
 		e = null;
 		imageCache = null;
 		fonts = null;

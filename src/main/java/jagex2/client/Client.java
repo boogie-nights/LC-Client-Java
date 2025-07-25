@@ -4935,9 +4935,7 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.a(ZI)V")
 	public final void a(boolean arg0, int arg1) {
-		if (arg0) {
-			Component.a(Ah, arg1);
-		}
+		Component.a(arg1);
 	}
 
 	@ObfuscatedName("client.a(IIIIIIBI)V")
@@ -10167,9 +10165,6 @@ public class Client extends GameShell {
 		}
 
 		var2 += 8;
-		if (arg0 <= 0) {
-			Ah = !Ah;
-		}
 
 		int var5 = this.menuSize * 15 + 21;
 		if (super.C > 4 && super.D > 4 && super.C < 516 && super.D < 338) {
