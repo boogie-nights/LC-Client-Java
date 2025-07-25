@@ -6,175 +6,149 @@ import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
 public class IdkType {
-   @ObfuscatedName("ZGOJZVHR.b")
-   public int b = -766;
-   @ObfuscatedName("ZGOJZVHR.c")
-   public int c = 256;
-   @ObfuscatedName("ZGOJZVHR.f")
-   public int f = -1;
-   @ObfuscatedName("ZGOJZVHR.h")
-   public int[] h = new int[6];
-   @ObfuscatedName("ZGOJZVHR.i")
-   public int[] i = new int[6];
-   @ObfuscatedName("ZGOJZVHR.j")
-   public int[] j = new int[]{-1, -1, -1, -1, -1};
-   @ObfuscatedName("ZGOJZVHR.k")
-   public boolean k = false;
-   @ObfuscatedName("ZGOJZVHR.a")
-   public static byte a = 6;
-   @ObfuscatedName("ZGOJZVHR.d")
-   public static int d;
-   @ObfuscatedName("ZGOJZVHR.g")
-   public int[] g;
-   @ObfuscatedName("ZGOJZVHR.e")
-   public static IdkType[] types;
 
-   @ObfuscatedName("ZGOJZVHR.a(LATJMVOZR;I)V")
-   public static void unpack(Jagfile arg0, int arg1) {
-      Packet var2 = new Packet(arg0.read("idk.dat", (byte[])null));
-      d = var2.g2();
-      if (types == null) {
-         types = new IdkType[d];
-      }
+	@ObfuscatedName("ZGOJZVHR.f")
+	public int type = -1;
 
-      for(int var3 = 0; var3 < d; ++var3) {
-         if (types[var3] == null) {
-            types[var3] = new IdkType();
-         }
+	@ObfuscatedName("ZGOJZVHR.h")
+	public int[] recol_s = new int[6];
 
-         types[var3].a(a, var2);
-      }
+	@ObfuscatedName("ZGOJZVHR.i")
+	public int[] recol_d = new int[6];
 
-      if (arg1 == 36135) {
-         ;
-      }
-   }
+	@ObfuscatedName("ZGOJZVHR.j")
+	public int[] heads = new int[] { -1, -1, -1, -1, -1 };
 
-   @ObfuscatedName("ZGOJZVHR.a(BLMFMVIYHT;)V")
-   public void a(byte arg0, Packet arg1) {
-      if (arg0 != 6) {
-         throw new NullPointerException();
-      } else {
-         boolean var3 = false;
+	@ObfuscatedName("ZGOJZVHR.k")
+	public boolean disable = false;
 
-         while(true) {
-            while(true) {
-               int var4 = arg1.g1();
-               if (var4 == 0) {
-                  return;
-               }
+	@ObfuscatedName("ZGOJZVHR.d")
+	public static int count;
 
-               if (var4 == 1) {
-                  this.f = arg1.g1();
-               } else if (var4 == 2) {
-                  int var5 = arg1.g1();
-                  this.g = new int[var5];
+	@ObfuscatedName("ZGOJZVHR.g")
+	public int[] models;
 
-                  for(int var6 = 0; var6 < var5; ++var6) {
-                     this.g[var6] = arg1.g2();
-                  }
-               } else if (var4 == 3) {
-                  this.k = true;
-               } else if (var4 >= 40 && var4 < 50) {
-                  this.h[var4 - 40] = arg1.g2();
-               } else if (var4 >= 50 && var4 < 60) {
-                  this.i[var4 - 50] = arg1.g2();
-               } else if (var4 >= 60 && var4 < 70) {
-                  this.j[var4 - 60] = arg1.g2();
-               } else {
-                  System.out.println("Error unrecognised config code: " + var4);
-               }
-            }
-         }
-      }
-   }
+	@ObfuscatedName("ZGOJZVHR.e")
+	public static IdkType[] types;
 
-   @ObfuscatedName("ZGOJZVHR.a(I)Z")
-   public boolean modelIsReady(int arg0) {
-      if (this.g == null) {
-         return true;
-      } else {
-         boolean var2 = true;
-         int var3 = 89 / arg0;
+	@ObfuscatedName("ZGOJZVHR.a(LATJMVOZR;I)V")
+	public static void unpack(Jagfile config) {
+		Packet dat = new Packet(config.read("idk.dat", (byte[]) null));
+		count = dat.g2();
 
-         for(int var4 = 0; var4 < this.g.length; ++var4) {
-            if (!Model.isReady(this.g[var4])) {
-               var2 = false;
-            }
-         }
+		if (types == null) {
+			types = new IdkType[count];
+		}
 
-         return var2;
-      }
-   }
+		for (int i = 0; i < count; ++i) {
+			if (types[i] == null) {
+				types[i] = new IdkType();
+			}
 
-   @ObfuscatedName("ZGOJZVHR.a(B)LLZYQDKJV;")
-   public Model getModel(byte arg0) {
-      if (this.g == null) {
-         return null;
-      } else {
-         Model[] var2 = new Model[this.g.length];
+			types[i].decode(dat);
+		}
+	}
 
-         for(int var3 = 0; var3 < this.g.length; ++var3) {
-            var2[var3] = Model.tryGet(this.g[var3]);
-         }
+	@ObfuscatedName("ZGOJZVHR.a(BLMFMVIYHT;)V")
+	public void decode(Packet buf) {
+		while (true) {
+			int code = buf.g1();
+			if (code == 0) {
+				return;
+			}
 
-         Model var4;
-         if (var2.length == 1) {
-            var4 = var2[0];
-         } else {
-            var4 = new Model(var2.length, var2);
-         }
+			if (code == 1) {
+				this.type = buf.g1();
+			} else if (code == 2) {
+				int count = buf.g1();
 
-         for(int var5 = 0; var5 < 6 && this.h[var5] != 0; ++var5) {
-            var4.recolour(this.h[var5], this.i[var5]);
-         }
+				this.models = new int[count];
+				for (int i = 0; i < count; ++i) {
+					this.models[i] = buf.g2();
+				}
+			} else if (code == 3) {
+				this.disable = true;
+			} else if (code >= 40 && code < 50) {
+				this.recol_s[code - 40] = buf.g2();
+			} else if (code >= 50 && code < 60) {
+				this.recol_d[code - 50] = buf.g2();
+			} else if (code >= 60 && code < 70) {
+				this.heads[code - 60] = buf.g2();
+			} else {
+				System.out.println("Error unrecognised config code: " + code);
+			}
+		}
+	}
 
-         if (arg0 != 2) {
-            throw new NullPointerException();
-         } else {
-            return var4;
-         }
-      }
-   }
+	@ObfuscatedName("ZGOJZVHR.a(I)Z")
+	public boolean modelIsReady(int arg0) {
+		if (this.models == null) {
+			return true;
+		}
 
-   @ObfuscatedName("ZGOJZVHR.b(I)Z")
-   public boolean b(int arg0) {
-      if (arg0 != -10584) {
-         throw new NullPointerException();
-      } else {
-         boolean var2 = true;
+		boolean ready = true;
+		for (int i = 0; i < this.models.length; ++i) {
+			if (!Model.isReady(this.models[i])) {
+				ready = false;
+			}
+		}
+		return ready;
+	}
 
-         for(int var3 = 0; var3 < 5; ++var3) {
-            if (this.j[var3] != -1 && !Model.isReady(this.j[var3])) {
-               var2 = false;
-            }
-         }
+	@ObfuscatedName("ZGOJZVHR.a(B)LLZYQDKJV;")
+	public Model getModel() {
+		if (this.models == null) {
+			return null;
+		}
 
-         return var2;
-      }
-   }
+		Model[] models = new Model[this.models.length];
+		for (int i = 0; i < this.models.length; ++i) {
+			models[i] = Model.tryGet(this.models[i]);
+		}
 
-   @ObfuscatedName("ZGOJZVHR.a(Z)LLZYQDKJV;")
-   public Model a(boolean arg0) {
-      Model[] var2 = new Model[5];
-      if (arg0) {
-         this.b = -298;
-      }
+		Model model;
+		if (models.length == 1) {
+			model = models[0];
+		} else {
+			model = new Model(models.length, models);
+		}
 
-      int var3 = 0;
+		for (int i = 0; i < 6 && this.recol_s[i] != 0; ++i) {
+			model.recolour(this.recol_s[i], this.recol_d[i]);
+		}
 
-      for(int var4 = 0; var4 < 5; ++var4) {
-         if (this.j[var4] != -1) {
-            var2[var3++] = Model.tryGet(this.j[var4]);
-         }
-      }
+		return model;
+	}
 
-      Model var5 = new Model(var3, var2);
+	@ObfuscatedName("ZGOJZVHR.b(I)Z")
+	public boolean headModelIsReady() {
 
-      for(int var6 = 0; var6 < 6 && this.h[var6] != 0; ++var6) {
-         var5.recolour(this.h[var6], this.i[var6]);
-      }
+		boolean ready = true;
+		for (int i = 0; i < 5; ++i) {
+			if (this.heads[i] != -1 && !Model.isReady(this.heads[i])) {
+				ready = false;
+			}
+		}
 
-      return var5;
-   }
+		return ready;
+	}
+
+	@ObfuscatedName("ZGOJZVHR.a(Z)LLZYQDKJV;")
+	public Model getHeadModel() {
+		Model[] models = new Model[5];
+
+		int count = 0;
+		for (int i = 0; i < 5; ++i) {
+			if (this.heads[i] != -1) {
+				models[count++] = Model.tryGet(this.heads[i]);
+			}
+		}
+
+		Model model = new Model(count, models);
+		for (int i = 0; i < 6 && this.recol_s[i] != 0; ++i) {
+			model.recolour(this.recol_s[i], this.recol_d[i]);
+		}
+
+		return model;
+	}
 }

@@ -1672,8 +1672,8 @@ public class Client extends GameShell {
 		for (int var2 = 0; var2 < 7; ++var2) {
 			this.designKits[var2] = -1;
 
-			for (int var3 = 0; var3 < IdkType.d; ++var3) {
-				if (!IdkType.types[var3].k && IdkType.types[var3].f == var2 + (this.designGender ? 0 : 7)) {
+			for (int var3 = 0; var3 < IdkType.count; ++var3) {
+				if (!IdkType.types[var3].disable && IdkType.types[var3].type == var2 + (this.designGender ? 0 : 7)) {
 					this.designKits[var2] = var3;
 					break;
 				}
@@ -5621,18 +5621,18 @@ public class Client extends GameShell {
 						if (var5 == 0) {
 							--var6;
 							if (var6 < 0) {
-								var6 = IdkType.d - 1;
+								var6 = IdkType.count - 1;
 							}
 						}
 
 						if (var5 == 1) {
 							++var6;
-							if (var6 >= IdkType.d) {
+							if (var6 >= IdkType.count) {
 								var6 = 0;
 							}
 						}
 
-						if (!IdkType.types[var6].k && IdkType.types[var6].f == var4 + (this.designGender ? 0 : 7)) {
+						if (!IdkType.types[var6].disable && IdkType.types[var6].type == var4 + (this.designGender ? 0 : 7)) {
 							this.designKits[var4] = var6;
 							this.updateDesignModel = true;
 							break;
@@ -6589,7 +6589,7 @@ public class Client extends GameShell {
 					FloType.unpack(jagConfig, 36135);
 					ObjType.unpack(jagConfig);
 					NpcType.unpack(jagConfig);
-					IdkType.unpack(jagConfig, 36135);
+					IdkType.unpack(jagConfig);
 					SpotAnimType.unpack(jagConfig, 36135);
 					VarpType.unpack(jagConfig);
 					VarbitType.unpack(jagConfig);
@@ -9808,7 +9808,7 @@ public class Client extends GameShell {
 					for (int i = 0; i < 7; ++i) {
 						int kit = this.designKits[i];
 						if (kit >= 0) {
-							models[modelCount++] = IdkType.types[kit].getModel((byte) 2);
+							models[modelCount++] = IdkType.types[kit].getModel();
 						}
 					}
 

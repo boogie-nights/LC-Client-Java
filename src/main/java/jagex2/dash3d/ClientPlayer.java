@@ -80,7 +80,7 @@ public class ClientPlayer extends ClientEntity {
 
          for(int var3 = 0; var3 < 12; ++var3) {
             int var4 = this.appearance[var3];
-            if (var4 >= 256 && var4 < 512 && !IdkType.types[var4 - 256].b(-10584)) {
+            if (var4 >= 256 && var4 < 512 && !IdkType.types[var4 - 256].headModelIsReady()) {
                var2 = true;
             }
 
@@ -98,7 +98,7 @@ public class ClientPlayer extends ClientEntity {
             for(int var7 = 0; var7 < 12; ++var7) {
                int var8 = this.appearance[var7];
                if (var8 >= 256 && var8 < 512) {
-                  Model var9 = IdkType.types[var8 - 256].a(this.ub);
+                  Model var9 = IdkType.types[var8 - 256].getHeadModel();
                   if (var9 != null) {
                      var5[var6++] = var9;
                   }
@@ -221,7 +221,7 @@ public class ClientPlayer extends ClientEntity {
                }
 
                if (var18 >= 256 && var18 < 512) {
-                  Model var19 = IdkType.types[var18 - 256].getModel((byte)2);
+                  Model var19 = IdkType.types[var18 - 256].getModel();
                   if (var19 != null) {
                      var15[var16++] = var19;
                   }
