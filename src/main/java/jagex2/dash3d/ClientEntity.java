@@ -7,7 +7,7 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("LRUWCBNN.n")
 	public int n = -89;
 	@ObfuscatedName("LRUWCBNN.o")
-	public int o = 100;
+	public int chatTimer = 100;
 	@ObfuscatedName("LRUWCBNN.s")
 	public int[] routeTileX = new int[10];
 	@ObfuscatedName("LRUWCBNN.t")
@@ -21,15 +21,15 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("LRUWCBNN.A")
 	public int A = 200;
 	@ObfuscatedName("LRUWCBNN.B")
-	public int B = -1000;
+	public int combatCycle = -1000;
 	@ObfuscatedName("LRUWCBNN.G")
 	public int G = 32;
 	@ObfuscatedName("LRUWCBNN.H")
 	public int size = 1;
 	@ObfuscatedName("LRUWCBNN.P")
-	public int P = -1;
+	public int targetId = -1;
 	@ObfuscatedName("LRUWCBNN.U")
-	public int U = -1;
+	public int spotAnimId = -1;
 	@ObfuscatedName("LRUWCBNN.Z")
 	public int Z = -1;
 	@ObfuscatedName("LRUWCBNN.ab")
@@ -83,13 +83,13 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("LRUWCBNN.T")
 	public int preanimRouteLength;
 	@ObfuscatedName("LRUWCBNN.V")
-	public int V;
+	public int spotanimFrame;
 	@ObfuscatedName("LRUWCBNN.W")
-	public int W;
+	public int spotanimCycle;
 	@ObfuscatedName("LRUWCBNN.X")
-	public int justUnfortunateNamingNotX;
+	public int spotanimLastCycle;
 	@ObfuscatedName("LRUWCBNN.Y")
-	public int Y;
+	public int spotanimHeight;
 	@ObfuscatedName("LRUWCBNN.db")
 	public int seqDelayMove;
 	@ObfuscatedName("LRUWCBNN.fb")
@@ -97,13 +97,13 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("LRUWCBNN.gb")
 	public int gb;
 	@ObfuscatedName("LRUWCBNN.hb")
-	public int hb;
+	public int primarySeqDelay;
 	@ObfuscatedName("LRUWCBNN.ib")
-	public int ib;
+	public int primarySeqLoop;
 	@ObfuscatedName("LRUWCBNN.nb")
 	public int routeLength;
 	@ObfuscatedName("LRUWCBNN.p")
-	public int p;
+	public int chatColour;
 	@ObfuscatedName("LRUWCBNN.q")
 	public int q;
 	@ObfuscatedName("LRUWCBNN.r")
@@ -113,9 +113,9 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("LRUWCBNN.w")
 	public int w;
 	@ObfuscatedName("LRUWCBNN.z")
-	public int zz;
+	public int chatEffect;
 	@ObfuscatedName("LRUWCBNN.m")
-	public String m;
+	public String chatMessage;
 
 	@ObfuscatedName("LRUWCBNN.b(I)Z")
 	public boolean isVisible() {

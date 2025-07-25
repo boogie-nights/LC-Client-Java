@@ -15,13 +15,13 @@ public class ClientPlayer extends ClientEntity {
    @ObfuscatedName("ZGNGQRPJ.wb")
    public long wb = -1L;
    @ObfuscatedName("ZGNGQRPJ.zb")
-   public int[] zb = new int[12];
+   public int[] appearance = new int[12];
    @ObfuscatedName("ZGNGQRPJ.Db")
    public int Db = -1;
    @ObfuscatedName("ZGNGQRPJ.Fb")
    public boolean Fb = false;
    @ObfuscatedName("ZGNGQRPJ.Hb")
-   public int[] Hb = new int[5];
+   public int[] colour = new int[5];
    @ObfuscatedName("ZGNGQRPJ.Jb")
    public boolean Jb = true;
    @ObfuscatedName("ZGNGQRPJ.Kb")
@@ -79,7 +79,7 @@ public class ClientPlayer extends ClientEntity {
          boolean var2 = false;
 
          for(int var3 = 0; var3 < 12; ++var3) {
-            int var4 = this.zb[var3];
+            int var4 = this.appearance[var3];
             if (var4 >= 256 && var4 < 512 && !IdkType.types[var4 - 256].b(-10584)) {
                var2 = true;
             }
@@ -96,7 +96,7 @@ public class ClientPlayer extends ClientEntity {
             int var6 = 0;
 
             for(int var7 = 0; var7 < 12; ++var7) {
-               int var8 = this.zb[var7];
+               int var8 = this.appearance[var7];
                if (var8 >= 256 && var8 < 512) {
                   Model var9 = IdkType.types[var8 - 256].a(this.ub);
                   if (var9 != null) {
@@ -117,10 +117,10 @@ public class ClientPlayer extends ClientEntity {
                throw new NullPointerException();
             } else {
                for(int var12 = 0; var12 < 5; ++var12) {
-                  if (this.Hb[var12] != 0) {
-                     var11.recolour(Client.DESIGN_BODY_COLOUR[var12][0], Client.DESIGN_BODY_COLOUR[var12][this.Hb[var12]]);
+                  if (this.colour[var12] != 0) {
+                     var11.recolour(Client.DESIGN_BODY_COLOUR[var12][0], Client.DESIGN_BODY_COLOUR[var12][this.colour[var12]]);
                      if (var12 == 1) {
-                        var11.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.Hb[var12]]);
+                        var11.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colour[var12]]);
                      }
                   }
                }
@@ -135,7 +135,7 @@ public class ClientPlayer extends ClientEntity {
    public final Model b(byte arg0) {
       if (this.Eb != null) {
          int var2 = -1;
-         if (super.primarySeqId >= 0 && super.hb == 0) {
+         if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
             var2 = SeqType.types[super.primarySeqId].frames[super.fb];
          } else if (super.u >= 0) {
             var2 = SeqType.types[super.u].frames[super.v];
@@ -152,7 +152,7 @@ public class ClientPlayer extends ClientEntity {
             this.Ob = !this.Ob;
          }
 
-         if (super.primarySeqId >= 0 && super.hb == 0) {
+         if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
             SeqType var10 = SeqType.types[super.primarySeqId];
             var6 = var10.frames[super.fb];
             if (super.u >= 0 && super.u != super.readyanim) {
@@ -161,12 +161,12 @@ public class ClientPlayer extends ClientEntity {
 
             if (var10.m >= 0) {
                var8 = var10.m;
-               var4 += (long)(var8 - this.zb[5] << 8);
+               var4 += (long)(var8 - this.appearance[5] << 8);
             }
 
             if (var10.n >= 0) {
                var9 = var10.n;
-               var4 += (long)(var9 - this.zb[3] << 16);
+               var4 += (long)(var9 - this.appearance[3] << 16);
             }
          } else if (super.u >= 0) {
             var6 = SeqType.types[super.u].frames[super.v];
@@ -177,7 +177,7 @@ public class ClientPlayer extends ClientEntity {
             boolean var12 = false;
 
             for(int var13 = 0; var13 < 12; ++var13) {
-               int var14 = this.zb[var13];
+               int var14 = this.appearance[var13];
                if (var9 >= 0 && var13 == 3) {
                   var14 = var9;
                }
@@ -211,7 +211,7 @@ public class ClientPlayer extends ClientEntity {
             int var16 = 0;
 
             for(int var17 = 0; var17 < 12; ++var17) {
-               int var18 = this.zb[var17];
+               int var18 = this.appearance[var17];
                if (var9 >= 0 && var17 == 3) {
                   var18 = var9;
                }
@@ -238,10 +238,10 @@ public class ClientPlayer extends ClientEntity {
             var11 = new Model(var16, var15, (byte)-89);
 
             for(int var21 = 0; var21 < 5; ++var21) {
-               if (this.Hb[var21] != 0) {
-                  var11.recolour(Client.DESIGN_BODY_COLOUR[var21][0], Client.DESIGN_BODY_COLOUR[var21][this.Hb[var21]]);
+               if (this.colour[var21] != 0) {
+                  var11.recolour(Client.DESIGN_BODY_COLOUR[var21][0], Client.DESIGN_BODY_COLOUR[var21][this.colour[var21]]);
                   if (var21 == 1) {
-                     var11.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.Hb[var21]]);
+                     var11.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colour[var21]]);
                   }
                }
             }
@@ -290,14 +290,14 @@ public class ClientPlayer extends ClientEntity {
             if (this.Kb) {
                return var2;
             } else {
-               if (super.U != -1 && super.V != -1) {
-                  SpotAnimType var3 = SpotAnimType.e[super.U];
+               if (super.spotAnimId != -1 && super.spotanimFrame != -1) {
+                  SpotAnimType var3 = SpotAnimType.e[super.spotAnimId];
                   Model var4 = var3.a();
                   if (var4 != null) {
-                     Model var5 = new Model(false, false, true, var4, AnimFrame.a(this.Jb, super.V));
-                     var5.a(0, 0, false, -super.Y);
+                     Model var5 = new Model(false, false, true, var4, AnimFrame.a(this.Jb, super.spotanimFrame));
+                     var5.a(0, 0, false, -super.spotanimHeight);
                      var5.createLabelReferences(7);
-                     var5.applyTransform(var3.i.frames[super.V], (byte)6);
+                     var5.applyTransform(var3.i.frames[super.spotanimFrame], (byte)6);
                      var5.db = null;
                      var5.cb = null;
                      if (var3.l != 128 || var3.m != 128) {
@@ -360,28 +360,30 @@ public class ClientPlayer extends ClientEntity {
    }
 
    @ObfuscatedName("ZGNGQRPJ.a(LMFMVIYHT;I)V")
-   public final void getHeadModel(Packet arg0, int arg1) {
-      arg0.pos = 0;
-      this.Cb = arg0.g1();
-      this.Db = arg0.g1b();
-      this.vb = arg0.g1b();
+   public final void read(Packet buf, int arg1) {
+      buf.pos = 0;
+
+	  this.Cb = buf.g1();
+      this.Db = buf.g1b();
+      this.vb = buf.g1b();
+
       this.Eb = null;
       this.Nb = 0;
 
-      for(int var3 = 0; var3 < 12; ++var3) {
-         int var4 = arg0.g1();
-         if (var4 == 0) {
-            this.zb[var3] = 0;
+      for(int i = 0; i < 12; ++i) {
+         int part = buf.g1();
+         if (part == 0) {
+            this.appearance[i] = 0;
          } else {
-            int var5 = arg0.g1();
-            this.zb[var3] = (var4 << 8) + var5;
-            if (var3 == 0 && this.zb[0] == 65535) {
-               this.Eb = NpcType.get(arg0.g2());
+            int var5 = buf.g1();
+            this.appearance[i] = (part << 8) + var5;
+            if (i == 0 && this.appearance[0] == 65535) {
+               this.Eb = NpcType.get(buf.g2());
                break;
             }
 
-            if (this.zb[var3] >= 512 && this.zb[var3] - 512 < ObjType.j) {
-               int var6 = ObjType.get(this.zb[var3] - 512).g;
+            if (this.appearance[i] >= 512 && this.appearance[i] - 512 < ObjType.j) {
+               int var6 = ObjType.get(this.appearance[i] - 512).g;
                if (var6 != 0) {
                   this.Nb = var6;
                }
@@ -389,82 +391,83 @@ public class ClientPlayer extends ClientEntity {
          }
       }
 
-      for(int var7 = 0; var7 < 5; ++var7) {
-         int var8 = arg0.g1();
-         if (var8 < 0 || var8 >= Client.DESIGN_BODY_COLOUR[var7].length) {
-            var8 = 0;
+      for(int i = 0; i < 5; ++i) {
+         int colour = buf.g1();
+         if (colour < 0 || colour >= Client.DESIGN_BODY_COLOUR[i].length) {
+            colour = 0;
          }
 
-         this.Hb[var7] = var8;
+         this.colour[i] = colour;
       }
 
-      super.readyanim = arg0.g2();
+      super.readyanim = buf.g2();
       if (super.readyanim == 65535) {
          super.readyanim = -1;
       }
 
-      super.pb = arg0.g2();
+      super.pb = buf.g2();
       if (super.pb == 65535) {
          super.pb = -1;
       }
 
-      super.Z = arg0.g2();
+      super.Z = buf.g2();
       if (super.Z == 65535) {
          super.Z = -1;
       }
 
-      super.ab = arg0.g2();
+      super.ab = buf.g2();
       if (super.ab == 65535) {
          super.ab = -1;
       }
 
-      super.bb = arg0.g2();
+      super.bb = buf.g2();
       if (super.bb == 65535) {
          super.bb = -1;
       }
 
-      super.cb = arg0.g2();
+      super.cb = buf.g2();
       if (super.cb == 65535) {
          super.cb = -1;
       }
 
-      super.jb = arg0.g2();
+      super.jb = buf.g2();
       if (super.jb == 65535) {
          super.jb = -1;
       }
 
-      this.name = JString.formatDisplayName(JString.fromBase37(arg0.g8()));
-      this.vislevel = arg0.g1();
-      this.Gb = arg0.g2();
+      this.name = JString.formatDisplayName(JString.fromBase37(buf.g8()));
+      this.vislevel = buf.g1();
+      this.Gb = buf.g2();
       this.Fb = true;
       this.Bb = 0L;
-      int var9 = this.zb[5];
-      int var10 = this.zb[9];
+      int var9 = this.appearance[5];
+      int var10 = this.appearance[9];
+
       if (arg1 == 0) {
-         this.zb[5] = var10;
-         this.zb[9] = var9;
+         this.appearance[5] = var10;
+         this.appearance[9] = var9;
 
          for(int var11 = 0; var11 < 12; ++var11) {
             this.Bb <<= 4;
-            if (this.zb[var11] >= 256) {
-               this.Bb += (long)(this.zb[var11] - 256);
+            if (this.appearance[var11] >= 256) {
+               this.Bb += (long)(this.appearance[var11] - 256);
             }
          }
 
-         if (this.zb[0] >= 256) {
-            this.Bb += (long)(this.zb[0] - 256 >> 4);
+         if (this.appearance[0] >= 256) {
+            this.Bb += (long)(this.appearance[0] - 256 >> 4);
          }
 
-         if (this.zb[1] >= 256) {
-            this.Bb += (long)(this.zb[1] - 256 >> 8);
+         if (this.appearance[1] >= 256) {
+            this.Bb += (long)(this.appearance[1] - 256 >> 8);
          }
 
-         this.zb[5] = var9;
-         this.zb[9] = var10;
+         this.appearance[5] = var9;
+         this.appearance[9] = var10;
 
          for(int var12 = 0; var12 < 5; ++var12) {
             this.Bb <<= 3;
-            this.Bb += (long)this.Hb[var12];
+            this.Bb += (long)this.colour[var12];
          }
 
          this.Bb <<= 1;

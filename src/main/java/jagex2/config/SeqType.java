@@ -13,7 +13,7 @@ public class SeqType {
    @ObfuscatedName("FHWCLIAS.k")
    public boolean k = false;
    @ObfuscatedName("FHWCLIAS.l")
-   public int l = 5;
+   public int priority = 5;
    @ObfuscatedName("FHWCLIAS.m")
    public int m = -1;
    @ObfuscatedName("FHWCLIAS.n")
@@ -25,7 +25,7 @@ public class SeqType {
    @ObfuscatedName("FHWCLIAS.q")
    public int postanim_mode = -1;
    @ObfuscatedName("FHWCLIAS.r")
-   public int r = 2;
+   public int restart_mode = 2;
    @ObfuscatedName("FHWCLIAS.a")
    public static byte a = 6;
    @ObfuscatedName("FHWCLIAS.c")
@@ -153,7 +153,7 @@ public class SeqType {
                if (var4 == 4) {
                   this.k = true;
                } else if (var4 == 5) {
-                  this.l = arg1.g1();
+                  this.priority = arg1.g1();
                } else if (var4 == 6) {
                   this.m = arg1.g2();
                } else if (var4 == 7) {
@@ -165,7 +165,7 @@ public class SeqType {
                } else if (var4 == 10) {
                   this.postanim_mode = arg1.g1();
                } else if (var4 == 11) {
-                  this.r = arg1.g1();
+                  this.restart_mode = arg1.g1();
                } else if (var4 == 12) {
                   this.s = arg1.g4();
                } else {

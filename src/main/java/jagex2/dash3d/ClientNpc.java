@@ -13,7 +13,7 @@ public class ClientNpc extends ClientEntity {
 
    @ObfuscatedName("RGHBDSIJ.b(B)LLZYQDKJV;")
    public final Model b(byte arg0) {
-      if (super.primarySeqId >= 0 && super.hb == 0) {
+      if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
          int var2 = SeqType.types[super.primarySeqId].frames[super.fb];
          int var3 = -1;
          if (super.u >= 0 && super.u != super.readyanim) {
@@ -49,13 +49,13 @@ public class ClientNpc extends ClientEntity {
                return null;
             } else {
                super.A = var3.k;
-               if (super.U != -1 && super.V != -1) {
-                  SpotAnimType var4 = SpotAnimType.e[super.U];
+               if (super.spotAnimId != -1 && super.spotanimFrame != -1) {
+                  SpotAnimType var4 = SpotAnimType.e[super.spotAnimId];
                   Model var5 = var4.a();
                   if (var5 != null) {
-                     int var6 = var4.i.frames[super.V];
+                     int var6 = var4.i.frames[super.spotanimFrame];
                      Model var7 = new Model(false, false, true, var5, AnimFrame.a(this.qb, var6));
-                     var7.a(0, 0, false, -super.Y);
+                     var7.a(0, 0, false, -super.spotanimHeight);
                      var7.createLabelReferences(7);
                      var7.applyTransform(var6, (byte)6);
                      var7.db = null;

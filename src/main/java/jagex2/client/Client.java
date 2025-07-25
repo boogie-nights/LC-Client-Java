@@ -167,7 +167,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.pd")
 	public int[] pd = new int[this.MAX_PLAYER_COUNT];
 	@ObfuscatedName("client.rd")
-	public int[] rd = new int[this.MAX_PLAYER_COUNT];
+	public int[] entityUpdateIds = new int[this.MAX_PLAYER_COUNT];
 	@ObfuscatedName("client.sd")
 	public Packet[] playerAppearanceBuffer = new Packet[this.MAX_PLAYER_COUNT];
 	@ObfuscatedName("client.td")
@@ -758,7 +758,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.qb")
 	public int psize;
 	@ObfuscatedName("client.qd")
-	public int qd;
+	public int entityUpdateCount;
 	@ObfuscatedName("client.qf")
 	public int qf;
 	@ObfuscatedName("client.qg")
@@ -1129,7 +1129,7 @@ public class Client extends GameShell {
 					if (this.players[var4] == null) {
 						this.players[var4] = new ClientPlayer();
 						if (this.playerAppearanceBuffer[var4] != null) {
-							this.players[var4].getHeadModel(this.playerAppearanceBuffer[var4], 0);
+							this.players[var4].read(this.playerAppearanceBuffer[var4], 0);
 						}
 					}
 
@@ -1143,7 +1143,7 @@ public class Client extends GameShell {
 
 					int var7 = arg2.gBit(1);
 					if (var7 == 1) {
-						this.rd[this.qd++] = var4;
+						this.entityUpdateIds[this.entityUpdateCount++] = var4;
 					}
 
 					int var8 = arg2.gBit(1);
@@ -1300,7 +1300,7 @@ public class Client extends GameShell {
 	public final void b(int arg0) {
 		this.players = null;
 		this.pd = null;
-		this.rd = null;
+		this.entityUpdateIds = null;
 		this.playerAppearanceBuffer = null;
 		this.entityRemovalIds = null;
 		this.areaBackleft1 = null;
@@ -2511,16 +2511,16 @@ public class Client extends GameShell {
 									this.out.psize1((int) (this.out.pos - var22));
 									this.Sf = WordPack.a((byte) 0, this.Sf);
 									this.Sf = WordFilter.a((byte) 0, (String) this.Sf);
-									localPlayer.m = this.Sf;
-									localPlayer.p = var19;
-									localPlayer.zz = var21;
-									localPlayer.o = 150;
+									localPlayer.chatMessage = this.Sf;
+									localPlayer.chatColour = var19;
+									localPlayer.chatEffect = var21;
+									localPlayer.chatTimer = 150;
 									if (this.staffModLevel == 2) {
-										this.addMessage(localPlayer.m, "@cr2@" + localPlayer.name, 2);
+										this.addMessage(localPlayer.chatMessage, "@cr2@" + localPlayer.name, 2);
 									} else if (this.staffModLevel == 1) {
-										this.addMessage(localPlayer.m, "@cr1@" + localPlayer.name, 2);
+										this.addMessage(localPlayer.chatMessage, "@cr1@" + localPlayer.name, 2);
 									} else {
-										this.addMessage(localPlayer.m, localPlayer.name, 2);
+										this.addMessage(localPlayer.chatMessage, localPlayer.name, 2);
 									}
 
 									if (this.Xd == 2) {
@@ -3357,7 +3357,7 @@ public class Client extends GameShell {
 				Component.types(comId).modelType = 3;
 
 				if (localPlayer.Eb == null) {
-					Component.types(comId).model = (localPlayer.zb[11] << 5) + (localPlayer.zb[8] << 10) + (localPlayer.zb[0] << 15) + (localPlayer.Hb[0] << 25) + (localPlayer.Hb[4] << 20) + localPlayer.zb[1];
+					Component.types(comId).model = (localPlayer.appearance[11] << 5) + (localPlayer.appearance[8] << 10) + (localPlayer.appearance[0] << 15) + (localPlayer.colour[0] << 25) + (localPlayer.colour[4] << 20) + localPlayer.appearance[1];
 				} else {
 					Component.types(comId).model = (int) (localPlayer.Eb.h + 305419896L);
 				}
@@ -4426,7 +4426,7 @@ public class Client extends GameShell {
 
 				if (var2.endTime == 0) {
 					if (var2.h < 0 || World.a(var2.j, this.Fg, var2.h)) {
-						this.a(var2.i, var2.x, var2.h, var2.z, var2.l, var2.j, (byte) 1, var2.m);
+						this.addLoc(var2.i, var2.x, var2.h, var2.z, var2.l, var2.j, (byte) 1, var2.m);
 						var2.unlink();
 					}
 				} else {
@@ -4435,7 +4435,7 @@ public class Client extends GameShell {
 					}
 
 					if (var2.p == 0 && var2.x >= 1 && var2.z >= 1 && var2.x <= 102 && var2.z <= 102 && (var2.e < 0 || World.a(var2.g, this.Fg, var2.e))) {
-						this.a(var2.f, var2.x, var2.e, var2.z, var2.l, var2.g, (byte) 1, var2.m);
+						this.addLoc(var2.f, var2.x, var2.e, var2.z, var2.l, var2.g, (byte) 1, var2.m);
 						var2.p = -1;
 						if (var2.h == var2.e && var2.h == -1) {
 							var2.unlink();
@@ -4613,19 +4613,18 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILMFMVIYHT;I)V")
-	public final void a(int arg0, Packet arg1, int arg2) {
-		for (int var4 = 0; var4 < this.qd; ++var4) {
-			int var5 = this.rd[var4];
-			ClientPlayer var6 = this.players[var5];
-			int var7 = arg1.g1();
-			if ((var7 & 32) != 0) {
-				var7 += arg1.g1() << 8;
+	public final void a(int size, Packet buf, int arg2) {
+		for (int i = 0; i < this.entityUpdateCount; ++i) {
+			int var5 = this.entityUpdateIds[i];
+			ClientPlayer player = this.players[var5];
+
+			int mask = buf.g1();
+			if ((mask & 32) != 0) {
+				mask += buf.g1() << 8;
 			}
 
-			this.a(2, var5, var6, var7, arg1);
+			this.getPlayerExtendedInfo(buf, player, var5, mask);
 		}
-
-		int var8 = 70 / arg0;
 	}
 
 	@ObfuscatedName("client.a(IZLMFMVIYHT;)V")
@@ -4636,13 +4635,13 @@ public class Client extends GameShell {
 			int var5 = arg2.gBit(2);
 			this.ingame &= arg1;
 			if (var5 == 0) {
-				this.rd[this.qd++] = this.LOCAL_PLAYER_INDEX;
+				this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 			} else if (var5 == 1) {
 				int var6 = arg2.gBit(3);
 				localPlayer.step(false, var6);
 				int var7 = arg2.gBit(1);
 				if (var7 == 1) {
-					this.rd[this.qd++] = this.LOCAL_PLAYER_INDEX;
+					this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 				}
 
 			} else if (var5 == 2) {
@@ -4652,7 +4651,7 @@ public class Client extends GameShell {
 				localPlayer.step(true, var9);
 				int var10 = arg2.gBit(1);
 				if (var10 == 1) {
-					this.rd[this.qd++] = this.LOCAL_PLAYER_INDEX;
+					this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 				}
 
 			} else if (var5 == 3) {
@@ -4662,7 +4661,7 @@ public class Client extends GameShell {
 				int var13 = arg2.gBit(7);
 				int var14 = arg2.gBit(1);
 				if (var14 == 1) {
-					this.rd[this.qd++] = this.LOCAL_PLAYER_INDEX;
+					this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 				}
 
 				localPlayer.move(var11 == 1, var13, var12);
@@ -4942,42 +4941,38 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIIBI)V")
-	public final void a(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6, int arg7) {
-		if (this.ff != arg6) {
-			this.lh = -380;
-		}
-
+	public final void addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6, int layer) {
 		if (arg1 >= 1 && arg3 >= 1 && arg1 <= 102 && arg3 <= 102) {
 			if (lowMemory && this.currentLevel != arg4) {
 				return;
 			}
 
-			int var9 = 0;
+			int typeCode = 0;
 			boolean var10 = true;
 			boolean var11 = false;
 			boolean var12 = false;
-			if (arg7 == 0) {
-				var9 = this.scene.b(arg4, arg1, arg3);
+			if (layer == 0) {
+				typeCode = this.scene.b(arg4, arg1, arg3);
 			}
 
-			if (arg7 == 1) {
-				var9 = this.scene.b(arg1, (byte) 4, arg4, arg3);
+			if (layer == 1) {
+				typeCode = this.scene.b(arg1, (byte) 4, arg4, arg3);
 			}
 
-			if (arg7 == 2) {
-				var9 = this.scene.c(arg4, arg1, arg3);
+			if (layer == 2) {
+				typeCode = this.scene.c(arg4, arg1, arg3);
 			}
 
-			if (arg7 == 3) {
-				var9 = this.scene.d(arg4, arg1, arg3);
+			if (layer == 3) {
+				typeCode = this.scene.d(arg4, arg1, arg3);
 			}
 
-			if (var9 != 0) {
-				int var13 = this.scene.getInfo(arg4, arg1, arg3, var9);
-				int var14 = var9 >> 14 & 32767;
+			if (typeCode != 0) {
+				int var13 = this.scene.getInfo(arg4, arg1, arg3, typeCode);
+				int var14 = typeCode >> 14 & 32767;
 				int var15 = var13 & 31;
 				int var16 = var13 >> 6;
-				if (arg7 == 0) {
+				if (layer == 0) {
 					this.scene.a(arg3, arg4, arg1, true);
 					LocType var17 = LocType.a(var14);
 					if (var17.ab) {
@@ -4985,11 +4980,11 @@ public class Client extends GameShell {
 					}
 				}
 
-				if (arg7 == 1) {
+				if (layer == 1) {
 					this.scene.a(false, arg1, arg3, arg4);
 				}
 
-				if (arg7 == 2) {
+				if (layer == 2) {
 					this.scene.b(arg3, (int) arg4, -779, arg1);
 					LocType var18 = LocType.a(var14);
 					if (var18.R + arg1 > 103 || var18.R + arg3 > 103 || var18.r + arg1 > 103 || var18.r + arg3 > 103) {
@@ -5001,7 +4996,7 @@ public class Client extends GameShell {
 					}
 				}
 
-				if (arg7 == 3) {
+				if (layer == 3) {
 					this.scene.a(arg1, arg3, true, arg4);
 					LocType var19 = LocType.a(var14);
 					if (var19.ab && var19.b) {
@@ -5017,10 +5012,8 @@ public class Client extends GameShell {
 				}
 
 				World.a(arg2, var20, arg5, arg3, this.levelCollisionMap[arg4], arg0, arg1, 0, arg4, this.scene, this.levelHeightmap);
-				return;
 			}
 		}
-
 	}
 
 	@ObfuscatedName("client.b(IBLMFMVIYHT;)V")
@@ -5055,7 +5048,7 @@ public class Client extends GameShell {
 					if (var10 == 0) {
 						this.npcIds[this.npcCount++] = var7;
 						var8.cycle = loopCycle;
-						this.rd[this.qd++] = var7;
+						this.entityUpdateIds[this.entityUpdateCount++] = var7;
 					} else if (var10 == 1) {
 						this.npcIds[this.npcCount++] = var7;
 						var8.cycle = loopCycle;
@@ -5063,7 +5056,7 @@ public class Client extends GameShell {
 						var8.step(false, var11);
 						int var12 = arg2.gBit(1);
 						if (var12 == 1) {
-							this.rd[this.qd++] = var7;
+							this.entityUpdateIds[this.entityUpdateCount++] = var7;
 						}
 					} else if (var10 == 2) {
 						this.npcIds[this.npcCount++] = var7;
@@ -5074,7 +5067,7 @@ public class Client extends GameShell {
 						var8.step(true, var14);
 						int var15 = arg2.gBit(1);
 						if (var15 == 1) {
-							this.rd[this.qd++] = var7;
+							this.entityUpdateIds[this.entityUpdateCount++] = var7;
 						}
 					} else if (var10 == 3) {
 						this.entityRemovalIds[this.entityRemovalCount++] = var7;
@@ -5111,7 +5104,7 @@ public class Client extends GameShell {
 	public final void getNpcPos(Packet buf, boolean arg1, int size) {
 		this.ingame &= arg1;
 		this.entityRemovalCount = 0;
-		this.qd = 0;
+		this.entityUpdateCount = 0;
 
 		this.b(size, (byte) -58, buf);
 		this.a(buf, size, false);
@@ -5871,8 +5864,8 @@ public class Client extends GameShell {
 	public final void a(Packet arg0, int arg1, int arg2) {
 		int var4 = 24 / arg2;
 
-		for (int var5 = 0; var5 < this.qd; ++var5) {
-			int var6 = this.rd[var5];
+		for (int var5 = 0; var5 < this.entityUpdateCount; ++var5) {
+			int var6 = this.entityUpdateIds[var5];
 			ClientNpc var7 = this.npcs[var6];
 			int var8 = arg0.g1();
 			if ((var8 & 1) != 0) {
@@ -5887,9 +5880,9 @@ public class Client extends GameShell {
 			}
 
 			if ((var8 & 64) != 0) {
-				var7.P = arg0.n(-125);
-				if (var7.P == 65535) {
-					var7.P = -1;
+				var7.targetId = arg0.n(-125);
+				if (var7.targetId == 65535) {
+					var7.targetId = -1;
 				}
 			}
 
@@ -5897,30 +5890,30 @@ public class Client extends GameShell {
 				int var9 = arg0.h(0);
 				int var10 = arg0.h(0);
 				var7.hit(var9, var10, loopCycle);
-				var7.B = loopCycle + 300;
+				var7.combatCycle = loopCycle + 300;
 				var7.C = arg0.g1();
 				var7.D = arg0.j(this.ui);
 			}
 
 			if ((var8 & 4) != 0) {
-				var7.U = arg0.g2();
+				var7.spotAnimId = arg0.g2();
 				int var11 = arg0.s(3);
-				var7.Y = var11 >> 16;
-				var7.justUnfortunateNamingNotX = (var11 & 65535) + loopCycle;
-				var7.V = 0;
-				var7.W = 0;
-				if (var7.justUnfortunateNamingNotX > loopCycle) {
-					var7.V = -1;
+				var7.spotanimHeight = var11 >> 16;
+				var7.spotanimLastCycle = (var11 & 65535) + loopCycle;
+				var7.spotanimFrame = 0;
+				var7.spotanimCycle = 0;
+				if (var7.spotanimLastCycle > loopCycle) {
+					var7.spotanimFrame = -1;
 				}
 
-				if (var7.U == 65535) {
-					var7.U = -1;
+				if (var7.spotAnimId == 65535) {
+					var7.spotAnimId = -1;
 				}
 			}
 
 			if ((var8 & 32) != 0) {
-				var7.m = arg0.gjstr();
-				var7.o = 100;
+				var7.chatMessage = arg0.gjstr();
+				var7.chatTimer = 100;
 			}
 
 			if ((var8 & 8) != 0) {
@@ -5936,23 +5929,23 @@ public class Client extends GameShell {
 
 				int var13 = arg0.j(this.ui);
 				if (var7.primarySeqId == var12 && var12 != -1) {
-					int var14 = SeqType.types[var12].r;
+					int var14 = SeqType.types[var12].restart_mode;
 					if (var14 == 1) {
 						var7.fb = 0;
 						var7.gb = 0;
-						var7.hb = var13;
-						var7.ib = 0;
+						var7.primarySeqDelay = var13;
+						var7.primarySeqLoop = 0;
 					}
 
 					if (var14 == 2) {
-						var7.ib = 0;
+						var7.primarySeqLoop = 0;
 					}
-				} else if (var12 == -1 || var7.primarySeqId == -1 || SeqType.types[var12].l >= SeqType.types[var7.primarySeqId].l) {
+				} else if (var12 == -1 || var7.primarySeqId == -1 || SeqType.types[var12].priority >= SeqType.types[var7.primarySeqId].priority) {
 					var7.primarySeqId = var12;
 					var7.fb = 0;
 					var7.gb = 0;
-					var7.hb = var13;
-					var7.ib = 0;
+					var7.primarySeqDelay = var13;
+					var7.primarySeqLoop = 0;
 					var7.preanimRouteLength = var7.routeLength;
 				}
 			}
@@ -5961,7 +5954,7 @@ public class Client extends GameShell {
 				int var15 = arg0.j(this.ui);
 				int var16 = arg0.j(this.ui);
 				var7.hit(var15, var16, loopCycle);
-				var7.B = loopCycle + 300;
+				var7.combatCycle = loopCycle + 300;
 				var7.C = arg0.g1();
 				var7.D = arg0.i(-34545);
 			}
@@ -5970,119 +5963,131 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IILZGNGQRPJ;ILMFMVIYHT;)V")
-	public final void a(int arg0, int arg1, ClientPlayer arg2, int arg3, Packet arg4) {
-		if (arg0 != 2) {
-			for (int var6 = 1; var6 > 0; ++var6) {
-			}
-		}
+	public final void getPlayerExtendedInfo(Packet buf, ClientPlayer player, int index, int mask) {
 
-		if ((arg3 & 8) != 0) {
-			int var7 = arg4.g2();
-			if (var7 == 65535) {
-				var7 = -1;
+		if ((mask & 8) != 0) {
+			// ANIM
+			int seqId = buf.g2();
+			if (seqId == 65535) {
+				seqId = -1;
 			}
 
-			int var8 = arg4.j(this.ui);
-			if (arg2.primarySeqId == var7 && var7 != -1) {
-				int var9 = SeqType.types[var7].r;
-				if (var9 == 1) {
-					arg2.fb = 0;
-					arg2.gb = 0;
-					arg2.hb = var8;
-					arg2.ib = 0;
+			int delay = buf.j(this.ui);
+			if (player.primarySeqId == seqId && seqId != -1) {
+
+				int replaceMode = SeqType.types[seqId].restart_mode;
+				if (replaceMode == 1) {
+					player.fb = 0;
+					player.gb = 0;
+					player.primarySeqDelay = delay;
+					player.primarySeqLoop = 0;
 				}
 
-				if (var9 == 2) {
-					arg2.ib = 0;
+				if (replaceMode == 2) {
+					player.primarySeqLoop = 0;
 				}
-			} else if (var7 == -1 || arg2.primarySeqId == -1 || SeqType.types[var7].l >= SeqType.types[arg2.primarySeqId].l) {
-				arg2.primarySeqId = var7;
-				arg2.fb = 0;
-				arg2.gb = 0;
-				arg2.hb = var8;
-				arg2.ib = 0;
-				arg2.preanimRouteLength = arg2.routeLength;
+			} else if (seqId == -1 || player.primarySeqId == -1 || SeqType.types[seqId].priority >= SeqType.types[player.primarySeqId].priority) {
+				player.primarySeqId = seqId;
+				player.fb = 0;
+				player.gb = 0;
+				player.primarySeqDelay = delay;
+				player.primarySeqLoop = 0;
+				player.preanimRouteLength = player.routeLength;
 			}
 		}
 
-		if ((arg3 & 16) != 0) {
-			arg2.m = arg4.gjstr();
-			if (arg2.m.charAt(0) == '~') {
-				arg2.m = arg2.m.substring(1);
-				this.addMessage(arg2.m, arg2.name, 2);
-			} else if (localPlayer == arg2) {
-				this.addMessage(arg2.m, arg2.name, 2);
+		if ((mask & 16) != 0) {
+			// SAY
+			player.chatMessage = buf.gjstr();
+			if (player.chatMessage.charAt(0) == '~') {
+				player.chatMessage = player.chatMessage.substring(1);
+				this.addMessage(player.chatMessage, player.name, 2);
+			} else if (localPlayer == player) {
+				this.addMessage(player.chatMessage, player.name, 2);
 			}
 
-			arg2.p = 0;
-			arg2.zz = 0;
-			arg2.o = 150;
+			player.chatColour = 0;
+			player.chatEffect = 0;
+			player.chatTimer = 150;
 		}
 
-		if ((arg3 & 256) != 0) {
-			arg2.I = arg4.h(0);
-			arg2.K = arg4.i(-34545);
-			arg2.J = arg4.j(this.ui);
-			arg2.L = arg4.g1();
-			arg2.M = arg4.g2() + loopCycle;
-			arg2.N = arg4.b((byte) 9) + loopCycle;
-			arg2.O = arg4.g1();
-			arg2.clearRoute();
+		if ((mask & 256) != 0) {
+			// EXACT_MOVE
+			player.I = buf.h(0);
+			player.K = buf.i(-34545);
+			player.J = buf.j(this.ui);
+			player.L = buf.g1();
+			player.M = buf.g2() + loopCycle;
+			player.N = buf.b((byte) 9) + loopCycle;
+			player.O = buf.g1();
+
+			player.clearRoute();
 		}
 
-		if ((arg3 & 1) != 0) {
-			arg2.P = arg4.b((byte) 9);
-			if (arg2.P == 65535) {
-				arg2.P = -1;
-			}
-		}
-
-		if ((arg3 & 2) != 0) {
-			arg2.E = arg4.g2();
-			arg2.F = arg4.g2();
-		}
-
-		if ((arg3 & 512) != 0) {
-			arg2.U = arg4.b((byte) 9);
-			int var10 = arg4.s(3);
-			arg2.Y = var10 >> 16;
-			arg2.justUnfortunateNamingNotX = (var10 & 65535) + loopCycle;
-			arg2.V = 0;
-			arg2.W = 0;
-			if (arg2.justUnfortunateNamingNotX > loopCycle) {
-				arg2.V = -1;
-			}
-
-			if (arg2.U == 65535) {
-				arg2.U = -1;
+		if ((mask & 1) != 0) {
+			// FACE_ENTITY
+			player.targetId = buf.b((byte) 9);
+			if (player.targetId == 65535) {
+				player.targetId = -1;
 			}
 		}
 
-		if ((arg3 & 4) != 0) {
-			int var11 = arg4.g1();
+		if ((mask & 2) != 0) {
+			// FACE_COORD
+			player.E = buf.g2();
+			player.F = buf.g2();
+		}
+
+		if ((mask & 512) != 0) {
+			// SPOTANIM
+			player.spotAnimId = buf.b((byte) 9);
+			int heightDelay = buf.s(3);
+
+			player.spotanimHeight = heightDelay >> 16;
+			player.spotanimLastCycle = (heightDelay & 65535) + loopCycle;
+			player.spotanimFrame = 0;
+			player.spotanimCycle = 0;
+
+			if (player.spotanimLastCycle > loopCycle) {
+				player.spotanimFrame = -1;
+			}
+
+			if (player.spotAnimId == 65535) {
+				player.spotAnimId = -1;
+			}
+		}
+
+		if ((mask & 4) != 0) {
+			// APPEARANCE
+			int var11 = buf.g1();
+
 			byte[] var12 = new byte[var11];
 			Packet var13 = new Packet(var12);
-			arg4.a((byte) -73, var12, var11, 0);
-			this.playerAppearanceBuffer[arg1] = var13;
-			arg2.getHeadModel(var13, 0);
+			buf.a((byte) -73, var12, var11, 0);
+
+			this.playerAppearanceBuffer[index] = var13;
+			// UH-OH!
+			player.read(var13, 0);
 		}
 
-		if ((arg3 & 1024) != 0) {
-			int var14 = arg4.h(0);
-			int var15 = arg4.j(this.ui);
-			arg2.hit(var14, var15, loopCycle);
-			arg2.B = loopCycle + 300;
-			arg2.C = arg4.i(-34545);
-			arg2.D = arg4.g1();
+		if ((mask & 1024) != 0) {
+			// DAMAGE
+			int damage = buf.h(0);
+			int damageType = buf.j(this.ui);
+			player.hit(damage, damageType, loopCycle);
+			player.combatCycle = loopCycle + 300;
+			player.C = buf.i(-34545);
+			player.D = buf.g1();
 		}
 
-		if ((arg3 & 64) != 0) {
-			int var16 = arg4.g2();
-			int var17 = arg4.i(-34545);
-			int var18 = arg4.h(0);
-			int var19 = arg4.pos;
-			if (arg2.name != null && arg2.Fb) {
-				long var20 = JString.toBase37(arg2.name);
+		if ((mask & 64) != 0) {
+			// CHAT
+			int var16 = buf.g2();
+			int var17 = buf.i(-34545);
+			int var18 = buf.h(0);
+			int var19 = buf.pos;
+			if (player.name != null && player.Fb) {
+				long var20 = JString.toBase37(player.name);
 				boolean var22 = false;
 				if (var17 <= 1) {
 					for (int var23 = 0; var23 < this.ignoreCount; ++var23) {
@@ -6096,22 +6101,24 @@ public class Client extends GameShell {
 				if (!var22 && this.overrideChat == 0) {
 					try {
 						this.tg.pos = 0;
-						arg4.b(this.tg.data, var18, 0, 0);
+						buf.b(this.tg.data, var18, 0, 0);
 						this.tg.pos = 0;
-						String var24 = WordPack.a(0, this.tg, var18);
-						String var25 = WordFilter.a((byte) 0, (String) var24);
-						arg2.m = var25;
-						arg2.p = var16 >> 8;
-						arg2.zz = var16 & 255;
-						arg2.o = 150;
+
+						String uncompressed = WordPack.a(0, this.tg, var18);
+						String filter = WordFilter.a((byte) 0, (String) uncompressed);
+
+						player.chatMessage = filter;
+						player.chatColour = var16 >> 8;
+						player.chatEffect = var16 & 255;
+						player.chatTimer = 150;
 						if (var17 != 2 && var17 != 3) {
 							if (var17 == 1) {
-								this.addMessage(var25, "@cr1@" + arg2.name, 1);
+								this.addMessage(filter, "@cr1@" + player.name, 1);
 							} else {
-								this.addMessage(var25, arg2.name, 2);
+								this.addMessage(filter, player.name, 2);
 							}
 						} else {
-							this.addMessage(var25, "@cr2@" + arg2.name, 1);
+							this.addMessage(filter, "@cr2@" + player.name, 1);
 						}
 					} catch (Exception var29) {
 						SignLink.reporterror("cde2");
@@ -6119,16 +6126,18 @@ public class Client extends GameShell {
 				}
 			}
 
-			arg4.pos = var18 + var19;
+			buf.pos = var18 + var19;
 		}
 
-		if ((arg3 & 128) != 0) {
-			int var27 = arg4.j(this.ui);
-			int var28 = arg4.i(-34545);
-			arg2.hit(var27, var28, loopCycle);
-			arg2.B = loopCycle + 300;
-			arg2.C = arg4.j(this.ui);
-			arg2.D = arg4.g1();
+		if ((mask & 128) != 0) {
+			// DAMAGE
+			int damage = buf.j(this.ui);
+			int damageType = buf.i(-34545);
+
+			player.hit(damage, damageType, loopCycle);
+			player.combatCycle = loopCycle + 300;
+			player.C = buf.j(this.ui);
+			player.D = buf.g1();
 		}
 	}
 
@@ -6963,7 +6972,7 @@ public class Client extends GameShell {
 	public final void a(int arg0, byte arg1, ClientEntity arg2) {
 		if (arg2.x < 128 || arg2.z < 128 || arg2.x >= 13184 || arg2.z >= 13184) {
 			arg2.primarySeqId = -1;
-			arg2.U = -1;
+			arg2.spotAnimId = -1;
 			arg2.M = 0;
 			arg2.N = 0;
 			arg2.x = arg2.routeTileX[0] * 128 + arg2.size * 64;
@@ -6973,7 +6982,7 @@ public class Client extends GameShell {
 
 		if (localPlayer == arg2 && (arg2.x < 1536 || arg2.z < 1536 || arg2.x >= 11776 || arg2.z >= 11776)) {
 			arg2.primarySeqId = -1;
-			arg2.U = -1;
+			arg2.spotAnimId = -1;
 			arg2.M = 0;
 			arg2.N = 0;
 			arg2.x = arg2.routeTileX[0] * 128 + arg2.size * 64;
@@ -7027,7 +7036,7 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.a(LLRUWCBNN;I)V")
 	public final void a(ClientEntity arg0, int arg1) {
-		if (loopCycle == arg0.N || arg0.primarySeqId == -1 || arg0.hb != 0 || arg0.gb + 1 > SeqType.types[arg0.primarySeqId].a(0, arg0.fb)) {
+		if (loopCycle == arg0.N || arg0.primarySeqId == -1 || arg0.primarySeqDelay != 0 || arg0.gb + 1 > SeqType.types[arg0.primarySeqId].a(0, arg0.fb)) {
 			int var3 = arg0.N - arg0.M;
 			int var4 = loopCycle - arg0.M;
 			int var5 = arg0.I * 128 + arg0.size * 64;
@@ -7067,7 +7076,7 @@ public class Client extends GameShell {
 		if (arg0.routeLength == 0) {
 			arg0.seqDelayMove = 0;
 		} else {
-			if (arg0.primarySeqId != -1 && arg0.hb == 0) {
+			if (arg0.primarySeqId != -1 && arg0.primarySeqDelay == 0) {
 				SeqType var3 = SeqType.types[arg0.primarySeqId];
 				if (arg0.preanimRouteLength > 0 && var3.p == 0) {
 					++arg0.seqDelayMove;
@@ -7131,7 +7140,7 @@ public class Client extends GameShell {
 
 				arg0.u = var9;
 				int var10 = 4;
-				if (arg0.q != arg0.S && arg0.P == -1 && arg0.G != 0) {
+				if (arg0.q != arg0.S && arg0.targetId == -1 && arg0.G != 0) {
 					var10 = 2;
 				}
 
@@ -7202,8 +7211,8 @@ public class Client extends GameShell {
 		}
 
 		if (arg1.G != 0) {
-			if (arg1.P != -1 && arg1.P < 32768) {
-				ClientNpc var3 = this.npcs[arg1.P];
+			if (arg1.targetId != -1 && arg1.targetId < 32768) {
+				ClientNpc var3 = this.npcs[arg1.targetId];
 				if (var3 != null) {
 					int var4 = arg1.x - var3.x;
 					int var5 = arg1.z - var3.z;
@@ -7213,8 +7222,8 @@ public class Client extends GameShell {
 				}
 			}
 
-			if (arg1.P >= 32768) {
-				int var6 = arg1.P - 32768;
+			if (arg1.targetId >= 32768) {
+				int var6 = arg1.targetId - 32768;
 				if (this.localPid == var6) {
 					var6 = this.LOCAL_PLAYER_INDEX;
 				}
@@ -7288,32 +7297,32 @@ public class Client extends GameShell {
 			}
 		}
 
-		if (arg0.U != -1 && loopCycle >= arg0.justUnfortunateNamingNotX) {
-			if (arg0.V < 0) {
-				arg0.V = 0;
+		if (arg0.spotAnimId != -1 && loopCycle >= arg0.spotanimLastCycle) {
+			if (arg0.spotanimFrame < 0) {
+				arg0.spotanimFrame = 0;
 			}
 
-			SeqType var4 = SpotAnimType.e[arg0.U].i;
-			++arg0.W;
-			if (arg0.V < var4.e && arg0.W > var4.a(0, arg0.V)) {
-				arg0.W = 1;
-				++arg0.V;
+			SeqType var4 = SpotAnimType.e[arg0.spotAnimId].i;
+			++arg0.spotanimCycle;
+			if (arg0.spotanimFrame < var4.e && arg0.spotanimCycle > var4.a(0, arg0.spotanimFrame)) {
+				arg0.spotanimCycle = 1;
+				++arg0.spotanimFrame;
 			}
 
-			if (arg0.V >= var4.e && (arg0.V < 0 || arg0.V >= var4.e)) {
-				arg0.U = -1;
+			if (arg0.spotanimFrame >= var4.e && (arg0.spotanimFrame < 0 || arg0.spotanimFrame >= var4.e)) {
+				arg0.spotAnimId = -1;
 			}
 		}
 
-		if (arg0.primarySeqId != -1 && arg0.hb <= 1) {
+		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay <= 1) {
 			SeqType var5 = SeqType.types[arg0.primarySeqId];
 			if (var5.p == 1 && arg0.preanimRouteLength > 0 && arg0.M <= loopCycle && arg0.N < loopCycle) {
-				arg0.hb = 1;
+				arg0.primarySeqDelay = 1;
 				return;
 			}
 		}
 
-		if (arg0.primarySeqId != -1 && arg0.hb == 0) {
+		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay == 0) {
 			SeqType var6 = SeqType.types[arg0.primarySeqId];
 			++arg0.gb;
 			if (arg0.fb < var6.e && arg0.gb > var6.a(0, arg0.fb)) {
@@ -7323,8 +7332,8 @@ public class Client extends GameShell {
 
 			if (arg0.fb >= var6.e) {
 				arg0.fb -= var6.i;
-				++arg0.ib;
-				if (arg0.ib >= var6.o) {
+				++arg0.primarySeqLoop;
+				if (arg0.primarySeqLoop >= var6.o) {
 					arg0.primarySeqId = -1;
 				}
 
@@ -7336,8 +7345,8 @@ public class Client extends GameShell {
 			arg0.y = var6.k;
 		}
 
-		if (arg0.hb > 0) {
-			--arg0.hb;
+		if (arg0.primarySeqDelay > 0) {
+			--arg0.primarySeqDelay;
 		}
 	}
 
@@ -8696,10 +8705,10 @@ public class Client extends GameShell {
 			}
 
 			ClientPlayer var4 = this.players[var3];
-			if (var4 != null && var4.o > 0) {
-				--var4.o;
-				if (var4.o == 0) {
-					var4.m = null;
+			if (var4 != null && var4.chatTimer > 0) {
+				--var4.chatTimer;
+				if (var4.chatTimer == 0) {
+					var4.chatMessage = null;
 				}
 			}
 		}
@@ -8709,10 +8718,10 @@ public class Client extends GameShell {
 		for (int var5 = 0; var5 < this.npcCount; ++var5) {
 			int var6 = this.npcIds[var5];
 			ClientNpc var7 = this.npcs[var6];
-			if (var7 != null && var7.o > 0) {
-				--var7.o;
-				if (var7.o == 0) {
-					var7.m = null;
+			if (var7 != null && var7.chatTimer > 0) {
+				--var7.chatTimer;
+				if (var7.chatTimer == 0) {
+					var7.chatMessage = null;
 				}
 			}
 		}
@@ -9471,24 +9480,24 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IILMFMVIYHT;)V")
-	public final void getPlayerPos(int arg0, int arg1, Packet arg2) {
+	public final void getPlayerPos(int size, int arg1, Packet buf) {
 		this.entityRemovalCount = 0;
-		this.qd = 0;
-		this.a(arg0, this.gj, arg2);
-		this.b(arg0, (int) -138, arg2);
-		int var4 = 40 / arg1;
-		this.a(arg0, (byte) 6, (Packet) arg2);
-		this.a(808, arg2, arg0);
+		this.entityUpdateCount = 0;
 
-		for (int var5 = 0; var5 < this.entityRemovalCount; ++var5) {
-			int var6 = this.entityRemovalIds[var5];
-			if (loopCycle != this.players[var6].cycle) {
-				this.players[var6] = null;
+		this.a(size, this.gj, buf);
+		this.b(size, (int) -138, buf);
+		this.a(size, (byte) 6, (Packet) buf);
+		this.a(808, buf, size);
+
+		for (int i = 0; i < this.entityRemovalCount; ++i) {
+			int index = this.entityRemovalIds[i];
+			if (loopCycle != this.players[index].cycle) {
+				this.players[index] = null;
 			}
 		}
 
-		if (arg2.pos != arg0) {
-			SignLink.reporterror("Error packet size mismatch in getplayer pos:" + arg2.pos + " psize:" + arg0);
+		if (buf.pos != size) {
+			SignLink.reporterror("Error packet size mismatch in getplayer pos:" + buf.pos + " psize:" + size);
 			throw new RuntimeException("eek");
 		} else {
 			for (int var7 = 0; var7 < this.od; ++var7) {
@@ -10568,7 +10577,7 @@ public class Client extends GameShell {
 					if (var10 == 0) {
 						this.pd[this.od++] = var7;
 						var8.cycle = loopCycle;
-						this.rd[this.qd++] = var7;
+						this.entityUpdateIds[this.entityUpdateCount++] = var7;
 					} else if (var10 == 1) {
 						this.pd[this.od++] = var7;
 						var8.cycle = loopCycle;
@@ -10576,7 +10585,7 @@ public class Client extends GameShell {
 						var8.step(false, var11);
 						int var12 = arg2.gBit(1);
 						if (var12 == 1) {
-							this.rd[this.qd++] = var7;
+							this.entityUpdateIds[this.entityUpdateCount++] = var7;
 						}
 					} else if (var10 == 2) {
 						this.pd[this.od++] = var7;
@@ -10587,7 +10596,7 @@ public class Client extends GameShell {
 						var8.step(true, var14);
 						int var15 = arg2.gBit(1);
 						if (var15 == 1) {
-							this.rd[this.qd++] = var7;
+							this.entityUpdateIds[this.entityUpdateCount++] = var7;
 						}
 					} else if (var10 == 3) {
 						this.entityRemovalIds[this.entityRemovalCount++] = var7;
@@ -11885,33 +11894,33 @@ public class Client extends GameShell {
 					}
 				}
 
-				if (var3.m != null && (var2 >= this.od || this.Xd == 0 || this.Xd == 3 || this.Xd == 1 && this.a((int) 13292, (String) ((ClientPlayer) var3).name))) {
+				if (var3.chatMessage != null && (var2 >= this.od || this.Xd == 0 || this.Xd == 3 || this.Xd == 1 && this.a((int) 13292, (String) ((ClientPlayer) var3).name))) {
 					this.a(var3, false, var3.A);
 					if (this.Bc > -1 && this.Ic < this.Jc) {
-						this.Nc[this.Ic] = this.fontBold12.a(var3.m, (byte) -53) / 2;
+						this.Nc[this.Ic] = this.fontBold12.a(var3.chatMessage, (byte) -53) / 2;
 						this.Mc[this.Ic] = this.fontBold12.G;
 						this.Kc[this.Ic] = this.Bc;
 						this.Lc[this.Ic] = this.Cc;
-						this.Oc[this.Ic] = var3.p;
-						this.Pc[this.Ic] = var3.zz;
-						this.Qc[this.Ic] = var3.o;
-						this.Rc[this.Ic++] = var3.m;
-						if (this.Pd == 0 && var3.zz >= 1 && var3.zz <= 3) {
+						this.Oc[this.Ic] = var3.chatColour;
+						this.Pc[this.Ic] = var3.chatEffect;
+						this.Qc[this.Ic] = var3.chatTimer;
+						this.Rc[this.Ic++] = var3.chatMessage;
+						if (this.Pd == 0 && var3.chatEffect >= 1 && var3.chatEffect <= 3) {
 							this.Mc[this.Ic] += 10;
 							this.Lc[this.Ic] += 5;
 						}
 
-						if (this.Pd == 0 && var3.zz == 4) {
+						if (this.Pd == 0 && var3.chatEffect == 4) {
 							this.Nc[this.Ic] = 60;
 						}
 
-						if (this.Pd == 0 && var3.zz == 5) {
+						if (this.Pd == 0 && var3.chatEffect == 5) {
 							this.Mc[this.Ic] += 5;
 						}
 					}
 				}
 
-				if (var3.B > loopCycle) {
+				if (var3.combatCycle > loopCycle) {
 					this.a(var3, false, var3.A + 15);
 					if (this.Bc > -1) {
 						int var8 = var3.C * 30 / var3.D;
@@ -12596,7 +12605,7 @@ public class Client extends GameShell {
 			var5.cycle = loopCycle;
 			int var6 = arg0.gBit(1);
 			if (var6 == 1) {
-				this.rd[this.qd++] = var4;
+				this.entityUpdateIds[this.entityUpdateCount++] = var4;
 			}
 
 			int var7 = arg0.gBit(5);
