@@ -791,7 +791,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.e(IIII)I")
-   public int e(int arg0, int arg1, int arg2, int arg3) {
+   public int getInfo(int arg0, int arg1, int arg2, int arg3) {
       Square var5 = this.r[arg0][arg1][arg2];
       if (var5 == null) {
          return -1;

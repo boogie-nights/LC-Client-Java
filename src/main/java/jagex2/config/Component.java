@@ -89,7 +89,7 @@ public class Component {
 	@ObfuscatedName("EWIXBTLV.sb")
 	public static int sb;
 	@ObfuscatedName("EWIXBTLV.v")
-	public int v;
+	public int scrollPosition;
 	@ObfuscatedName("EWIXBTLV.vb")
 	public int modelType;
 	@ObfuscatedName("EWIXBTLV.wb")

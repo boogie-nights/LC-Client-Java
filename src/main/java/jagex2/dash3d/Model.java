@@ -128,7 +128,7 @@ public class Model extends ModelSource {
    @ObfuscatedName("LZYQDKJV.zb")
    public static int[] zb = new int[10];
    @ObfuscatedName("LZYQDKJV.Hb")
-   public static int[] Hb = new int[1000];
+   public static int[] pickedBitsets = new int[1000];
    @ObfuscatedName("LZYQDKJV.Ib")
    public static int[] Ib = Pix3D.sinTable;
    @ObfuscatedName("LZYQDKJV.Jb")
@@ -1753,7 +1753,7 @@ public class Model extends ModelSource {
                         int var31 = Fb - Pix3D.centerY;
                         if (var30 > var26 && var30 < var27 && var31 > var28 && var31 < var29) {
                            if (this.eb) {
-                              Hb[Gb++] = arg8;
+                              pickedBitsets[Gb++] = arg8;
                            } else {
                               var24 = true;
                            }
@@ -1833,7 +1833,7 @@ public class Model extends ModelSource {
                rb[var12][qb[var12]++] = var5;
             } else {
                if (arg1 && this.a(Eb, Fb, lb[var6], lb[var7], lb[var8], var9, var10, var11)) {
-                  Hb[Gb++] = arg2;
+                  pickedBitsets[Gb++] = arg2;
                   arg1 = false;
                }
 

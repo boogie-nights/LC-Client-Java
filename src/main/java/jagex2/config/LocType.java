@@ -17,7 +17,7 @@ public class LocType {
    @ObfuscatedName("YMYTDPVW.q")
    public boolean q = true;
    @ObfuscatedName("YMYTDPVW.s")
-   public String s = "null";
+   public String name = "null";
    @ObfuscatedName("YMYTDPVW.C")
    public boolean C = true;
    @ObfuscatedName("YMYTDPVW.J")
@@ -358,7 +358,7 @@ public class LocType {
    public final void a() {
       this.f = null;
       this.F = null;
-      this.s = "null";
+      this.name = "null";
       this.z = null;
       this.P = null;
       this.I = null;
@@ -437,7 +437,7 @@ public class LocType {
                      }
 
                      if (var4 == 2) {
-                        this.s = arg1.gjstr();
+                        this.name = arg1.gjstr();
                      } else if (var4 == 3) {
                         this.z = arg1.gjstrraw();
                      } else if (var4 == 5) {

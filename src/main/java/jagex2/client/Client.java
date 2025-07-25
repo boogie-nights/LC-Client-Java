@@ -276,7 +276,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.mg")
 	public int[] mg = new int[4000];
 	@ObfuscatedName("client.pg")
-	public boolean pg = false;
+	public boolean scrollGrabbed = false;
 	@ObfuscatedName("client.sg")
 	public long[] friendName37 = new long[200];
 	@ObfuscatedName("client.tg")
@@ -501,9 +501,9 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.Ie")
 	public int mapLastBaseZ;
 	@ObfuscatedName("client.If")
-	public int If;
+	public int dragCycles;
 	@ObfuscatedName("client.Ig")
-	public int Ig;
+	public int objSelected;
 	@ObfuscatedName("client.Ij")
 	public int Ij;
 	@ObfuscatedName("client.Jd")
@@ -513,7 +513,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.Jg")
 	public int Jg;
 	@ObfuscatedName("client.Jj")
-	public int Jj;
+	public int scrollInputPadding;
 	@ObfuscatedName("client.Kb")
 	public int Kb;
 	@ObfuscatedName("client.Kd")
@@ -967,7 +967,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.xj")
 	public OnDemand onDemand;
 	@ObfuscatedName("client.Mg")
-	public String Mg;
+	public String objSelectedName;
 	@ObfuscatedName("client.Xe")
 	public String modelMessage;
 	@ObfuscatedName("client.kh")
@@ -2009,7 +2009,7 @@ public class Client extends GameShell {
 			}
 
 			if (super.u == 1 || super.mouseClickButton == 1) {
-				++this.If;
+				++this.dragCycles;
 			}
 
 			if (this.qj == 0 && this.Je == 0 && this.rg == 0) {
@@ -4052,7 +4052,9 @@ public class Client extends GameShell {
 
 			if (this.ptype == 251) {
 				this.hb = this.in.g1();
+
 				this.redrawSidebar = true;
+
 				this.ptype = -1;
 				return true;
 			}
@@ -4118,7 +4120,7 @@ public class Client extends GameShell {
 						var186 = var187.scroll - var187.width;
 					}
 
-					var187.v = var186;
+					var187.scrollPosition = var186;
 				}
 
 				this.ptype = -1;
@@ -4145,11 +4147,11 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.g(B)V")
 	public final void g(byte arg0) {
-		if (this.menuSize >= 2 || this.Ig != 0 || this.hh != 0) {
+		if (this.menuSize >= 2 || this.objSelected != 0 || this.hh != 0) {
 			if (arg0 == -79) {
 				String var2;
-				if (this.Ig == 1 && this.menuSize < 2) {
-					var2 = "Use " + this.Mg + " with...";
+				if (this.objSelected == 1 && this.menuSize < 2) {
+					var2 = "Use " + this.objSelectedName + " with...";
 				} else if (this.hh == 1 && this.menuSize < 2) {
 					var2 = this.kh + "...";
 				} else {
@@ -4475,8 +4477,8 @@ public class Client extends GameShell {
 					var6 = arg3.name + " (skill-" + arg3.Gb + ")";
 				}
 
-				if (this.Ig == 1) {
-					this.menuOption[this.menuSize] = "Use " + this.Mg + " with @whi@" + var6;
+				if (this.objSelected == 1) {
+					this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @whi@" + var6;
 					this.menuAction[this.menuSize] = 596;
 					this.menuParamA[this.menuSize] = arg0;
 					this.menuParamB[this.menuSize] = arg2;
@@ -4669,21 +4671,18 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IILEWIXBTLV;BIIIII)V")
-	public final void a(int arg0, int arg1, Component arg2, byte arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
-		if (this.pg) {
-			this.Jj = 32;
+	public final void handleScrollInput(int scrollHeight, int arg1, Component com, int arg4, int arg5, int arg6, int height, int arg8) {
+		if (this.scrollGrabbed) {
+			this.scrollInputPadding = 32;
 		} else {
-			this.Jj = 0;
+			this.scrollInputPadding = 0;
 		}
 
-		this.pg = false;
-		if (arg3 != 102) {
-			for (int var10 = 1; var10 > 0; ++var10) {
-			}
-		}
+		this.scrollGrabbed = false;
 
 		if (arg6 >= arg8 && arg6 < arg8 + 16 && arg4 >= arg1 && arg4 < arg1 + 16) {
-			arg2.v -= this.If * 4;
+			com.scrollPosition -= this.dragCycles * 4;
+
 			if (arg5 == 1) {
 				this.redrawSidebar = true;
 			}
@@ -4692,8 +4691,9 @@ public class Client extends GameShell {
 				this.redrawChatback = true;
 			}
 
-		} else if (arg6 >= arg8 && arg6 < arg8 + 16 && arg4 >= arg1 + arg7 - 16 && arg4 < arg1 + arg7) {
-			arg2.v += this.If * 4;
+		} else if (arg6 >= arg8 && arg6 < arg8 + 16 && arg4 >= arg1 + height - 16 && arg4 < arg1 + height) {
+			com.scrollPosition += this.dragCycles * 4;
+
 			if (arg5 == 1) {
 				this.redrawSidebar = true;
 			}
@@ -4702,15 +4702,17 @@ public class Client extends GameShell {
 				this.redrawChatback = true;
 			}
 
-		} else if (arg6 >= arg8 - this.Jj && arg6 < arg8 + 16 + this.Jj && arg4 >= arg1 + 16 && arg4 < arg1 + arg7 - 16 && this.If > 0) {
-			int var11 = (arg7 - 32) * arg7 / arg0;
-			if (var11 < 8) {
-				var11 = 8;
+		} else if (arg6 >= arg8 - this.scrollInputPadding && arg6 < arg8 + 16 + this.scrollInputPadding && arg4 >= arg1 + 16 && arg4 < arg1 + height - 16 && this.dragCycles > 0) {
+			int gripSize = (height - 32) * height / scrollHeight;
+			if (gripSize < 8) {
+				gripSize = 8;
 			}
 
-			int var12 = arg4 - arg1 - 16 - var11 / 2;
-			int var13 = arg7 - 32 - var11;
-			arg2.v = (arg0 - arg7) * var12 / var13;
+			int gripY = arg4 - arg1 - 16 - gripSize / 2;
+			int maxY = height - 32 - gripSize;
+
+			com.scrollPosition = (scrollHeight - height) * gripY / maxY;
+
 			if (arg5 == 1) {
 				this.redrawSidebar = true;
 			}
@@ -4719,13 +4721,13 @@ public class Client extends GameShell {
 				this.redrawChatback = true;
 			}
 
-			this.pg = true;
+			this.scrollGrabbed = true;
 		}
 	}
 
 	@ObfuscatedName("client.h(B)V")
-	public final void h(byte arg0) {
-		if (this.Ig == 0 && this.hh == 0) {
+	public final void handleViewportOptions(byte arg0) {
+		if (this.objSelected == 0 && this.hh == 0) {
 			this.menuOption[this.menuSize] = "Walk here";
 			this.menuAction[this.menuSize] = 14;
 			this.menuParamB[this.menuSize] = super.v;
@@ -4733,148 +4735,150 @@ public class Client extends GameShell {
 			this.menuSize++;
 		}
 
-		int var2 = -1;
+		int lastTypeCode = -1;
 		if (arg0 != 7) {
 			this.ptype = -1;
 		}
 
-		for (int var3 = 0; var3 < Model.Gb; ++var3) {
-			int var4 = Model.Hb[var3];
-			int var5 = var4 & 127;
-			int var6 = var4 >> 7 & 127;
-			int var7 = var4 >> 29 & 3;
-			int var8 = var4 >> 14 & 32767;
-			if (var2 != var4) {
-				var2 = var4;
-				if (var7 == 2 && this.scene.e(this.currentLevel, var5, var6, var4) >= 0) {
-					LocType var9 = LocType.a(var8);
-					if (var9.V != null) {
-						var9 = var9.b(0);
+		for (int picked = 0; picked < Model.Gb; ++picked) {
+			int typeCode = Model.pickedBitsets[picked];
+			int x = typeCode & 127;
+			int z = typeCode >> 7 & 127;
+			int entityType = typeCode >> 29 & 3;
+			int typeId = typeCode >> 14 & 32767;
+
+			if (lastTypeCode != typeCode) {
+				lastTypeCode = typeCode;
+				if (entityType == 2 && this.scene.getInfo(this.currentLevel, x, z, typeCode) >= 0) {
+					LocType loc = LocType.a(typeId);
+
+					if (loc.V != null) {
+						loc = loc.b(0);
 					}
 
-					if (var9 == null) {
+					if (loc == null) {
 						continue;
 					}
 
-					if (this.Ig == 1) {
-						this.menuOption[this.menuSize] = "Use " + this.Mg + " with @cya@" + var9.s;
+					if (this.objSelected == 1) {
+						this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @cya@" + loc.name;
 						this.menuAction[this.menuSize] = 467;
-						this.menuParamA[this.menuSize] = var4;
-						this.menuParamB[this.menuSize] = var5;
-						this.menuParamC[this.menuSize] = var6;
+						this.menuParamA[this.menuSize] = typeCode;
+						this.menuParamB[this.menuSize] = x;
+						this.menuParamC[this.menuSize] = z;
 						this.menuSize++;
 					} else if (this.hh == 1) {
 						if ((this.jh & 4) == 4) {
-							this.menuOption[this.menuSize] = this.kh + " @cya@" + var9.s;
+							this.menuOption[this.menuSize] = this.kh + " @cya@" + loc.name;
 							this.menuAction[this.menuSize] = 376;
-							this.menuParamA[this.menuSize] = var4;
-							this.menuParamB[this.menuSize] = var5;
-							this.menuParamC[this.menuSize] = var6;
+							this.menuParamA[this.menuSize] = typeCode;
+							this.menuParamB[this.menuSize] = x;
+							this.menuParamC[this.menuSize] = z;
 							this.menuSize++;
 						}
 					} else {
-						if (var9.G != null) {
-							for (int var10 = 4; var10 >= 0; --var10) {
-								if (var9.G[var10] != null) {
-									this.menuOption[this.menuSize] = var9.G[var10] + " @cya@" + var9.s;
-									if (var10 == 0) {
+						if (loc.G != null) {
+							for (int i = 4; i >= 0; --i) {
+								if (loc.G[i] != null) {
+									this.menuOption[this.menuSize] = loc.G[i] + " @cya@" + loc.name;
+									if (i == 0) {
 										this.menuAction[this.menuSize] = 35;
 									}
 
-									if (var10 == 1) {
+									if (i == 1) {
 										this.menuAction[this.menuSize] = 389;
 									}
 
-									if (var10 == 2) {
+									if (i == 2) {
 										this.menuAction[this.menuSize] = 888;
 									}
 
-									if (var10 == 3) {
+									if (i == 3) {
 										this.menuAction[this.menuSize] = 892;
 									}
 
-									if (var10 == 4) {
+									if (i == 4) {
 										this.menuAction[this.menuSize] = 1280;
 									}
 
-									this.menuParamA[this.menuSize] = var4;
-									this.menuParamB[this.menuSize] = var5;
-									this.menuParamC[this.menuSize] = var6;
+									this.menuParamA[this.menuSize] = typeCode;
+									this.menuParamB[this.menuSize] = x;
+									this.menuParamC[this.menuSize] = z;
 									this.menuSize++;
 								}
 							}
 						}
 
-						this.menuOption[this.menuSize] = "Examine @cya@" + var9.s;
+						this.menuOption[this.menuSize] = "Examine @cya@" + loc.name;
 						this.menuAction[this.menuSize] = 1412;
-						this.menuParamA[this.menuSize] = var9.p << 14;
-						this.menuParamB[this.menuSize] = var5;
-						this.menuParamC[this.menuSize] = var6;
+						this.menuParamA[this.menuSize] = loc.p << 14;
+						this.menuParamB[this.menuSize] = x;
+						this.menuParamC[this.menuSize] = z;
 						this.menuSize++;
 					}
 				}
 
-				if (var7 == 1) {
-					ClientNpc var11 = this.npcs[var8];
+				if (entityType == 1) {
+					ClientNpc var11 = this.npcs[typeId];
 					if (var11.type.v == 1 && (var11.x & 127) == 64 && (var11.z & 127) == 64) {
 						for (int var12 = 0; var12 < this.npcCount; ++var12) {
 							ClientNpc var13 = this.npcs[this.npcIds[var12]];
 							if (var13 != null && var11 != var13 && var13.type.v == 1 && var11.x == var13.x && var11.z == var13.z) {
-								this.a(var13.type, var6, var5, this.npcIds[var12], (byte) -76);
+								this.a(var13.type, z, x, this.npcIds[var12], (byte) -76);
 							}
 						}
 
 						for (int var14 = 0; var14 < this.od; ++var14) {
 							ClientPlayer var15 = this.players[this.pd[var14]];
 							if (var15 != null && var11.x == var15.x && var11.z == var15.z) {
-								this.a(this.pd[var14], var6, var5, var15, 0);
+								this.a(this.pd[var14], z, x, var15, 0);
 							}
 						}
 					}
 
-					this.a(var11.type, var6, var5, var8, (byte) -76);
+					this.a(var11.type, z, x, typeId, (byte) -76);
 				}
 
-				if (var7 == 0) {
-					ClientPlayer var16 = this.players[var8];
+				if (entityType == 0) {
+					ClientPlayer var16 = this.players[typeId];
 					if ((var16.x & 127) == 64 && (var16.z & 127) == 64) {
 						for (int var17 = 0; var17 < this.npcCount; ++var17) {
 							ClientNpc var18 = this.npcs[this.npcIds[var17]];
 							if (var18 != null && var18.type.v == 1 && var16.x == var18.x && var16.z == var18.z) {
-								this.a(var18.type, var6, var5, this.npcIds[var17], (byte) -76);
+								this.a(var18.type, z, x, this.npcIds[var17], (byte) -76);
 							}
 						}
 
 						for (int var19 = 0; var19 < this.od; ++var19) {
 							ClientPlayer var20 = this.players[this.pd[var19]];
 							if (var20 != null && var16 != var20 && var16.x == var20.x && var16.z == var20.z) {
-								this.a(this.pd[var19], var6, var5, var20, 0);
+								this.a(this.pd[var19], z, x, var20, 0);
 							}
 						}
 					}
 
-					this.a(var8, var6, var5, var16, 0);
+					this.a(typeId, z, x, var16, 0);
 				}
 
-				if (var7 == 3) {
-					LinkList var21 = this.objStacks[this.currentLevel][var5][var6];
+				if (entityType == 3) {
+					LinkList var21 = this.objStacks[this.currentLevel][x][z];
 					if (var21 != null) {
 						for (ClientObj var22 = (ClientObj) var21.tail(); var22 != null; var22 = (ClientObj) var21.prev()) {
 							ObjType var23 = ObjType.get(var22.m);
-							if (this.Ig == 1) {
-								this.menuOption[this.menuSize] = "Use " + this.Mg + " with @lre@" + var23.d;
+							if (this.objSelected == 1) {
+								this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var23.d;
 								this.menuAction[this.menuSize] = 100;
 								this.menuParamA[this.menuSize] = var22.m;
-								this.menuParamB[this.menuSize] = var5;
-								this.menuParamC[this.menuSize] = var6;
+								this.menuParamB[this.menuSize] = x;
+								this.menuParamC[this.menuSize] = z;
 								this.menuSize++;
 							} else if (this.hh == 1) {
 								if ((this.jh & 1) == 1) {
 									this.menuOption[this.menuSize] = this.kh + " @lre@" + var23.d;
 									this.menuAction[this.menuSize] = 199;
 									this.menuParamA[this.menuSize] = var22.m;
-									this.menuParamB[this.menuSize] = var5;
-									this.menuParamC[this.menuSize] = var6;
+									this.menuParamB[this.menuSize] = x;
+									this.menuParamC[this.menuSize] = z;
 									this.menuSize++;
 								}
 							} else {
@@ -4902,15 +4906,15 @@ public class Client extends GameShell {
 										}
 
 										this.menuParamA[this.menuSize] = var22.m;
-										this.menuParamB[this.menuSize] = var5;
-										this.menuParamC[this.menuSize] = var6;
+										this.menuParamB[this.menuSize] = x;
+										this.menuParamC[this.menuSize] = z;
 										this.menuSize++;
 									} else if (var24 == 2) {
 										this.menuOption[this.menuSize] = "Take @lre@" + var23.d;
 										this.menuAction[this.menuSize] = 684;
 										this.menuParamA[this.menuSize] = var22.m;
-										this.menuParamB[this.menuSize] = var5;
-										this.menuParamC[this.menuSize] = var6;
+										this.menuParamB[this.menuSize] = x;
+										this.menuParamC[this.menuSize] = z;
 										this.menuSize++;
 									}
 								}
@@ -4918,8 +4922,8 @@ public class Client extends GameShell {
 								this.menuOption[this.menuSize] = "Examine @lre@" + var23.d;
 								this.menuAction[this.menuSize] = 1564;
 								this.menuParamA[this.menuSize] = var22.m;
-								this.menuParamB[this.menuSize] = var5;
-								this.menuParamC[this.menuSize] = var6;
+								this.menuParamB[this.menuSize] = x;
+								this.menuParamC[this.menuSize] = z;
 								this.menuSize++;
 							}
 						}
@@ -4969,7 +4973,7 @@ public class Client extends GameShell {
 			}
 
 			if (var9 != 0) {
-				int var13 = this.scene.e(arg4, arg1, arg3, var9);
+				int var13 = this.scene.getInfo(arg4, arg1, arg3, var9);
 				int var14 = var9 >> 14 & 32767;
 				int var15 = var13 & 31;
 				int var16 = var13 >> 6;
@@ -6726,9 +6730,9 @@ public class Client extends GameShell {
 						}
 
 						if (var13.type == 0) {
-							this.a(var15, var13, arg2, var13.v, var14, arg5, 23658, arg7);
+							this.a(var15, var13, arg2, var13.scrollPosition, var14, arg5, 23658, arg7);
 							if (var13.scroll > var13.width) {
-								this.a(var13.scroll, var15, var13, (byte) 102, arg7, arg2, arg5, var13.width, var13.height + var14);
+								this.handleScrollInput(var13.scroll, var15, var13, arg7, arg2, arg5, var13.width, var13.height + var14);
 							}
 						} else {
 							if (var13.buttonType == 1 && arg5 >= var14 && arg7 >= var15 && arg5 < var13.height + var14 && arg7 < var13.width + var15) {
@@ -6807,9 +6811,9 @@ public class Client extends GameShell {
 											this.df = var13.id;
 											if (var13.invSlotObjId[var18] > 0) {
 												ObjType var23 = ObjType.get(var13.invSlotObjId[var18] - 1);
-												if (this.Ig == 1 && var13.interactable) {
+												if (this.objSelected == 1 && var13.interactable) {
 													if (this.Kg != var13.id || this.Jg != var18) {
-														this.menuOption[this.menuSize] = "Use " + this.Mg + " with @lre@" + var23.d;
+														this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var23.d;
 														this.menuAction[this.menuSize] = 903;
 														this.menuParamA[this.menuSize] = var23.L;
 														this.menuParamB[this.menuSize] = var18;
@@ -7397,12 +7401,12 @@ public class Client extends GameShell {
 			}
 
 			if (this.chatInterfaceId == -1 && this.Ci == 0) {
-				this.Hi.v = this.Vf - this.Y - 77;
+				this.Hi.scrollPosition = this.Vf - this.Y - 77;
 				if (super.v > 448 && super.v < 560 && super.w > 332) {
-					this.a(this.Vf, 0, this.Hi, (byte) 102, super.w - 357, -1, super.v - 17, 77, 463);
+					this.handleScrollInput(this.Vf, 0, this.Hi, super.w - 357, -1, super.v - 17, 77, 463);
 				}
 
-				int var5 = this.Vf - 77 - this.Hi.v;
+				int var5 = this.Vf - 77 - this.Hi.scrollPosition;
 				if (var5 < 0) {
 					var5 = 0;
 				}
@@ -7419,12 +7423,12 @@ public class Client extends GameShell {
 
 			if (this.chatInterfaceId == -1 && this.Ci == 3) {
 				int var6 = this.jb * 14 + 7;
-				this.Hi.v = this.mb;
+				this.Hi.scrollPosition = this.mb;
 				if (super.v > 448 && super.v < 560 && super.w > 332) {
-					this.a(var6, 0, this.Hi, (byte) 102, super.w - 357, -1, super.v - 17, 77, 463);
+					this.handleScrollInput(var6, 0, this.Hi, super.w - 357, -1, super.v - 17, 77, 463);
 				}
 
-				int var7 = this.Hi.v;
+				int var7 = this.Hi.scrollPosition;
 				if (var7 < 0) {
 					var7 = 0;
 				}
@@ -7999,7 +8003,7 @@ public class Client extends GameShell {
 					this.messageText[i] = null;
 				}
 
-				this.Ig = 0;
+				this.objSelected = 0;
 				this.hh = 0;
 				this.sceneState = 0;
 				this.waveCount = 0;
@@ -8212,7 +8216,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.a(IIII)Z")
 	public final boolean a(int arg0, int arg1, int arg2, int arg3) {
 		int var5 = arg3 >> 14 & 32767;
-		int var6 = this.scene.e(this.currentLevel, arg2, arg0, arg3);
+		int var6 = this.scene.getInfo(this.currentLevel, arg2, arg0, arg3);
 		if (var6 == -1) {
 			return false;
 		} else {
@@ -8345,8 +8349,8 @@ public class Client extends GameShell {
 						var6 = var6 + getCombatLevelColorTag(arg0.visLevel, localPlayer.vislevel) + " (level-" + arg0.visLevel + ")";
 					}
 
-					if (this.Ig == 1) {
-						this.menuOption[this.menuSize] = "Use " + this.Mg + " with @yel@" + var6;
+					if (this.objSelected == 1) {
+						this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @yel@" + var6;
 						this.menuAction[this.menuSize] = 347;
 						this.menuParamA[this.menuSize] = arg3;
 						this.menuParamB[this.menuSize] = arg2;
@@ -9075,7 +9079,7 @@ public class Client extends GameShell {
 					if (this.fh != -1) {
 						this.a(4, Component.types(this.fh), 0, 0, 4, super.v, 23658, super.w);
 					} else {
-						this.h((byte) 7);
+						this.handleViewportOptions((byte) 7);
 					}
 				}
 
@@ -11389,7 +11393,7 @@ public class Client extends GameShell {
 				this.hh = 1;
 				this.ih = var4;
 				this.jh = var37.targetMask;
-				this.Ig = 0;
+				this.objSelected = 0;
 				this.redrawSidebar = true;
 				String var38 = var37.targetVerb;
 				if (var38.indexOf(" ") != -1) {
@@ -11522,7 +11526,7 @@ public class Client extends GameShell {
 					if (var46.z != null) {
 						var47 = new String(var46.z);
 					} else {
-						var47 = "It's a " + var46.s + ".";
+						var47 = "It's a " + var46.name + ".";
 					}
 
 					this.addMessage(var47, "", 0);
@@ -11773,11 +11777,11 @@ public class Client extends GameShell {
 				}
 
 				if (action == 52) {
-					this.Ig = 1;
+					this.objSelected = 1;
 					this.Jg = var3;
 					this.Kg = var4;
 					this.Lg = var6;
-					this.Mg = String.valueOf(ObjType.get(var6).d);
+					this.objSelectedName = String.valueOf(ObjType.get(var6).d);
 					this.hh = 0;
 					this.redrawSidebar = true;
 				} else {
@@ -11806,7 +11810,7 @@ public class Client extends GameShell {
 						}
 					}
 
-					this.Ig = 0;
+					this.objSelected = 0;
 					this.hh = 0;
 					this.redrawSidebar = true;
 				}
@@ -12297,7 +12301,7 @@ public class Client extends GameShell {
 				this.p(7);
 			}
 
-			this.If = 0;
+			this.dragCycles = 0;
 		} else {
 			this.drawError();
 		}
@@ -13164,7 +13168,7 @@ public class Client extends GameShell {
 		}
 
 		if (var3 != 0) {
-			int var7 = this.scene.e(arg1.l, arg1.x, arg1.z, var3);
+			int var7 = this.scene.getInfo(arg1.l, arg1.x, arg1.z, var3);
 			var4 = var3 >> 14 & 32767;
 			var5 = var7 & 31;
 			var6 = var7 >> 6;
@@ -13232,17 +13236,17 @@ public class Client extends GameShell {
 					}
 
 					if (var14.type == 0) {
-						if (var14.v > var14.scroll - var14.width) {
-							var14.v = var14.scroll - var14.width;
+						if (var14.scrollPosition > var14.scroll - var14.width) {
+							var14.scrollPosition = var14.scroll - var14.width;
 						}
 
-						if (var14.v < 0) {
-							var14.v = 0;
+						if (var14.scrollPosition < 0) {
+							var14.scrollPosition = 0;
 						}
 
-						this.a(var16, var15, var14, var14.v, 8);
+						this.a(var16, var15, var14, var14.scrollPosition, 8);
 						if (var14.scroll > var14.width) {
-							this.a(true, var14.v, var14.height + var15, var14.width, var14.scroll, var16);
+							this.a(true, var14.scrollPosition, var14.height + var15, var14.width, var14.scroll, var16);
 						}
 					} else if (var14.type != 1) {
 						if (var14.type == 2) {
@@ -13270,7 +13274,7 @@ public class Client extends GameShell {
 										int var24 = var14.invSlotObjId[var17] - 1;
 										if (var20 > Pix2D.left - 32 && var20 < Pix2D.right && var21 > Pix2D.top - 32 && var21 < Pix2D.bottom || this.bg != 0 && this.ag == var17) {
 											int var25 = 0;
-											if (this.Ig == 1 && this.Jg == var17 && this.Kg == var14.id) {
+											if (this.objSelected == 1 && this.Jg == var17 && this.Kg == var14.id) {
 												var25 = 16777215;
 											}
 
@@ -13293,31 +13297,31 @@ public class Client extends GameShell {
 													}
 
 													var26.b(0, var20 + var22, var21 + var23, 128);
-													if (var21 + var23 < Pix2D.top && arg2.v > 0) {
+													if (var21 + var23 < Pix2D.top && arg2.scrollPosition > 0) {
 														int var27 = (Pix2D.top - var21 - var23) * this.Uc / 3;
 														if (var27 > this.Uc * 10) {
 															var27 = this.Uc * 10;
 														}
 
-														if (var27 > arg2.v) {
-															var27 = arg2.v;
+														if (var27 > arg2.scrollPosition) {
+															var27 = arg2.scrollPosition;
 														}
 
-														arg2.v -= var27;
+														arg2.scrollPosition -= var27;
 														this.dg += var27;
 													}
 
-													if (var21 + var23 + 32 > Pix2D.bottom && arg2.v < arg2.scroll - arg2.width) {
+													if (var21 + var23 + 32 > Pix2D.bottom && arg2.scrollPosition < arg2.scroll - arg2.width) {
 														int var28 = (var21 + var23 + 32 - Pix2D.bottom) * this.Uc / 3;
 														if (var28 > this.Uc * 10) {
 															var28 = this.Uc * 10;
 														}
 
-														if (var28 > arg2.scroll - arg2.width - arg2.v) {
-															var28 = arg2.scroll - arg2.width - arg2.v;
+														if (var28 > arg2.scroll - arg2.width - arg2.scrollPosition) {
+															var28 = arg2.scroll - arg2.width - arg2.scrollPosition;
 														}
 
-														arg2.v += var28;
+														arg2.scrollPosition += var28;
 														this.dg -= var28;
 													}
 												} else if (this.mk != 0 && this.lk == var17 && this.kk == var14.id) {
@@ -13915,7 +13919,7 @@ public class Client extends GameShell {
 		int var7 = this.scene.b(arg1, arg2, arg0);
 		int var8 = 62 / arg4;
 		if (var7 != 0) {
-			int var9 = this.scene.e(arg1, arg2, arg0, var7);
+			int var9 = this.scene.getInfo(arg1, arg2, arg0, var7);
 			int var10 = var9 >> 6 & 3;
 			int var11 = var9 & 31;
 			int var12 = arg5;
@@ -13999,7 +14003,7 @@ public class Client extends GameShell {
 
 		int var20 = this.scene.c(arg1, arg2, arg0);
 		if (var20 != 0) {
-			int var21 = this.scene.e(arg1, arg2, arg0, var20);
+			int var21 = this.scene.getInfo(arg1, arg2, arg0, var20);
 			int var22 = var21 >> 6 & 3;
 			int var23 = var21 & 31;
 			int var24 = var20 >> 14 & 32767;
