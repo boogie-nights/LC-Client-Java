@@ -48,7 +48,7 @@ public class ClientNpc extends ClientEntity {
             if (var3 == null) {
                return null;
             } else {
-               super.A = var3.k;
+               super.A = var3.minY;
                if (super.spotAnimId != -1 && super.spotanimFrame != -1) {
                   SpotAnimType var4 = SpotAnimType.e[super.spotAnimId];
                   Model var5 = var4.a();

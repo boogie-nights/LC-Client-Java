@@ -88,18 +88,18 @@ public class MapSpotAnim extends ModelSource {
 
             if (this.u.n != 0) {
                if (this.u.n == 90) {
-                  var4.b(true);
+                  var4.rotateY90(true);
                }
 
                if (this.u.n == 180) {
-                  var4.b(true);
-                  var4.b(true);
+                  var4.rotateY90(true);
+                  var4.rotateY90(true);
                }
 
                if (this.u.n == 270) {
-                  var4.b(true);
-                  var4.b(true);
-                  var4.b(true);
+                  var4.rotateY90(true);
+                  var4.rotateY90(true);
+                  var4.rotateY90(true);
                }
             }
 

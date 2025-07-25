@@ -359,11 +359,11 @@ public class NpcType {
 	public final NpcType getMultiNpc() {
 		int value = -1;
 		if (this.multivarbit != -1) {
-			VarbitType varbit = VarbitType.c[this.multivarbit];
-			int var4 = varbit.e;
-			int var5 = varbit.f;
-			int var6 = varbit.g;
-			int var7 = Client.Yh[var6 - var5];
+			VarbitType varbit = VarbitType.types[this.multivarbit];
+			int var4 = varbit.basevar;
+			int var5 = varbit.startbit;
+			int var6 = varbit.endbit;
+			int var7 = Client.BITMASK[var6 - var5];
 			value = i.varps[var4] >> var5 & var7;
 		} else if (this.multivarp != -1) {
 			value = i.varps[this.multivarp];
@@ -380,11 +380,11 @@ public class NpcType {
 
 		int value = -1;
 		if (this.multivarbit != -1) {
-			VarbitType var3 = VarbitType.c[this.multivarbit];
-			int var4 = var3.e;
-			int var5 = var3.f;
-			int var6 = var3.g;
-			int var7 = Client.Yh[var6 - var5];
+			VarbitType var3 = VarbitType.types[this.multivarbit];
+			int var4 = var3.basevar;
+			int var5 = var3.startbit;
+			int var6 = var3.endbit;
+			int var7 = Client.BITMASK[var6 - var5];
 			value = i.varps[var4] >> var5 & var7;
 		} else if (this.multivarp != -1) {
 			value = i.varps[this.multivarp];

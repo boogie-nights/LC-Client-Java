@@ -567,7 +567,7 @@ public class ObjType {
 		int sinPitch = Pix3D.sinTable[obj.xan2d] * zoom >> 16;
 		int cosPitch = Pix3D.cosTable[obj.xan2d] * zoom >> 16;
 
-		model.drawSimple(0, obj.yan2d, obj.zan2d, obj.xan2d, obj.xof2d, model.k / 2 + sinPitch + obj.yof2d, obj.yof2d + cosPitch);
+		model.drawSimple(0, obj.yan2d, obj.zan2d, obj.xan2d, obj.xof2d, model.minY / 2 + sinPitch + obj.yof2d, obj.yof2d + cosPitch);
 
 		for (int x = 31; x >= 0; --x) {
 			for (int y = 31; y >= 0; --y) {

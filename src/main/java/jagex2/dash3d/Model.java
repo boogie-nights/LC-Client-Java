@@ -22,17 +22,17 @@ public class Model extends ModelSource {
 	@ObfuscatedName("LZYQDKJV.eb")
 	public boolean picking = false;
 	@ObfuscatedName("LZYQDKJV.y")
-	public int y;
+	public int vertexCount;
 	@ObfuscatedName("LZYQDKJV.C")
 	public int C;
 	@ObfuscatedName("LZYQDKJV.O")
 	public int O;
 	@ObfuscatedName("LZYQDKJV.z")
-	public int[] z;
+	public int[] vertexX;
 	@ObfuscatedName("LZYQDKJV.A")
-	public int[] A;
+	public int[] vertexY;
 	@ObfuscatedName("LZYQDKJV.B")
-	public int[] B;
+	public int[] vertexZ;
 	@ObfuscatedName("LZYQDKJV.D")
 	public int[] D;
 	@ObfuscatedName("LZYQDKJV.E")
@@ -150,7 +150,7 @@ public class Model extends ModelSource {
 	@ObfuscatedName("LZYQDKJV.Gb")
 	public static int Gb;
 	@ObfuscatedName("LZYQDKJV.Z")
-	public int Z;
+	public int objRaise;
 	@ObfuscatedName("LZYQDKJV.s")
 	public static int s;
 	@ObfuscatedName("LZYQDKJV.hb")
@@ -323,12 +323,12 @@ public class Model extends ModelSource {
 	public Model(int arg0, int arg1) {
 		++s;
 		Metadata var3 = gb[arg0];
-		this.y = var3.b;
+		this.vertexCount = var3.b;
 		this.C = var3.c;
 		this.O = var3.d;
-		this.z = new int[this.y];
-		this.A = new int[this.y];
-		this.B = new int[this.y];
+		this.vertexX = new int[this.vertexCount];
+		this.vertexY = new int[this.vertexCount];
+		this.vertexZ = new int[this.vertexCount];
 		this.D = new int[this.C];
 		this.E = new int[this.C];
 		this.F = new int[this.C];
@@ -336,7 +336,7 @@ public class Model extends ModelSource {
 		this.Q = new int[this.O];
 		this.R = new int[this.O];
 		if (var3.i >= 0) {
-			this.ab = new int[this.y];
+			this.ab = new int[this.vertexCount];
 		}
 
 		if (var3.m >= 0) {
@@ -376,7 +376,7 @@ public class Model extends ModelSource {
 		int var10 = 0;
 		int var11 = 0;
 
-		for (int var12 = 0; var12 < this.y; ++var12) {
+		for (int var12 = 0; var12 < this.vertexCount; ++var12) {
 			int var13 = var4.g1();
 			int var14 = 0;
 			if ((var13 & 1) != 0) {
@@ -393,12 +393,12 @@ public class Model extends ModelSource {
 				var16 = var7.gsmart();
 			}
 
-			this.z[var12] = var9 + var14;
-			this.A[var12] = var10 + var15;
-			this.B[var12] = var11 + var16;
-			var9 = this.z[var12];
-			var10 = this.A[var12];
-			var11 = this.B[var12];
+			this.vertexX[var12] = var9 + var14;
+			this.vertexY[var12] = var10 + var15;
+			this.vertexZ[var12] = var11 + var16;
+			var9 = this.vertexX[var12];
+			var10 = this.vertexY[var12];
+			var11 = this.vertexZ[var12];
 			if (this.ab != null) {
 				this.ab[var12] = var8.g1();
 			}
@@ -496,7 +496,7 @@ public class Model extends ModelSource {
 		boolean var5 = false;
 		boolean var6 = false;
 		boolean var7 = false;
-		this.y = 0;
+		this.vertexCount = 0;
 		this.C = 0;
 		this.O = 0;
 		this.N = -1;
@@ -504,7 +504,7 @@ public class Model extends ModelSource {
 		for (int var8 = 0; var8 < arg0; ++var8) {
 			Model var9 = arg1[var8];
 			if (var9 != null) {
-				this.y += var9.y;
+				this.vertexCount += var9.vertexCount;
 				this.C += var9.C;
 				this.O += var9.O;
 				var4 |= var9.J != null;
@@ -525,10 +525,10 @@ public class Model extends ModelSource {
 			}
 		}
 
-		this.z = new int[this.y];
-		this.A = new int[this.y];
-		this.B = new int[this.y];
-		this.ab = new int[this.y];
+		this.vertexX = new int[this.vertexCount];
+		this.vertexY = new int[this.vertexCount];
+		this.vertexZ = new int[this.vertexCount];
+		this.ab = new int[this.vertexCount];
 		this.D = new int[this.C];
 		this.E = new int[this.C];
 		this.F = new int[this.C];
@@ -553,7 +553,7 @@ public class Model extends ModelSource {
 		}
 
 		this.faceColour = new int[this.C];
-		this.y = 0;
+		this.vertexCount = 0;
 		this.C = 0;
 		this.O = 0;
 		int var10 = 0;
@@ -621,7 +621,7 @@ public class Model extends ModelSource {
 		boolean var6 = false;
 		boolean var7 = false;
 		boolean var8 = false;
-		this.y = 0;
+		this.vertexCount = 0;
 		this.C = 0;
 		this.O = 0;
 		this.N = -1;
@@ -629,7 +629,7 @@ public class Model extends ModelSource {
 		for (int var9 = 0; var9 < arg0; ++var9) {
 			Model var10 = arg3[var9];
 			if (var10 != null) {
-				this.y += var10.y;
+				this.vertexCount += var10.vertexCount;
 				this.C += var10.C;
 				this.O += var10.O;
 				var5 |= var10.J != null;
@@ -650,9 +650,9 @@ public class Model extends ModelSource {
 			}
 		}
 
-		this.z = new int[this.y];
-		this.A = new int[this.y];
-		this.B = new int[this.y];
+		this.vertexX = new int[this.vertexCount];
+		this.vertexY = new int[this.vertexCount];
+		this.vertexZ = new int[this.vertexCount];
 		this.D = new int[this.C];
 		this.E = new int[this.C];
 		this.F = new int[this.C];
@@ -678,7 +678,7 @@ public class Model extends ModelSource {
 			this.faceColour = new int[this.C];
 		}
 
-		this.y = 0;
+		this.vertexCount = 0;
 		if (arg2 != 0) {
 			throw new NullPointerException();
 		} else {
@@ -689,13 +689,13 @@ public class Model extends ModelSource {
 			for (int var12 = 0; var12 < arg0; ++var12) {
 				Model var13 = arg3[var12];
 				if (var13 != null) {
-					int var14 = this.y;
+					int var14 = this.vertexCount;
 
-					for (int var15 = 0; var15 < var13.y; ++var15) {
-						this.z[this.y] = var13.z[var15];
-						this.A[this.y] = var13.A[var15];
-						this.B[this.y] = var13.B[var15];
-						++this.y;
+					for (int var15 = 0; var15 < var13.vertexCount; ++var15) {
+						this.vertexX[this.vertexCount] = var13.vertexX[var15];
+						this.vertexY[this.vertexCount] = var13.vertexY[var15];
+						this.vertexZ[this.vertexCount] = var13.vertexZ[var15];
+						++this.vertexCount;
 					}
 
 					for (int var16 = 0; var16 < var13.C; ++var16) {
@@ -758,7 +758,7 @@ public class Model extends ModelSource {
 
 	public Model(boolean arg0, boolean arg1, boolean arg2, Model arg3, boolean arg4) {
 		++s;
-		this.y = arg3.y;
+		this.vertexCount = arg3.vertexCount;
 		this.C = arg3.C;
 		this.O = arg3.O;
 		if (arg1) {
@@ -766,18 +766,18 @@ public class Model extends ModelSource {
 		}
 
 		if (arg0) {
-			this.z = arg3.z;
-			this.A = arg3.A;
-			this.B = arg3.B;
+			this.vertexX = arg3.vertexX;
+			this.vertexY = arg3.vertexY;
+			this.vertexZ = arg3.vertexZ;
 		} else {
-			this.z = new int[this.y];
-			this.A = new int[this.y];
-			this.B = new int[this.y];
+			this.vertexX = new int[this.vertexCount];
+			this.vertexY = new int[this.vertexCount];
+			this.vertexZ = new int[this.vertexCount];
 
-			for (int var6 = 0; var6 < this.y; ++var6) {
-				this.z[var6] = arg3.z[var6];
-				this.A[var6] = arg3.A[var6];
-				this.B[var6] = arg3.B[var6];
+			for (int var6 = 0; var6 < this.vertexCount; ++var6) {
+				this.vertexX[var6] = arg3.vertexX[var6];
+				this.vertexY[var6] = arg3.vertexY[var6];
+				this.vertexZ[var6] = arg3.vertexZ[var6];
 			}
 		}
 
@@ -821,17 +821,17 @@ public class Model extends ModelSource {
 
 	public Model(boolean arg0, boolean arg1, int arg2, Model arg3) {
 		++s;
-		this.y = arg3.y;
+		this.vertexCount = arg3.vertexCount;
 		this.C = arg3.C;
 		this.O = arg3.O;
 		if (arg0) {
-			this.A = new int[this.y];
+			this.vertexY = new int[this.vertexCount];
 
-			for (int var5 = 0; var5 < this.y; ++var5) {
-				this.A[var5] = arg3.A[var5];
+			for (int var5 = 0; var5 < this.vertexCount; ++var5) {
+				this.vertexY[var5] = arg3.vertexY[var5];
 			}
 		} else {
-			this.A = arg3.A;
+			this.vertexY = arg3.vertexY;
 		}
 
 		if (arg1) {
@@ -856,9 +856,9 @@ public class Model extends ModelSource {
 				}
 			}
 
-			super.j = new VertexNormal[this.y];
+			super.j = new VertexNormal[this.vertexCount];
 
-			for (int var9 = 0; var9 < this.y; ++var9) {
+			for (int var9 = 0; var9 < this.vertexCount; ++var9) {
 				VertexNormal var10 = super.j[var9] = new VertexNormal();
 				VertexNormal var11 = arg3.j[var9];
 				var10.a = var11.a;
@@ -875,8 +875,8 @@ public class Model extends ModelSource {
 			this.J = arg3.J;
 		}
 
-		this.z = arg3.z;
-		this.B = arg3.B;
+		this.vertexX = arg3.vertexX;
+		this.vertexZ = arg3.vertexZ;
 		if (arg2 != 0) {
 			this.o = !this.o;
 		}
@@ -891,7 +891,7 @@ public class Model extends ModelSource {
 		this.P = arg3.P;
 		this.Q = arg3.Q;
 		this.R = arg3.R;
-		super.k = arg3.k;
+		super.minY = arg3.minY;
 		this.W = arg3.W;
 		this.V = arg3.V;
 		this.Y = arg3.Y;
@@ -903,24 +903,24 @@ public class Model extends ModelSource {
 
 	@ObfuscatedName("LZYQDKJV.a(ZLLZYQDKJV;I)V")
 	public void a(boolean arg0, Model arg1, int arg2) {
-		this.y = arg1.y;
+		this.vertexCount = arg1.vertexCount;
 		this.C = arg1.C;
 		this.O = arg1.O;
-		if (u.length < this.y) {
-			u = new int[this.y + 100];
-			v = new int[this.y + 100];
-			w = new int[this.y + 100];
+		if (u.length < this.vertexCount) {
+			u = new int[this.vertexCount + 100];
+			v = new int[this.vertexCount + 100];
+			w = new int[this.vertexCount + 100];
 		}
 
-		this.z = u;
-		this.A = v;
+		this.vertexX = u;
+		this.vertexY = v;
 		if (arg2 == 1244) {
-			this.B = w;
+			this.vertexZ = w;
 
-			for (int var4 = 0; var4 < this.y; ++var4) {
-				this.z[var4] = arg1.z[var4];
-				this.A[var4] = arg1.A[var4];
-				this.B[var4] = arg1.B[var4];
+			for (int var4 = 0; var4 < this.vertexCount; ++var4) {
+				this.vertexX[var4] = arg1.vertexX[var4];
+				this.vertexY[var4] = arg1.vertexY[var4];
+				this.vertexZ[var4] = arg1.vertexZ[var4];
 			}
 
 			if (arg0) {
@@ -963,26 +963,26 @@ public class Model extends ModelSource {
 	@ObfuscatedName("LZYQDKJV.a(LLZYQDKJV;I)I")
 	public final int a(Model arg0, int arg1) {
 		int var3 = -1;
-		int var4 = arg0.z[arg1];
-		int var5 = arg0.A[arg1];
-		int var6 = arg0.B[arg1];
+		int var4 = arg0.vertexX[arg1];
+		int var5 = arg0.vertexY[arg1];
+		int var6 = arg0.vertexZ[arg1];
 
-		for (int var7 = 0; var7 < this.y; ++var7) {
-			if (this.z[var7] == var4 && this.A[var7] == var5 && this.B[var7] == var6) {
+		for (int var7 = 0; var7 < this.vertexCount; ++var7) {
+			if (this.vertexX[var7] == var4 && this.vertexY[var7] == var5 && this.vertexZ[var7] == var6) {
 				var3 = var7;
 				break;
 			}
 		}
 
 		if (var3 == -1) {
-			this.z[this.y] = var4;
-			this.A[this.y] = var5;
-			this.B[this.y] = var6;
+			this.vertexX[this.vertexCount] = var4;
+			this.vertexY[this.vertexCount] = var5;
+			this.vertexZ[this.vertexCount] = var6;
 			if (arg0.ab != null) {
-				this.ab[this.y] = arg0.ab[arg1];
+				this.ab[this.vertexCount] = arg0.ab[arg1];
 			}
 
-			var3 = this.y++;
+			var3 = this.vertexCount++;
 		}
 
 		return var3;
@@ -990,16 +990,16 @@ public class Model extends ModelSource {
 
 	@ObfuscatedName("LZYQDKJV.c(I)V")
 	public void calculateBoundsCylinder() {
-		super.k = 0;
+		super.minY = 0;
 		this.V = 0;
 		this.W = 0;
 
-		for (int var2 = 0; var2 < this.y; ++var2) {
-			int var3 = this.z[var2];
-			int var4 = this.A[var2];
-			int var5 = this.B[var2];
-			if (-var4 > super.k) {
-				super.k = -var4;
+		for (int var2 = 0; var2 < this.vertexCount; ++var2) {
+			int var3 = this.vertexX[var2];
+			int var4 = this.vertexY[var2];
+			int var5 = this.vertexZ[var2];
+			if (-var4 > super.minY) {
+				super.minY = -var4;
 			}
 
 			if (var4 > this.W) {
@@ -1013,20 +1013,20 @@ public class Model extends ModelSource {
 		}
 
 		this.V = (int) (Math.sqrt((double) this.V) + 0.99D);
-		this.Y = (int) (Math.sqrt((double) (super.k * super.k + this.V * this.V)) + 0.99D);
+		this.Y = (int) (Math.sqrt((double) (super.minY * super.minY + this.V * this.V)) + 0.99D);
 		this.X = this.Y + (int) (Math.sqrt((double) (this.W * this.W + this.V * this.V)) + 0.99D);
 	}
 
 	@ObfuscatedName("LZYQDKJV.d(I)V")
-	public void d(int arg0) {
-		super.k = 0;
+	public void calculateBoundsY(int arg0) {
+		super.minY = 0;
 		if (arg0 == 6) {
 			this.W = 0;
 
-			for (int var2 = 0; var2 < this.y; ++var2) {
-				int var3 = this.A[var2];
-				if (-var3 > super.k) {
-					super.k = -var3;
+			for (int var2 = 0; var2 < this.vertexCount; ++var2) {
+				int var3 = this.vertexY[var2];
+				if (-var3 > super.minY) {
+					super.minY = -var3;
 				}
 
 				if (var3 > this.W) {
@@ -1034,14 +1034,14 @@ public class Model extends ModelSource {
 				}
 			}
 
-			this.Y = (int) (Math.sqrt((double) (super.k * super.k + this.V * this.V)) + 0.99D);
+			this.Y = (int) (Math.sqrt((double) (super.minY * super.minY + this.V * this.V)) + 0.99D);
 			this.X = this.Y + (int) (Math.sqrt((double) (this.W * this.W + this.V * this.V)) + 0.99D);
 		}
 	}
 
 	@ObfuscatedName("LZYQDKJV.e(I)V")
 	public void e(int arg0) {
-		super.k = 0;
+		super.minY = 0;
 		this.V = 0;
 		this.W = 0;
 		int var2 = 32767;
@@ -1049,10 +1049,10 @@ public class Model extends ModelSource {
 		int var4 = -32767;
 		int var5 = 32767;
 
-		for (int var6 = 0; var6 < this.y; ++var6) {
-			int var7 = this.z[var6];
-			int var8 = this.A[var6];
-			int var9 = this.B[var6];
+		for (int var6 = 0; var6 < this.vertexCount; ++var6) {
+			int var7 = this.vertexX[var6];
+			int var8 = this.vertexY[var6];
+			int var9 = this.vertexZ[var6];
 			if (var7 < var2) {
 				var2 = var7;
 			}
@@ -1069,8 +1069,8 @@ public class Model extends ModelSource {
 				var4 = var9;
 			}
 
-			if (-var8 > super.k) {
-				super.k = -var8;
+			if (-var8 > super.minY) {
+				super.minY = -var8;
 			}
 
 			if (var8 > this.W) {
@@ -1084,7 +1084,7 @@ public class Model extends ModelSource {
 		}
 
 		this.V = (int) Math.sqrt((double) this.V);
-		this.Y = (int) Math.sqrt((double) (super.k * super.k + this.V * this.V));
+		this.Y = (int) Math.sqrt((double) (super.minY * super.minY + this.V * this.V));
 		this.X = this.Y + (int) Math.sqrt((double) (this.W * this.W + this.V * this.V));
 		this.T = (var2 << 16) + (var3 & 65535);
 		if (arg0 <= 0) {
@@ -1101,7 +1101,7 @@ public class Model extends ModelSource {
 			int[] var2 = new int[256];
 			int var3 = 0;
 
-			for (int var4 = 0; var4 < this.y; ++var4) {
+			for (int var4 = 0; var4 < this.vertexCount; ++var4) {
 				int var5 = this.ab[var4];
 				var10002 = var2[var5]++;
 				if (var5 > var3) {
@@ -1118,7 +1118,7 @@ public class Model extends ModelSource {
 
 			int var7 = 0;
 
-			while (var7 < this.y) {
+			while (var7 < this.vertexCount) {
 				int var8 = this.ab[var7];
 				this.labelVertices[var8][var2[var8]++] = var7++;
 			}
@@ -1248,9 +1248,9 @@ public class Model extends ModelSource {
 
 					for (int var11 = 0; var11 < var10.length; ++var11) {
 						int var12 = var10[var11];
-						Ab += this.z[var12];
-						Bb += this.A[var12];
-						Cb += this.B[var12];
+						Ab += this.vertexX[var12];
+						Bb += this.vertexY[var12];
+						Cb += this.vertexZ[var12];
 						++var7;
 					}
 				}
@@ -1273,9 +1273,9 @@ public class Model extends ModelSource {
 
 					for (int var16 = 0; var16 < var15.length; ++var16) {
 						int var17 = var15[var16];
-						this.z[var17] += arg2;
-						this.A[var17] += arg3;
-						this.B[var17] += arg4;
+						this.vertexX[var17] += arg2;
+						this.vertexY[var17] += arg3;
+						this.vertexZ[var17] += arg4;
 					}
 				}
 			}
@@ -1288,39 +1288,39 @@ public class Model extends ModelSource {
 
 					for (int var21 = 0; var21 < var20.length; ++var21) {
 						int var22 = var20[var21];
-						this.z[var22] -= Ab;
-						this.A[var22] -= Bb;
-						this.B[var22] -= Cb;
+						this.vertexX[var22] -= Ab;
+						this.vertexY[var22] -= Bb;
+						this.vertexZ[var22] -= Cb;
 						int var23 = (arg2 & 255) * 8;
 						int var24 = (arg3 & 255) * 8;
 						int var25 = (arg4 & 255) * 8;
 						if (var25 != 0) {
 							int var26 = Ib[var25];
 							int var27 = Jb[var25];
-							int var28 = this.z[var22] * var27 + this.A[var22] * var26 >> 16;
-							this.A[var22] = this.A[var22] * var27 - this.z[var22] * var26 >> 16;
-							this.z[var22] = var28;
+							int var28 = this.vertexX[var22] * var27 + this.vertexY[var22] * var26 >> 16;
+							this.vertexY[var22] = this.vertexY[var22] * var27 - this.vertexX[var22] * var26 >> 16;
+							this.vertexX[var22] = var28;
 						}
 
 						if (var23 != 0) {
 							int var29 = Ib[var23];
 							int var30 = Jb[var23];
-							int var31 = this.A[var22] * var30 - this.B[var22] * var29 >> 16;
-							this.B[var22] = this.B[var22] * var30 + this.A[var22] * var29 >> 16;
-							this.A[var22] = var31;
+							int var31 = this.vertexY[var22] * var30 - this.vertexZ[var22] * var29 >> 16;
+							this.vertexZ[var22] = this.vertexZ[var22] * var30 + this.vertexY[var22] * var29 >> 16;
+							this.vertexY[var22] = var31;
 						}
 
 						if (var24 != 0) {
 							int var32 = Ib[var24];
 							int var33 = Jb[var24];
-							int var34 = this.z[var22] * var33 + this.B[var22] * var32 >> 16;
-							this.B[var22] = this.B[var22] * var33 - this.z[var22] * var32 >> 16;
-							this.z[var22] = var34;
+							int var34 = this.vertexX[var22] * var33 + this.vertexZ[var22] * var32 >> 16;
+							this.vertexZ[var22] = this.vertexZ[var22] * var33 - this.vertexX[var22] * var32 >> 16;
+							this.vertexX[var22] = var34;
 						}
 
-						this.z[var22] += Ab;
-						this.A[var22] += Bb;
-						this.B[var22] += Cb;
+						this.vertexX[var22] += Ab;
+						this.vertexY[var22] += Bb;
+						this.vertexZ[var22] += Cb;
 					}
 				}
 			}
@@ -1333,15 +1333,15 @@ public class Model extends ModelSource {
 
 					for (int var38 = 0; var38 < var37.length; ++var38) {
 						int var39 = var37[var38];
-						this.z[var39] -= Ab;
-						this.A[var39] -= Bb;
-						this.B[var39] -= Cb;
-						this.z[var39] = this.z[var39] * arg2 / 128;
-						this.A[var39] = this.A[var39] * arg3 / 128;
-						this.B[var39] = this.B[var39] * arg4 / 128;
-						this.z[var39] += Ab;
-						this.A[var39] += Bb;
-						this.B[var39] += Cb;
+						this.vertexX[var39] -= Ab;
+						this.vertexY[var39] -= Bb;
+						this.vertexZ[var39] -= Cb;
+						this.vertexX[var39] = this.vertexX[var39] * arg2 / 128;
+						this.vertexY[var39] = this.vertexY[var39] * arg3 / 128;
+						this.vertexZ[var39] = this.vertexZ[var39] * arg4 / 128;
+						this.vertexX[var39] += Ab;
+						this.vertexY[var39] += Bb;
+						this.vertexZ[var39] += Cb;
 					}
 				}
 			}
@@ -1372,12 +1372,12 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("LZYQDKJV.b(Z)V")
-	public void b(boolean arg0) {
+	public void rotateY90(boolean arg0) {
 		if (arg0) {
-			for (int var2 = 0; var2 < this.y; ++var2) {
-				int var3 = this.z[var2];
-				this.z[var2] = this.B[var2];
-				this.B[var2] = -var3;
+			for (int var2 = 0; var2 < this.vertexCount; ++var2) {
+				int var3 = this.vertexX[var2];
+				this.vertexX[var2] = this.vertexZ[var2];
+				this.vertexZ[var2] = -var3;
 			}
 
 		}
@@ -1388,10 +1388,10 @@ public class Model extends ModelSource {
 		int var3 = Ib[arg0];
 		int var4 = Jb[arg0];
 
-		for (int var5 = 0; var5 < this.y; ++var5) {
-			int var6 = this.A[var5] * var4 - this.B[var5] * var3 >> 16;
-			this.B[var5] = this.B[var5] * var4 + this.A[var5] * var3 >> 16;
-			this.A[var5] = var6;
+		for (int var5 = 0; var5 < this.vertexCount; ++var5) {
+			int var6 = this.vertexY[var5] * var4 - this.vertexZ[var5] * var3 >> 16;
+			this.vertexZ[var5] = this.vertexZ[var5] * var4 + this.vertexY[var5] * var3 >> 16;
+			this.vertexY[var5] = var6;
 		}
 
 		int var7 = 61 / arg1;
@@ -1403,10 +1403,10 @@ public class Model extends ModelSource {
 			this.m = -310;
 		}
 
-		for (int var5 = 0; var5 < this.y; ++var5) {
-			this.z[var5] += arg0;
-			this.A[var5] += arg3;
-			this.B[var5] += arg1;
+		for (int var5 = 0; var5 < this.vertexCount; ++var5) {
+			this.vertexX[var5] += arg0;
+			this.vertexY[var5] += arg3;
+			this.vertexZ[var5] += arg1;
 		}
 
 	}
@@ -1428,8 +1428,8 @@ public class Model extends ModelSource {
 			}
 		}
 
-		for (int var3 = 0; var3 < this.y; ++var3) {
-			this.B[var3] = -this.B[var3];
+		for (int var3 = 0; var3 < this.vertexCount; ++var3) {
+			this.vertexZ[var3] = -this.vertexZ[var3];
 		}
 
 		for (int var4 = 0; var4 < this.C; ++var4) {
@@ -1442,10 +1442,10 @@ public class Model extends ModelSource {
 
 	@ObfuscatedName("LZYQDKJV.a(IIII)V")
 	public void scale(int arg0, int arg1, int arg2, int arg3) {
-		for (int var5 = 0; var5 < this.y; ++var5) {
-			this.z[var5] = this.z[var5] * arg3 / 128;
-			this.A[var5] = this.A[var5] * arg0 / 128;
-			this.B[var5] = this.B[var5] * arg1 / 128;
+		for (int var5 = 0; var5 < this.vertexCount; ++var5) {
+			this.vertexX[var5] = this.vertexX[var5] * arg3 / 128;
+			this.vertexY[var5] = this.vertexY[var5] * arg0 / 128;
+			this.vertexZ[var5] = this.vertexZ[var5] * arg1 / 128;
 		}
 
 		if (arg2 != 9) {
@@ -1464,9 +1464,9 @@ public class Model extends ModelSource {
 		}
 
 		if (super.j == null) {
-			super.j = new VertexNormal[this.y];
+			super.j = new VertexNormal[this.vertexCount];
 
-			for (int var9 = 0; var9 < this.y; ++var9) {
+			for (int var9 = 0; var9 < this.vertexCount; ++var9) {
 				super.j[var9] = new VertexNormal();
 			}
 		}
@@ -1475,12 +1475,12 @@ public class Model extends ModelSource {
 			int var11 = this.D[var10];
 			int var12 = this.E[var10];
 			int var13 = this.F[var10];
-			int var14 = this.z[var12] - this.z[var11];
-			int var15 = this.A[var12] - this.A[var11];
-			int var16 = this.B[var12] - this.B[var11];
-			int var17 = this.z[var13] - this.z[var11];
-			int var18 = this.A[var13] - this.A[var11];
-			int var19 = this.B[var13] - this.B[var11];
+			int var14 = this.vertexX[var12] - this.vertexX[var11];
+			int var15 = this.vertexY[var12] - this.vertexY[var11];
+			int var16 = this.vertexZ[var12] - this.vertexZ[var11];
+			int var17 = this.vertexX[var13] - this.vertexX[var11];
+			int var18 = this.vertexY[var13] - this.vertexY[var11];
+			int var19 = this.vertexZ[var13] - this.vertexZ[var11];
 			int var20 = var15 * var19 - var16 * var18;
 			int var21 = var16 * var17 - var14 * var19;
 
@@ -1523,9 +1523,9 @@ public class Model extends ModelSource {
 		if (arg5) {
 			this.a(arg0, var8, arg2, arg3, arg4);
 		} else {
-			this.fb = new VertexNormal[this.y];
+			this.fb = new VertexNormal[this.vertexCount];
 
-			for (int var31 = 0; var31 < this.y; ++var31) {
+			for (int var31 = 0; var31 < this.vertexCount; ++var31) {
 				VertexNormal var32 = super.j[var31];
 				VertexNormal var33 = this.fb[var31] = new VertexNormal();
 				var33.a = var32.a;
@@ -1639,10 +1639,10 @@ public class Model extends ModelSource {
 		int var17 = Jb[arg3];
 		int var18 = arg5 * var16 + arg6 * var17 >> 16;
 
-		for (int var19 = 0; var19 < this.y; ++var19) {
-			int var20 = this.z[var19];
-			int var21 = this.A[var19];
-			int var22 = this.B[var19];
+		for (int var19 = 0; var19 < this.vertexCount; ++var19) {
+			int var20 = this.vertexX[var19];
+			int var21 = this.vertexY[var19];
+			int var22 = this.vertexZ[var19];
 			if (arg2 != 0) {
 				int var23 = var14 * var21 + var15 * var20 >> 16;
 				var21 = var15 * var21 - var14 * var20 >> 16;
@@ -1698,10 +1698,10 @@ public class Model extends ModelSource {
 					int var18 = this.V * arg1 >> 16;
 					int var19 = var17 + var18 << 9;
 					if (var19 / var13 > -Pix2D.centerY2d) {
-						int var20 = (super.k * arg2 >> 16) + var18;
+						int var20 = (super.minY * arg2 >> 16) + var18;
 						int var21 = var17 - var20 << 9;
 						if (var21 / var13 < Pix2D.centerY2d) {
-							int var22 = (super.k * arg1 >> 16) + var12;
+							int var22 = (super.minY * arg1 >> 16) + var12;
 							boolean var23 = false;
 							if (var11 - var22 <= 50) {
 								var23 = true;
@@ -1754,10 +1754,10 @@ public class Model extends ModelSource {
 								var35 = Jb[arg0];
 							}
 
-							for (int var36 = 0; var36 < this.y; ++var36) {
-								int var37 = this.z[var36];
-								int var38 = this.A[var36];
-								int var39 = this.B[var36];
+							for (int var36 = 0; var36 < this.vertexCount; ++var36) {
+								int var37 = this.vertexX[var36];
+								int var38 = this.vertexY[var36];
+								int var39 = this.vertexZ[var36];
 								if (arg0 != 0) {
 									int var40 = var34 * var39 + var35 * var37 >> 16;
 									var39 = var35 * var39 - var34 * var37 >> 16;

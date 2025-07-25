@@ -285,7 +285,7 @@ public class ClientPlayer extends ClientEntity {
          if (var2 == null) {
             return null;
          } else {
-            super.A = var2.k;
+            super.A = var2.minY;
             var2.picking = true;
             if (this.Kb) {
                return var2;
@@ -319,27 +319,27 @@ public class ClientPlayer extends ClientEntity {
                      Model var7 = this.tb;
                      var7.translate(this.qb - super.x, this.sb - super.z, false, this.rb - this.xb);
                      if (super.q == 512) {
-                        var7.b(true);
-                        var7.b(true);
-                        var7.b(true);
+                        var7.rotateY90(true);
+                        var7.rotateY90(true);
+                        var7.rotateY90(true);
                      } else if (super.q == 1024) {
-                        var7.b(true);
-                        var7.b(true);
+                        var7.rotateY90(true);
+                        var7.rotateY90(true);
                      } else if (super.q == 1536) {
-                        var7.b(true);
+                        var7.rotateY90(true);
                      }
 
                      Model[] var8 = new Model[]{var2, var7};
                      var2 = new Model(2, true, 0, var8);
                      if (super.q == 512) {
-                        var7.b(true);
+                        var7.rotateY90(true);
                      } else if (super.q == 1024) {
-                        var7.b(true);
-                        var7.b(true);
+                        var7.rotateY90(true);
+                        var7.rotateY90(true);
                      } else if (super.q == 1536) {
-                        var7.b(true);
-                        var7.b(true);
-                        var7.b(true);
+                        var7.rotateY90(true);
+                        var7.rotateY90(true);
+                        var7.rotateY90(true);
                      }
 
                      var7.translate(super.x - this.qb, super.z - this.sb, false, this.xb - this.rb);

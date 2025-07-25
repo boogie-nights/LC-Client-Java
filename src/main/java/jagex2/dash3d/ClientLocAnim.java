@@ -50,17 +50,17 @@ public class ClientLocAnim extends ModelSource {
       }
 
       if (this.x != -1) {
-         VarbitType var3 = VarbitType.c[this.x];
-         int var4 = var3.e;
-         int var5 = var3.f;
-         int var6 = var3.g;
-         int var7 = Client.Yh[var6 - var5];
+         VarbitType var3 = VarbitType.types[this.x];
+         int var4 = var3.basevar;
+         int var5 = var3.startbit;
+         int var6 = var3.endbit;
+         int var7 = Client.BITMASK[var6 - var5];
          var2 = v.varps[var4] >> var5 & var7;
       } else if (this.y != -1) {
          var2 = v.varps[this.y];
       }
 
-      return var2 >= 0 && var2 < this.z.length && this.z[var2] != -1 ? LocType.a(this.z[var2]) : null;
+      return var2 >= 0 && var2 < this.z.length && this.z[var2] != -1 ? LocType.get(this.z[var2]) : null;
    }
 
    public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, boolean arg7, int arg8, int arg9) {
@@ -81,10 +81,10 @@ public class ClientLocAnim extends ModelSource {
          }
       }
 
-      LocType var11 = LocType.a(this.s);
-      this.x = var11.u;
-      this.y = var11.x;
-      this.z = var11.V;
+      LocType var11 = LocType.get(this.s);
+      this.x = var11.multivarbit;
+      this.y = var11.multivarp;
+      this.z = var11.multiloc;
       if (arg5 != 3) {
          this.r = -126;
       }
@@ -130,7 +130,7 @@ public class ClientLocAnim extends ModelSource {
       if (this.z != null) {
          var4 = this.a((int)0);
       } else {
-         var4 = LocType.a(this.s);
+         var4 = LocType.get(this.s);
       }
 
       return var4 == null ? null : var4.a(this.t, this.u, this.n, this.o, this.p, this.q, var2);

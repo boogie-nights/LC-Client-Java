@@ -455,7 +455,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.Ah")
 	public static boolean Ah;
 	@ObfuscatedName("client.Yh")
-	public static int[] Yh;
+	public static int[] BITMASK;
 	@ObfuscatedName("client.Ai")
 	public static boolean Ai;
 	@ObfuscatedName("client.aj")
@@ -1419,7 +1419,7 @@ public class Client extends GameShell {
 		int var2 = 96 / arg0;
 		this.locChanges = null;
 		this.H(28614);
-		LocType.a(false);
+		LocType.unload(false);
 		NpcType.unload(false);
 		ObjType.unload();
 		Component.clear();
@@ -4749,10 +4749,10 @@ public class Client extends GameShell {
 			if (lastTypeCode != typeCode) {
 				lastTypeCode = typeCode;
 				if (entityType == 2 && this.scene.getInfo(this.currentLevel, x, z, typeCode) >= 0) {
-					LocType loc = LocType.a(typeId);
+					LocType loc = LocType.get(typeId);
 
-					if (loc.V != null) {
-						loc = loc.b(0);
+					if (loc.multiloc != null) {
+						loc = loc.getMulitLoc(0);
 					}
 
 					if (loc == null) {
@@ -4776,10 +4776,10 @@ public class Client extends GameShell {
 							this.menuSize++;
 						}
 					} else {
-						if (loc.G != null) {
+						if (loc.op != null) {
 							for (int i = 4; i >= 0; --i) {
-								if (loc.G[i] != null) {
-									this.menuOption[this.menuSize] = loc.G[i] + " @cya@" + loc.name;
+								if (loc.op[i] != null) {
+									this.menuOption[this.menuSize] = loc.op[i] + " @cya@" + loc.name;
 									if (i == 0) {
 										this.menuAction[this.menuSize] = 35;
 									}
@@ -4810,7 +4810,7 @@ public class Client extends GameShell {
 
 						this.menuOption[this.menuSize] = "Examine @cya@" + loc.name;
 						this.menuAction[this.menuSize] = 1412;
-						this.menuParamA[this.menuSize] = loc.p << 14;
+						this.menuParamA[this.menuSize] = loc.id << 14;
 						this.menuParamB[this.menuSize] = x;
 						this.menuParamC[this.menuSize] = z;
 						this.menuSize++;
@@ -4972,9 +4972,9 @@ public class Client extends GameShell {
 				int var16 = var13 >> 6;
 				if (layer == 0) {
 					this.scene.a(arg3, arg4, arg1, true);
-					LocType var17 = LocType.a(var14);
-					if (var17.ab) {
-						this.levelCollisionMap[arg4].a(var16, arg1, 0, arg3, var15, var17.Z);
+					LocType var17 = LocType.get(var14);
+					if (var17.blockwalk) {
+						this.levelCollisionMap[arg4].a(var16, arg1, 0, arg3, var15, var17.blockrange);
 					}
 				}
 
@@ -4984,20 +4984,20 @@ public class Client extends GameShell {
 
 				if (layer == 2) {
 					this.scene.b(arg3, (int) arg4, -779, arg1);
-					LocType var18 = LocType.a(var14);
-					if (var18.R + arg1 > 103 || var18.R + arg3 > 103 || var18.r + arg1 > 103 || var18.r + arg3 > 103) {
+					LocType var18 = LocType.get(var14);
+					if (var18.width + arg1 > 103 || var18.width + arg3 > 103 || var18.length + arg1 > 103 || var18.length + arg3 > 103) {
 						return;
 					}
 
-					if (var18.ab) {
-						this.levelCollisionMap[arg4].a(this.Ue, arg3, arg1, var16, var18.r, var18.Z, var18.R);
+					if (var18.blockwalk) {
+						this.levelCollisionMap[arg4].a(this.Ue, arg3, arg1, var16, var18.length, var18.blockrange, var18.width);
 					}
 				}
 
 				if (layer == 3) {
 					this.scene.a(arg1, arg3, true, arg4);
-					LocType var19 = LocType.a(var14);
-					if (var19.ab && var19.b) {
+					LocType var19 = LocType.get(var14);
+					if (var19.blockwalk && var19.active) {
 						this.levelCollisionMap[arg4].a(arg1, (byte) -122, arg3);
 					}
 				}
@@ -5131,8 +5131,8 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.k(I)V")
 	public final void k(int arg0) {
-		LocType.v.clear();
-		LocType.e.clear();
+		LocType.modelCacheStatic.clear();
+		LocType.modelCacheDynamic.clear();
 		NpcType.modelCache.clear();
 		ObjType.modelCache.clear();
 		ObjType.iconCache.clear();
@@ -6674,7 +6674,7 @@ public class Client extends GameShell {
 					this.mousetracking = new MouseTracking(this, (byte) -116);
 					this.startThread((Runnable) this.mousetracking, 10);
 					ClientLocAnim.v = this;
-					LocType.m = this;
+					LocType.client = this;
 					NpcType.i = this;
 				} catch (Exception var75) {
 					SignLink.reporterror("loaderror " + this.se + " " + this.ck);
@@ -8232,18 +8232,18 @@ public class Client extends GameShell {
 			if (var7 != 10 && var7 != 11 && var7 != 22) {
 				this.a(true, false, arg0, localPlayer.routeTileZ[0], 0, 0, 2, var7 + 1, arg2, 0, var8, localPlayer.routeTileX[0]);
 			} else {
-				LocType var9 = LocType.a(var5);
+				LocType var9 = LocType.get(var5);
 				int var10;
 				int var11;
 				if (var8 != 0 && var8 != 2) {
-					var10 = var9.r;
-					var11 = var9.R;
+					var10 = var9.length;
+					var11 = var9.width;
 				} else {
-					var10 = var9.R;
-					var11 = var9.r;
+					var10 = var9.width;
+					var11 = var9.length;
 				}
 
-				int var12 = var9.g;
+				int var12 = var9.forceapproach;
 				if (var8 != 0) {
 					var12 = (var12 >> 4 - var8) + (var12 << var8 & 15);
 				}
@@ -9360,7 +9360,7 @@ public class Client extends GameShell {
 		} catch (Exception var61) {
 		}
 
-		LocType.v.clear();
+		LocType.modelCacheStatic.clear();
 		if (super.frame != null) {
 			this.out.pIsaac(78);
 			this.out.p4(1057001181);
@@ -10666,7 +10666,7 @@ public class Client extends GameShell {
 				int var15 = this.scene.d(this.currentLevel, var13, var14);
 				if (var15 != 0) {
 					int var16 = var15 >> 14 & 32767;
-					int var17 = LocType.a(var16).W;
+					int var17 = LocType.get(var16).mapfunction;
 					if (var17 >= 0) {
 						int var18 = var13;
 						int var19 = var14;
@@ -11525,10 +11525,10 @@ public class Client extends GameShell {
 
 				if (action == 1412) {
 					int var45 = var6 >> 14 & 32767;
-					LocType var46 = LocType.a(var45);
+					LocType var46 = LocType.get(var45);
 					String var47;
-					if (var46.z != null) {
-						var47 = new String(var46.z);
+					if (var46.desc != null) {
+						var47 = new String(var46.desc);
 					} else {
 						var47 = "It's a " + var46.name + ".";
 					}
@@ -12425,11 +12425,11 @@ public class Client extends GameShell {
 					value = (varp & 1 << lsb) != 0 ? 1 : 0;
 				} else if (opcode == 14) {
 					int varb = script[pc++];
-					VarbitType var21 = VarbitType.c[varb];
-					int var22 = var21.e;
-					int var23 = var21.f;
-					int var24 = var21.g;
-					int var25 = Yh[var24 - var23];
+					VarbitType var21 = VarbitType.types[varb];
+					int var22 = var21.basevar;
+					int var23 = var21.startbit;
+					int var24 = var21.endbit;
+					int var25 = BITMASK[var24 - var23];
 					value = this.varps[var22] >> var23 & var25;
 				} else if (opcode == 15) {
 					nextAccumulatorMode = 1;
@@ -12658,7 +12658,7 @@ public class Client extends GameShell {
 			}
 
 			if (var19 != null) {
-				LocType var20 = LocType.a(var4);
+				LocType var20 = LocType.get(var4);
 				int var21 = this.levelHeightmap[this.currentLevel][var11][var12];
 				int var22 = this.levelHeightmap[this.currentLevel][var11 + 1][var12];
 				int var23 = this.levelHeightmap[this.currentLevel][var11 + 1][var12 + 1];
@@ -12669,11 +12669,11 @@ public class Client extends GameShell {
 					var19.Lb = loopCycle + var18;
 					var19.Mb = loopCycle + var14;
 					var19.tb = var25;
-					int var26 = var20.R;
-					int var27 = var20.r;
+					int var26 = var20.width;
+					int var27 = var20.length;
 					if (var7 == 1 || var7 == 3) {
-						var26 = var20.r;
-						var27 = var20.R;
+						var26 = var20.length;
+						var27 = var20.width;
 					}
 
 					var19.qb = var11 * 128 + var26 * 64;
@@ -13934,13 +13934,13 @@ public class Client extends GameShell {
 			int[] var13 = this.imageMinimap.pixels;
 			int var14 = (103 - arg0) * 512 * 4 + arg2 * 4 + 24624;
 			int var15 = var7 >> 14 & 32767;
-			LocType var16 = LocType.a(var15);
-			if (var16.L != -1) {
-				Pix8 var17 = this.imageMapscene[var16.L];
+			LocType var16 = LocType.get(var15);
+			if (var16.mapscene != -1) {
+				Pix8 var17 = this.imageMapscene[var16.mapscene];
 				if (var17 != null) {
-					int var18 = (var16.R * 4 - var17.width) / 2;
-					int var19 = (var16.r * 4 - var17.height) / 2;
-					var17.a((104 - arg0 - var16.r) * 4 + 48 + var19, arg2 * 4 + 48 + var18, -488);
+					int var18 = (var16.width * 4 - var17.width) / 2;
+					int var19 = (var16.length * 4 - var17.height) / 2;
+					var17.a((104 - arg0 - var16.length) * 4 + 48 + var19, arg2 * 4 + 48 + var18, -488);
 				}
 			} else {
 				if (var11 == 0 || var11 == 2) {
@@ -14011,13 +14011,13 @@ public class Client extends GameShell {
 			int var22 = var21 >> 6 & 3;
 			int var23 = var21 & 31;
 			int var24 = var20 >> 14 & 32767;
-			LocType var25 = LocType.a(var24);
-			if (var25.L != -1) {
-				Pix8 var26 = this.imageMapscene[var25.L];
+			LocType var25 = LocType.get(var24);
+			if (var25.mapscene != -1) {
+				Pix8 var26 = this.imageMapscene[var25.mapscene];
 				if (var26 != null) {
-					int var27 = (var25.R * 4 - var26.width) / 2;
-					int var28 = (var25.r * 4 - var26.height) / 2;
-					var26.a((104 - arg0 - var25.r) * 4 + 48 + var28, arg2 * 4 + 48 + var27, -488);
+					int var27 = (var25.width * 4 - var26.width) / 2;
+					int var28 = (var25.length * 4 - var26.height) / 2;
+					var26.a((104 - arg0 - var25.length) * 4 + 48 + var28, arg2 * 4 + 48 + var27, -488);
 				}
 			} else if (var23 == 9) {
 				int var29 = 15658734;
@@ -14044,13 +14044,13 @@ public class Client extends GameShell {
 		int var32 = this.scene.d(arg1, arg2, arg0);
 		if (var32 != 0) {
 			int var33 = var32 >> 14 & 32767;
-			LocType var34 = LocType.a(var33);
-			if (var34.L != -1) {
-				Pix8 var35 = this.imageMapscene[var34.L];
+			LocType var34 = LocType.get(var33);
+			if (var34.mapscene != -1) {
+				Pix8 var35 = this.imageMapscene[var34.mapscene];
 				if (var35 != null) {
-					int var36 = (var34.R * 4 - var35.width) / 2;
-					int var37 = (var34.r * 4 - var35.height) / 2;
-					var35.a((104 - arg0 - var34.r) * 4 + 48 + var37, arg2 * 4 + 48 + var36, -488);
+					int var36 = (var34.width * 4 - var35.width) / 2;
+					int var37 = (var34.length * 4 - var35.height) / 2;
+					var35.a((104 - arg0 - var34.length) * 4 + 48 + var37, arg2 * 4 + 48 + var36, -488);
 					return;
 				}
 			}
@@ -14236,11 +14236,11 @@ public class Client extends GameShell {
 		DESIGN_BODY_COLOUR = new int[][]{{6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193}, {8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239}, {25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003}, {4626, 11146, 6439, 12, 4758, 10270}, {4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574}};
 		qe = -352;
 		Ah = true;
-		Yh = new int[32];
+		BITMASK = new int[32];
 		int var4 = 2;
 
 		for (int var5 = 0; var5 < 32; ++var5) {
-			Yh[var5] = var4 - 1;
+			BITMASK[var5] = var4 - 1;
 			var4 += var4;
 		}
 

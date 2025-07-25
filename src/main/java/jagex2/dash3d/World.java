@@ -109,112 +109,112 @@ public class World {
       int var13 = arg10[arg1][arg6 + 1][arg3 + 1];
       int var14 = arg10[arg1][arg6][arg3 + 1];
       int var15 = var11 + var12 + var13 + var14 >> 2;
-      LocType var16 = LocType.a(arg0);
+      LocType var16 = LocType.get(arg0);
       if (arg7 == 0) {
          int var17 = (arg0 << 14) + (arg3 << 7) + arg6 + 1073741824;
-         if (!var16.b) {
+         if (!var16.active) {
             var17 += Integer.MIN_VALUE;
          }
 
          byte var18 = (byte)((arg5 << 6) + arg2);
          if (arg2 == 22) {
             ModelSource var19;
-            if (var16.T == -1 && var16.V == null) {
+            if (var16.anim == -1 && var16.multiloc == null) {
                var19 = var16.a(22, arg5, var11, var12, var13, var14, -1);
             } else {
-               var19 = new ClientLocAnim(var16.T, var13, var14, var12, 22, (byte)3, arg0, true, var11, arg5);
+               var19 = new ClientLocAnim(var16.anim, var13, var14, var12, 22, (byte)3, arg0, true, var11, arg5);
             }
 
             arg9.a(arg6, arg3, 669, var18, var17, var15, arg8, var19);
-            if (var16.ab && var16.b) {
+            if (var16.blockwalk && var16.active) {
                arg4.a(8, (int)arg3, arg6);
             }
 
          } else if (arg2 != 10 && arg2 != 11) {
             if (arg2 >= 12) {
                ModelSource var24;
-               if (var16.T == -1 && var16.V == null) {
+               if (var16.anim == -1 && var16.multiloc == null) {
                   var24 = var16.a(arg2, arg5, var11, var12, var13, var14, -1);
                } else {
-                  var24 = new ClientLocAnim(var16.T, var13, var14, var12, arg2, (byte)3, arg0, true, var11, arg5);
+                  var24 = new ClientLocAnim(var16.anim, var13, var14, var12, arg2, (byte)3, arg0, true, var11, arg5);
                }
 
                arg9.a(arg8, 1, arg3, var24, var18, 0, arg6, -896, 1, var15, var17);
-               if (var16.ab) {
-                  arg4.a(arg3, arg5, var16.r, var16.R, var16.Z, arg6, (byte)52);
+               if (var16.blockwalk) {
+                  arg4.a(arg3, arg5, var16.length, var16.width, var16.blockrange, arg6, (byte)52);
                }
 
             } else if (arg2 == 0) {
                ModelSource var25;
-               if (var16.T == -1 && var16.V == null) {
+               if (var16.anim == -1 && var16.multiloc == null) {
                   var25 = var16.a(0, arg5, var11, var12, var13, var14, -1);
                } else {
-                  var25 = new ClientLocAnim(var16.T, var13, var14, var12, 0, (byte)3, arg0, true, var11, arg5);
+                  var25 = new ClientLocAnim(var16.anim, var13, var14, var12, 0, (byte)3, arg0, true, var11, arg5);
                }
 
                arg9.a(var15, 49878, 0, u[arg5], (ModelSource)null, arg6, var17, var18, arg3, var25, arg8);
-               if (var16.ab) {
-                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               if (var16.blockwalk) {
+                  arg4.a(arg5, 37679, var16.blockrange, arg2, arg6, arg3);
                }
 
             } else if (arg2 == 1) {
                ModelSource var26;
-               if (var16.T == -1 && var16.V == null) {
+               if (var16.anim == -1 && var16.multiloc == null) {
                   var26 = var16.a(1, arg5, var11, var12, var13, var14, -1);
                } else {
-                  var26 = new ClientLocAnim(var16.T, var13, var14, var12, 1, (byte)3, arg0, true, var11, arg5);
+                  var26 = new ClientLocAnim(var16.anim, var13, var14, var12, 1, (byte)3, arg0, true, var11, arg5);
                }
 
                arg9.a(var15, 49878, 0, D[arg5], (ModelSource)null, arg6, var17, var18, arg3, var26, arg8);
-               if (var16.ab) {
-                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               if (var16.blockwalk) {
+                  arg4.a(arg5, 37679, var16.blockrange, arg2, arg6, arg3);
                }
 
             } else if (arg2 == 2) {
                int var27 = arg5 + 1 & 3;
                ModelSource var28;
                ModelSource var29;
-               if (var16.T == -1 && var16.V == null) {
+               if (var16.anim == -1 && var16.multiloc == null) {
                   var28 = var16.a(2, arg5 + 4, var11, var12, var13, var14, -1);
                   var29 = var16.a(2, var27, var11, var12, var13, var14, -1);
                } else {
-                  var28 = new ClientLocAnim(var16.T, var13, var14, var12, 2, (byte)3, arg0, true, var11, arg5 + 4);
-                  var29 = new ClientLocAnim(var16.T, var13, var14, var12, 2, (byte)3, arg0, true, var11, var27);
+                  var28 = new ClientLocAnim(var16.anim, var13, var14, var12, 2, (byte)3, arg0, true, var11, arg5 + 4);
+                  var29 = new ClientLocAnim(var16.anim, var13, var14, var12, 2, (byte)3, arg0, true, var11, var27);
                }
 
                arg9.a(var15, 49878, u[var27], u[arg5], var29, arg6, var17, var18, arg3, var28, arg8);
-               if (var16.ab) {
-                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               if (var16.blockwalk) {
+                  arg4.a(arg5, 37679, var16.blockrange, arg2, arg6, arg3);
                }
 
             } else if (arg2 == 3) {
                ModelSource var30;
-               if (var16.T == -1 && var16.V == null) {
+               if (var16.anim == -1 && var16.multiloc == null) {
                   var30 = var16.a(3, arg5, var11, var12, var13, var14, -1);
                } else {
-                  var30 = new ClientLocAnim(var16.T, var13, var14, var12, 3, (byte)3, arg0, true, var11, arg5);
+                  var30 = new ClientLocAnim(var16.anim, var13, var14, var12, 3, (byte)3, arg0, true, var11, arg5);
                }
 
                arg9.a(var15, 49878, 0, D[arg5], (ModelSource)null, arg6, var17, var18, arg3, var30, arg8);
-               if (var16.ab) {
-                  arg4.a(arg5, 37679, var16.Z, arg2, arg6, arg3);
+               if (var16.blockwalk) {
+                  arg4.a(arg5, 37679, var16.blockrange, arg2, arg6, arg3);
                }
 
             } else if (arg2 == 9) {
                ModelSource var31;
-               if (var16.T == -1 && var16.V == null) {
+               if (var16.anim == -1 && var16.multiloc == null) {
                   var31 = var16.a(arg2, arg5, var11, var12, var13, var14, -1);
                } else {
-                  var31 = new ClientLocAnim(var16.T, var13, var14, var12, arg2, (byte)3, arg0, true, var11, arg5);
+                  var31 = new ClientLocAnim(var16.anim, var13, var14, var12, arg2, (byte)3, arg0, true, var11, arg5);
                }
 
                arg9.a(arg8, 1, arg3, var31, var18, 0, arg6, -896, 1, var15, var17);
-               if (var16.ab) {
-                  arg4.a(arg3, arg5, var16.r, var16.R, var16.Z, arg6, (byte)52);
+               if (var16.blockwalk) {
+                  arg4.a(arg3, arg5, var16.length, var16.width, var16.blockrange, arg6, (byte)52);
                }
 
             } else {
-               if (var16.l) {
+               if (var16.hillskew) {
                   if (arg5 == 1) {
                      int var32 = var14;
                      var14 = var13;
@@ -239,10 +239,10 @@ public class World {
 
                if (arg2 == 4) {
                   ModelSource var36;
-                  if (var16.T == -1 && var16.V == null) {
+                  if (var16.anim == -1 && var16.multiloc == null) {
                      var36 = var16.a(4, 0, var11, var12, var13, var14, -1);
                   } else {
-                     var36 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                     var36 = new ClientLocAnim(var16.anim, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
                   }
 
                   arg9.a(arg8, u[arg5], arg5 * 512, var17, var18, arg6, 0, arg3, 0, var15, var36, -930);
@@ -250,41 +250,41 @@ public class World {
                   int var37 = 16;
                   int var38 = arg9.b(arg8, arg6, arg3);
                   if (var38 > 0) {
-                     var37 = LocType.a(var38 >> 14 & 32767).S;
+                     var37 = LocType.get(var38 >> 14 & 32767).wallwidth;
                   }
 
                   ModelSource var39;
-                  if (var16.T == -1 && var16.V == null) {
+                  if (var16.anim == -1 && var16.multiloc == null) {
                      var39 = var16.a(4, 0, var11, var12, var13, var14, -1);
                   } else {
-                     var39 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                     var39 = new ClientLocAnim(var16.anim, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
                   }
 
                   arg9.a(arg8, u[arg5], arg5 * 512, var17, var18, arg6, f[arg5] * var37, arg3, x[arg5] * var37, var15, var39, -930);
                } else if (arg2 == 6) {
                   ModelSource var40;
-                  if (var16.T == -1 && var16.V == null) {
+                  if (var16.anim == -1 && var16.multiloc == null) {
                      var40 = var16.a(4, 0, var11, var12, var13, var14, -1);
                   } else {
-                     var40 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                     var40 = new ClientLocAnim(var16.anim, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
                   }
 
                   arg9.a(arg8, 256, arg5, var17, var18, arg6, 0, arg3, 0, var15, var40, -930);
                } else if (arg2 == 7) {
                   ModelSource var41;
-                  if (var16.T == -1 && var16.V == null) {
+                  if (var16.anim == -1 && var16.multiloc == null) {
                      var41 = var16.a(4, 0, var11, var12, var13, var14, -1);
                   } else {
-                     var41 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                     var41 = new ClientLocAnim(var16.anim, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
                   }
 
                   arg9.a(arg8, 512, arg5, var17, var18, arg6, 0, arg3, 0, var15, var41, -930);
                } else if (arg2 == 8) {
                   ModelSource var42;
-                  if (var16.T == -1 && var16.V == null) {
+                  if (var16.anim == -1 && var16.multiloc == null) {
                      var42 = var16.a(4, 0, var11, var12, var13, var14, -1);
                   } else {
-                     var42 = new ClientLocAnim(var16.T, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
+                     var42 = new ClientLocAnim(var16.anim, var13, var14, var12, 4, (byte)3, arg0, true, var11, 0);
                   }
 
                   arg9.a(arg8, 768, arg5, var17, var18, arg6, 0, arg3, 0, var15, var42, -930);
@@ -292,10 +292,10 @@ public class World {
             }
          } else {
             ModelSource var20;
-            if (var16.T == -1 && var16.V == null) {
+            if (var16.anim == -1 && var16.multiloc == null) {
                var20 = var16.a(10, arg5, var11, var12, var13, var14, -1);
             } else {
-               var20 = new ClientLocAnim(var16.T, var13, var14, var12, 10, (byte)3, arg0, true, var11, arg5);
+               var20 = new ClientLocAnim(var16.anim, var13, var14, var12, 10, (byte)3, arg0, true, var11, arg5);
             }
 
             if (var20 != null) {
@@ -307,18 +307,18 @@ public class World {
                int var22;
                int var23;
                if (arg5 != 1 && arg5 != 3) {
-                  var22 = var16.R;
-                  var23 = var16.r;
+                  var22 = var16.width;
+                  var23 = var16.length;
                } else {
-                  var22 = var16.r;
-                  var23 = var16.R;
+                  var22 = var16.length;
+                  var23 = var16.width;
                }
 
                arg9.a(arg8, var22, arg3, var20, var18, var21, arg6, -896, var23, var15, var17);
             }
 
-            if (var16.ab) {
-               arg4.a(arg3, arg5, var16.r, var16.R, var16.Z, arg6, (byte)52);
+            if (var16.blockwalk) {
+               arg4.a(arg3, arg5, var16.length, var16.width, var16.blockrange, arg6, (byte)52);
             }
 
          }
@@ -797,8 +797,8 @@ public class World {
             }
 
             var3 += var4;
-            LocType var5 = LocType.a(var3);
-            var5.a(arg0, -747);
+            LocType var5 = LocType.get(var3);
+            var5.prefetch(arg0);
 
             while(true) {
                int var6 = arg1.gsmarts();
@@ -814,7 +814,7 @@ public class World {
 
    @ObfuscatedName("CHEOPWNH.a(IBI)Z")
    public static final boolean a(int arg0, byte arg1, int arg2) {
-      LocType var3 = LocType.a(arg2);
+      LocType var3 = LocType.get(arg2);
       if (q != arg1) {
          for(int var4 = 1; var4 > 0; ++var4) {
          }
@@ -876,9 +876,9 @@ public class World {
                int var21 = var20 >> 2;
                int var22 = var20 & 3;
                if (arg10 == var19 && var18 >= arg7 && var18 < arg7 + 8 && var17 >= arg9 && var17 < arg9 + 8) {
-                  LocType var23 = LocType.a(var13);
-                  int var24 = arg8 + WorldRegion.a(arg6, var23.r, var22, var18 & 7, (byte)-117, var23.R, var17 & 7);
-                  int var25 = arg5 + WorldRegion.a(var23.R, arg6, 671, var18 & 7, (int)(var17 & 7), var23.r, var22);
+                  LocType var23 = LocType.get(var13);
+                  int var24 = arg8 + WorldRegion.a(arg6, var23.length, var22, var18 & 7, (byte)-117, var23.width, var17 & 7);
+                  int var25 = arg5 + WorldRegion.a(var23.width, arg6, 671, var18 & 7, (int)(var17 & 7), var23.length, var22);
                   if (var24 > 0 && var25 > 0 && var24 < 103 && var25 < 103) {
                      int var26 = arg0;
                      if ((this.a[1][var24][var25] & 2) == 2) {
@@ -919,28 +919,28 @@ public class World {
       int var12 = this.l[arg3][arg4 + 1][arg2 + 1];
       int var13 = this.l[arg3][arg4][arg2 + 1];
       int var14 = var10 + var11 + var12 + var13 >> 2;
-      LocType var15 = LocType.a(arg8);
+      LocType var15 = LocType.get(arg8);
       int var16 = (arg8 << 14) + (arg2 << 7) + arg4 + 1073741824;
       if (arg5 != 0) {
          this.t = !this.t;
       }
 
-      if (!var15.b) {
+      if (!var15.active) {
          var16 += Integer.MIN_VALUE;
       }
 
       byte var17 = (byte)((arg6 << 6) + arg7);
       if (arg7 == 22) {
-         if (!lowMemory || var15.b || var15.h) {
+         if (!lowMemory || var15.active || var15.forcedecor) {
             ModelSource var18;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var18 = var15.a(22, arg6, var10, var11, var12, var13, -1);
             } else {
-               var18 = new ClientLocAnim(var15.T, var12, var13, var11, 22, (byte)3, arg8, true, var10, arg6);
+               var18 = new ClientLocAnim(var15.anim, var12, var13, var11, 22, (byte)3, arg8, true, var10, arg6);
             }
 
             arg0.a(arg4, arg2, 669, var17, var16, var14, arg3, var18);
-            if (var15.ab && var15.b && arg1 != null) {
+            if (var15.blockwalk && var15.active && arg1 != null) {
                arg1.a(8, (int)arg2, arg4);
             }
 
@@ -948,10 +948,10 @@ public class World {
       } else if (arg7 != 10 && arg7 != 11) {
          if (arg7 >= 12) {
             ModelSource var27;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var27 = var15.a(arg7, arg6, var10, var11, var12, var13, -1);
             } else {
-               var27 = new ClientLocAnim(var15.T, var12, var13, var11, arg7, (byte)3, arg8, true, var10, arg6);
+               var27 = new ClientLocAnim(var15.anim, var12, var13, var11, arg7, (byte)3, arg8, true, var10, arg6);
             }
 
             arg0.a(arg3, 1, arg2, var27, var17, 0, arg4, -896, 1, var14, var16);
@@ -959,75 +959,75 @@ public class World {
                this.E[arg3][arg4][arg2] |= 2340;
             }
 
-            if (var15.ab && arg1 != null) {
-               arg1.a(arg2, arg6, var15.r, var15.R, var15.Z, arg4, (byte)52);
+            if (var15.blockwalk && arg1 != null) {
+               arg1.a(arg2, arg6, var15.length, var15.width, var15.blockrange, arg4, (byte)52);
             }
 
          } else if (arg7 == 0) {
             ModelSource var28;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var28 = var15.a(0, arg6, var10, var11, var12, var13, -1);
             } else {
-               var28 = new ClientLocAnim(var15.T, var12, var13, var11, 0, (byte)3, arg8, true, var10, arg6);
+               var28 = new ClientLocAnim(var15.anim, var12, var13, var11, 0, (byte)3, arg8, true, var10, arg6);
             }
 
             arg0.a(var14, 49878, 0, u[arg6], (ModelSource)null, arg4, var16, var17, arg2, var28, arg3);
             if (arg6 == 0) {
-               if (var15.X) {
+               if (var15.shadow) {
                   this.A[arg3][arg4][arg2] = 50;
                   this.A[arg3][arg4][arg2 + 1] = 50;
                }
 
-               if (var15.N) {
+               if (var15.occlude) {
                   this.E[arg3][arg4][arg2] |= 585;
                }
             } else if (arg6 == 1) {
-               if (var15.X) {
+               if (var15.shadow) {
                   this.A[arg3][arg4][arg2 + 1] = 50;
                   this.A[arg3][arg4 + 1][arg2 + 1] = 50;
                }
 
-               if (var15.N) {
+               if (var15.occlude) {
                   this.E[arg3][arg4][arg2 + 1] |= 1170;
                }
             } else if (arg6 == 2) {
-               if (var15.X) {
+               if (var15.shadow) {
                   this.A[arg3][arg4 + 1][arg2] = 50;
                   this.A[arg3][arg4 + 1][arg2 + 1] = 50;
                }
 
-               if (var15.N) {
+               if (var15.occlude) {
                   this.E[arg3][arg4 + 1][arg2] |= 585;
                }
             } else if (arg6 == 3) {
-               if (var15.X) {
+               if (var15.shadow) {
                   this.A[arg3][arg4][arg2] = 50;
                   this.A[arg3][arg4 + 1][arg2] = 50;
                }
 
-               if (var15.N) {
+               if (var15.occlude) {
                   this.E[arg3][arg4][arg2] |= 1170;
                }
             }
 
-            if (var15.ab && arg1 != null) {
-               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            if (var15.blockwalk && arg1 != null) {
+               arg1.a(arg6, 37679, var15.blockrange, arg7, arg4, arg2);
             }
 
-            if (var15.S != 16) {
-               arg0.a(arg2, var15.S, arg3, arg4, 0);
+            if (var15.wallwidth != 16) {
+               arg0.a(arg2, var15.wallwidth, arg3, arg4, 0);
             }
 
          } else if (arg7 == 1) {
             ModelSource var29;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var29 = var15.a(1, arg6, var10, var11, var12, var13, -1);
             } else {
-               var29 = new ClientLocAnim(var15.T, var12, var13, var11, 1, (byte)3, arg8, true, var10, arg6);
+               var29 = new ClientLocAnim(var15.anim, var12, var13, var11, 1, (byte)3, arg8, true, var10, arg6);
             }
 
             arg0.a(var14, 49878, 0, D[arg6], (ModelSource)null, arg4, var16, var17, arg2, var29, arg3);
-            if (var15.X) {
+            if (var15.shadow) {
                if (arg6 == 0) {
                   this.A[arg3][arg4][arg2 + 1] = 50;
                } else if (arg6 == 1) {
@@ -1039,24 +1039,24 @@ public class World {
                }
             }
 
-            if (var15.ab && arg1 != null) {
-               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            if (var15.blockwalk && arg1 != null) {
+               arg1.a(arg6, 37679, var15.blockrange, arg7, arg4, arg2);
             }
 
          } else if (arg7 == 2) {
             int var30 = arg6 + 1 & 3;
             ModelSource var31;
             ModelSource var32;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var31 = var15.a(2, arg6 + 4, var10, var11, var12, var13, -1);
                var32 = var15.a(2, var30, var10, var11, var12, var13, -1);
             } else {
-               var31 = new ClientLocAnim(var15.T, var12, var13, var11, 2, (byte)3, arg8, true, var10, arg6 + 4);
-               var32 = new ClientLocAnim(var15.T, var12, var13, var11, 2, (byte)3, arg8, true, var10, var30);
+               var31 = new ClientLocAnim(var15.anim, var12, var13, var11, 2, (byte)3, arg8, true, var10, arg6 + 4);
+               var32 = new ClientLocAnim(var15.anim, var12, var13, var11, 2, (byte)3, arg8, true, var10, var30);
             }
 
             arg0.a(var14, 49878, u[var30], u[arg6], var32, arg4, var16, var17, arg2, var31, arg3);
-            if (var15.N) {
+            if (var15.occlude) {
                if (arg6 == 0) {
                   this.E[arg3][arg4][arg2] |= 585;
                   this.E[arg3][arg4][arg2 + 1] |= 1170;
@@ -1072,24 +1072,24 @@ public class World {
                }
             }
 
-            if (var15.ab && arg1 != null) {
-               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            if (var15.blockwalk && arg1 != null) {
+               arg1.a(arg6, 37679, var15.blockrange, arg7, arg4, arg2);
             }
 
-            if (var15.S != 16) {
-               arg0.a(arg2, var15.S, arg3, arg4, 0);
+            if (var15.wallwidth != 16) {
+               arg0.a(arg2, var15.wallwidth, arg3, arg4, 0);
             }
 
          } else if (arg7 == 3) {
             ModelSource var33;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var33 = var15.a(3, arg6, var10, var11, var12, var13, -1);
             } else {
-               var33 = new ClientLocAnim(var15.T, var12, var13, var11, 3, (byte)3, arg8, true, var10, arg6);
+               var33 = new ClientLocAnim(var15.anim, var12, var13, var11, 3, (byte)3, arg8, true, var10, arg6);
             }
 
             arg0.a(var14, 49878, 0, D[arg6], (ModelSource)null, arg4, var16, var17, arg2, var33, arg3);
-            if (var15.X) {
+            if (var15.shadow) {
                if (arg6 == 0) {
                   this.A[arg3][arg4][arg2 + 1] = 50;
                } else if (arg6 == 1) {
@@ -1101,25 +1101,25 @@ public class World {
                }
             }
 
-            if (var15.ab && arg1 != null) {
-               arg1.a(arg6, 37679, var15.Z, arg7, arg4, arg2);
+            if (var15.blockwalk && arg1 != null) {
+               arg1.a(arg6, 37679, var15.blockrange, arg7, arg4, arg2);
             }
 
          } else if (arg7 == 9) {
             ModelSource var34;
-            if (var15.T == -1 && var15.V == null) {
+            if (var15.anim == -1 && var15.multiloc == null) {
                var34 = var15.a(arg7, arg6, var10, var11, var12, var13, -1);
             } else {
-               var34 = new ClientLocAnim(var15.T, var12, var13, var11, arg7, (byte)3, arg8, true, var10, arg6);
+               var34 = new ClientLocAnim(var15.anim, var12, var13, var11, arg7, (byte)3, arg8, true, var10, arg6);
             }
 
             arg0.a(arg3, 1, arg2, var34, var17, 0, arg4, -896, 1, var14, var16);
-            if (var15.ab && arg1 != null) {
-               arg1.a(arg2, arg6, var15.r, var15.R, var15.Z, arg4, (byte)52);
+            if (var15.blockwalk && arg1 != null) {
+               arg1.a(arg2, arg6, var15.length, var15.width, var15.blockrange, arg4, (byte)52);
             }
 
          } else {
-            if (var15.l) {
+            if (var15.hillskew) {
                if (arg6 == 1) {
                   int var35 = var13;
                   var13 = var12;
@@ -1144,10 +1144,10 @@ public class World {
 
             if (arg7 == 4) {
                ModelSource var39;
-               if (var15.T == -1 && var15.V == null) {
+               if (var15.anim == -1 && var15.multiloc == null) {
                   var39 = var15.a(4, 0, var10, var11, var12, var13, -1);
                } else {
-                  var39 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+                  var39 = new ClientLocAnim(var15.anim, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
                }
 
                arg0.a(arg3, u[arg6], arg6 * 512, var16, var17, arg4, 0, arg2, 0, var14, var39, -930);
@@ -1155,41 +1155,41 @@ public class World {
                int var40 = 16;
                int var41 = arg0.b(arg3, arg4, arg2);
                if (var41 > 0) {
-                  var40 = LocType.a(var41 >> 14 & 32767).S;
+                  var40 = LocType.get(var41 >> 14 & 32767).wallwidth;
                }
 
                ModelSource var42;
-               if (var15.T == -1 && var15.V == null) {
+               if (var15.anim == -1 && var15.multiloc == null) {
                   var42 = var15.a(4, 0, var10, var11, var12, var13, -1);
                } else {
-                  var42 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+                  var42 = new ClientLocAnim(var15.anim, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
                }
 
                arg0.a(arg3, u[arg6], arg6 * 512, var16, var17, arg4, f[arg6] * var40, arg2, x[arg6] * var40, var14, var42, -930);
             } else if (arg7 == 6) {
                ModelSource var43;
-               if (var15.T == -1 && var15.V == null) {
+               if (var15.anim == -1 && var15.multiloc == null) {
                   var43 = var15.a(4, 0, var10, var11, var12, var13, -1);
                } else {
-                  var43 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+                  var43 = new ClientLocAnim(var15.anim, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
                }
 
                arg0.a(arg3, 256, arg6, var16, var17, arg4, 0, arg2, 0, var14, var43, -930);
             } else if (arg7 == 7) {
                ModelSource var44;
-               if (var15.T == -1 && var15.V == null) {
+               if (var15.anim == -1 && var15.multiloc == null) {
                   var44 = var15.a(4, 0, var10, var11, var12, var13, -1);
                } else {
-                  var44 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+                  var44 = new ClientLocAnim(var15.anim, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
                }
 
                arg0.a(arg3, 512, arg6, var16, var17, arg4, 0, arg2, 0, var14, var44, -930);
             } else if (arg7 == 8) {
                ModelSource var45;
-               if (var15.T == -1 && var15.V == null) {
+               if (var15.anim == -1 && var15.multiloc == null) {
                   var45 = var15.a(4, 0, var10, var11, var12, var13, -1);
                } else {
-                  var45 = new ClientLocAnim(var15.T, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
+                  var45 = new ClientLocAnim(var15.anim, var12, var13, var11, 4, (byte)3, arg8, true, var10, 0);
                }
 
                arg0.a(arg3, 768, arg6, var16, var17, arg4, 0, arg2, 0, var14, var45, -930);
@@ -1197,10 +1197,10 @@ public class World {
          }
       } else {
          ModelSource var19;
-         if (var15.T == -1 && var15.V == null) {
+         if (var15.anim == -1 && var15.multiloc == null) {
             var19 = var15.a(10, arg6, var10, var11, var12, var13, -1);
          } else {
-            var19 = new ClientLocAnim(var15.T, var12, var13, var11, 10, (byte)3, arg8, true, var10, arg6);
+            var19 = new ClientLocAnim(var15.anim, var12, var13, var11, 10, (byte)3, arg8, true, var10, arg6);
          }
 
          if (var19 != null) {
@@ -1212,14 +1212,14 @@ public class World {
             int var21;
             int var22;
             if (arg6 != 1 && arg6 != 3) {
-               var21 = var15.R;
-               var22 = var15.r;
+               var21 = var15.width;
+               var22 = var15.length;
             } else {
-               var21 = var15.r;
-               var22 = var15.R;
+               var21 = var15.length;
+               var22 = var15.width;
             }
 
-            if (arg0.a(arg3, var21, arg2, var19, var17, var20, arg4, -896, var22, var14, var16) && var15.X) {
+            if (arg0.a(arg3, var21, arg2, var19, var17, var20, arg4, -896, var22, var14, var16) && var15.shadow) {
                Model var23;
                if (var19 instanceof Model) {
                   var23 = (Model)var19;
@@ -1244,8 +1244,8 @@ public class World {
             }
          }
 
-         if (var15.ab && arg1 != null) {
-            arg1.a(arg2, arg6, var15.r, var15.R, var15.Z, arg4, (byte)52);
+         if (var15.blockwalk && arg1 != null) {
+            arg1.a(arg2, arg6, var15.length, var15.width, var15.blockrange, arg4, (byte)52);
          }
 
       }
@@ -1456,9 +1456,9 @@ public class World {
                   int var15 = arg0 + var13;
                   int var16 = arg1 + var12;
                   if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
-                     LocType var17 = LocType.a(var6);
-                     if (var14 != 22 || !lowMemory || var17.b || var17.h) {
-                        var4 &= var17.c(-321);
+                     LocType var17 = LocType.get(var6);
+                     if (var14 != 22 || !lowMemory || var17.active || var17.forcedecor) {
+                        var4 &= var17.modelsAreReady();
                         var9 = true;
                      }
                   }

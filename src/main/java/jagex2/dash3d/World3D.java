@@ -373,7 +373,7 @@ public class World3D {
       if (var12 != null) {
          for(int var13 = 0; var13 < var12.p; ++var13) {
             if (var12.q[var13].e instanceof Model) {
-               int var14 = ((Model)var12.q[var13].e).Z;
+               int var14 = ((Model)var12.q[var13].e).objRaise;
                if (var14 > var11) {
                   var11 = var14;
                }
@@ -943,27 +943,27 @@ public class World3D {
    public void a(Model arg0, Model arg1, int arg2, int arg3, int arg4, boolean arg5) {
       ++this.mb;
       int var7 = 0;
-      int[] var8 = arg1.z;
-      int var9 = arg1.y;
+      int[] var8 = arg1.vertexX;
+      int var9 = arg1.vertexCount;
       int var10 = arg1.T >> 16;
       int var11 = arg1.T << 16 >> 16;
       int var12 = arg1.U >> 16;
       int var13 = arg1.U << 16 >> 16;
 
-      for(int var14 = 0; var14 < arg0.y; ++var14) {
+      for(int var14 = 0; var14 < arg0.vertexCount; ++var14) {
          VertexNormal var15 = arg0.j[var14];
          VertexNormal var16 = arg0.fb[var14];
          if (var16.d != 0) {
-            int var17 = arg0.A[var14] - arg3;
+            int var17 = arg0.vertexY[var14] - arg3;
             if (var17 <= arg1.W) {
-               int var18 = arg0.z[var14] - arg2;
+               int var18 = arg0.vertexX[var14] - arg2;
                if (var18 >= var10 && var18 <= var11) {
-                  int var19 = arg0.B[var14] - arg4;
+                  int var19 = arg0.vertexZ[var14] - arg4;
                   if (var19 >= var13 && var19 <= var12) {
                      for(int var20 = 0; var20 < var9; ++var20) {
                         VertexNormal var21 = arg1.j[var20];
                         VertexNormal var22 = arg1.fb[var20];
-                        if (var8[var20] == var18 && arg1.B[var20] == var19 && arg1.A[var20] == var17 && var22.d != 0) {
+                        if (var8[var20] == var18 && arg1.vertexZ[var20] == var19 && arg1.vertexY[var20] == var17 && var22.d != 0) {
                            var15.a += var22.a;
                            var15.b += var22.b;
                            var15.c += var22.c;
@@ -1521,7 +1521,7 @@ public class World3D {
                                     }
                                  }
 
-                                 if (var22 != null && !this.h(var7, var4, var5, var22.f.k)) {
+                                 if (var22 != null && !this.h(var7, var4, var5, var22.f.minY)) {
                                     if ((var22.d & var20) != 0) {
                                        var22.f.a(var22.e, I, J, K, L, var22.b - F, var22.a - G, var22.c - H, var22.g);
                                     } else if ((var22.d & 768) != 0) {
@@ -1724,7 +1724,7 @@ public class World3D {
 
                                     Loc var63 = M[var56];
                                     var63.l = y;
-                                    if (!this.a(var7, var63.g, var63.h, var63.i, var63.j, var63.e.k)) {
+                                    if (!this.a(var7, var63.g, var63.h, var63.i, var63.j, var63.e.minY)) {
                                        var63.e.a(var63.f, I, J, K, L, var63.c - F, var63.b - G, var63.d - H, var63.m);
                                     }
 
@@ -1798,7 +1798,7 @@ public class World3D {
 
          if (var3.A != 0) {
             Decor var72 = var3.m;
-            if (var72 != null && !this.h(var7, var4, var5, var72.f.k)) {
+            if (var72 != null && !this.h(var7, var4, var5, var72.f.minY)) {
                if ((var72.d & var3.A) != 0) {
                   var72.f.a(var72.e, I, J, K, L, var72.b - F, var72.a - G, var72.c - H, var72.g);
                } else if ((var72.d & 768) != 0) {
