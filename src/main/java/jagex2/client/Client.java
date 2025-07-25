@@ -1420,7 +1420,7 @@ public class Client extends GameShell {
 		this.locChanges = null;
 		this.H(28614);
 		LocType.a(false);
-		NpcType.a(false);
+		NpcType.unload(false);
 		ObjType.unload();
 		Component.clear();
 		FloType.e = null;
@@ -3359,7 +3359,7 @@ public class Client extends GameShell {
 				if (localPlayer.Eb == null) {
 					Component.types(comId).model = (localPlayer.appearance[11] << 5) + (localPlayer.appearance[8] << 10) + (localPlayer.appearance[0] << 15) + (localPlayer.colour[0] << 25) + (localPlayer.colour[4] << 20) + localPlayer.appearance[1];
 				} else {
-					Component.types(comId).model = (int) (localPlayer.Eb.h + 305419896L);
+					Component.types(comId).model = (int) (localPlayer.Eb.id + 305419896L);
 				}
 
 				this.ptype = -1;
@@ -4819,10 +4819,10 @@ public class Client extends GameShell {
 
 				if (entityType == 1) {
 					ClientNpc var11 = this.npcs[typeId];
-					if (var11.type.v == 1 && (var11.x & 127) == 64 && (var11.z & 127) == 64) {
+					if (var11.type.size == 1 && (var11.x & 127) == 64 && (var11.z & 127) == 64) {
 						for (int var12 = 0; var12 < this.npcCount; ++var12) {
 							ClientNpc var13 = this.npcs[this.npcIds[var12]];
-							if (var13 != null && var11 != var13 && var13.type.v == 1 && var11.x == var13.x && var11.z == var13.z) {
+							if (var13 != null && var11 != var13 && var13.type.size == 1 && var11.x == var13.x && var11.z == var13.z) {
 								this.a(var13.type, z, x, this.npcIds[var12], (byte) -76);
 							}
 						}
@@ -4843,7 +4843,7 @@ public class Client extends GameShell {
 					if ((var16.x & 127) == 64 && (var16.z & 127) == 64) {
 						for (int var17 = 0; var17 < this.npcCount; ++var17) {
 							ClientNpc var18 = this.npcs[this.npcIds[var17]];
-							if (var18 != null && var18.type.v == 1 && var16.x == var18.x && var16.z == var18.z) {
+							if (var18 != null && var18.type.size == 1 && var16.x == var18.x && var16.z == var18.z) {
 								this.a(var18.type, z, x, this.npcIds[var17], (byte) -76);
 							}
 						}
@@ -5133,7 +5133,7 @@ public class Client extends GameShell {
 	public final void k(int arg0) {
 		LocType.v.clear();
 		LocType.e.clear();
-		NpcType.o.clear();
+		NpcType.modelCache.clear();
 		ObjType.modelCache.clear();
 		ObjType.iconCache.clear();
 		ClientPlayer.Ib.clear();
@@ -5506,7 +5506,7 @@ public class Client extends GameShell {
 		for (int var4 = 0; var4 < this.npcCount; ++var4) {
 			ClientNpc var5 = this.npcs[this.npcIds[var4]];
 			int var6 = (this.npcIds[var4] << 14) + 536870912;
-			if (var5 != null && var5.isVisible() && var5.type.x == arg1 && var5.type.b(-993)) {
+			if (var5 != null && var5.isVisible() && var5.type.alwaysontop == arg1 && var5.type.isNotMulti()) {
 				int var7 = var5.x >> 7;
 				int var8 = var5.z >> 7;
 				if (var7 >= 0 && var7 < 104 && var8 >= 0 && var8 < 104) {
@@ -5518,7 +5518,7 @@ public class Client extends GameShell {
 						this.Hb[var7][var8] = this.Ag;
 					}
 
-					if (!var5.type.k) {
+					if (!var5.type.active) {
 						var6 += Integer.MIN_VALUE;
 					}
 
@@ -5868,13 +5868,13 @@ public class Client extends GameShell {
 			int var8 = arg0.g1();
 			if ((var8 & 1) != 0) {
 				var7.type = NpcType.get(arg0.g2_alt2());
-				var7.size = var7.type.v;
-				var7.G = var7.type.E;
-				var7.Z = var7.type.y;
-				var7.ab = var7.type.w;
-				var7.bb = var7.type.u;
-				var7.cb = var7.type.m;
-				var7.readyanim = var7.type.a;
+				var7.size = var7.type.size;
+				var7.G = var7.type.turnspeed;
+				var7.Z = var7.type.walkanim;
+				var7.ab = var7.type.walkanim_b;
+				var7.bb = var7.type.walkanim_r;
+				var7.cb = var7.type.walkanim_l;
+				var7.readyanim = var7.type.readyanim;
 			}
 
 			if ((var8 & 64) != 0) {
@@ -6957,7 +6957,7 @@ public class Client extends GameShell {
 			int var3 = this.npcIds[var2];
 			ClientNpc var4 = this.npcs[var3];
 			if (var4 != null) {
-				this.a(var4.type.v, (byte) -97, (ClientEntity) var4);
+				this.a(var4.type.size, (byte) -97, (ClientEntity) var4);
 			}
 		}
 
@@ -8345,13 +8345,13 @@ public class Client extends GameShell {
 		}
 
 		if (this.menuSize < 400) {
-			if (arg0.b != null) {
-				arg0 = arg0.b(false);
+			if (arg0.multinpc != null) {
+				arg0 = arg0.getMultiNpc();
 			}
 
 			if (arg0 != null) {
-				if (arg0.k) {
-					String var6 = arg0.F;
+				if (arg0.active) {
+					String var6 = arg0.name;
 					if (arg0.visLevel != 0) {
 						var6 = var6 + getCombatLevelColorTag(arg0.visLevel, localPlayer.vislevel) + " (level-" + arg0.visLevel + ")";
 					}
@@ -8374,10 +8374,10 @@ public class Client extends GameShell {
 								this.menuSize++;
 							}
 						} else {
-							if (arg0.z != null) {
+							if (arg0.op != null) {
 								for (int var7 = 4; var7 >= 0; --var7) {
-									if (arg0.z[var7] != null && !arg0.z[var7].equalsIgnoreCase("attack")) {
-										this.menuOption[this.menuSize] = arg0.z[var7] + " @yel@" + var6;
+									if (arg0.op[var7] != null && !arg0.op[var7].equalsIgnoreCase("attack")) {
+										this.menuOption[this.menuSize] = arg0.op[var7] + " @yel@" + var6;
 										if (var7 == 0) {
 											this.menuAction[this.menuSize] = 318;
 										}
@@ -8406,15 +8406,15 @@ public class Client extends GameShell {
 								}
 							}
 
-							if (arg0.z != null) {
+							if (arg0.op != null) {
 								for (int var8 = 4; var8 >= 0; --var8) {
-									if (arg0.z[var8] != null && arg0.z[var8].equalsIgnoreCase("attack")) {
+									if (arg0.op[var8] != null && arg0.op[var8].equalsIgnoreCase("attack")) {
 										short var9 = 0;
 										if (arg0.visLevel > localPlayer.vislevel) {
 											var9 = 2000;
 										}
 
-										this.menuOption[this.menuSize] = arg0.z[var8] + " @yel@" + var6;
+										this.menuOption[this.menuSize] = arg0.op[var8] + " @yel@" + var6;
 										if (var8 == 0) {
 											this.menuAction[this.menuSize] = var9 + 318;
 										}
@@ -8845,11 +8845,11 @@ public class Client extends GameShell {
 				ClientNpc var19 = this.npcs[this.npcIds[var18]];
 				if (var19 != null && var19.isVisible()) {
 					NpcType var20 = var19.type;
-					if (var20.b != null) {
-						var20 = var20.b(false);
+					if (var20.multinpc != null) {
+						var20 = var20.getMultiNpc();
 					}
 
-					if (var20 != null && var20.p && var20.k) {
+					if (var20 != null && var20.minimap && var20.active) {
 						int var21 = var19.x / 32 - localPlayer.x / 32;
 						int var22 = var19.z / 32 - localPlayer.z / 32;
 						this.a(var22, true, this.imageMapdot1, var21);
@@ -9822,8 +9822,8 @@ public class Client extends GameShell {
 						}
 					}
 
-					model.createLabelReferences(7);
-					model.applyTransform(SeqType.types[localPlayer.readyanim].frames[0], (byte) 6);
+					model.createLabelReferences();
+					model.applyTransform(SeqType.types[localPlayer.readyanim].frames[0]);
 					model.calculateNormals(64, 850, -30, -50, -30, true);
 
 					com.modelType = 5;
@@ -11605,16 +11605,16 @@ public class Client extends GameShell {
 					ClientNpc var53 = this.npcs[var6];
 					if (var53 != null) {
 						NpcType var54 = var53.type;
-						if (var54.b != null) {
-							var54 = var54.b(false);
+						if (var54.multinpc != null) {
+							var54 = var54.getMultiNpc();
 						}
 
 						if (var54 != null) {
 							String var55;
-							if (var54.N != null) {
-								var55 = new String(var54.N);
+							if (var54.desc != null) {
+								var55 = new String(var54.desc);
 							} else {
-								var55 = "It's a " + var54.F + ".";
+								var55 = "It's a " + var54.name + ".";
 							}
 
 							this.addMessage(var55, "", 0);
@@ -11839,8 +11839,8 @@ public class Client extends GameShell {
 			if (var3 != null && var3.isVisible()) {
 				if (var3 instanceof ClientNpc) {
 					NpcType var4 = ((ClientNpc) var3).type;
-					if (var4.b != null) {
-						var4 = var4.b(false);
+					if (var4.multinpc != null) {
+						var4 = var4.getMultiNpc();
 					}
 
 					if (var4 == null) {
@@ -11850,10 +11850,10 @@ public class Client extends GameShell {
 
 				if (var2 >= this.od) {
 					NpcType var7 = ((ClientNpc) var3).type;
-					if (var7.r >= 0 && var7.r < this.tf.length) {
+					if (var7.headicon >= 0 && var7.headicon < this.tf.length) {
 						this.a(var3, false, var3.A + 15);
 						if (this.Bc > -1) {
-							this.tf[var7.r].b(this.Cc - 30, this.Bc - 12, -488);
+							this.tf[var7.headicon].b(this.Cc - 30, this.Bc - 12, -488);
 						}
 					}
 
@@ -12615,13 +12615,13 @@ public class Client extends GameShell {
 
 			int var9 = arg0.gBit(1);
 			var5.type = NpcType.get(arg0.gBit(13));
-			var5.size = var5.type.v;
-			var5.G = var5.type.E;
-			var5.Z = var5.type.y;
-			var5.ab = var5.type.w;
-			var5.bb = var5.type.u;
-			var5.cb = var5.type.m;
-			var5.readyanim = var5.type.a;
+			var5.size = var5.type.size;
+			var5.G = var5.type.turnspeed;
+			var5.Z = var5.type.walkanim;
+			var5.ab = var5.type.walkanim_b;
+			var5.bb = var5.type.walkanim_r;
+			var5.cb = var5.type.walkanim_l;
+			var5.readyanim = var5.type.readyanim;
 			var5.move(var9 == 1, localPlayer.routeTileX[0] + var8, localPlayer.routeTileZ[0] + var7);
 		}
 

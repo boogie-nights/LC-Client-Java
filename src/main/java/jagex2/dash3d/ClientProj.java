@@ -124,10 +124,10 @@ public class ClientProj extends ModelSource {
 
          Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.G, var3));
          if (var3 != -1) {
-            var4.createLabelReferences(7);
-            var4.applyTransform(var3, (byte)6);
-            var4.db = null;
-            var4.cb = null;
+            var4.createLabelReferences();
+            var4.applyTransform(var3);
+            var4.labelFaces = null;
+            var4.labelVertices = null;
          }
 
          if (this.m.l != 128 || this.m.m != 128) {

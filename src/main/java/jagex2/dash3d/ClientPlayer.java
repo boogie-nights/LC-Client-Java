@@ -74,7 +74,7 @@ public class ClientPlayer extends ClientEntity {
       if (!this.Fb) {
          return null;
       } else if (this.Eb != null) {
-         return this.Eb.getHeadModel(858);
+         return this.Eb.getHeadModel();
       } else {
          boolean var2 = false;
 
@@ -141,7 +141,7 @@ public class ClientPlayer extends ClientEntity {
             var2 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.Eb.a(var2, -1, 0, (int[])null);
+         return this.Eb.getModel(var2, -1, (int[])null);
       } else {
          long var4 = this.Bb;
          int var6 = -1;
@@ -246,7 +246,7 @@ public class ClientPlayer extends ClientEntity {
                }
             }
 
-            var11.createLabelReferences(7);
+            var11.createLabelReferences();
             var11.calculateNormals(64, 850, -30, -50, -30, true);
             Ib.put(var11, var4);
             this.wb = var4;
@@ -255,17 +255,17 @@ public class ClientPlayer extends ClientEntity {
          if (this.Kb) {
             return var11;
          } else {
-            Model var22 = Model.t;
+            Model var22 = Model.empty;
             var22.a(AnimFrame.a(this.Jb, var6) & AnimFrame.a(this.Jb, var7), var11, 1244);
             if (var6 != -1 && var7 != -1) {
-               var22.a(var7, 0, var6, SeqType.types[super.primarySeqId].j);
+               var22.applyTransforms(var6, var7, SeqType.types[super.primarySeqId].j);
             } else if (var6 != -1) {
-               var22.applyTransform(var6, (byte)6);
+               var22.applyTransform(var6);
             }
 
-            var22.c(this.Tb);
-            var22.db = null;
-            var22.cb = null;
+            var22.calculateBoundsCylinder();
+            var22.labelFaces = null;
+            var22.labelVertices = null;
             return var22;
          }
       }
@@ -296,10 +296,10 @@ public class ClientPlayer extends ClientEntity {
                   if (var4 != null) {
                      Model var5 = new Model(false, false, true, var4, AnimFrame.a(this.Jb, super.spotanimFrame));
                      var5.translate(0, 0, false, -super.spotanimHeight);
-                     var5.createLabelReferences(7);
-                     var5.applyTransform(var3.i.frames[super.spotanimFrame], (byte)6);
-                     var5.db = null;
-                     var5.cb = null;
+                     var5.createLabelReferences();
+                     var5.applyTransform(var3.i.frames[super.spotanimFrame]);
+                     var5.labelFaces = null;
+                     var5.labelVertices = null;
                      if (var3.l != 128 || var3.m != 128) {
                         var5.scale(var3.m, var3.l, 9, var3.l);
                      }
@@ -383,7 +383,7 @@ public class ClientPlayer extends ClientEntity {
             }
 
             if (this.appearance[i] >= 512 && this.appearance[i] - 512 < ObjType.count) {
-               int var6 = ObjType.get(this.appearance[i] - 512).g;
+               int var6 = ObjType.get(this.appearance[i] - 512).team;
                if (var6 != 0) {
                   this.Nb = var6;
                }

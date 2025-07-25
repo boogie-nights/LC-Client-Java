@@ -20,7 +20,7 @@ public class ClientNpc extends ClientEntity {
             var3 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.type.a(var2, var3, 0, SeqType.types[super.primarySeqId].j);
+         return this.type.getModel(var2, var3, SeqType.types[super.primarySeqId].j);
       } else {
          int var4 = -1;
          if (arg0 != 122) {
@@ -31,7 +31,7 @@ public class ClientNpc extends ClientEntity {
             var4 = SeqType.types[super.u].frames[super.v];
          }
 
-         return this.type.a(var4, -1, 0, (int[])null);
+         return this.type.getModel(var4, -1, (int[])null);
       }
    }
 
@@ -56,10 +56,10 @@ public class ClientNpc extends ClientEntity {
                      int var6 = var4.i.frames[super.spotanimFrame];
                      Model var7 = new Model(false, false, true, var5, AnimFrame.a(this.qb, var6));
                      var7.translate(0, 0, false, -super.spotanimHeight);
-                     var7.createLabelReferences(7);
-                     var7.applyTransform(var6, (byte)6);
-                     var7.db = null;
-                     var7.cb = null;
+                     var7.createLabelReferences();
+                     var7.applyTransform(var6);
+                     var7.labelFaces = null;
+                     var7.labelVertices = null;
                      if (var4.l != 128 || var4.m != 128) {
                         var7.scale(var4.m, var4.l, 9, var4.l);
                      }
@@ -70,7 +70,7 @@ public class ClientNpc extends ClientEntity {
                   }
                }
 
-               if (this.type.v == 1) {
+               if (this.type.size == 1) {
                   var3.picking = true;
                }
 

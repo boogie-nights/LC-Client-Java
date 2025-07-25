@@ -107,7 +107,7 @@ public class ObjType {
 	public int manwear2;
 
 	@ObfuscatedName("GSCQQEUA.g")
-	public int g;
+	public int team;
 
 	@ObfuscatedName("GSCQQEUA.h")
 	public int certlink;
@@ -224,7 +224,7 @@ public class ObjType {
 			obj.desc = "Login to a members' server to use this object.".getBytes();
 			obj.op = null;
 			obj.iop = null;
-			obj.g = 0;
+			obj.team = 0;
 		}
 
 		return obj;
@@ -270,7 +270,7 @@ public class ObjType {
 		this.resizez = 128;
 		this.ambient = 0;
 		this.contrast = 0;
-		this.g = 0;
+		this.team = 0;
 	}
 
 	@ObfuscatedName("GSCQQEUA.a(BLMFMVIYHT;)V")
@@ -382,7 +382,7 @@ public class ObjType {
 			} else if (code == 114) {
 				this.contrast = buf.g1b() * 5;
 			} else if (code == 115) {
-				this.g = buf.g1();
+				this.team = buf.g1();
 			}
 		}
 	}

@@ -82,7 +82,7 @@ public class Model extends ModelSource {
 	@ObfuscatedName("LZYQDKJV.S")
 	public int S;
 	@ObfuscatedName("LZYQDKJV.t")
-	public static Model t = new Model(852);
+	public static Model empty = new Model(852);
 	@ObfuscatedName("LZYQDKJV.u")
 	public static int[] u = new int[2000];
 	@ObfuscatedName("LZYQDKJV.v")
@@ -160,9 +160,9 @@ public class Model extends ModelSource {
 	@ObfuscatedName("LZYQDKJV.gb")
 	public static Metadata[] gb;
 	@ObfuscatedName("LZYQDKJV.cb")
-	public int[][] cb;
+	public int[][] labelVertices;
 	@ObfuscatedName("LZYQDKJV.db")
-	public int[][] db;
+	public int[][] labelFaces;
 
 	@ObfuscatedName("LZYQDKJV.a(Z)V")
 	public static void a(boolean arg0) {
@@ -752,7 +752,7 @@ public class Model extends ModelSource {
 				}
 			}
 
-			this.c(this.m);
+			this.calculateBoundsCylinder();
 		}
 	}
 
@@ -946,8 +946,8 @@ public class Model extends ModelSource {
 			this.faceColour = arg1.faceColour;
 			this.K = arg1.K;
 			this.N = arg1.N;
-			this.db = arg1.db;
-			this.cb = arg1.cb;
+			this.labelFaces = arg1.labelFaces;
+			this.labelVertices = arg1.labelVertices;
 			this.D = arg1.D;
 			this.E = arg1.E;
 			this.F = arg1.F;
@@ -989,7 +989,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("LZYQDKJV.c(I)V")
-	public void c(int arg0) {
+	public void calculateBoundsCylinder() {
 		super.k = 0;
 		this.V = 0;
 		this.W = 0;
@@ -1014,7 +1014,6 @@ public class Model extends ModelSource {
 
 		this.V = (int) (Math.sqrt((double) this.V) + 0.99D);
 		this.Y = (int) (Math.sqrt((double) (super.k * super.k + this.V * this.V)) + 0.99D);
-		int var7 = 64 / arg0;
 		this.X = this.Y + (int) (Math.sqrt((double) (this.W * this.W + this.V * this.V)) + 0.99D);
 	}
 
@@ -1096,87 +1095,82 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("LZYQDKJV.f(I)V")
-	public void createLabelReferences(int arg0) {
-		if (arg0 == 7) {
-			int var10002;
-			if (this.ab != null) {
-				int[] var2 = new int[256];
-				int var3 = 0;
+	public void createLabelReferences() {
+		int var10002;
+		if (this.ab != null) {
+			int[] var2 = new int[256];
+			int var3 = 0;
 
-				for (int var4 = 0; var4 < this.y; ++var4) {
-					int var5 = this.ab[var4];
-					var10002 = var2[var5]++;
-					if (var5 > var3) {
-						var3 = var5;
-					}
+			for (int var4 = 0; var4 < this.y; ++var4) {
+				int var5 = this.ab[var4];
+				var10002 = var2[var5]++;
+				if (var5 > var3) {
+					var3 = var5;
 				}
-
-				this.cb = new int[var3 + 1][];
-
-				for (int var6 = 0; var6 <= var3; ++var6) {
-					this.cb[var6] = new int[var2[var6]];
-					var2[var6] = 0;
-				}
-
-				int var7 = 0;
-
-				while (var7 < this.y) {
-					int var8 = this.ab[var7];
-					this.cb[var8][var2[var8]++] = var7++;
-				}
-
-				this.ab = null;
 			}
 
-			if (this.bb != null) {
-				int[] var9 = new int[256];
-				int var10 = 0;
+			this.labelVertices = new int[var3 + 1][];
 
-				for (int var11 = 0; var11 < this.C; ++var11) {
-					int var12 = this.bb[var11];
-					var10002 = var9[var12]++;
-					if (var12 > var10) {
-						var10 = var12;
-					}
-				}
-
-				this.db = new int[var10 + 1][];
-
-				for (int var13 = 0; var13 <= var10; ++var13) {
-					this.db[var13] = new int[var9[var13]];
-					var9[var13] = 0;
-				}
-
-				int var14 = 0;
-
-				while (var14 < this.C) {
-					int var15 = this.bb[var14];
-					this.db[var15][var9[var15]++] = var14++;
-				}
-
-				this.bb = null;
+			for (int var6 = 0; var6 <= var3; ++var6) {
+				this.labelVertices[var6] = new int[var2[var6]];
+				var2[var6] = 0;
 			}
+
+			int var7 = 0;
+
+			while (var7 < this.y) {
+				int var8 = this.ab[var7];
+				this.labelVertices[var8][var2[var8]++] = var7++;
+			}
+
+			this.ab = null;
+		}
+
+		if (this.bb != null) {
+			int[] var9 = new int[256];
+			int var10 = 0;
+
+			for (int var11 = 0; var11 < this.C; ++var11) {
+				int var12 = this.bb[var11];
+				var10002 = var9[var12]++;
+				if (var12 > var10) {
+					var10 = var12;
+				}
+			}
+
+			this.labelFaces = new int[var10 + 1][];
+
+			for (int var13 = 0; var13 <= var10; ++var13) {
+				this.labelFaces[var13] = new int[var9[var13]];
+				var9[var13] = 0;
+			}
+
+			int var14 = 0;
+
+			while (var14 < this.C) {
+				int var15 = this.bb[var14];
+				this.labelFaces[var15][var9[var15]++] = var14++;
+			}
+
+			this.bb = null;
 		}
 	}
 
 	@ObfuscatedName("LZYQDKJV.a(IB)V")
-	public void applyTransform(int arg0, byte arg1) {
-		if (this.cb != null) {
+	public void applyTransform(int arg0) {
+		if (this.labelVertices != null) {
 			if (arg0 != -1) {
 				AnimFrame var3 = AnimFrame.b(arg0);
 				if (var3 != null) {
 					AnimBase var4 = var3.e;
-					if (arg1 == 6) {
-						boolean var5 = false;
-						Ab = 0;
-						Bb = 0;
-						Cb = 0;
+					boolean var5 = false;
+					Ab = 0;
+					Bb = 0;
+					Cb = 0;
 
-						for (int var6 = 0; var6 < var3.f; ++var6) {
-							int var7 = var3.g[var6];
-							this.a(var4.b[var7], var4.c[var7], var3.h[var6], var3.i[var6], var3.j[var6]);
-						}
-
+					for (int var6 = 0; var6 < var3.f; ++var6) {
+						int var7 = var3.g[var6];
+						this.a(var4.b[var7], var4.c[var7], var3.h[var6], var3.i[var6], var3.j[var6]);
 					}
 				}
 			}
@@ -1184,63 +1178,57 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("LZYQDKJV.a(III[I)V")
-	public void a(int arg0, int arg1, int arg2, int[] arg3) {
-		if (arg2 != -1) {
-			if (arg3 != null && arg0 != -1) {
-				AnimFrame var5 = AnimFrame.b(arg2);
-				if (var5 != null) {
-					AnimFrame var6 = AnimFrame.b(arg0);
-					if (var6 == null) {
-						this.applyTransform(arg2, (byte) 6);
-					} else {
-						AnimBase var7 = var5.e;
-						Ab = 0;
-						if (arg1 != 0) {
-							this.r = !this.r;
+	public void applyTransforms(int primaryTransformId, int secondaryTransformId, int[] seqmask) {
+		if (seqmask != null && secondaryTransformId != -1) {
+			AnimFrame var5 = AnimFrame.b(primaryTransformId);
+			if (var5 != null) {
+				AnimFrame var6 = AnimFrame.b(secondaryTransformId);
+				if (var6 == null) {
+					this.applyTransform(primaryTransformId);
+				} else {
+					AnimBase var7 = var5.e;
+					Ab = 0;
+					Bb = 0;
+					Cb = 0;
+					byte var8 = 0;
+					int var16 = var8 + 1;
+					int var9 = seqmask[var8];
+
+					for (int var10 = 0; var10 < var5.f; ++var10) {
+						int var11 = var5.g[var10];
+
+						while (var11 > var9) {
+							var9 = seqmask[var16++];
 						}
 
-						Bb = 0;
-						Cb = 0;
-						byte var8 = 0;
-						int var16 = var8 + 1;
-						int var9 = arg3[var8];
-
-						for (int var10 = 0; var10 < var5.f; ++var10) {
-							int var11 = var5.g[var10];
-
-							while (var11 > var9) {
-								var9 = arg3[var16++];
-							}
-
-							if (var9 != var11 || var7.b[var11] == 0) {
-								this.a(var7.b[var11], var7.c[var11], var5.h[var10], var5.i[var10], var5.j[var10]);
-							}
+						if (var9 != var11 || var7.b[var11] == 0) {
+							this.a(var7.b[var11], var7.c[var11], var5.h[var10], var5.i[var10], var5.j[var10]);
 						}
-
-						Ab = 0;
-						Bb = 0;
-						Cb = 0;
-						byte var12 = 0;
-						int var17 = var12 + 1;
-						int var13 = arg3[var12];
-
-						for (int var14 = 0; var14 < var6.f; ++var14) {
-							int var15 = var6.g[var14];
-
-							while (var15 > var13) {
-								var13 = arg3[var17++];
-							}
-
-							if (var13 == var15 || var7.b[var15] == 0) {
-								this.a(var7.b[var15], var7.c[var15], var6.h[var14], var6.i[var14], var6.j[var14]);
-							}
-						}
-
 					}
+
+					Ab = 0;
+					Bb = 0;
+					Cb = 0;
+					byte var12 = 0;
+					int var17 = var12 + 1;
+					int var13 = seqmask[var12];
+
+					for (int var14 = 0; var14 < var6.f; ++var14) {
+						int var15 = var6.g[var14];
+
+						while (var15 > var13) {
+							var13 = seqmask[var17++];
+						}
+
+						if (var13 == var15 || var7.b[var15] == 0) {
+							this.a(var7.b[var15], var7.c[var15], var6.h[var14], var6.i[var14], var6.j[var14]);
+						}
+					}
+
 				}
-			} else {
-				this.applyTransform(arg2, (byte) 6);
 			}
+		} else {
+			this.applyTransform(primaryTransformId);
 		}
 	}
 
@@ -1255,8 +1243,8 @@ public class Model extends ModelSource {
 
 			for (int var8 = 0; var8 < var6; ++var8) {
 				int var9 = arg1[var8];
-				if (var9 < this.cb.length) {
-					int[] var10 = this.cb[var9];
+				if (var9 < this.labelVertices.length) {
+					int[] var10 = this.labelVertices[var9];
 
 					for (int var11 = 0; var11 < var10.length; ++var11) {
 						int var12 = var10[var11];
@@ -1280,8 +1268,8 @@ public class Model extends ModelSource {
 		} else if (arg0 == 1) {
 			for (int var13 = 0; var13 < var6; ++var13) {
 				int var14 = arg1[var13];
-				if (var14 < this.cb.length) {
-					int[] var15 = this.cb[var14];
+				if (var14 < this.labelVertices.length) {
+					int[] var15 = this.labelVertices[var14];
 
 					for (int var16 = 0; var16 < var15.length; ++var16) {
 						int var17 = var15[var16];
@@ -1295,8 +1283,8 @@ public class Model extends ModelSource {
 		} else if (arg0 == 2) {
 			for (int var18 = 0; var18 < var6; ++var18) {
 				int var19 = arg1[var18];
-				if (var19 < this.cb.length) {
-					int[] var20 = this.cb[var19];
+				if (var19 < this.labelVertices.length) {
+					int[] var20 = this.labelVertices[var19];
 
 					for (int var21 = 0; var21 < var20.length; ++var21) {
 						int var22 = var20[var21];
@@ -1340,8 +1328,8 @@ public class Model extends ModelSource {
 		} else if (arg0 == 3) {
 			for (int var35 = 0; var35 < var6; ++var35) {
 				int var36 = arg1[var35];
-				if (var36 < this.cb.length) {
-					int[] var37 = this.cb[var36];
+				if (var36 < this.labelVertices.length) {
+					int[] var37 = this.labelVertices[var36];
 
 					for (int var38 = 0; var38 < var37.length; ++var38) {
 						int var39 = var37[var38];
@@ -1359,11 +1347,11 @@ public class Model extends ModelSource {
 			}
 
 		} else if (arg0 == 5) {
-			if (this.db != null && this.L != null) {
+			if (this.labelFaces != null && this.L != null) {
 				for (int var40 = 0; var40 < var6; ++var40) {
 					int var41 = arg1[var40];
-					if (var41 < this.db.length) {
-						int[] var42 = this.db[var41];
+					if (var41 < this.labelFaces.length) {
+						int[] var42 = this.labelFaces[var41];
 
 						for (int var43 = 0; var43 < var42.length; ++var43) {
 							int var44 = var42[var43];
@@ -1550,7 +1538,7 @@ public class Model extends ModelSource {
 		}
 
 		if (arg5) {
-			this.c(this.m);
+			this.calculateBoundsCylinder();
 		} else {
 			this.e(426);
 		}

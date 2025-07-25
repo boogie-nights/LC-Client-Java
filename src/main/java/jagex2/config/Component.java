@@ -233,7 +233,7 @@ public class Component {
 		}
 
 		if (type == 2) {
-			model = NpcType.get(id).getHeadModel(858);
+			model = NpcType.get(id).getHeadModel();
 		}
 
 		if (type == 3) {
@@ -589,15 +589,15 @@ public class Component {
 			model = new Model(false, false, true, model, AnimFrame.a(this.jb, primaryTransformId) & AnimFrame.a(this.jb, secondaryTransformId));
 
 			if (primaryTransformId != -1 || secondaryTransformId != -1) {
-				model.createLabelReferences(7);
+				model.createLabelReferences();
 			}
 
 			if (primaryTransformId != -1) {
-				model.applyTransform(primaryTransformId, (byte) 6);
+				model.applyTransform(primaryTransformId);
 			}
 
 			if (secondaryTransformId != -1) {
-				model.applyTransform(secondaryTransformId, (byte) 6);
+				model.applyTransform(secondaryTransformId);
 			}
 
 			model.calculateNormals(sb, H, -50, -10, -50, true);

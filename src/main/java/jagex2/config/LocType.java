@@ -302,10 +302,10 @@ public class LocType {
       }
 
       if (arg1 != -1) {
-         var20.createLabelReferences(7);
-         var20.applyTransform(arg1, (byte)6);
-         var20.db = null;
-         var20.cb = null;
+         var20.createLabelReferences();
+         var20.applyTransform(arg1);
+         var20.labelFaces = null;
+         var20.labelVertices = null;
       }
 
       while(arg0-- > 0) {

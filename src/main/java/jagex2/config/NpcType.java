@@ -9,421 +9,387 @@ import jagex2.io.Jagfile;
 import jagex2.io.Packet;
 
 public class NpcType {
-   @ObfuscatedName("SLDUQHOR.a")
-   public int a = -1;
-   @ObfuscatedName("SLDUQHOR.c")
-   public boolean c = true;
-   @ObfuscatedName("SLDUQHOR.d")
-   public int d = 932;
-   @ObfuscatedName("SLDUQHOR.g")
-   public int g = -1;
-   @ObfuscatedName("SLDUQHOR.h")
-   public long h = -1L;
-   @ObfuscatedName("SLDUQHOR.j")
-   public int j = 128;
-   @ObfuscatedName("SLDUQHOR.k")
-   public boolean k = true;
-   @ObfuscatedName("SLDUQHOR.l")
-   public int l = 128;
-   @ObfuscatedName("SLDUQHOR.m")
-   public int m = -1;
-   @ObfuscatedName("SLDUQHOR.p")
-   public boolean p = true;
-   @ObfuscatedName("SLDUQHOR.q")
-   public int q = -1;
-   @ObfuscatedName("SLDUQHOR.r")
-   public int r = -1;
-   @ObfuscatedName("SLDUQHOR.s")
-   public int visLevel = -1;
-   @ObfuscatedName("SLDUQHOR.t")
-   public int t = 7;
-   @ObfuscatedName("SLDUQHOR.u")
-   public int u = -1;
-   @ObfuscatedName("SLDUQHOR.v")
-   public byte v = 1;
-   @ObfuscatedName("SLDUQHOR.w")
-   public int w = -1;
-   @ObfuscatedName("SLDUQHOR.x")
-   public boolean x = false;
-   @ObfuscatedName("SLDUQHOR.y")
-   public int y = -1;
-   @ObfuscatedName("SLDUQHOR.A")
-   public boolean A = false;
-   @ObfuscatedName("SLDUQHOR.B")
-   public int B = -1;
-   @ObfuscatedName("SLDUQHOR.E")
-   public int E = 32;
-   @ObfuscatedName("SLDUQHOR.F")
-   public String F = "null";
-   @ObfuscatedName("SLDUQHOR.H")
-   public int H = -1;
-   @ObfuscatedName("SLDUQHOR.M")
-   public int M = -1;
-   @ObfuscatedName("SLDUQHOR.P")
-   public boolean P = false;
-   @ObfuscatedName("SLDUQHOR.o")
-   public static LruCache o = new LruCache(30);
-   @ObfuscatedName("SLDUQHOR.G")
-   public static byte G = 6;
-   @ObfuscatedName("SLDUQHOR.C")
-   public static int C;
-   @ObfuscatedName("SLDUQHOR.L")
-   public int L;
-   @ObfuscatedName("SLDUQHOR.O")
-   public static int O;
-   @ObfuscatedName("SLDUQHOR.Q")
-   public int Q;
-   @ObfuscatedName("SLDUQHOR.K")
-   public static Packet K;
-   @ObfuscatedName("SLDUQHOR.i")
-   public static Client i;
-   @ObfuscatedName("SLDUQHOR.N")
-   public byte[] N;
-   @ObfuscatedName("SLDUQHOR.D")
-   public static int[] D;
-   @ObfuscatedName("SLDUQHOR.J")
-   public int[] J;
-   @ObfuscatedName("SLDUQHOR.b")
-   public int[] b;
-   @ObfuscatedName("SLDUQHOR.e")
-   public int[] e;
-   @ObfuscatedName("SLDUQHOR.f")
-   public int[] f;
-   @ObfuscatedName("SLDUQHOR.n")
-   public int[] n;
-   @ObfuscatedName("SLDUQHOR.I")
-   public static NpcType[] I;
-   @ObfuscatedName("SLDUQHOR.z")
-   public String[] z;
+	@ObfuscatedName("SLDUQHOR.a")
+	public int readyanim = -1;
+	@ObfuscatedName("SLDUQHOR.c")
+	public boolean c = true;
+	@ObfuscatedName("SLDUQHOR.d")
+	public int d = 932;
+	@ObfuscatedName("SLDUQHOR.g")
+	public int g = -1;
+	@ObfuscatedName("SLDUQHOR.h")
+	public long id = -1L;
+	@ObfuscatedName("SLDUQHOR.j")
+	public int resizev = 128;
+	@ObfuscatedName("SLDUQHOR.k")
+	public boolean active = true;
+	@ObfuscatedName("SLDUQHOR.l")
+	public int resizeh = 128;
+	@ObfuscatedName("SLDUQHOR.m")
+	public int walkanim_l = -1;
+	@ObfuscatedName("SLDUQHOR.p")
+	public boolean minimap = true;
+	@ObfuscatedName("SLDUQHOR.q")
+	public int q = -1;
+	@ObfuscatedName("SLDUQHOR.r")
+	public int headicon = -1;
+	@ObfuscatedName("SLDUQHOR.s")
+	public int visLevel = -1;
+	@ObfuscatedName("SLDUQHOR.t")
+	public int t = 7;
+	@ObfuscatedName("SLDUQHOR.u")
+	public int walkanim_r = -1;
+	@ObfuscatedName("SLDUQHOR.v")
+	public byte size = 1;
+	@ObfuscatedName("SLDUQHOR.w")
+	public int walkanim_b = -1;
+	@ObfuscatedName("SLDUQHOR.x")
+	public boolean alwaysontop = false;
+	@ObfuscatedName("SLDUQHOR.y")
+	public int walkanim = -1;
+	@ObfuscatedName("SLDUQHOR.A")
+	public boolean A = false;
+	@ObfuscatedName("SLDUQHOR.B")
+	public int B = -1;
+	@ObfuscatedName("SLDUQHOR.E")
+	public int turnspeed = 32;
+	@ObfuscatedName("SLDUQHOR.F")
+	public String name = "null";
+	@ObfuscatedName("SLDUQHOR.H")
+	public int multivarbit = -1;
+	@ObfuscatedName("SLDUQHOR.M")
+	public int multivarp = -1;
+	@ObfuscatedName("SLDUQHOR.P")
+	public boolean P = false;
+	@ObfuscatedName("SLDUQHOR.o")
+	public static LruCache modelCache = new LruCache(30);
+	@ObfuscatedName("SLDUQHOR.G")
+	public static byte G = 6;
+	@ObfuscatedName("SLDUQHOR.C")
+	public static int count;
+	@ObfuscatedName("SLDUQHOR.L")
+	public int contrast;
+	@ObfuscatedName("SLDUQHOR.O")
+	public static int cachePos;
+	@ObfuscatedName("SLDUQHOR.Q")
+	public int ambient;
+	@ObfuscatedName("SLDUQHOR.K")
+	public static Packet data;
+	@ObfuscatedName("SLDUQHOR.i")
+	public static Client i;
+	@ObfuscatedName("SLDUQHOR.N")
+	public byte[] desc;
+	@ObfuscatedName("SLDUQHOR.D")
+	public static int[] idx;
+	@ObfuscatedName("SLDUQHOR.J")
+	public int[] recol_d;
+	@ObfuscatedName("SLDUQHOR.b")
+	public int[] multinpc;
+	@ObfuscatedName("SLDUQHOR.e")
+	public int[] heads;
+	@ObfuscatedName("SLDUQHOR.f")
+	public int[] models;
+	@ObfuscatedName("SLDUQHOR.n")
+	public int[] recol_s;
+	@ObfuscatedName("SLDUQHOR.I")
+	public static NpcType[] cache;
+	@ObfuscatedName("SLDUQHOR.z")
+	public String[] op;
 
-   @ObfuscatedName("SLDUQHOR.a(BLMFMVIYHT;)V")
-   public final void a(byte arg0, Packet arg1) {
-      if (arg0 != 6) {
-         throw new NullPointerException();
-      } else {
-         boolean var3 = false;
+	@ObfuscatedName("SLDUQHOR.a(LATJMVOZR;)V")
+	public static final void unpack(Jagfile config) {
+		data = new Packet(config.read("npc.dat", null));
+		Packet temp = new Packet(config.read("npc.idx", null));
 
-         while(true) {
-            while(true) {
-               int var4 = arg1.g1();
-               if (var4 == 0) {
-                  return;
-               }
+		count = temp.g2();
+		idx = new int[count];
 
-               if (var4 == 1) {
-                  int var5 = arg1.g1();
-                  this.f = new int[var5];
+		int pos = 2;
+		for (int i = 0; i < count; ++i) {
+			idx[i] = pos;
+			pos += temp.g2();
+		}
 
-                  for(int var6 = 0; var6 < var5; ++var6) {
-                     this.f[var6] = arg1.g2();
-                  }
-               } else if (var4 == 2) {
-                  this.F = arg1.gjstr();
-               } else if (var4 == 3) {
-                  this.N = arg1.gjstrraw();
-               } else if (var4 == 12) {
-                  this.v = arg1.g1b();
-               } else if (var4 == 13) {
-                  this.a = arg1.g2();
-               } else if (var4 == 14) {
-                  this.y = arg1.g2();
-               } else if (var4 == 17) {
-                  this.y = arg1.g2();
-                  this.w = arg1.g2();
-                  this.u = arg1.g2();
-                  this.m = arg1.g2();
-               } else if (var4 >= 30 && var4 < 40) {
-                  if (this.z == null) {
-                     this.z = new String[5];
-                  }
+		cache = new NpcType[20];
+		for (int i = 0; i < 20; ++i) {
+			cache[i] = new NpcType();
+		}
+	}
 
-                  this.z[var4 - 30] = arg1.gjstr();
-                  if (this.z[var4 - 30].equalsIgnoreCase("hidden")) {
-                     this.z[var4 - 30] = null;
-                  }
-               } else if (var4 == 40) {
-                  int var7 = arg1.g1();
-                  this.n = new int[var7];
-                  this.J = new int[var7];
+	@ObfuscatedName("SLDUQHOR.a(Z)V")
+	public static final void unload(boolean arg0) {
+		modelCache = null;
+		idx = null;
+		cache = null;
+		data = null;
+	}
 
-                  for(int var8 = 0; var8 < var7; ++var8) {
-                     this.n[var8] = arg1.g2();
-                     this.J[var8] = arg1.g2();
-                  }
-               } else if (var4 == 60) {
-                  int var9 = arg1.g1();
-                  this.e = new int[var9];
+	@ObfuscatedName("SLDUQHOR.c(I)LSLDUQHOR;")
+	public static final NpcType get(int id) {
+		for (int i = 0; i < 20; ++i) {
+			if ((long) id == cache[i].id) {
+				return cache[i];
+			}
+		}
 
-                  for(int var10 = 0; var10 < var9; ++var10) {
-                     this.e[var10] = arg1.g2();
-                  }
-               } else if (var4 == 90) {
-                  this.B = arg1.g2();
-               } else if (var4 == 91) {
-                  this.g = arg1.g2();
-               } else if (var4 == 92) {
-                  this.q = arg1.g2();
-               } else if (var4 == 93) {
-                  this.p = false;
-               } else if (var4 == 95) {
-                  this.visLevel = arg1.g2();
-               } else if (var4 == 97) {
-                  this.l = arg1.g2();
-               } else if (var4 == 98) {
-                  this.j = arg1.g2();
-               } else if (var4 == 99) {
-                  this.x = true;
-               } else if (var4 == 100) {
-                  this.Q = arg1.g1b();
-               } else if (var4 == 101) {
-                  this.L = arg1.g1b() * 5;
-               } else if (var4 == 102) {
-                  this.r = arg1.g2();
-               } else if (var4 == 103) {
-                  this.E = arg1.g2();
-               } else if (var4 == 106) {
-                  this.H = arg1.g2();
-                  if (this.H == 65535) {
-                     this.H = -1;
-                  }
+		cachePos = (cachePos + 1) % 20;
 
-                  this.M = arg1.g2();
-                  if (this.M == 65535) {
-                     this.M = -1;
-                  }
+		NpcType npc = cache[cachePos] = new NpcType();
+		data.pos = idx[id];
+		npc.id = id;
+		npc.decode(G, data);
+		return npc;
+	}
 
-                  int var11 = arg1.g1();
-                  this.b = new int[var11 + 1];
+	@ObfuscatedName("SLDUQHOR.a(BLMFMVIYHT;)V")
+	public final void decode(byte arg0, Packet buf) {
+		while (true) {
+			int code = buf.g1();
+			if (code == 0) {
+				return;
+			}
 
-                  for(int var12 = 0; var12 <= var11; ++var12) {
-                     this.b[var12] = arg1.g2();
-                     if (this.b[var12] == 65535) {
-                        this.b[var12] = -1;
-                     }
-                  }
-               } else if (var4 == 107) {
-                  this.k = false;
-               }
-            }
-         }
-      }
-   }
+			if (code == 1) {
+				int count = buf.g1();
+				this.models = new int[count];
 
-   @ObfuscatedName("SLDUQHOR.a(Z)V")
-   public static final void a(boolean arg0) {
-      o = null;
-      D = null;
-      I = null;
-      K = null;
-      if (arg0) {
-         for(int var1 = 1; var1 > 0; ++var1) {
-         }
+				for (int i = 0; i < count; ++i) {
+					this.models[i] = buf.g2();
+				}
+			} else if (code == 2) {
+				this.name = buf.gjstr();
+			} else if (code == 3) {
+				this.desc = buf.gjstrraw();
+			} else if (code == 12) {
+				this.size = buf.g1b();
+			} else if (code == 13) {
+				this.readyanim = buf.g2();
+			} else if (code == 14) {
+				this.walkanim = buf.g2();
+			} else if (code == 17) {
+				this.walkanim = buf.g2();
+				this.walkanim_b = buf.g2();
+				this.walkanim_r = buf.g2();
+				this.walkanim_l = buf.g2();
+			} else if (code >= 30 && code < 40) {
+				if (this.op == null) {
+					this.op = new String[5];
+				}
 
-      }
-   }
+				this.op[code - 30] = buf.gjstr();
+				if (this.op[code - 30].equalsIgnoreCase("hidden")) {
+					this.op[code - 30] = null;
+				}
+			} else if (code == 40) {
+				int count = buf.g1();
+				this.recol_s = new int[count];
+				this.recol_d = new int[count];
 
-   @ObfuscatedName("SLDUQHOR.a(I)LLZYQDKJV;")
-   public final Model getHeadModel(int arg0) {
-      if (arg0 <= 0) {
-         for(int var2 = 1; var2 > 0; ++var2) {
-         }
-      }
+				for (int i = 0; i < count; ++i) {
+					this.recol_s[i] = buf.g2();
+					this.recol_d[i] = buf.g2();
+				}
+			} else if (code == 60) {
+				int count = buf.g1();
+				this.heads = new int[count];
 
-      if (this.b != null) {
-         NpcType var3 = this.b(false);
-         return var3 == null ? null : var3.getHeadModel(858);
-      } else if (this.e == null) {
-         return null;
-      } else {
-         boolean var4 = false;
+				for (int i = 0; i < count; ++i) {
+					this.heads[i] = buf.g2();
+				}
+			} else if (code == 90) {
+				this.B = buf.g2();
+			} else if (code == 91) {
+				this.g = buf.g2();
+			} else if (code == 92) {
+				this.q = buf.g2();
+			} else if (code == 93) {
+				this.minimap = false;
+			} else if (code == 95) {
+				this.visLevel = buf.g2();
+			} else if (code == 97) {
+				this.resizeh = buf.g2();
+			} else if (code == 98) {
+				this.resizev = buf.g2();
+			} else if (code == 99) {
+				this.alwaysontop = true;
+			} else if (code == 100) {
+				this.ambient = buf.g1b();
+			} else if (code == 101) {
+				this.contrast = buf.g1b() * 5;
+			} else if (code == 102) {
+				this.headicon = buf.g2();
+			} else if (code == 103) {
+				this.turnspeed = buf.g2();
+			} else if (code == 106) {
+				this.multivarbit = buf.g2();
+				if (this.multivarbit == 65535) {
+					this.multivarbit = -1;
+				}
 
-         for(int var5 = 0; var5 < this.e.length; ++var5) {
-            if (!Model.isReady(this.e[var5])) {
-               var4 = true;
-            }
-         }
+				this.multivarp = buf.g2();
+				if (this.multivarp == 65535) {
+					this.multivarp = -1;
+				}
 
-         if (var4) {
-            return null;
-         } else {
-            Model[] var6 = new Model[this.e.length];
+				int count = buf.g1();
+				this.multinpc = new int[count + 1];
 
-            for(int var7 = 0; var7 < this.e.length; ++var7) {
-               var6[var7] = Model.tryGet(this.e[var7]);
-            }
+				for (int i = 0; i <= count; ++i) {
+					this.multinpc[i] = buf.g2();
+					if (this.multinpc[i] == 65535) {
+						this.multinpc[i] = -1;
+					}
+				}
+			} else if (code == 107) {
+				this.active = false;
+			}
+		}
+	}
 
-            Model var8;
-            if (var6.length == 1) {
-               var8 = var6[0];
-            } else {
-               var8 = new Model(var6.length, var6);
-            }
+	@ObfuscatedName("SLDUQHOR.a(III[I)LLZYQDKJV;")
+	public final Model getModel(int primaryTransformId, int secondaryTransformId, int[] seqMask) {
+		if (this.multinpc != null) {
+			NpcType npc = this.getMultiNpc();
+			return npc == null ? null : npc.getModel(primaryTransformId, secondaryTransformId, seqMask);
+		}
 
-            if (this.n != null) {
-               for(int var9 = 0; var9 < this.n.length; ++var9) {
-                  var8.recolour(this.n[var9], this.J[var9]);
-               }
-            }
+		Model model = (Model) modelCache.get(this.id);
+		if (model == null) {
+			boolean ready = false;
+			for (int i = 0; i < this.models.length; ++i) {
+				if (!Model.isReady(this.models[i])) {
+					ready = true;
+				}
+			}
 
-            return var8;
-         }
-      }
-   }
+			if (ready) {
+				return null;
+			}
 
-   @ObfuscatedName("SLDUQHOR.b(I)Z")
-   public boolean b(int arg0) {
-      while(arg0 >= 0) {
-         this.P = !this.P;
-      }
+			Model[] models = new Model[this.models.length];
+			for (int i = 0; i < this.models.length; ++i) {
+				models[i] = Model.tryGet(this.models[i]);
+			}
 
-      if (this.b == null) {
-         return true;
-      } else {
-         int var2 = -1;
-         if (this.H != -1) {
-            VarbitType var3 = VarbitType.c[this.H];
-            int var4 = var3.e;
-            int var5 = var3.f;
-            int var6 = var3.g;
-            int var7 = Client.Yh[var6 - var5];
-            var2 = i.varps[var4] >> var5 & var7;
-         } else if (this.M != -1) {
-            var2 = i.varps[this.M];
-         }
+			if (models.length == 1) {
+				model = models[0];
+			} else {
+				model = new Model(models.length, models);
+			}
 
-         if (var2 >= 0 && var2 < this.b.length && this.b[var2] != -1) {
-            return true;
-         } else {
-            return false;
-         }
-      }
-   }
+			if (this.recol_s != null) {
+				for (int var11 = 0; var11 < this.recol_s.length; ++var11) {
+					model.recolour(this.recol_s[var11], this.recol_d[var11]);
+				}
+			}
 
-   @ObfuscatedName("SLDUQHOR.a(LATJMVOZR;)V")
-   public static final void unpack(Jagfile arg0) {
-      K = new Packet(arg0.read("npc.dat", (byte[])null));
-      Packet var1 = new Packet(arg0.read("npc.idx", (byte[])null));
-      C = var1.g2();
-      D = new int[C];
-      int var2 = 2;
+			model.createLabelReferences();
+			model.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
+			modelCache.put(model, this.id);
+		}
 
-      for(int var3 = 0; var3 < C; ++var3) {
-         D[var3] = var2;
-         var2 += var1.g2();
-      }
+		Model tmp = Model.empty;
+		tmp.a(AnimFrame.a(this.c, primaryTransformId) & AnimFrame.a(this.c, secondaryTransformId), model, 1244);
 
-      I = new NpcType[20];
+		if (primaryTransformId != -1 && secondaryTransformId != -1) {
+			tmp.applyTransforms(primaryTransformId, secondaryTransformId, seqMask);
+		} else if (primaryTransformId != -1) {
+			tmp.applyTransform(primaryTransformId);
+		}
 
-      for(int var4 = 0; var4 < 20; ++var4) {
-         I[var4] = new NpcType();
-      }
+		if (this.resizeh != 128 || this.resizev != 128) {
+			tmp.scale(this.resizev, this.resizeh, 9, this.resizeh);
+		}
 
-   }
+		tmp.calculateBoundsCylinder();
+		tmp.labelFaces = null;
+		tmp.labelVertices = null;
 
-   @ObfuscatedName("SLDUQHOR.a(III[I)LLZYQDKJV;")
-   public final Model a(int arg0, int arg1, int arg2, int[] arg3) {
-      if (this.b != null) {
-         NpcType var5 = this.b(false);
-         return var5 == null ? null : var5.a(arg0, arg1, 0, arg3);
-      } else {
-         Model var6 = (Model)o.get(this.h);
-         if (var6 == null) {
-            boolean var7 = false;
+		if (this.size == 1) {
+			tmp.picking = true;
+		}
 
-            for(int var8 = 0; var8 < this.f.length; ++var8) {
-               if (!Model.isReady(this.f[var8])) {
-                  var7 = true;
-               }
-            }
+		return tmp;
+	}
 
-            if (var7) {
-               return null;
-            }
+	@ObfuscatedName("SLDUQHOR.a(I)LLZYQDKJV;")
+	public final Model getHeadModel() {
+		if (this.multinpc != null) {
+			NpcType npc = this.getMultiNpc();
+			return npc == null ? null : npc.getHeadModel();
+		}
 
-            Model[] var9 = new Model[this.f.length];
+		if (this.heads == null) {
+			return null;
+		}
 
-            for(int var10 = 0; var10 < this.f.length; ++var10) {
-               var9[var10] = Model.tryGet(this.f[var10]);
-            }
+		boolean exists = false;
+		for (int i = 0; i < this.heads.length; ++i) {
+			if (!Model.isReady(this.heads[i])) {
+				exists = true;
+			}
+		}
 
-            if (var9.length == 1) {
-               var6 = var9[0];
-            } else {
-               var6 = new Model(var9.length, var9);
-            }
+		if (exists) {
+			return null;
+		}
 
-            if (this.n != null) {
-               for(int var11 = 0; var11 < this.n.length; ++var11) {
-                  var6.recolour(this.n[var11], this.J[var11]);
-               }
-            }
+		Model[] models = new Model[this.heads.length];
+		for (int i = 0; i < this.heads.length; ++i) {
+			models[i] = Model.tryGet(this.heads[i]);
+		}
 
-            var6.createLabelReferences(7);
-            var6.calculateNormals(this.Q + 64, this.L + 850, -30, -50, -30, true);
-            o.put(var6, this.h);
-         }
+		Model model;
+		if (models.length == 1) {
+			model = models[0];
+		} else {
+			model = new Model(models.length, models);
+		}
 
-         Model var12 = Model.t;
-         if (arg2 != 0) {
-            this.A = !this.A;
-         }
+		if (this.recol_s != null) {
+			for (int i = 0; i < this.recol_s.length; ++i) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
+			}
+		}
 
-         var12.a(AnimFrame.a(this.c, arg0) & AnimFrame.a(this.c, arg1), var6, 1244);
-         if (arg0 != -1 && arg1 != -1) {
-            var12.a(arg1, 0, arg0, arg3);
-         } else if (arg0 != -1) {
-            var12.applyTransform(arg0, (byte)6);
-         }
+		return model;
+	}
 
-         if (this.l != 128 || this.j != 128) {
-            var12.scale(this.j, this.l, 9, this.l);
-         }
+	@ObfuscatedName("SLDUQHOR.b(Z)LSLDUQHOR;")
+	public final NpcType getMultiNpc() {
+		int value = -1;
+		if (this.multivarbit != -1) {
+			VarbitType varbit = VarbitType.c[this.multivarbit];
+			int var4 = varbit.e;
+			int var5 = varbit.f;
+			int var6 = varbit.g;
+			int var7 = Client.Yh[var6 - var5];
+			value = i.varps[var4] >> var5 & var7;
+		} else if (this.multivarp != -1) {
+			value = i.varps[this.multivarp];
+		}
 
-         var12.c(this.d);
-         var12.db = null;
-         var12.cb = null;
-         if (this.v == 1) {
-            var12.picking = true;
-         }
+		return value >= 0 && value < this.multinpc.length && this.multinpc[value] != -1 ? get(this.multinpc[value]) : null;
+	}
 
-         return var12;
-      }
-   }
+	@ObfuscatedName("SLDUQHOR.b(I)Z")
+	public boolean isNotMulti() {
+		if (this.multinpc == null) {
+			return true;
+		}
 
-   @ObfuscatedName("SLDUQHOR.b(Z)LSLDUQHOR;")
-   public final NpcType b(boolean arg0) {
-      if (arg0) {
-         this.t = -212;
-      }
+		int value = -1;
+		if (this.multivarbit != -1) {
+			VarbitType var3 = VarbitType.c[this.multivarbit];
+			int var4 = var3.e;
+			int var5 = var3.f;
+			int var6 = var3.g;
+			int var7 = Client.Yh[var6 - var5];
+			value = i.varps[var4] >> var5 & var7;
+		} else if (this.multivarp != -1) {
+			value = i.varps[this.multivarp];
+		}
 
-      int var2 = -1;
-      if (this.H != -1) {
-         VarbitType var3 = VarbitType.c[this.H];
-         int var4 = var3.e;
-         int var5 = var3.f;
-         int var6 = var3.g;
-         int var7 = Client.Yh[var6 - var5];
-         var2 = i.varps[var4] >> var5 & var7;
-      } else if (this.M != -1) {
-         var2 = i.varps[this.M];
-      }
-
-      return var2 >= 0 && var2 < this.b.length && this.b[var2] != -1 ? get(this.b[var2]) : null;
-   }
-
-   @ObfuscatedName("SLDUQHOR.c(I)LSLDUQHOR;")
-   public static final NpcType get(int arg0) {
-      for(int var1 = 0; var1 < 20; ++var1) {
-         if ((long)arg0 == I[var1].h) {
-            return I[var1];
-         }
-      }
-
-      O = (O + 1) % 20;
-      NpcType var2 = I[O] = new NpcType();
-      K.pos = D[arg0];
-      var2.h = (long)arg0;
-      var2.a(G, K);
-      return var2;
-   }
+		return value >= 0 && value < this.multinpc.length && this.multinpc[value] != -1;
+	}
 }

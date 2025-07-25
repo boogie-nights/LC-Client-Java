@@ -76,10 +76,10 @@ public class MapSpotAnim extends ModelSource {
             int var3 = this.u.i.frames[this.s];
             Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.q, var3));
             if (!this.r) {
-               var4.createLabelReferences(7);
-               var4.applyTransform(var3, (byte)6);
-               var4.db = null;
-               var4.cb = null;
+               var4.createLabelReferences();
+               var4.applyTransform(var3);
+               var4.labelFaces = null;
+               var4.labelVertices = null;
             }
 
             if (this.u.l != 128 || this.u.m != 128) {
