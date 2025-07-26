@@ -557,11 +557,11 @@ public class LocType {
 
 			for (int i = 0; i < model.vertexCount; ++i) {
 				int x = model.vertexX[i];
-				int var12 = model.vertexZ[i];
+				int z = model.vertexZ[i];
 
 				int heightS = (heightmapSE - heightmapSW) * (x + 64) / 128 + heightmapSW;
 				int heightN = (heightmapNE - heightmapNW) * (x + 64) / 128 + heightmapNW;
-				int y = (heightN - heightS) * (var12 + 64) / 128 + heightS;
+				int y = (heightN - heightS) * (z + 64) / 128 + heightS;
 
 				model.vertexY[i] += y - groundY;
 			}
