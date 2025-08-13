@@ -88,7 +88,7 @@ public class ClientStream implements Runnable {
    }
 
    @ObfuscatedName("GXWEWMHV.a([BII)V")
-   public void a(byte[] arg0, int arg1, int arg2) throws IOException {
+   public void read(byte[] arg0, int arg1, int arg2) throws IOException {
       if (!this.f) {
          while(arg2 > 0) {
             int var4 = this.c.read(arg0, arg1, arg2);

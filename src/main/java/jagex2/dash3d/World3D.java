@@ -461,7 +461,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.a(ILZOXDNIET;IIZIIIII)Z")
-   public boolean a(int arg0, ModelSource arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+   public boolean addTemporary(int arg0, ModelSource arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
       if (arg1 == null) {
          return true;
       } else {
@@ -752,7 +752,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.b(III)I")
-   public int b(int arg0, int arg1, int arg2) {
+   public int getWallTypecode(int arg0, int arg1, int arg2) {
       Square var4 = this.r[arg0][arg1][arg2];
       return var4 != null && var4.l != null ? var4.l.h : 0;
    }
@@ -768,7 +768,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.c(III)I")
-   public int c(int arg0, int arg1, int arg2) {
+   public int getLocTypecode(int arg0, int arg1, int arg2) {
       Square var4 = this.r[arg0][arg1][arg2];
       if (var4 == null) {
          return 0;
@@ -785,7 +785,7 @@ public class World3D {
    }
 
    @ObfuscatedName("KJCMXHNO.d(III)I")
-   public int d(int arg0, int arg1, int arg2) {
+   public int getGroundDecorTypecode(int arg0, int arg1, int arg2) {
       Square var4 = this.r[arg0][arg1][arg2];
       return var4 != null && var4.n != null ? var4.n.e : 0;
    }

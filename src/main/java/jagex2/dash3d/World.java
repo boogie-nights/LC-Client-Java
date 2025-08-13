@@ -248,7 +248,7 @@ public class World {
                   arg9.a(arg8, u[arg5], arg5 * 512, var17, var18, arg6, 0, arg3, 0, var15, var36, -930);
                } else if (arg2 == 5) {
                   int var37 = 16;
-                  int var38 = arg9.b(arg8, arg6, arg3);
+                  int var38 = arg9.getWallTypecode(arg8, arg6, arg3);
                   if (var38 > 0) {
                      var37 = LocType.get(var38 >> 14 & 32767).wallwidth;
                   }
@@ -1153,7 +1153,7 @@ public class World {
                arg0.a(arg3, u[arg6], arg6 * 512, var16, var17, arg4, 0, arg2, 0, var14, var39, -930);
             } else if (arg7 == 5) {
                int var40 = 16;
-               int var41 = arg0.b(arg3, arg4, arg2);
+               int var41 = arg0.getWallTypecode(arg3, arg4, arg2);
                if (var41 > 0) {
                   var40 = LocType.get(var41 >> 14 & 32767).wallwidth;
                }

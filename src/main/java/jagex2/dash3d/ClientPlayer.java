@@ -25,7 +25,7 @@ public class ClientPlayer extends ClientEntity {
    @ObfuscatedName("ZGNGQRPJ.Jb")
    public boolean Jb = true;
    @ObfuscatedName("ZGNGQRPJ.Kb")
-   public boolean Kb = false;
+   public boolean lowMemory = false;
    @ObfuscatedName("ZGNGQRPJ.Ob")
    public boolean Ob = false;
    @ObfuscatedName("ZGNGQRPJ.Tb")
@@ -252,7 +252,7 @@ public class ClientPlayer extends ClientEntity {
             this.wb = var4;
          }
 
-         if (this.Kb) {
+         if (this.lowMemory) {
             return var11;
          } else {
             Model var22 = Model.empty;
@@ -287,7 +287,7 @@ public class ClientPlayer extends ClientEntity {
          } else {
             super.A = var2.minY;
             var2.picking = true;
-            if (this.Kb) {
+            if (this.lowMemory) {
                return var2;
             } else {
                if (super.spotAnimId != -1 && super.spotanimFrame != -1) {

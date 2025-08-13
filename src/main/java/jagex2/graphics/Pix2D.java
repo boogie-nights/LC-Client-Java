@@ -81,7 +81,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("LFYNQWSZ.a(I)V")
-	public static void clear() {
+	public static void cls() {
 		int length = height2d * width2d;
 		for (int i = 0; i < length; ++i) {
 			data[i] = 0;

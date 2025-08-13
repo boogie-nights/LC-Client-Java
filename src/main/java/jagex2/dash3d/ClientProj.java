@@ -15,7 +15,7 @@ public class ClientProj extends ModelSource {
    @ObfuscatedName("KFJRVZCI.m")
    public SpotAnimType m;
    @ObfuscatedName("KFJRVZCI.n")
-   public int n;
+   public int level;
    @ObfuscatedName("KFJRVZCI.J")
    public int J;
    @ObfuscatedName("KFJRVZCI.K")
@@ -23,15 +23,15 @@ public class ClientProj extends ModelSource {
    @ObfuscatedName("KFJRVZCI.L")
    public int L;
    @ObfuscatedName("KFJRVZCI.y")
-   public int y;
+   public int startCycle;
    @ObfuscatedName("KFJRVZCI.z")
-   public int z;
+   public int endCycle;
    @ObfuscatedName("KFJRVZCI.r")
    public int r;
    @ObfuscatedName("KFJRVZCI.s")
    public int s;
    @ObfuscatedName("KFJRVZCI.t")
-   public int t;
+   public int target;
    @ObfuscatedName("KFJRVZCI.M")
    public int M;
    @ObfuscatedName("KFJRVZCI.C")
@@ -60,7 +60,7 @@ public class ClientProj extends ModelSource {
    public int w;
 
    @ObfuscatedName("KFJRVZCI.a(IIIII)V")
-   public final void a(int arg0, int arg1, int arg2, int arg3, int arg4) {
+   public final void updateVelocity(int arg0, int arg1, int arg2, int arg3, int arg4) {
       if (!this.I) {
          double var6 = (double)(arg0 - this.J);
          double var8 = (double)(arg1 - this.K);
@@ -70,7 +70,7 @@ public class ClientProj extends ModelSource {
          this.q = (double)this.L;
       }
 
-      double var12 = (double)(this.z + 1 - arg3);
+      double var12 = (double)(this.endCycle + 1 - arg3);
       this.C = ((double)arg0 - this.o) / var12;
       this.D = ((double)arg1 - this.p) / var12;
       if (arg4 == 0) {
@@ -107,7 +107,6 @@ public class ClientProj extends ModelSource {
                this.A = 0;
             }
          }
-
       }
    }
 
@@ -148,18 +147,18 @@ public class ClientProj extends ModelSource {
 
    public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, byte arg8, int arg9, int arg10, int arg11) {
       this.m = SpotAnimType.e[arg4];
-      this.n = arg0;
+      this.level = arg0;
       this.J = arg10;
       this.K = arg3;
       this.L = arg9;
-      this.y = arg11;
-      this.z = arg5;
+      this.startCycle = arg11;
+      this.endCycle = arg5;
       if (this.x != arg8) {
          throw new NullPointerException();
       } else {
          this.r = arg6;
          this.s = arg2;
-         this.t = arg7;
+         this.target = arg7;
          this.M = arg1;
          this.I = false;
       }

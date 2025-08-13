@@ -43,7 +43,7 @@ public class Pix3D extends Pix2D {
    @ObfuscatedName("YIBHWZVJ.P")
    public static int P;
    @ObfuscatedName("YIBHWZVJ.T")
-   public static int T;
+   public static int cycle;
    @ObfuscatedName("YIBHWZVJ.x")
    public static int x;
    @ObfuscatedName("YIBHWZVJ.A")
@@ -212,7 +212,7 @@ public class Pix3D extends Pix2D {
 
    @ObfuscatedName("YIBHWZVJ.c(I)[I")
    public static final int[] c(int arg0) {
-      S[arg0] = T++;
+      S[arg0] = cycle++;
       if (R[arg0] != null) {
          return R[arg0];
       } else {

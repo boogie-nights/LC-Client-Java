@@ -7,11 +7,11 @@ public class MapSpotAnim extends ModelSource {
    @ObfuscatedName("WHUAOHZM.q")
    public boolean q = true;
    @ObfuscatedName("WHUAOHZM.r")
-   public boolean r = false;
+   public boolean seqComplete = false;
    @ObfuscatedName("WHUAOHZM.u")
    public SpotAnimType u;
    @ObfuscatedName("WHUAOHZM.m")
-   public int m;
+   public int level;
    @ObfuscatedName("WHUAOHZM.n")
    public int n;
    @ObfuscatedName("WHUAOHZM.o")
@@ -19,7 +19,7 @@ public class MapSpotAnim extends ModelSource {
    @ObfuscatedName("WHUAOHZM.p")
    public int p;
    @ObfuscatedName("WHUAOHZM.v")
-   public int v;
+   public int startCycle;
    @ObfuscatedName("WHUAOHZM.s")
    public int s;
    @ObfuscatedName("WHUAOHZM.t")
@@ -44,14 +44,14 @@ public class MapSpotAnim extends ModelSource {
             } while(this.s >= 0 && this.s < this.u.i.e);
 
             this.s = 0;
-            this.r = true;
+            this.seqComplete = true;
          }
       }
    }
 
    public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
       this.u = SpotAnimType.e[arg4];
-      this.m = arg1;
+      this.level = arg1;
       this.n = arg0;
       this.o = arg6;
       if (arg7 != 10709) {
@@ -60,8 +60,8 @@ public class MapSpotAnim extends ModelSource {
       }
 
       this.p = arg2;
-      this.v = arg3 + arg5;
-      this.r = false;
+      this.startCycle = arg3 + arg5;
+      this.seqComplete = false;
    }
 
    @ObfuscatedName("WHUAOHZM.a(B)LLZYQDKJV;")
@@ -75,7 +75,7 @@ public class MapSpotAnim extends ModelSource {
          } else {
             int var3 = this.u.i.frames[this.s];
             Model var4 = new Model(false, false, true, var2, AnimFrame.a(this.q, var3));
-            if (!this.r) {
+            if (!this.seqComplete) {
                var4.createLabelReferences();
                var4.applyTransform(var3);
                var4.labelFaces = null;

@@ -189,7 +189,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("WRRBQEHV.a(III)V")
-	public void a(int arg0, int arg1, int arg2) {
+	public void plotSprite(int arg0, int arg1, int arg2) {
 		int var4 = this.cropX + arg1;
 		int var5 = this.cropY + arg0;
 
